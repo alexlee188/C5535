@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;CSL_USB_IsoHighSpeedExample_Out/BH_USB560m.ccxml&apos;" deleteContents="false" description="Delete resource &apos;CSL_USB_IsoHighSpeedExample_Out/BH_USB560m.ccxml&apos;" element1="/CSL_USB_IsoHighSpeedExample_Out/BH_USB560m.ccxml" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1359719692307"/>
+</session>

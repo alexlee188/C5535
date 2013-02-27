@@ -1,0 +1,116 @@
+Release Notes:
+
+================================================================================
+Table of Contents
+================================================================================
+ 00.15.00.00. Fixed the MAC compatibility issue and 4ch playback issue. 
+
+ 00.14.00.00. Add dynamic sample rate change support for 88.2khz and 44.1khz.
+ 							Changed the buffer management from uFrame based to sample based. 
+
+ 00.13.00.00. Add dynamic sample rate change support for 96khz and 48khz. 
+
+ 00.12.00.00. Add 8 channel IN and 8 channel OUT support. 
+
+ 00.11.00.00. Activated the implicit feedback on USB IN EP, fixed record/play buffer boundary check issue.
+ 							Improved the record/play buffer managing, make use of double buffering for recording. 
+
+ 00.10.00.00. Fixed recording buffer management issue. Added feedback EP code. Updated the documentation for 6ch demo.
+
+ 00.09.00.00. Fixed the periodical click and distorted sound when in playback mode
+
+ 00.08.00.00. Add CCS 4 support
+
+ 00.07.00.00. Fixed the USB transfer/receive data format error
+
+ 00.06.00.00. Add 6 channel IN and 6 channel OUT support
+
+ 00.05.00.00. Add release notes and readme file
+
+ 00.04.00.00. Code Clean up and Bug fixes
+ 
+ 00.03.00.00. Add 4 channel IN and 4 channel OUT support
+ 
+ 00.02.00.00. Add 24 bit and 96khz support
+
+ 00.01.00.00. Initial Release
+
+================================================================================
+ 00.15.00.00. Bugs Fixed in This Release. (since version 00.14.00.00)
+================================================================================
+Fixed the MAC compatibility issue and 4ch playback issue.
+
+================================================================================
+ 00.14.00.00. Bugs Fixed in This Release (since version 00.13.00.00)
+================================================================================
+Add dynamic sample rate change support for 88.2khz and 44.1khz. 
+Changed the buffer management from uFrame based to sample based.
+
+================================================================================
+ 00.13.00.00. Bugs Fixed in This Release (since version 00.12.00.00)
+================================================================================
+Add dynamic sample rate change support for 96khz and 48khz. 
+
+================================================================================
+ 00.12.00.00. Bugs Fixed in This Release (since version 00.11.00.00)
+================================================================================
+Add 8 channel IN and 8 channel OUT support.
+
+================================================================================
+ 00.11.00.00. Bugs Fixed in This Release (since version 00.10.00.00)
+================================================================================
+Activated the implicit feedback on USB IN EP, fixed record/play buffer boundary check issue, 
+improved the record/play buffer managing, make use of double buffering for recording.
+
+================================================================================
+ 00.10.00.00. Bugs Fixed in This Release (since version 00.09.00.00)
+================================================================================
+Fixed recording buffer management issue. Added the feedback EP code. Updated the documentation for 6ch demo.
+
+================================================================================
+ 00.09.00.00. Bugs Fixed in This Release (since version 00.08.00.00)
+================================================================================
+Fixed the periodical click and distorted sound when in playback mode
+
+================================================================================
+ 00.08.00.00. Bugs Fixed in This Release (since version 00.07.00.00)
+================================================================================
+Add CCS 4 support
+
+================================================================================
+ 00.07.00.00. Bugs Fixed in This Release (since version 00.06.00.00)
+================================================================================
+Fixed the USB transfer/receive data format error when 24 bit/sample is used
+
+================================================================================
+ 00.06.00.00. Bugs Fixed in This Release (since version 00.05.00.00)
+================================================================================
+Add third codec for 6 channel in and 6 channel out implementation
+
+================================================================================
+ 00.05.00.00. Bugs Fixed in This Release (since version 00.04.00.00)
+================================================================================
+Add release notes and readme file
+
+================================================================================
+ 00.04.00.00. Bugs Fixed in This Release (since version 00.03.00.00)
+================================================================================
+remove ARSC module and buffers
+correct the EP_PB_MAXP defination for SAMPLE_RATE_TX_48kHz
+change parallel port mode from mode1 to mode6 to enable I2S3
+
+================================================================================
+ 00.03.00.00. Bugs Fixed in This Release (since version 00.02.00.00)
+================================================================================
+Add second codec for 4 channel in and 4 channel out implementation
+
+================================================================================
+ 00.02.00.00. Bugs Fixed in This Release (since version 00.01.00.00)
+================================================================================
+Support 24 bit record and playback
+Add SAMP_24BIT for 24 bit sampling
+Change to SAMPLE_RATE_TX_96kHz and SAMPLE_RATE_RX_96kHz for 96hKz
+
+================================================================================
+ 00.01.00.00. Initial Release
+================================================================================

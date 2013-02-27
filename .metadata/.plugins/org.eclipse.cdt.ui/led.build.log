@@ -1,0 +1,22 @@
+
+**** Build of configuration Debug for project led ****
+
+"C:\\Users\\Alex\\ccsv5\\utils\\bin\\gmake" -k all 
+'Building file: ../led_test.c'
+'Invoking: C5500 Compiler'
+"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 -g --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/ezdsp5535_v1/c55xx_csl/inc" --include_path="C:/Users/Alex/ezdsp5535_v1/include" --diag_warning=225 --ptrdiff_size=16 --memory_model=large --preproc_with_compile --preproc_dependency="led_test.pp"  "../led_test.c"
+'Finished building: ../led_test.c'
+' '
+'Building file: ../main.c'
+'Invoking: C5500 Compiler'
+"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 -g --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/ezdsp5535_v1/c55xx_csl/inc" --include_path="C:/Users/Alex/ezdsp5535_v1/include" --diag_warning=225 --ptrdiff_size=16 --memory_model=large --preproc_with_compile --preproc_dependency="main.pp"  "../main.c"
+'Finished building: ../main.c'
+' '
+'Building target: led.out'
+'Invoking: C5500 Linker'
+"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 -g --diag_warning=225 --ptrdiff_size=16 --memory_model=large -z -m"led.map" --warn_sections -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" -i"C:/Users/Alex/ezdsp5535_v1/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"C:/Users/Alex/ezdsp5535_v1/lib" --reread_libs --rom_model -o "led.out"  "./main.obj" "./led_test.obj" -l"cslVC5505.lib" -l"ezdsp5535bsl.lib" -l"rts55x.lib" "../lnkx.cmd" 
+<Linking>
+'Finished building target: led.out'
+' '
+
+**** Build Finished ****

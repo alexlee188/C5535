@@ -1,0 +1,75 @@
+
+**** Build of configuration Debug for project boot_post ****
+
+"C:\\Users\\Alex\\ccsv5\\utils\\bin\\gmake" -k all 
+'Building target: boot_post.out'
+'Invoking: C5500 Linker'
+"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 -g --diag_warning=225 --ptrdiff_size=16 --memory_model=large -z -m"boot_post.map" --warn_sections -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/Alex/USB Audio Class/c55xx_csl/build/cslVC5505/Debug" -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" -i"C:/Users/Alex/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"C:/Users/Alex/lib" --reread_libs --rom_model -o "boot_post.out"  "./usb.obj" "./spiflash_test.obj" "./oled_test.obj" "./mem_test.obj" "./main.obj" "./aic3204_test.obj" "./aic3204_loop_linein.obj" -l"C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib" -l"" -l"rts55x.lib" "../lnkx.cmd" 
+<Linking>
+error: cannot find file "-lrts55x.lib"
+
+ undefined                first referenced                                                       
+  symbol                      in file                                                            
+ ---------                ----------------                                                       
+ _GPIO_configBit          C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_gpio.obj>    
+ _GPIO_open               C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_gpio.obj>    
+ _GPIO_read               C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_gpio.obj>    
+ _GPIO_write              C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_gpio.obj>    
+ _I2C_config              C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2c.obj>     
+ _I2C_init                C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2c.obj>     
+ _I2C_read                C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2c.obj>     
+ _I2C_write               C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2c.obj>     
+ _I2S_open                C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2s.obj>     
+ _I2S_reset               C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2s.obj>     
+ _I2S_setup               C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2s.obj>     
+ _I2S_transEnable         C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_i2s.obj>     
+ _IRQ_enable              ./usb.obj                                                              
+ _IRQ_globalEnable        ./usb.obj                                                              
+ _IRQ_plug                ./usb.obj                                                              
+ _IRQ_setVecs             ./usb.obj                                                              
+ _PLL_config              ./main.obj                                                             
+ _PLL_init                ./main.obj                                                             
+ _PLL_reset               ./main.obj                                                             
+ _SAR_A2DMeasParamSet     C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_chanCycSet          C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_chanInit            C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_chanOpen            C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_chanSetup           C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_getStatus           C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_init                C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_readData            C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SAR_startConversion     C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_sar.obj>     
+ _SPI_config              C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_spiflash.obj>
+ _SPI_dataTransaction     C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_spiflash.obj>
+ _SPI_init                C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_spiflash.obj>
+ _SPI_open                C:\Users\Alex\ezdsp5535_v1\lib\ezdsp5535bsl.lib<ezdsp5535_spiflash.obj>
+ _USB_clearEndptStall     ./usb.obj                                                              
+ _USB_connectDev          ./usb.obj                                                              
+ _USB_disconnectDev       ./usb.obj                                                              
+ _USB_epNumToHandle       ./usb.obj                                                              
+ _USB_getEndptStall       ./usb.obj                                                              
+ _USB_getRemoteWakeupStat ./usb.obj                                                              
+ _USB_getSetupPacket      ./usb.obj                                                              
+ _USB_init                ./usb.obj                                                              
+ _USB_initEndptObj        ./usb.obj                                                              
+ _USB_issueRemoteWakeup   ./usb.obj                                                              
+ _USB_postTransaction     ./usb.obj                                                              
+ _USB_resetDev            ./usb.obj                                                              
+ _USB_setDevAddr          ./usb.obj                                                              
+ _USB_setParams           ./usb.obj                                                              
+ _USB_setRemoteWakeup     ./usb.obj                                                              
+ _USB_stallEndpt          ./usb.obj                                                              
+ _USB_suspendDevice       ./usb.obj                                                              
+ _VECSTART                ./usb.obj                                                              
+ _gUsbContext             ./usb.obj                                                              
+ _sysCtrlRegs             ./usb.obj                                                              
+ _usbRegisters            ./usb.obj                                                              
+
+error: unresolved symbols remain
+
+>> Compilation failure
+error: errors encountered during linking; "boot_post.out" not built
+gmake: *** [boot_post.out] Error 1
+gmake: Target `all' not remade because of errors.
+
+**** Build Finished ****

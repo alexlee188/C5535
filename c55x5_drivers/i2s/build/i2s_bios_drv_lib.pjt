@@ -1,0 +1,30 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\test\TITaiwan\c55_usbac2_v00.15.00.04_20121219\c55x5_drivers\i2s\build\"
+ProjectType=Library
+CPUFamily=TMS320C55XX
+Tool="Archiver"
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="..\src\dda_i2s.c"
+Source="..\src\ddc_i2s.c"
+Source="..\src\llc_i2s.c"
+
+["Archiver" Settings: "Debug"]
+Options=-r -o"..\..\lib\Debug\i2s_bios_drv_lib.lib"
+
+["Archiver" Settings: "Release"]
+Options=-r -o"..\..\lib\Release\i2s_bios_drv_lib.lib"
+
+["Compiler" Settings: "Debug"]
+Options=-g -fr"$(Proj_dir)\Debug" -i"$(Proj_dir)\..\..\..\inc" -i"$(Proj_dir)\..\..\soc\da225\dsp\inc" -i"$(Proj_dir)\..\src" -i"$(Proj_dir)\..\inc" -i"$(Proj_dir)\..\..\inc" -i"$(Proj_dir)\..\..\dma\inc" -i"$(Proj_dir)\..\..\i2c\inc" -i"..\..\..\..\..\ASRC\inc" -d"_DEBUG" -d"BIOS_BUILD" -d"I2S_POLLED_INTERRUPT" -d"CSL_AC_TEST" -d"PLAY_RECORD" -d"SAMP_24BIT" -d"USE_THREE_CODEC" -ml -vcpu:3.3
+
+["Compiler" Settings: "Release"]
+Options=-o3 -fr"$(Proj_dir)\Release" -i"$(Proj_dir)\..\..\..\inc" -i"$(Proj_dir)\..\..\soc\da225\dsp\inc" -i"$(Proj_dir)\..\src" -i"$(Proj_dir)\..\inc" -i"$(Proj_dir)\..\..\inc" -i"$(Proj_dir)\..\..\dma\inc" -i"$(Proj_dir)\..\..\i2c\inc" -i"..\..\..\..\..\ASRC\inc" -d"BIOS_BUILD" -d"I2S_POLLED_INTERRUPT" -d"PLAY_RECORD" -d"SAMP_24BIT" -ml -vcpu:3.3
+

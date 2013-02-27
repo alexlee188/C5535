@@ -1,0 +1,34 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="D:\VC5505_CSL\Design\SW\Source_Codes\VC5505_CSL\example\usb\example5\pal_os\build\"
+ProjectType=Library
+CPUFamily=TMS320C55XX
+Tool="Archiver"
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="..\src\bios\src\pal_osCache.c"
+Source="..\src\bios\src\pal_osList.c"
+Source="..\src\bios\src\pal_osMem.c"
+Source="..\src\bios\src\pal_osProtect.c"
+Source="..\src\bios\src\pal_osSem.c"
+Source="..\src\bios\src\pal_osTime.c"
+Source="..\src\bios\src\pal_osWait.c"
+
+["Archiver" Settings: "Debug"]
+Options=-r -o"..\lib\debug\palos_bios_lib.lib"
+
+["Archiver" Settings: "Release"]
+Options=-r -o"..\lib\release\palos_bios_lib.lib"
+
+["Compiler" Settings: "Debug"]
+Options=-g -fr"$(Proj_dir)\Debug" -i"$(Proj_dir)\..\inc" -i"$(Proj_dir)\..\..\inc" -i"$(Proj_dir)\..\..\soc\da225\dsp\inc" -i"$(Proj_dir)\..\src\bios\src" -d"_DEBUG" -d"BIOS_BUILD" -ml -vcpu:3.3
+
+["Compiler" Settings: "Release"]
+Options=-o2 -fr"$(Proj_dir)\Release" -i"$(Proj_dir)\..\inc" -i"$(Proj_dir)\..\..\inc" -i"$(Proj_dir)\..\..\soc\da225\dsp\inc" -i"$(Proj_dir)\..\src\bios\src" -d"BIOS_BUILD" -ml -vcpu:3.3
+

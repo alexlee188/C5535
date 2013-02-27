@@ -1,0 +1,124 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Each subdirectory must supply rules for building sources it contributes
+VC5505_CSL_BIOS_cfg.cmd: C:/Users/Alex/USB\ Audio\ Class/build/VC5505_CSL_BIOS_cfg.tcf
+	@echo 'Building file: $<'
+	@echo 'Invoking: TConf Script Compiler'
+	"C:/xdctools_3_22_01_21/tconf" -b -Dconfig.importPath="C:/Users/Alex/bios_5_42_00_07/packages;" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+VC5505_CSL_BIOS_cfg.s??: VC5505_CSL_BIOS_cfg.cmd
+VC5505_CSL_BIOS_cfg_c.c: VC5505_CSL_BIOS_cfg.cmd
+VC5505_CSL_BIOS_cfg.h: VC5505_CSL_BIOS_cfg.cmd
+VC5505_CSL_BIOS_cfg.h??: VC5505_CSL_BIOS_cfg.cmd
+VC5505_CSL_BIOS_.cdb: VC5505_CSL_BIOS_cfg.cmd
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/VC5505_CSL_BIOS_cfg.obj: ./VC5505_CSL_BIOS_cfg.s?? $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="VC5505_CSL_BIOS_cfg.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/VC5505_CSL_BIOS_cfg_c.obj: ./VC5505_CSL_BIOS_cfg_c.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="VC5505_CSL_BIOS_cfg_c.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_asrc.obj: C:/Users/Alex/USB\ Audio\ Class/src/app_asrc.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="app_asrc.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_audio_alg.obj: C:/Users/Alex/USB\ Audio\ Class/src/app_audio_alg.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="app_audio_alg.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_usb.obj: C:/Users/Alex/USB\ Audio\ Class/src/app_usb.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="app_usb.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_usbac.obj: C:/Users/Alex/USB\ Audio\ Class/src/app_usbac.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="app_usbac.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_usbac_descs.obj: C:/Users/Alex/USB\ Audio\ Class/src/app_usbac_descs.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="app_usbac_descs.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/codec_aic3254.obj: C:/Users/Alex/USB\ Audio\ Class/src/codec_aic3254.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="codec_aic3254.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/codec_config.obj: C:/Users/Alex/USB\ Audio\ Class/src/codec_config.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="codec_config.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/csl_usb_iso_highspeed_example.obj: C:/Users/Alex/USB\ Audio\ Class/src/csl_usb_iso_highspeed_example.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="csl_usb_iso_highspeed_example.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/dbg_sdram.obj: C:/Users/Alex/USB\ Audio\ Class/src/dbg_sdram.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="dbg_sdram.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/gpio_control.obj: C:/Users/Alex/USB\ Audio\ Class/src/gpio_control.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="gpio_control.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/i2s_sample.obj: C:/Users/Alex/USB\ Audio\ Class/src/i2s_sample.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="i2s_sample.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/pll_control.obj: C:/Users/Alex/USB\ Audio\ Class/src/pll_control.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="pll_control.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+C:/Users/Alex/USB\ Audio\ Class/build/Release/user_interface.obj: C:/Users/Alex/USB\ Audio\ Class/src/user_interface.c $(GEN_OPTS) $(GEN_SRCS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --include_path="C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/Alex/USB Audio Class/dsplib/inc" --include_path="C:/Users/Alex/USB Audio Class/build/CSL_USB_IsoHighSpeedExample_Out/Release" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/include" --include_path="C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/include/c5500" --include_path="C:/Users/Alex/xdais_7_21_01_07/packages/ti/xdais" --include_path="C:/Users/Alex/USB Audio Class/build" --include_path="C:/Users/Alex/USB Audio Class/inc" --include_path="C:/Users/Alex/USB Audio Class/c55xx_csl/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2c/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/i2s/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/inc" --include_path="C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/inc" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/USB Audio Class/build/Release" --preproc_with_compile --preproc_dependency="user_interface.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

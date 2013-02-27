@@ -1,0 +1,51 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\test\TITaiwan\c55_usbac2_v00.15.00.04_20121219\c55xx_csl\build\"
+ProjectType=Library
+CPUFamily=TMS320C55XX
+Tool="Archiver"
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="..\src\csl_audioClass.c"
+Source="..\src\csl_dat.c"
+Source="..\src\csl_dma.c"
+Source="..\src\csl_gpio.c"
+Source="..\src\csl_gpt.c"
+Source="..\src\csl_i2c.c"
+Source="..\src\csl_i2s.c"
+Source="..\src\csl_intc.c"
+Source="..\src\csl_irqplug.asm"
+Source="..\src\csl_lcdc.c"
+Source="..\src\csl_mem.c"
+Source="..\src\csl_mmcsd.c"
+Source="..\src\csl_mmcsd_ataIf.c"
+Source="..\src\csl_msc.c"
+Source="..\src\csl_nand.c"
+Source="..\src\csl_pll.c"
+Source="..\src\csl_rtc.c"
+Source="..\src\csl_sar.c"
+Source="..\src\csl_sdio.c"
+Source="..\src\csl_spi.c"
+Source="..\src\csl_uart.c"
+Source="..\src\csl_usb.c"
+Source="..\src\csl_wdt.c"
+Source="..\src\vectors.asm"
+
+["Archiver" Settings: "Debug"]
+Options=-r -o".\Debug\cslVC5505_Lib.lib"
+
+["Archiver" Settings: "Release"]
+Options=-r -o".\Release\cslVC5505_Lib.lib"
+
+["Compiler" Settings: "Debug"]
+Options=-g -mg -fr"$(Proj_dir)\Debug" -i"$(Proj_dir)\..\src" -i"$(Proj_dir)\..\inc" -d"_DEBUG" -d"CSL_AC_TEST" -d"PLAY_RECORD" -d"SAMP_24BIT" -d"USE_THREE_CODEC" -ml -vcpu:3.3
+
+["Compiler" Settings: "Release"]
+Options=-g -mg -o3 -fr"$(Proj_dir)\Release" -i"$(Proj_dir)\..\src" -i"$(Proj_dir)\..\inc" -d"CSL_AC_TEST" -d"SAMP_24BIT" -ml -vcpu:3.3
+

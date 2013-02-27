@@ -1,0 +1,508 @@
+#define SDR_TIMING0  0x1020 
+#define SDR_TIMING1  0x1021 
+#define SDR_CONFIG0  0x1008 
+#define SDR_CONFIG1  0x1009 
+#define SDR_REFRESH  0x100C 
+#define SDR_EXIT  	 0x103C 
+#define RESET_COUNT  0x1C04
+#define RESET_CONTRL 0x1C05
+#define SDR_ENABLE	 0x1C1E 
+#define EMIF_ACCESS	 0x1C33
+
+#define SRAM_ASYNCCONFIG0	0x1004
+#define SRAM_ASYNCCONFIG1	0x1005
+#define SRAM_ASYNC4CTRL0	0x101C
+#define SRAM_ASYNC4CTRL1	0x101D
+
+#define IDLE_CTRL0  0x1c02
+#define IDLE_CTRL1  0x1c03
+
+#define CLKCFGMSW   0x1c1f
+#define PLL_CNTL1   0x1c20
+#define PLL_CNTL2   0x1c21
+#define PLL_CNTL3   0x1c22
+#define PLL_CNTL4   0x1c23
+
+#define PSRCR       0x1c04
+#define PRCR        0x1c05
+
+/* The Startup() function is executed when the GEL file is loaded. */
+StartUp()
+{
+    C5505_MapInit();
+}
+
+/* The OnTargetConnect() function is executed when the target is connected. */
+OnTargetConnect()
+{
+    GEL_Reset();
+    Peripheral_Reset(); 
+    C5505_MapInit();
+//    ProgramPLL_12p288MHz_clksel0();
+//    ProgramPLL_60MHz_clksel0();
+//    ProgramPLL_100MHz_clksel0();
+//	  ProgramPLL_100MHz_clksel1();
+//	  ProgramPLL_120MHz_clksel1();
+//	  ProgramPLL_60MHz_clksel1();
+    ProgramPLL_120MHz_clksel0();
+
+    GEL_TextOut("Target Connection Complete.\n");
+}
+
+menuitem "C5505EVM_Configuration";
+hotmenu CPU_Reset()
+{
+    GEL_Reset();
+    GEL_TextOut("CPU Reset Complete.\n");
+}
+
+hotmenu C5505EVM_Init()
+{
+    GEL_Reset();
+    C5505_MapInit();
+    GEL_TextOut("C5505EVM Initialization Complete.\n");
+}
+
+hotmenu SetPLL_12p288MHz() {
+    ProgramPLL_12p288MHz_clksel0();
+}
+
+hotmenu SetPLL_40MHz() {
+    ProgramPLL_40MHz_clksel0();
+}
+
+hotmenu SetPLL_60MHz() {
+    ProgramPLL_60MHz_clksel0();
+}
+
+hotmenu SetPLL_75MHz() {
+    ProgramPLL_75MHz_clksel0();
+}
+
+hotmenu SetPLL_100MHz() {
+    ProgramPLL_100MHz_clksel0();
+}
+
+hotmenu SetPLL_120MHz() {
+    ProgramPLL_120MHz_clksel0();
+}
+
+hotmenu SetPLL_100MHz_EXT() {
+    ProgramPLL_100MHz_clksel1();
+}
+
+hotmenu SetPLL_120MHz_EXT() {
+    ProgramPLL_120MHz_clksel1();
+}
+
+hotmenu Peripheral_Reset() {
+    int i;
+
+    *(short *)PSRCR@IO = 0x0002;
+    *(short *)PRCR@IO  = 0x00FF;
+
+    for(i=0;i<0xff;i++);
+
+    GEL_TextOut("Reset Peripherals is complete.\n");
+}
+
+
+menuitem "SDRAM_Configuration";
+hotmenu SDRAM_INIT() {
+	int i;
+
+	*(short *)0x1c00@IO=0x2<<8;  // Select GPIO0 in I2S
+	*(short *)0x1c06@IO=0x1;	//Set GPIO0 as output
+	*(short *)0x1c0A@IO=0x0;	//Set GPIO0 = 1
+
+	*(short *)SDR_ENABLE@IO = 0x0001;
+    for(i=0;i<20000;i++);
+    *(short *)RESET_COUNT@IO = 0x0400;
+    *(short *)RESET_CONTRL@IO = 0x0002;
+    for(i=0;i<20000;i++);
+    *(short *)EMIF_ACCESS@IO = 0x0000;
+
+//    *(short *)SDR_CONFIG0@IO = 0x4720;
+//    *(short *)SDR_CONFIG1@IO = 0x0031;
+//    *(short *)SDR_TIMING0@IO = 0x5810;
+//    *(short *)SDR_TIMING1@IO = 0x4221;
+//    *(short *)SDR_REFRESH@IO = 0x007D;
+//    *(short *)SDR_EXIT@IO = 0x0000;
+    *(short *)SDR_TIMING0@IO = 0x3510;
+    *(short *)SDR_TIMING1@IO = 0x4225;
+    *(short *)SDR_CONFIG0@IO = 0x4720;
+    *(short *)SDR_CONFIG1@IO = 0x0031;
+    for(i=0;i<2048;i++);
+    GEL_TextOut("SDRAM Initilization Complete.\n");
+}
+
+menuitem "EMIF_Configuration";
+hotmenu SRAM_INIT() {
+    *(short *)RESET_COUNT@IO = 0x0020;
+    *(short *)RESET_CONTRL@IO = 0x0002;
+    *(short *)SRAM_ASYNCCONFIG0@IO = 0x0004;
+    *(short *)SRAM_ASYNCCONFIG1@IO = 0x00E4;
+    *(short *)SRAM_ASYNC4CTRL0@IO = 0x404D;
+    *(short *)SRAM_ASYNC4CTRL1@IO = 0x0020;
+    GEL_TextOut("EMIF-SRAM Initilization Complete.\n");
+}
+
+// ***************************************************************************
+
+/* Memory map based on MP/MC value=0 (BOOTM[2:0]=0).    */
+C5505_MapInit() {
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /*Program Space*/
+
+    /* DARAM */
+    GEL_MapAdd(0x0000C0,0,0x001F40,1,1);    /* DARAM0 */
+    GEL_MapAdd(0x002000,0,0x002000,1,1);    /* DARAM1 */
+    GEL_MapAdd(0x004000,0,0x002000,1,1);    /* DARAM2 */
+    GEL_MapAdd(0x006000,0,0x002000,1,1);    /* DARAM3 */
+    GEL_MapAdd(0x008000,0,0x002000,1,1);    /* DARAM4 */
+    GEL_MapAdd(0x00A000,0,0x002000,1,1);    /* DARAM5 */
+    GEL_MapAdd(0x00C000,0,0x002000,1,1);    /* DARAM6 */
+    GEL_MapAdd(0x00E000,0,0x002000,1,1);    /* DARAM7 */
+
+    /* SARAM */
+    GEL_MapAdd(0x010000,0,0x002000,1,1);    /* SARAM0 */
+    GEL_MapAdd(0x012000,0,0x002000,1,1);    /* SARAM1 */
+    GEL_MapAdd(0x014000,0,0x002000,1,1);    /* SARAM2 */
+    GEL_MapAdd(0x016000,0,0x002000,1,1);    /* SARAM3 */
+    GEL_MapAdd(0x018000,0,0x002000,1,1);    /* SARAM4 */
+    GEL_MapAdd(0x01A000,0,0x002000,1,1);    /* SARAM5 */
+    GEL_MapAdd(0x01C000,0,0x002000,1,1);    /* SARAM6 */
+    GEL_MapAdd(0x01E000,0,0x002000,1,1);    /* SARAM7 */
+    GEL_MapAdd(0x020000,0,0x002000,1,1);    /* SARAM8 */
+    GEL_MapAdd(0x022000,0,0x002000,1,1);    /* SARAM9 */
+    GEL_MapAdd(0x024000,0,0x002000,1,1);    /* SARAM10 */
+    GEL_MapAdd(0x026000,0,0x002000,1,1);    /* SARAM11 */
+    GEL_MapAdd(0x028000,0,0x002000,1,1);    /* SARAM12 */
+    GEL_MapAdd(0x02A000,0,0x002000,1,1);    /* SARAM13 */
+    GEL_MapAdd(0x02C000,0,0x002000,1,1);    /* SARAM14 */
+    GEL_MapAdd(0x02E000,0,0x002000,1,1);    /* SARAM15 */
+    GEL_MapAdd(0x030000,0,0x002000,1,1);    /* SARAM16 */
+    GEL_MapAdd(0x032000,0,0x002000,1,1);    /* SARAM17 */
+    GEL_MapAdd(0x034000,0,0x002000,1,1);    /* SARAM18 */
+    GEL_MapAdd(0x036000,0,0x002000,1,1);    /* SARAM19 */
+    GEL_MapAdd(0x038000,0,0x002000,1,1);    /* SARAM20 */
+    GEL_MapAdd(0x03A000,0,0x002000,1,1);    /* SARAM21 */
+    GEL_MapAdd(0x03C000,0,0x002000,1,1);    /* SARAM22 */
+    GEL_MapAdd(0x03E000,0,0x002000,1,1);    /* SARAM23 */
+    GEL_MapAdd(0x040000,0,0x002000,1,1);    /* SARAM24 */
+    GEL_MapAdd(0x042000,0,0x002000,1,1);    /* SARAM25 */
+    GEL_MapAdd(0x044000,0,0x002000,1,1);    /* SARAM26 */
+    GEL_MapAdd(0x046000,0,0x002000,1,1);    /* SARAM27 */
+    GEL_MapAdd(0x048000,0,0x002000,1,1);    /* SARAM28 */
+    GEL_MapAdd(0x04A000,0,0x002000,1,1);    /* SARAM29 */
+    GEL_MapAdd(0x04C000,0,0x002000,1,1);    /* SARAM30 */
+    GEL_MapAdd(0x04E000,0,0x002000,1,1);    /* SARAM31 */
+
+    /* External-Memory */
+    GEL_MapAdd(0x050000,0,0x7B0000,1,1);    /* External-SDRAM */
+    GEL_MapAdd(0x800000,0,0x400000,1,1);    /* External-Async */
+    GEL_MapAdd(0xC00000,0,0x200000,1,1);    /* External-Async */
+    GEL_MapAdd(0xE00000,0,0x100000,1,1);    /* External-Async */
+    GEL_MapAdd(0xF00000,0,0x0E0000,1,1);    /* External-Async */
+
+    /* ROM */
+    GEL_MapAdd(0xFE0000,0,0x008000,1,0);    /* SAROM0 */
+    GEL_MapAdd(0xFE8000,0,0x008000,1,0);    /* SAROM1 */
+    GEL_MapAdd(0xFF0000,0,0x008000,1,0);    /* SAROM2 */
+    GEL_MapAdd(0xFF8000,0,0x008000,1,0);    /* SAROM3 */
+
+    /* Data Space */
+
+    /* DARAM */
+    GEL_MapAdd(0x000000,1,0x000060,1,1);    /* MMRs */
+    GEL_MapAdd(0x000060,1,0x000FA0,1,1);    /* DARAM0 */
+    GEL_MapAdd(0x001000,1,0x001000,1,1);    /* DARAM1 */
+    GEL_MapAdd(0x002000,1,0x001000,1,1);    /* DARAM2 */
+    GEL_MapAdd(0x003000,1,0x001000,1,1);    /* DARAM3 */
+    GEL_MapAdd(0x004000,1,0x001000,1,1);    /* DARAM4 */
+    GEL_MapAdd(0x005000,1,0x001000,1,1);    /* DARAM5 */
+    GEL_MapAdd(0x006000,1,0x001000,1,1);    /* DARAM6 */
+    GEL_MapAdd(0x007000,1,0x001000,1,1);    /* DARAM7 */
+
+    /* SARAM */
+    GEL_MapAdd(0x008000,1,0x001000,1,1);    /* SARAM0 */
+    GEL_MapAdd(0x009000,1,0x001000,1,1);    /* SARAM1 */
+    GEL_MapAdd(0x00A000,1,0x001000,1,1);    /* SARAM2 */
+    GEL_MapAdd(0x00B000,1,0x001000,1,1);    /* SARAM3 */
+    GEL_MapAdd(0x00C000,1,0x001000,1,1);    /* SARAM4 */
+    GEL_MapAdd(0x00D000,1,0x001000,1,1);    /* SARAM5 */
+    GEL_MapAdd(0x00E000,1,0x001000,1,1);    /* SARAM6 */
+    GEL_MapAdd(0x00F000,1,0x001000,1,1);    /* SARAM7 */
+    GEL_MapAdd(0x010000,1,0x001000,1,1);    /* SARAM8 */
+    GEL_MapAdd(0x011000,1,0x001000,1,1);    /* SARAM9 */
+    GEL_MapAdd(0x012000,1,0x001000,1,1);    /* SARAM10 */
+    GEL_MapAdd(0x013000,1,0x001000,1,1);    /* SARAM11 */
+    GEL_MapAdd(0x014000,1,0x001000,1,1);    /* SARAM12 */
+    GEL_MapAdd(0x015000,1,0x001000,1,1);    /* SARAM13 */
+    GEL_MapAdd(0x016000,1,0x001000,1,1);    /* SARAM14 */
+    GEL_MapAdd(0x017000,1,0x001000,1,1);    /* SARAM15 */
+    GEL_MapAdd(0x018000,1,0x001000,1,1);    /* SARAM16 */
+    GEL_MapAdd(0x019000,1,0x001000,1,1);    /* SARAM17 */
+    GEL_MapAdd(0x01A000,1,0x001000,1,1);    /* SARAM18 */
+    GEL_MapAdd(0x01B000,1,0x001000,1,1);    /* SARAM19 */
+    GEL_MapAdd(0x01C000,1,0x001000,1,1);    /* SARAM20 */
+    GEL_MapAdd(0x01D000,1,0x001000,1,1);    /* SARAM21 */
+    GEL_MapAdd(0x01E000,1,0x001000,1,1);    /* SARAM22 */
+    GEL_MapAdd(0x01F000,1,0x001000,1,1);    /* SARAM23 */
+    GEL_MapAdd(0x020000,1,0x001000,1,1);    /* SARAM24 */
+    GEL_MapAdd(0x021000,1,0x001000,1,1);    /* SARAM25 */
+    GEL_MapAdd(0x022000,1,0x001000,1,1);    /* SARAM26 */
+    GEL_MapAdd(0x023000,1,0x001000,1,1);    /* SARAM27 */
+    GEL_MapAdd(0x024000,1,0x001000,1,1);    /* SARAM28 */
+    GEL_MapAdd(0x025000,1,0x001000,1,1);    /* SARAM29 */
+    GEL_MapAdd(0x026000,1,0x001000,1,1);    /* SARAM30 */
+    GEL_MapAdd(0x027000,1,0x001000,1,1);    /* SARAM31 */
+
+    /* External-Memory */
+    GEL_MapAdd(0x028000,1,0x3D8000,1,1);    /* External-SDRAM */
+    GEL_MapAdd(0x400000,1,0x200000,1,1);    /* External-Async */
+    GEL_MapAdd(0x600000,1,0x100000,1,1);    /* External-Async */
+    GEL_MapAdd(0x700000,1,0x080000,1,1);    /* External-Async */
+    GEL_MapAdd(0x780000,1,0x070000,1,1);    /* External-Async */
+
+    /* ROM */
+    GEL_MapAdd(0x7F0000,1,0x004000,1,0);    /* SAROM0 */
+    GEL_MapAdd(0x7F4000,1,0x004000,1,0);    /* SAROM1 */
+    GEL_MapAdd(0x7F8000,1,0x004000,1,0);    /* SAROM2 */
+    GEL_MapAdd(0x7FC000,1,0x004000,1,0);    /* SAROM3 */
+
+    /* IO Space */
+    GEL_MapAdd(0x0000,2,0xFFFF,1,1);        /* XPORT */
+}
+
+ProgramPLL_12p288MHz_clksel0() {
+    GEL_TextOut("Configure PLL (12.288 MHz).\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL2@IO = 0x8000;
+    *(short *)PLL_CNTL4@IO = 0x0200;
+    *(short *)PLL_CNTL3@IO = 0x0806;
+    *(short *)PLL_CNTL1@IO = 0x82ED;
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (12.288 MHz).\n");
+}
+
+ProgramPLL_40MHz_clksel0() {
+    GEL_TextOut("Configure PLL (40.04 MHz).\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x8988;
+    *(short *)PLL_CNTL2@IO = 0x8000;
+    *(short *)PLL_CNTL3@IO = 0x0806;
+    *(short *)PLL_CNTL4@IO = 0x0201;
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (40.04 MHz).\n");
+}
+
+
+ProgramPLL_60MHz_clksel0() {
+    GEL_TextOut("Configure PLL (60.00 MHz).\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x8724;
+    *(short *)PLL_CNTL2@IO = 0x8000;
+    *(short *)PLL_CNTL3@IO = 0x0806;
+    *(short *)PLL_CNTL4@IO = 0x0000;
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (60.00 MHz).\n");
+}
+
+ProgramPLL_75MHz_clksel0() {
+    GEL_TextOut("Configure PLL (75.00 MHz).\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x88ED;
+    *(short *)PLL_CNTL2@IO = 0x8000;
+    *(short *)PLL_CNTL3@IO = 0x0806;
+    *(short *)PLL_CNTL4@IO = 0x0000;
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (75.00 MHz).\n");
+}
+
+ProgramPLL_100MHz_clksel0() {
+    GEL_TextOut("Configure PLL (100.00 MHz).\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x8BE8;
+    *(short *)PLL_CNTL2@IO = 0x8000;
+    *(short *)PLL_CNTL3@IO = 0x0806;
+    *(short *)PLL_CNTL4@IO = 0x0000;
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (100.00 MHz).\n");
+}
+
+ProgramPLL_120MHz_clksel0() {
+    GEL_TextOut("Configure PLL (120.00 MHz).\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x8E4A;
+    *(short *)PLL_CNTL2@IO = 0x8000;
+    *(short *)PLL_CNTL3@IO = 0x0806;
+    *(short *)PLL_CNTL4@IO = 0x0000;
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (120.00 MHz).\n");
+}
+
+
+ProgramPLL_60MHz_clksel1() {
+    GEL_TextOut("Configure PLL (60.00 MHz) Using 12MHz.\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x81F0;	// CLRZ_HIGH | VP[9:0] = 186
+    *(short *)PLL_CNTL2@IO = 0x0060;	// RD == 61 and VS == 2
+    *(short *)PLL_CNTL3@IO = 0x0806;	// EN_LOW_JIT | LONG_LK_CNT | EN_FASTSTART
+    *(short *)PLL_CNTL4@IO = 0x0000;	// OUTDIV_EN | OUTDIV2_DIS
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (60.00 MHz).\n");
+}
+
+ProgramPLL_100MHz_clksel1() {
+    GEL_TextOut("Configure PLL (100.00 MHz) Using 12MHz.\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x833E;	// CLRZ_HIGH | VP[9:0] = 186
+    *(short *)PLL_CNTL2@IO = 0x0060;	// RD == 61 and VS == 2
+    *(short *)PLL_CNTL3@IO = 0x0806;	// EN_LOW_JIT | LONG_LK_CNT | EN_FASTSTART
+    *(short *)PLL_CNTL4@IO = 0x0000;	// OUTDIV_EN | OUTDIV2_DIS
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (100.00 MHz).\n");
+}
+
+ProgramPLL_120MHz_clksel1() {
+    GEL_TextOut("Configure PLL (120.00 MHz) Using 12MHz.\n");
+    // Enable clocks to all peripherals
+    *(short *)IDLE_CTRL0@IO = 0x0;
+    *(short *)IDLE_CTRL1@IO = 0x0;
+
+    // bypass PLL
+    *(short *)CLKCFGMSW@IO = 0x0;
+
+    *(short *)PLL_CNTL1@IO = 0x87CC;	// CLRZ_HIGH | VP[11:0] = 1996
+    *(short *)PLL_CNTL2@IO = 0x00C4;	// RD == 196
+    *(short *)PLL_CNTL3@IO = 0x0806;	// EN_LOW_JIT | LONG_LK_CNT | EN_FASTSTART
+    *(short *)PLL_CNTL4@IO = 0x0000;	// OUTDIV_EN | OUTDIV2_DIS
+
+    // Busy wait until TESTLOCKMON is high or timeout
+    GEL_TextOut("Wait until TESTLOCKMON is high...\n");
+    while ( ((*(short *)PLL_CNTL3@IO) & 8) == 0) ;
+    GEL_TextOut("After checking TESTLOCKMON bit...\n");
+
+    // Switch to PLL clk
+    *(short *)CLKCFGMSW@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done (120.00 MHz).\n");
+}
+
+
+

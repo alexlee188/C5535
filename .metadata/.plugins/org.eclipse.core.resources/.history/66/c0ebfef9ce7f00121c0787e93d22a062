@@ -1,0 +1,151 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+C:/Users/Alex/USB\ Audio\ Class/build/UsbAcHighSpeed.cmd 
+
+TCF_SRCS += \
+C:/Users/Alex/USB\ Audio\ Class/build/VC5505_CSL_BIOS_cfg.tcf 
+
+S??_SRCS += \
+./VC5505_CSL_BIOS_cfg.s?? 
+
+C_SRCS += \
+./VC5505_CSL_BIOS_cfg_c.c \
+C:/Users/Alex/USB\ Audio\ Class/src/app_asrc.c \
+C:/Users/Alex/USB\ Audio\ Class/src/app_audio_alg.c \
+C:/Users/Alex/USB\ Audio\ Class/src/app_usb.c \
+C:/Users/Alex/USB\ Audio\ Class/src/app_usbac.c \
+C:/Users/Alex/USB\ Audio\ Class/src/app_usbac_descs.c \
+C:/Users/Alex/USB\ Audio\ Class/src/codec_aic3254.c \
+C:/Users/Alex/USB\ Audio\ Class/src/codec_config.c \
+C:/Users/Alex/USB\ Audio\ Class/src/csl_usb_iso_highspeed_example.c \
+C:/Users/Alex/USB\ Audio\ Class/src/dbg_sdram.c \
+C:/Users/Alex/USB\ Audio\ Class/src/gpio_control.c \
+C:/Users/Alex/USB\ Audio\ Class/src/i2s_sample.c \
+C:/Users/Alex/USB\ Audio\ Class/src/pll_control.c \
+C:/Users/Alex/USB\ Audio\ Class/src/user_interface.c 
+
+OBJS += \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/VC5505_CSL_BIOS_cfg.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/VC5505_CSL_BIOS_cfg_c.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_asrc.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_audio_alg.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_usb.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_usbac.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/app_usbac_descs.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/codec_aic3254.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/codec_config.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/csl_usb_iso_highspeed_example.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/dbg_sdram.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/gpio_control.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/i2s_sample.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/pll_control.obj \
+C:/Users/Alex/USB\ Audio\ Class/build/Release/user_interface.obj 
+
+GEN_SRCS += \
+./VC5505_CSL_BIOS_cfg.cmd \
+./VC5505_CSL_BIOS_cfg.s?? \
+./VC5505_CSL_BIOS_cfg_c.c 
+
+GEN_MISC_FILES += \
+./VC5505_CSL_BIOS_cfg.h \
+./VC5505_CSL_BIOS_cfg.h?? \
+./VC5505_CSL_BIOS_.cdb 
+
+S??_DEPS += \
+./VC5505_CSL_BIOS_cfg.pp 
+
+C_DEPS += \
+./VC5505_CSL_BIOS_cfg_c.pp \
+./app_asrc.pp \
+./app_audio_alg.pp \
+./app_usb.pp \
+./app_usbac.pp \
+./app_usbac_descs.pp \
+./codec_aic3254.pp \
+./codec_config.pp \
+./csl_usb_iso_highspeed_example.pp \
+./dbg_sdram.pp \
+./gpio_control.pp \
+./i2s_sample.pp \
+./pll_control.pp \
+./user_interface.pp 
+
+GEN_CMDS += \
+./VC5505_CSL_BIOS_cfg.cmd 
+
+GEN_SRCS__QUOTED += \
+"VC5505_CSL_BIOS_cfg.cmd" \
+"VC5505_CSL_BIOS_cfg.s??" \
+"VC5505_CSL_BIOS_cfg_c.c" 
+
+GEN_MISC_FILES__QUOTED += \
+"VC5505_CSL_BIOS_cfg.h" \
+"VC5505_CSL_BIOS_cfg.h??" \
+"VC5505_CSL_BIOS_.cdb" 
+
+C_DEPS__QUOTED += \
+"VC5505_CSL_BIOS_cfg_c.pp" \
+"app_asrc.pp" \
+"app_audio_alg.pp" \
+"app_usb.pp" \
+"app_usbac.pp" \
+"app_usbac_descs.pp" \
+"codec_aic3254.pp" \
+"codec_config.pp" \
+"csl_usb_iso_highspeed_example.pp" \
+"dbg_sdram.pp" \
+"gpio_control.pp" \
+"i2s_sample.pp" \
+"pll_control.pp" \
+"user_interface.pp" 
+
+S??_DEPS__QUOTED += \
+"VC5505_CSL_BIOS_cfg.pp" 
+
+OBJS__QUOTED += \
+"C:\Users\Alex\USB Audio Class\build\Release\VC5505_CSL_BIOS_cfg.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\VC5505_CSL_BIOS_cfg_c.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\app_asrc.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\app_audio_alg.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\app_usb.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\app_usbac.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\app_usbac_descs.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\codec_aic3254.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\codec_config.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\csl_usb_iso_highspeed_example.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\dbg_sdram.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\gpio_control.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\i2s_sample.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\pll_control.obj" \
+"C:\Users\Alex\USB Audio Class\build\Release\user_interface.obj" 
+
+GEN_CMDS__FLAG += \
+-l"./VC5505_CSL_BIOS_cfg.cmd" 
+
+S??_SRCS__QUOTED += \
+"./VC5505_CSL_BIOS_cfg.s??" 
+
+S??_OBJS__QUOTED += \
+"VC5505_CSL_BIOS_cfg.obj" 
+
+C_SRCS__QUOTED += \
+"./VC5505_CSL_BIOS_cfg_c.c" \
+"C:/Users/Alex/USB Audio Class/src/app_asrc.c" \
+"C:/Users/Alex/USB Audio Class/src/app_audio_alg.c" \
+"C:/Users/Alex/USB Audio Class/src/app_usb.c" \
+"C:/Users/Alex/USB Audio Class/src/app_usbac.c" \
+"C:/Users/Alex/USB Audio Class/src/app_usbac_descs.c" \
+"C:/Users/Alex/USB Audio Class/src/codec_aic3254.c" \
+"C:/Users/Alex/USB Audio Class/src/codec_config.c" \
+"C:/Users/Alex/USB Audio Class/src/csl_usb_iso_highspeed_example.c" \
+"C:/Users/Alex/USB Audio Class/src/dbg_sdram.c" \
+"C:/Users/Alex/USB Audio Class/src/gpio_control.c" \
+"C:/Users/Alex/USB Audio Class/src/i2s_sample.c" \
+"C:/Users/Alex/USB Audio Class/src/pll_control.c" \
+"C:/Users/Alex/USB Audio Class/src/user_interface.c" 
+
+

@@ -1,0 +1,8 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+USER_OBJS :=
+
+LIBS := $(GEN_CMDS__FLAG) -l"dma_bios_drv_lib.lib" -l"C:/Users/Alex/ezdsp5535_v1/lib/ezdsp5535bsl.lib" -l"C:/Users/Alex/USB\ Audio\ Class/dsplib/lib/55xdspx.lib" -l"i2c_bios_drv_lib.lib" -l"i2s_bios_drv_lib.lib" -l"palos_bios_lib.lib" -l"cslVC5505_Lib.lib"
+

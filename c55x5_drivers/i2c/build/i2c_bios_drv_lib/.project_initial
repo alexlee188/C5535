@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>i2c_bios_drv_lib</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.rtsc.xdctools.buildDefinitions.XDC.xdcNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>com.ti.ccstudio.managedbuild.core.ccsNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>dda_i2c.c</name>
+			<type>1</type>
+			<locationURI>COMMON_ROOT/c55x5_drivers/i2c/src/dda_i2c.c</locationURI>
+		</link>
+		<link>
+			<name>ddc_i2c.c</name>
+			<type>1</type>
+			<locationURI>COMMON_ROOT/c55x5_drivers/i2c/src/ddc_i2c.c</locationURI>
+		</link>
+		<link>
+			<name>i2c_bios_drv_lib.pjt</name>
+			<type>1</type>
+			<locationURI>COMMON_ROOT/c55x5_drivers/i2c/build/i2c_bios_drv_lib.pjt</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
