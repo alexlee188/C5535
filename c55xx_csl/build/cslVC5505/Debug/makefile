@@ -7,30 +7,30 @@ SHELL = cmd.exe
 CG_TOOL_ROOT := C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1
 
 ORDERED_OBJS += \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/vectors.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_wdt.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_usb.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_uart.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_spi.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_sdio.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_sar.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_rtc.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_pll.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_nand.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_msc.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_mmcsd_ataIf.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_mmcsd.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_mem.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_lcdc.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_irqplug.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_intc.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_i2s.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_i2c.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_gpt.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_gpio.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_dma.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_dat.obj" \
-"C:/Users/Alex/USB Audio Class/c55xx_csl/build/Debug/csl_audioClass.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/vectors.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_wdt.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_usb.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_uart.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_spi.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_sdio.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_sar.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_rtc.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_pll.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_nand.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_msc.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_mmcsd_ataIf.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_mmcsd.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_mem.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_lcdc.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_irqplug.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_intc.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_i2s.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_i2c.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_gpt.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_gpio.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_dma.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_dat.obj" \
+"C:/Users/Alex/C5535/c55xx_csl/build/Debug/csl_audioClass.obj" \
 
 -include ../makefile.init
 
@@ -129,22 +129,22 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: C:/Users/Alex/USB\ Audio\ Class/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Debug/cslVC5505_Lib.lib
+all: C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Debug/cslVC5505_Lib.lib
 
 # Tool invocations
-C:/Users/Alex/USB\ Audio\ Class/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Debug/cslVC5505_Lib.lib: $(OBJS)
+C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Debug/cslVC5505_Lib.lib: $(OBJS) $(LIB_SRCS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Archiver'
-	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/ar55" r "C:/Users/Alex/USB Audio Class/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Debug/cslVC5505_Lib.lib" $(ORDERED_OBJS)
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/ar55" r "C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Debug/cslVC5505_Lib.lib" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C5500_LIBRARY_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\USB Audio Class\c55xx_csl\lib\Debug\cslVC5505_Lib.lib"
+	-$(RM) $(C5500_LIBRARY_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\C5535\c55xx_csl\lib\Debug\cslVC5505_Lib.lib"
 	-$(RM) "csl_audioClass.pp" "csl_dat.pp" "csl_dma.pp" "csl_gpio.pp" "csl_gpt.pp" "csl_i2c.pp" "csl_i2s.pp" "csl_intc.pp" "csl_lcdc.pp" "csl_mem.pp" "csl_mmcsd.pp" "csl_mmcsd_ataIf.pp" "csl_msc.pp" "csl_nand.pp" "csl_pll.pp" "csl_rtc.pp" "csl_sar.pp" "csl_sdio.pp" "csl_spi.pp" "csl_uart.pp" "csl_usb.pp" "csl_wdt.pp" 
-	-$(RM) "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_audioClass.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_dat.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_dma.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_gpio.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_gpt.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_i2c.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_i2s.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_intc.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_irqplug.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_lcdc.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_mem.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_mmcsd.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_mmcsd_ataIf.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_msc.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_nand.obj" 
-	-$(RM) "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_pll.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_rtc.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_sar.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_sdio.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_spi.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_uart.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_usb.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\csl_wdt.obj" "C:\Users\Alex\USB Audio Class\c55xx_csl\build\Debug\vectors.obj" 
+	-$(RM) "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_audioClass.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_dat.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_dma.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_gpio.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_gpt.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_i2c.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_i2s.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_intc.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_irqplug.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_lcdc.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_mem.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_mmcsd.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_mmcsd_ataIf.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_msc.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_nand.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_pll.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_rtc.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_sar.obj" 
+	-$(RM) "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_sdio.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_spi.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_uart.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_usb.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\csl_wdt.obj" "C:\Users\Alex\C5535\c55xx_csl\build\Debug\vectors.obj" 
 	-$(RM) "csl_irqplug.pp" "vectors.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '

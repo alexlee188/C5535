@@ -4,22 +4,22 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osCache.c \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osList.c \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osMem.c \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osprotect.c \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osSem.c \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osTime.c \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/src/bios/src/pal_osWait.c 
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osCache.c \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osList.c \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osMem.c \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osprotect.c \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osSem.c \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osTime.c \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osWait.c 
 
 OBJS += \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osCache.obj \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osList.obj \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osMem.obj \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osprotect.obj \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osSem.obj \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osTime.obj \
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/Debug/pal_osWait.obj 
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osCache.obj \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osList.obj \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osMem.obj \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osprotect.obj \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osSem.obj \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osTime.obj \
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Debug/pal_osWait.obj 
 
 C_DEPS += \
 ./pal_osCache.pp \
@@ -40,21 +40,21 @@ C_DEPS__QUOTED += \
 "pal_osWait.pp" 
 
 OBJS__QUOTED += \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osCache.obj" \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osList.obj" \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osMem.obj" \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osprotect.obj" \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osSem.obj" \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osTime.obj" \
-"C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Debug\pal_osWait.obj" 
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osCache.obj" \
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osList.obj" \
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osMem.obj" \
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osprotect.obj" \
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osSem.obj" \
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osTime.obj" \
+"C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Debug\pal_osWait.obj" 
 
 C_SRCS__QUOTED += \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osCache.c" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osList.c" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osMem.c" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osprotect.c" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osSem.c" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osTime.c" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/src/bios/src/pal_osWait.c" 
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osCache.c" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osList.c" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osMem.c" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osprotect.c" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osSem.c" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osTime.c" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/src/bios/src/pal_osWait.c" 
 
 

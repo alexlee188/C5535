@@ -7,13 +7,13 @@ SHELL = cmd.exe
 CG_TOOL_ROOT := C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1
 
 ORDERED_OBJS += \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osWait.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osTime.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osSem.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osprotect.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osMem.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osList.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/Release/pal_osCache.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osWait.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osTime.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osSem.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osprotect.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osMem.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osList.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/Release/pal_osCache.obj" \
 
 -include ../makefile.init
 
@@ -112,21 +112,21 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib
+all: C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib
 
 # Tool invocations
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib: $(OBJS) $(LIB_SRCS)
+C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib: $(OBJS) $(LIB_SRCS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Archiver'
-	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/ar55" r "C:/Users/Alex/USB Audio Class/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib" $(ORDERED_OBJS)
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/ar55" r "C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C5500_LIBRARY_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\USB Audio Class\c55x5_drivers\lib\release\palos_bios_lib.lib"
+	-$(RM) $(C5500_LIBRARY_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\C5535\c55x5_drivers\lib\release\palos_bios_lib.lib"
 	-$(RM) "pal_osCache.pp" "pal_osList.pp" "pal_osMem.pp" "pal_osProtect.pp" "pal_osSem.pp" "pal_osTime.pp" "pal_osWait.pp" 
-	-$(RM) "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osCache.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osList.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osMem.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osprotect.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osSem.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osTime.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\pal_os\build\Release\pal_osWait.obj" 
+	-$(RM) "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osCache.obj" "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osList.obj" "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osMem.obj" "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osprotect.obj" "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osSem.obj" "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osTime.obj" "C:\Users\Alex\C5535\c55x5_drivers\pal_os\build\Release\pal_osWait.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

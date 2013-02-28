@@ -7,8 +7,8 @@ SHELL = cmd.exe
 CG_TOOL_ROOT := C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1
 
 ORDERED_OBJS += \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/build/Release/ddc_dma.obj" \
-"C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/build/Release/dda_dma.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/dma/build/Release/ddc_dma.obj" \
+"C:/Users/Alex/C5535/c55x5_drivers/dma/build/Release/dda_dma.obj" \
 
 -include ../makefile.init
 
@@ -107,21 +107,21 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib
+all: C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib
 
 # Tool invocations
-C:/Users/Alex/USB\ Audio\ Class/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib: $(OBJS) $(LIB_SRCS)
+C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib: $(OBJS) $(LIB_SRCS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Archiver'
-	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/ar55" r "C:/Users/Alex/USB Audio Class/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib" $(ORDERED_OBJS)
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/ar55" r "C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C5500_LIBRARY_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\USB Audio Class\c55x5_drivers\lib\Release\dma_bios_drv_lib.lib"
+	-$(RM) $(C5500_LIBRARY_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\C5535\c55x5_drivers\lib\Release\dma_bios_drv_lib.lib"
 	-$(RM) "dda_dma.pp" "ddc_dma.pp" 
-	-$(RM) "C:\Users\Alex\USB Audio Class\c55x5_drivers\dma\build\Release\dda_dma.obj" "C:\Users\Alex\USB Audio Class\c55x5_drivers\dma\build\Release\ddc_dma.obj" 
+	-$(RM) "C:\Users\Alex\C5535\c55x5_drivers\dma\build\Release\dda_dma.obj" "C:\Users\Alex\C5535\c55x5_drivers\dma\build\Release\ddc_dma.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
