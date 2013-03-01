@@ -1,0 +1,9 @@
+#Wed Jul 18 11:46:43 CDT 2012
+com.ti.ccstudio.buildDefinitions.C5500.Debug.756099330/internalBuilder/enabled=false
+com.ti.ccstudio.buildDefinitions.C5500.Debug.756099330/internalBuilder/ignoreErr=true
+com.ti.ccstudio.buildDefinitions.C5500.Release.798803258/internalBuilder/enabled=false
+com.ti.ccstudio.buildDefinitions.C5500.Release.798803258/internalBuilder/ignoreErr=true
+eclipse.preferences.version=1
+environment/project=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<environment/>\r\n
+environment/project/com.ti.ccstudio.buildDefinitions.C5500.Debug.756099330=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<environment/>\r\n
+environment/project/com.ti.ccstudio.buildDefinitions.C5500.Release.798803258=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<environment/>\r\n

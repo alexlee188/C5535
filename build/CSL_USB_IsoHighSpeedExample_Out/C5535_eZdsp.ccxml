@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+
+<configuration XML_version="1.2" id="Texas Instruments XDS100v1 USB Emulator_0">
+        <instance XML_version="1.2" desc="Texas Instruments XDS100v1 USB Emulator_0" href="connections\TIXDS100usb_Connection.xml" id="Texas Instruments XDS100v1 USB Emulator_0" xml="TIXDS100usb_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Texas Instruments XDS100v1 USB Emulator_0">
+            <instance XML_version="1.2" href="drivers\tixds100c55x.xml" id="drivers" xml="tixds100c55x.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="USBSTK5535_0" href="boards\usbstk5535.xml" id="USBSTK5535_0" xml="usbstk5535.xml" xmlpath="boards"/>
+                <board XML_version="1.2" description="Spectrum Digital C5535 USB Stick" id="USBSTK5535_0">
+                    <device HW_revision="1" XML_version="1.2" description="" id="TMS320C5535_0" partnum="TMS320C5535">
+                        <cpu HW_revision="1.0" XML_version="1.2" desc="C55xx" description="The C55xx CPU" id="C55xx" isa="TMS320C55XX">
+                            <property Type="filepathfield" Value="..\..\c5505evm_pg20.gel" id="GEL File"/>
+                        </cpu>
+                    </device>
+                </board>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>

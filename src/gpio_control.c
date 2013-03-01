@@ -28,7 +28,9 @@
 #include "gpio_control.h"
 
 CSL_GpioObj gGpioObj;
-CSL_GpioObj *hGpio;
+
+//Redefined in ezdsp5535v1 lib
+//CSL_GpioObj *hGpio;
 
 // Debug
 Int16 gpio02State =0;

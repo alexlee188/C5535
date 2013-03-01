@@ -1,0 +1,2 @@
+!WARNING: File 'UsbAcHighSpeed.cmd' explicitly references a TConf-generated linker-command file (line 1). Please remove this reference when migration completes - CCS now automatically handles generated files during project-build.
+

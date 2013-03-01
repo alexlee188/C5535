@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?fileVersion 3.1.0?>
+
+<ManagedProjectBuildInfo>
+<project id="CSL_USB_IsoHighSpeedExample_Out.com.ti.ccstudio.buildDefinitions.C5500.ProjectType.1918290397" name="C5500" projectType="com.ti.ccstudio.buildDefinitions.C5500.ProjectType">
+<configuration artifactExtension="out" artifactName="${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/CSL_USB_IsoHighSpeedExample_Out/Debug/CSL_USB_IsoHighSpeedExample_Out" description="" id="com.ti.ccstudio.buildDefinitions.C5500.Debug.756099330" name="Debug" parent="com.ti.ccstudio.buildDefinitions.C5500.Debug" postbuildStep="">
+<toolChain id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.DebugToolchain.711922123" name="TI Code Generation Tools" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerDebug.1449236098">
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.97970269" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+<listOptionValue builtIn="false" value="DEVICE_CONFIGURATION_ID=TMS320C55XX"/>
+<listOptionValue builtIn="false" value="DEVICE_ENDIANNESS=none"/>
+<listOptionValue builtIn="false" value="OUTPUT_FORMAT=COFF"/>
+<listOptionValue builtIn="false" value="CCS_MBS_VERSION=4.2.4"/>
+<listOptionValue builtIn="false" value="LINKER_COMMAND_FILE="/>
+<listOptionValue builtIn="false" value="RUNTIME_SUPPORT_LIBRARY="/>
+<listOptionValue builtIn="false" value="OUTPUT_TYPE=executable"/>
+<listOptionValue builtIn="false" value="DSPBIOS_VERSION=5.41.10.36"/>
+<listOptionValue builtIn="false" value="DEPENDENCIES=dma_bios_drv_lib:$;i2c_bios_drv_lib:$;i2s_bios_drv_lib:$;palos_bios_lib:$;cslVC5505:$;"/>
+<listOptionValue builtIn="false" value="RTSC_PRODUCTS=com.ti.rtsc.XDAIS:latest;"/>
+<listOptionValue builtIn="false" value="LINK_ORDER=UsbAcHighSpeed.cmd;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.913030990" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="4.3.8" valueType="string"/>
+<tool id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.compilerDebug.1751510872" name="C5500 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.compilerDebug">
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIAG_WARNING.2016546883" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIAG_WARNING" valueType="stringList">
+<listOptionValue builtIn="false" value="225"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.INCLUDE_PATH.1842483856" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.INCLUDE_PATH" valueType="includePath">
+<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${TCONF_OUTPUT_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${BIOS_INCLUDE_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${RTDX_INCLUDE_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${XDAIS_CG_ROOT}/packages/ti/xdais&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55xx_csl/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/i2c/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/i2s/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/dma/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/pal_os/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/asrc/inc&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.ALGEBRAIC.1039134506" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.ALGEBRAIC" value="true" valueType="boolean"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIRECTORY_MODE.550804899" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIRECTORY_MODE" value="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIRECTORY_MODE.manual" valueType="enumerated"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OBJ_DIRECTORY.1997104598" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OBJ_DIRECTORY" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/Debug&quot;" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE.863480389" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE" valueType="definedSymbols">
+<listOptionValue builtIn="false" value="&quot;_DEBUG&quot;"/>
+<listOptionValue builtIn="false" value="&quot;BIOS_BUILD&quot;"/>
+<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>
+<listOptionValue builtIn="false" value="&quot;PLAY_RECORD&quot;"/>
+<listOptionValue builtIn="false" value="&quot;SAMP_24BIT&quot;"/>
+<listOptionValue builtIn="false" value="&quot;USE_THREE_CODEC&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.LARGE_MEMORY_MODEL.950616269" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.SILICON_VERSION.1046640095" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.SILICON_VERSION" value="cpu:3.3" valueType="string"/>
+</tool>
+<tool id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerDebug.1449236098" name="C5500 Linker" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerDebug">
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.OUTPUT_FILE.1464137447" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.OUTPUT_FILE" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/CSL_USB_IsoHighSpeedExample_Out/Debug/CSL_USB_IsoHighSpeedExample_Out.out&quot;" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.MAP_FILE.1521342746" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.MAP_FILE" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/CSL_USB_IsoHighSpeedExample_Out/Debug/CSL_USB_IsoHighSpeedExample_Out.map&quot;" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.SEARCH_PATH.423815338" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.SEARCH_PATH" valueType="stringList">
+<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${RTDX_LIB_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${BIOS_LIB_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../../c55x5_drivers/lib/Debug&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../../c55xx_csl/lib/Debug&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${env_var:BIOS_INSTALL_DIR}/packages/ti/rtdx/lib/c5000&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/asrc/lib&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.LIBRARY.1310307764" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.LIBRARY" valueType="libs">
+<listOptionValue builtIn="false" value="&quot;dma_bios_drv_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;i2c_bios_drv_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;i2s_bios_drv_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;palos_bios_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;cslVC5505_Lib.lib&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.XML_LINK_INFO.982696337" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.XML_LINK_INFO" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/Debug/link_info.xml&quot;" valueType="string"/>
+</tool>
+<tool id="com.ti.rtsc.buildDefinitions.DSPBIOS_5.40.tool.1925383191" name="TConf Script Compiler" superClass="com.ti.rtsc.buildDefinitions.DSPBIOS_5.40.tool">
+<option id="com.ti.rtsc.buildDefinitions.DSPBIOS_5.40.tool.CONFIG_IMPORT_PATH.1796407749" superClass="com.ti.rtsc.buildDefinitions.DSPBIOS_5.40.tool.CONFIG_IMPORT_PATH" valueType="includePath">
+<listOptionValue builtIn="false" value="&quot;${BIOS_CG_ROOT}/packages&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${env_var:BIOS_INSTALL_DIR}/packages&quot;"/>
+</option>
+</tool>
+<macros expandEnvironmentMacros="true"/>
+</toolChain>
+</configuration>
+<configuration artifactExtension="out" artifactName="${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out" description="" id="com.ti.ccstudio.buildDefinitions.C5500.Release.798803258" name="Release" parent="com.ti.ccstudio.buildDefinitions.C5500.Release" postbuildStep="&quot;${PROJECT_ROOT}/postBuildStep_Release.bat&quot;">
+<toolChain id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.ReleaseToolchain.2135789351" name="TI Code Generation Tools" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerRelease.148230042">
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.521306337" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+<listOptionValue builtIn="false" value="DEVICE_CONFIGURATION_ID=TMS320C55XX"/>
+<listOptionValue builtIn="false" value="DEVICE_ENDIANNESS=none"/>
+<listOptionValue builtIn="false" value="OUTPUT_FORMAT=COFF"/>
+<listOptionValue builtIn="false" value="CCS_MBS_VERSION=4.2.4"/>
+<listOptionValue builtIn="false" value="LINKER_COMMAND_FILE="/>
+<listOptionValue builtIn="false" value="RUNTIME_SUPPORT_LIBRARY="/>
+<listOptionValue builtIn="false" value="OUTPUT_TYPE=executable"/>
+<listOptionValue builtIn="false" value="DSPBIOS_VERSION=5.41.10.36"/>
+<listOptionValue builtIn="false" value="DEPENDENCIES=dma_bios_drv_lib:$;i2c_bios_drv_lib:$;i2s_bios_drv_lib:$;palos_bios_lib:$;cslVC5505:$;"/>
+<listOptionValue builtIn="false" value="RTSC_PRODUCTS=com.ti.rtsc.XDAIS:latest;"/>
+<listOptionValue builtIn="false" value="LINK_ORDER=UsbAcHighSpeed.cmd;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1068414511" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="4.3.8" valueType="string"/>
+<tool id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.compilerRelease.1656912094" name="C5500 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.compilerRelease">
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIAG_WARNING.1300730560" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIAG_WARNING" valueType="stringList">
+<listOptionValue builtIn="false" value="225"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.INCLUDE_PATH.1944672460" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.INCLUDE_PATH" valueType="includePath">
+<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${TCONF_OUTPUT_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${BIOS_INCLUDE_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${RTDX_INCLUDE_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${XDAIS_CG_ROOT}/packages/ti/xdais&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55xx_csl/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/i2c/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/i2s/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/dma/inc&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/c55x5_drivers/pal_os/inc&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.ALGEBRAIC.423173949" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.ALGEBRAIC" value="true" valueType="boolean"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.NO_WARNINGS.606323440" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.NO_WARNINGS" value="true" valueType="boolean"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OPT_LEVEL.release.1007045486" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OPT_LEVEL.release" value="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OPT_LEVEL.3" valueType="enumerated"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIRECTORY_MODE.1369910196" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIRECTORY_MODE" value="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DIRECTORY_MODE.manual" valueType="enumerated"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OBJ_DIRECTORY.1905025340" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OBJ_DIRECTORY" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/Release&quot;" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE.1796645097" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE" valueType="definedSymbols">
+<listOptionValue builtIn="false" value="&quot;BIOS_BUILD&quot;"/>
+<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>
+<listOptionValue builtIn="false" value="&quot;PLAY_RECORD&quot;"/>
+<listOptionValue builtIn="false" value="&quot;SAMP_24BIT&quot;"/>
+<listOptionValue builtIn="false" value="&quot;USE_THREE_CODEC&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.LARGE_MEMORY_MODEL.324233686" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.SILICON_VERSION.1487392695" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.SILICON_VERSION" value="cpu:3.3" valueType="string"/>
+</tool>
+<tool id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerRelease.148230042" name="C5500 Linker" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerRelease">
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.OUTPUT_FILE.273954743" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.OUTPUT_FILE" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out&quot;" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.MAP_FILE.1635161336" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.MAP_FILE" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.map&quot;" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.SEARCH_PATH.1482228335" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.SEARCH_PATH" valueType="stringList">
+<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${RTDX_LIB_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${BIOS_LIB_DIR}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../../c55x5_drivers/lib/Release&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../../c55xx_csl/lib/Release&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${env_var:BIOS_INSTALL_DIR}/packages/ti/rtdx/lib/c5000&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/asrc/lib&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.LIBRARY.666653494" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.LIBRARY" valueType="libs">
+<listOptionValue builtIn="false" value="&quot;dma_bios_drv_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;i2c_bios_drv_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;i2s_bios_drv_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;palos_bios_lib.lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;cslVC5505_Lib.lib&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.XML_LINK_INFO.359456934" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.linkerID.XML_LINK_INFO" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/Release/link_info.xml&quot;" valueType="string"/>
+</tool>
+<tool id="com.ti.rtsc.buildDefinitions.DSPBIOS_5.40.tool.568132540" name="TConf Script Compiler" superClass="com.ti.rtsc.buildDefinitions.DSPBIOS_5.40.tool"/>
+<macros expandEnvironmentMacros="true"/>
+</toolChain>
+<resourceConfiguration exclude="false" id="com.ti.ccstudio.buildDefinitions.C5500.Release.798803258./CSL_USB_IsoHighSpeedExample_Out/UsbAcHighSpeed.cmd" name="UsbAcHighSpeed.cmd" rcbsApplicability="disable" resourcePath="/CSL_USB_IsoHighSpeedExample_Out/UsbAcHighSpeed.cmd" toolsToInvoke="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerRelease.148230042./CSL_USB_IsoHighSpeedExample_Out/UsbAcHighSpeed.cmd">
+<tool id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerRelease.148230042./CSL_USB_IsoHighSpeedExample_Out/UsbAcHighSpeed.cmd" name="C5500 Linker" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerRelease.148230042"/>
+</resourceConfiguration>
+</configuration>
+<macros/>
+</project>
+</ManagedProjectBuildInfo>

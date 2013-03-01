@@ -1,0 +1,88 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\test\TITaiwan\c55_usbac2_v00.15.00.04_20121219\build\"
+ProjectType=Executable
+CPUFamily=TMS320C55XX
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Project Dependencies]
+Source="..\c55x5_drivers\dma\build\dma_bios_drv_lib.pjt"
+Source="..\c55x5_drivers\i2c\build\i2c_bios_drv_lib.pjt"
+Source="..\c55x5_drivers\i2s\build\i2s_bios_drv_lib.pjt"
+Source="..\c55x5_drivers\pal_os\build\palos_bios_lib.pjt"
+Source="..\c55xx_csl\build\cslVC5505.pjt"
+
+["..\c55x5_drivers\dma\build\dma_bios_drv_lib.pjt" Settings]
+MatchConfigName=true
+
+["..\c55x5_drivers\i2c\build\i2c_bios_drv_lib.pjt" Settings]
+MatchConfigName=true
+
+["..\c55x5_drivers\i2s\build\i2s_bios_drv_lib.pjt" Settings]
+MatchConfigName=true
+
+["..\c55x5_drivers\pal_os\build\palos_bios_lib.pjt" Settings]
+MatchConfigName=true
+
+["..\c55xx_csl\build\cslVC5505.pjt" Settings]
+MatchConfigName=true
+
+[Source Files]
+Source="..\src\app_asrc.c"
+Source="..\src\app_audio_alg.c"
+Source="..\src\app_usb.c"
+Source="..\src\app_usbac.c"
+Source="..\src\app_usbac_descs.c"
+Source="..\src\codec_aic3254.c"
+Source="..\src\codec_config.c"
+Source="..\src\csl_usb_iso_highspeed_example.c"
+Source="..\src\dbg_sdram.c"
+Source="..\src\gpio_control.c"
+Source="..\src\i2s_sample.c"
+Source="..\src\pll_control.c"
+Source="..\src\user_interface.c"
+Source="VC5505_CSL_BIOS_cfg.tcf"
+Source="UsbAcHighSpeed.cmd"
+Source="VC5505_CSL_BIOS_cfg.cmd"
+
+[Generated Files]
+Source="VC5505_CSL_BIOS_cfg.s55"
+Source="VC5505_CSL_BIOS_cfg_c.c"
+
+["Release" Settings]
+FinalBuildCmd=c:\Perl\ofd\ofd55 -x -o=release\CSL_USB_IsoHighSpeedExample_Out.xml release\CSL_USB_IsoHighSpeedExample_Out.out
+FinalBuildCmd=perl -S c:\Perl\ofd\sectti.pl release\CSL_USB_IsoHighSpeedExample_Out.xml
+
+["Compiler" Settings: "Debug"]
+Options=-g -mg -fr"$(Proj_dir)\Debug" -i"$(Proj_dir)" -i"$(Proj_dir)\..\inc" -i"$(Proj_dir)\..\c55xx_csl\inc" -i"$(Proj_dir)\..\c55x5_drivers\inc" -i"$(Proj_dir)\..\c55x5_drivers\i2c\inc" -i"$(Proj_dir)\..\c55x5_drivers\i2s\inc" -i"$(Proj_dir)\..\c55x5_drivers\dma\inc" -i"$(Proj_dir)\..\c55x5_drivers\pal_os\inc" -i"$(Proj_dir)\..\asrc\inc" -d"_DEBUG" -d"BIOS_BUILD" -d"CSL_AC_TEST" -d"PLAY_RECORD" -d"SAMP_24BIT" -d"USE_THREE_CODEC" -ml -vcpu:3.3
+
+["Compiler" Settings: "Release"]
+Options=-g -mg -pdw -o3 -fr"$(Proj_dir)\Release" -i"$(Proj_dir)" -i"$(Proj_dir)\..\inc" -i"$(Proj_dir)\..\c55xx_csl\inc" -i"$(Proj_dir)\..\c55x5_drivers\inc" -i"$(Proj_dir)\..\c55x5_drivers\i2c\inc" -i"$(Proj_dir)\..\c55x5_drivers\i2s\inc" -i"$(Proj_dir)\..\c55x5_drivers\dma\inc" -i"$(Proj_dir)\..\c55x5_drivers\pal_os\inc" -i"$(Proj_dir)\..\asrc\inc" -d"BIOS_BUILD" -d"CSL_AC_TEST" -d"PLAY_RECORD" -d"SAMP_24BIT" -d"C5535_EZDSP" -ml -vcpu:3.3
+
+["DspBiosBuilder" Settings: "Debug"]
+Options=-Dconfig.importPath="%BIOS_INSTALL_DIR%/packages;"
+
+["Linker" Settings: "Debug"]
+Options=-c -m".\Debug\CSL_USB_IsoHighSpeedExample_Out.map" -o".\Debug\CSL_USB_IsoHighSpeedExample_Out.out" -w -x -i"%BIOS_INSTALL_DIR%\packages\ti\rtdx\lib\c5000" -i"..\asrc\lib" --xml_link_info=".\Debug\link_info.xml"
+
+["Linker" Settings: "Release"]
+Options=-c -m".\Release\CSL_USB_IsoHighSpeedExample_Out.map" -o".\Release\CSL_USB_IsoHighSpeedExample_Out.out" -w -i"%BIOS_INSTALL_DIR%\packages\ti\rtdx\lib\c5000" -i"..\asrc\lib" --xml_link_info=".\Release\link_info.xml"
+
+["UsbAcHighSpeed.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["UsbAcHighSpeed.cmd" Settings: "Release"]
+LinkOrder=1
+
+["VC5505_CSL_BIOS_cfg.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["VC5505_CSL_BIOS_cfg.cmd" Settings: "Release"]
+LinkOrder=1
+

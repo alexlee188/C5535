@@ -70,6 +70,8 @@
 #include "soc.h"
 #include "cslr.h"
 #include "cslr_sysctrl.h"
+#include "ezdsp5535.h"
+#include "ezdsp5535_led.h"
 #include <sem.h>
 SEM_Obj SEM_BufferInReady;
 CSL_Status  CSL_i2cPowerTest(void);
@@ -198,6 +200,9 @@ void main(void)
 
     /* Enable the USB LDO */
     *(volatile ioport unsigned int *)(0x7004) |= 0x0001;
+
+    EZDSP5535_init();
+    EZDSP5535_LED_init( );
 }
 
 /**

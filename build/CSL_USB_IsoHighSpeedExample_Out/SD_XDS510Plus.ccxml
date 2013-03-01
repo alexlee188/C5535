@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+<configuration XML_version="1.2" id="Spectrum Digital XDS510USB Emulator_0">
+        <instance XML_version="1.2" desc="Spectrum Digital XDS510USB Emulator_0" href="connections\SD510USB_Connection.xml" id="Spectrum Digital XDS510USB Emulator_0" xml="SD510USB_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Spectrum Digital XDS510USB Emulator_0">
+            <instance XML_version="1.2" href="drivers\sdgo55xxusb.xml" id="drivers" xml="sdgo55xxusb.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="EVM5515_0" href="boards\evm5515.xml" id="EVM5515_0" xml="evm5515.xml" xmlpath="boards"/>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>
