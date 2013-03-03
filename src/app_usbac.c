@@ -175,9 +175,9 @@ CSL_AcMediaStatus appPlayAudio(
     if ((usb_play_start)&&(usb_play_mode==FALSE)&&(codec_output_buffer_sample>=(MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC/2)))
     {
         usb_play_mode = TRUE;
-        EZDSP5535_LED_on(0);
+        //EZDSP5535_LED_on(0);
         usb_play_start = FALSE;
-        EZDSP5535_LED_off(1);
+        //EZDSP5535_LED_off(1);
     }
 
     return(CSL_AC_MEDIACCESS_SUCCESS);
@@ -299,9 +299,9 @@ CSL_Status appInitPlayAudio(
 	
 	// start the USB uFrame counting
 	usb_play_start = TRUE;
-	EZDSP5535_LED_on(1);
+	//EZDSP5535_LED_on(1);
 	usb_play_mode = FALSE;
-	EZDSP5535_LED_off(0);
+	//EZDSP5535_LED_off(0);
 
     // reset codec output circular buffer
     //memset(codec_output_buffer, 0, 2*CODEC_OUTPUT_BUFFER_SIZE);
@@ -369,9 +369,9 @@ CSL_Status appStopPlayAudio(
 )
 {
     usb_play_mode = FALSE;
-    EZDSP5535_LED_off(0);
+    //EZDSP5535_LED_off(0);
     usb_play_start = FALSE;
-    EZDSP5535_LED_off(1);
+    //EZDSP5535_LED_off(1);
     return CSL_SOK;
 }
 
