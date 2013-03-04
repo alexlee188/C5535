@@ -31,6 +31,8 @@
 #include "ddc_i2s.h"
 #include "psp_i2s.h"
 #include "dda_i2s.h"
+#include "ezdsp5535.h"
+#include "ezdsp5535_led.h"
 
 DDC_I2SObj DDC_I2S_Instance[I2S_PER_CNT];
 /**< DDC instance handle */
@@ -732,6 +734,8 @@ void I2S_DmaTxLChCallBack(
     dmaCXferCnt++;
 
     i2sDmaTxLChCallBackCount++;
+
+    EZDSP5535_LED_on(1);
 
     if((dataCallback != NULL) && (dmaStatus == PSP_DMA_TRANSFER_COMPLETE))
     {

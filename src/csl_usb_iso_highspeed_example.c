@@ -120,6 +120,7 @@ void main(void)
 {
     CSL_Status status;
     Uint32 gpioIoDir;
+    int i;
 
 #ifdef DISABLE_BIOS_TRACE
     // Disable trace to reduce MHz load
@@ -203,7 +204,8 @@ void main(void)
 
     EZDSP5535_init();
     EZDSP5535_LED_init( );
-}
+    for (i = 0; i < 4; i++) EZDSP5535_LED_off(i);
+};
 
 /**
  *  \brief  Audio Class intialization function

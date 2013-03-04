@@ -8,4 +8,5 @@
 <isElfFormat value="false"/>
 <rts value=""/>
 <deviceFamily value="C5500"/>
+<isTargetManual value="false"/>
 </projectOptions>
