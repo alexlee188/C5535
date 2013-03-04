@@ -372,7 +372,7 @@ void CSL_acTest(void)
 
 #ifdef C5535_EZDSP_DEMO
         // initialize the OLED display        
-        // oled_init();
+        //oled_init();
 #endif
         
         /* Initialising the Pointer to the Audio Class Handle to the Buffer Allocated */

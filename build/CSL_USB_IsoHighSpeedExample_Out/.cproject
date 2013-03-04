@@ -182,7 +182,6 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OBJ_DIRECTORY.1905025340" name="Object file directory (default is .) (--obj_directory, -fr)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OBJ_DIRECTORY" value="&quot;${EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out}/build/Release&quot;" valueType="string"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE.1796645097" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="&quot;BIOS_BUILD&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;USE_THREE_CODEC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot; C5535_EZDSP_DEMO&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;PLAY_RECORD&quot;"/>

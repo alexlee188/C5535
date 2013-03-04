@@ -133,7 +133,6 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.SILICON_VERSION.951544875" name="device+optional revision of target silicon (--silicon_version, -v)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.SILICON_VERSION" value="cpu:3.3" valueType="string"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE.1019205497" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="&quot;C5535_EZDSP_DEMO&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;USE_THREE_CODEC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;PLAY_RECORD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;SAMP_24BIT&quot;"/>

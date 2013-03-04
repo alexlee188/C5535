@@ -447,8 +447,7 @@ void PbAudioAlgTsk(void)
     Int16 *pbOutBufRight4;
 #endif //USE_FOUR_CODEC
     volatile Int16 i, loopCount;
-    EZDSP5535_LED_off(2);
-    EZDSP5535_LED_off(3);
+
     while (1)
     {
         SEM_pend(&SEM_PingPongTxLeftComplete, SYS_FOREVER);
@@ -457,9 +456,8 @@ void PbAudioAlgTsk(void)
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
 #endif //USE_TWO_CODEC
 #ifdef USE_THREE_CODEC
-        // Temporarily disable waiting for DMS channels 2 and 3 to complete
-        //SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
-        //SEM_pend(&SEM_PingPongTxLeftComplete3, SYS_FOREVER);
+        SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
+        SEM_pend(&SEM_PingPongTxLeftComplete3, SYS_FOREVER);
 #endif //USE_THREE_CODEC
 #ifdef USE_FOUR_CODEC
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
@@ -471,9 +469,8 @@ void PbAudioAlgTsk(void)
         SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
 #endif //USE_TWO_CODEC
 #ifdef USE_THREE_CODEC
-        // temporarily disable waiting for DMA channels 2 and 3 to complete
-        //SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
-        //SEM_pend(&SEM_PingPongTxRightComplete3, SYS_FOREVER);
+        SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
+        SEM_pend(&SEM_PingPongTxRightComplete3, SYS_FOREVER);
 #endif //USE_THREE_CODEC
 #ifdef USE_FOUR_CODEC
         SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
