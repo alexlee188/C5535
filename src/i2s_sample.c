@@ -503,7 +503,6 @@ Int16 i2sInit(
             pI2sInitPrms->pingPongI2sRxRightBuf);
 
     }
-    //EZDSP5535_LED_on(0);
     return I2SSAMPLE_SOK;
 }
 
