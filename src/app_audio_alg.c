@@ -447,11 +447,12 @@ void PbAudioAlgTsk(void)
     Int16 *pbOutBufRight4;
 #endif //USE_FOUR_CODEC
     volatile Int16 i, loopCount;
+    Bool led_toggle = FALSE;
 
     while (1)
     {
         SEM_pend(&SEM_PingPongTxLeftComplete, SYS_FOREVER);
-        EZDSP5535_LED_on(2);
+
 #ifdef USE_TWO_CODEC
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
 #endif //USE_TWO_CODEC
@@ -477,6 +478,12 @@ void PbAudioAlgTsk(void)
         SEM_pend(&SEM_PingPongTxRightComplete3, SYS_FOREVER);
         SEM_pend(&SEM_PingPongTxRightComplete4, SYS_FOREVER);
 #endif //USE_FOUR_CODEC
+
+        if ((playAudioTaskCount % 1000) == 0){
+        	if (led_toggle) EZDSP5535_LED_off(3);
+        	else EZDSP5535_LED_on(3);
+        	led_toggle = !led_toggle;
+        }
 
 		playAudioTaskCount++;
         /* Select output buffer */
@@ -511,9 +518,6 @@ void PbAudioAlgTsk(void)
 
 		if (usb_play_mode)
         {
-			if (right_tx_buf_sel == 0x00) EZDSP5535_LED_off(3);
-			else EZDSP5535_LED_on(3);
-
         	// do we have enough samples for the DMA buffer? 
 			if (codec_output_buffer_sample>=MAX_TXBUFF_SZ_DACSAMPS)
 			{
