@@ -1,7 +1,7 @@
 ******************************************************************************
               TMS320C55x Linker PC v4.4.1                      
 ******************************************************************************
->> Linked Wed Mar 06 20:12:06 2013
+>> Linked Wed Mar 06 23:18:21 2013
 
 OUTPUT FILE NAME:   <C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00042381
@@ -13,7 +13,7 @@ MEMORY CONFIGURATION
                         (bytes)   (bytes)    (bytes)   (bytes)
 ----------------------  --------  ---------  --------  --------  ----  --------
   DARAM                 000000c0   0000fe40  0000aafa  00005346  RWIX
-  SARAM                 00010000   0003df00  000324fa  0000ba06  RWIX
+  SARAM                 00010000   0003df00  00032536  0000b9ca  RWIX
   VECT                  0004df00   00000100  00000100  00000000  RWIX
   SARAM31               0004e000   00002000  00002000  00000000  RWIX
 
@@ -242,7 +242,7 @@ section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
                  [ 0002ebe4 ]  000175f2          *   00000002   codec_aic3254.obj (.bss)
                  [ 0002ebe8 ]  000175f4          *   00000002   rts55x.lib : sinit.obj (.bss)
 
-.text        0     0002ebec  [ 000175f6 ] 0000ced4          *   
+.text        0     0002ebec  [ 000175f6 ] 0000cf10          *   
                    0002ebec  [ 000175f6 ] 00001bb6          *   app_usb.obj (.text)
                    000307a2  [ 000183d1 ] 00001ae7          *   cslVC5505_Lib.lib : csl_usb.obj (.text)
                    00032289  [ 00019144+] 00001326          *                     : csl_audioClass.obj (.text)
@@ -252,152 +252,151 @@ section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
                    0003612c  [ 0001b096 ] 00000aef          *   i2s_sample.obj (.text)
                    00036c1b  [ 0001b60d+] 00000868          *   app_usbac.obj (.text)
                    00037483  [ 0001ba41+] 00000819          *   cslVC5505_Lib.lib : csl_sar.obj (.text)
-                   00037c9c  [ 0001be4e ] 000006c7          *   i2s_bios_drv_lib.lib : ddc_i2s.obj (.text)
-                   00038363  [ 0001c1b1+] 00000681          *   csl_usb_iso_highspeed_example.obj (.text)
-                   000389e4  [ 0001c4f2 ] 0000066c          *   app_audio_alg.obj (.text)
-                   00039050  [ 0001c828 ] 000004ee          *   cslVC5505_Lib.lib : csl_gpio.obj (.text)
-                   0003953e  [ 0001ca9f ] 00000401          *   i2s_bios_drv_lib.lib : llc_i2s.obj (.text)
-                   0003993f  [ 0001cc9f+] 000003e8          *   user_interface.obj (.text)
-                   00039d27  [ 0001ce93+] 000003cc          *   rts55x.lib : divd.obj (.text)
-                   0003a0f3  [ 0001d079+] 00000285          *   codec_config.obj (.text)
-                   0003a378  [ 0001d1bc ] 0000025a          *   rts55x.lib : addd.obj (.text)
-                   0003a5d2  [ 0001d2e9 ] 0000020c          *   cslVC5505_Lib.lib : csl_gpt.obj (.text)
-                   0003a7de  [ 0001d3ef ] 00000203          *   app_asrc.obj (.text)
-                   0003a9e1  [ 0001d4f0+] 000001e7          *   ezdsp5535bsl.lib : ezdsp5535_led.obj (.text)
-                   0003abc8  [ 0001d5e4 ] 000001d9          *   cslVC5505_Lib.lib : csl_pll.obj (.text)
-                   0003ada1  [ 0001d6d0+] 00000194          *   i2s_bios_drv_lib.lib : dda_i2s.obj (.text)
-                   0003af35  [ 0001d79a+] 0000014c          *   rts55x.lib : mpyd.obj (.text)
-                   0003b081  [ 0001d840+] 000000e8          *   i2c_bios_drv_lib.lib : dda_i2c.obj (.text)
-                   0003b169  [ 0001d8b4+] 000000d7          *   dma_bios_drv_lib.lib : dda_dma.obj (.text)
-                   0003b240  [ 0001d920 ] 000000c7          *   pll_control.obj (.text)
-                   0003b307  [ 0001d983+] 000000b1          *   gpio_control.obj (.text)
-                   0003b3b8  [ 0001d9dc ] 000000a1          *   rts55x.lib : divul.obj (.text)
-                   0003b459  [ 0001da2c+] 00000087          *   ezdsp5535bsl.lib : ezdsp5535_gpio.obj (.text)
-                   0003b4e0  [ 0001da70 ] 00000080          *   dbg_sdram.obj (.text)
-                   0003b560  [ 0001dab0 ] 00000077          *   rts55x.lib : fixdul.obj (.text)
-                   0003b5d7  [ 0001daeb+] 00000076          *              : frcmpyd.obj (.text)
-                   0003b64d  [ 0001db26+] 00000075          *              : sinit.obj (.text)
-                   0003b6c2  [ 0001db61 ] 00000073          *              : frcmpyd_div.obj (.text)
-                   0003b735  [ 0001db9a+] 00000072          *              : remul.obj (.text)
-                   0003b7a7  [ 0001dbd3+] 0000006f          *              : atexit.obj (.text)
-                   0003b816  [ 0001dc0b ] 00000002          *   --HOLE-- [fill = 20]
-                   0003b818  [ 0001dc0c ] 0000005c          *   bios.a55L : tsk_stup.o55L (.text)
-                   0003b874  [ 0001dc3a ] 00000058          *   palos_bios_lib.lib : pal_osSem.obj (.text)
-                   0003b8cc  [ 0001dc66 ] 00000057          *                      : pal_osprotect.obj (.text)
-                   0003b923  [ 0001dc91+] 00000054          *   ezdsp5535bsl.lib : ezdsp5535.obj (.text)
-                   0003b977  [ 0001dcbb+] 00000048          *   rts55x.lib : divli.obj (.text)
-                   0003b9bf  [ 0001dcdf+] 0000003f          *              : memcpy.obj (.text)
-                   0003b9fe  [ 0001dcff ] 0000003e          *              : exit.obj (.text)
-                   0003ba3c  [ 0001dd1e ] 00000028          *   palos_bios_lib.lib : pal_osTime.obj (.text)
-                   0003ba64  [ 0001dd32 ] 0000001b          *   rts55x.lib : fixdu.obj (.text)
-                   0003ba7f  [ 0001dd3f+] 00000014          *   palos_bios_lib.lib : pal_osWait.obj (.text)
-                   0003ba93  [ 0001dd49+] 00000013          *   rts55x.lib : lmpy.obj (.text)
-                   0003baa6  [ 0001dd53 ] 00000012          *              : _lock.obj (.text)
-                   0003bab8  [ 0001dd5c ] 00000007          *              : exit.obj (.text:CIO_breakpoint)
-                   0003babf  [ 0001dd5f ] 00000001          *   --HOLE-- [fill = 20]
+                   00037c9c  [ 0001be4e ] 000006fb          *   i2s_bios_drv_lib.lib : ddc_i2s.obj (.text)
+                   00038397  [ 0001c1cb+] 00000681          *   csl_usb_iso_highspeed_example.obj (.text)
+                   00038a18  [ 0001c50c ] 00000676          *   app_audio_alg.obj (.text)
+                   0003908e  [ 0001c847 ] 000004ee          *   cslVC5505_Lib.lib : csl_gpio.obj (.text)
+                   0003957c  [ 0001cabe ] 00000401          *   i2s_bios_drv_lib.lib : llc_i2s.obj (.text)
+                   0003997d  [ 0001ccbe+] 000003e8          *   user_interface.obj (.text)
+                   00039d65  [ 0001ceb2+] 000003cc          *   rts55x.lib : divd.obj (.text)
+                   0003a131  [ 0001d098+] 00000285          *   codec_config.obj (.text)
+                   0003a3b6  [ 0001d1db ] 0000025a          *   rts55x.lib : addd.obj (.text)
+                   0003a610  [ 0001d308 ] 0000020c          *   cslVC5505_Lib.lib : csl_gpt.obj (.text)
+                   0003a81c  [ 0001d40e ] 00000203          *   app_asrc.obj (.text)
+                   0003aa1f  [ 0001d50f+] 000001e7          *   ezdsp5535bsl.lib : ezdsp5535_led.obj (.text)
+                   0003ac06  [ 0001d603 ] 000001d9          *   cslVC5505_Lib.lib : csl_pll.obj (.text)
+                   0003addf  [ 0001d6ef+] 00000194          *   i2s_bios_drv_lib.lib : dda_i2s.obj (.text)
+                   0003af73  [ 0001d7b9+] 0000014c          *   rts55x.lib : mpyd.obj (.text)
+                   0003b0bf  [ 0001d85f+] 000000e8          *   i2c_bios_drv_lib.lib : dda_i2c.obj (.text)
+                   0003b1a7  [ 0001d8d3+] 000000d7          *   dma_bios_drv_lib.lib : dda_dma.obj (.text)
+                   0003b27e  [ 0001d93f ] 000000c7          *   pll_control.obj (.text)
+                   0003b345  [ 0001d9a2+] 000000b1          *   gpio_control.obj (.text)
+                   0003b3f6  [ 0001d9fb ] 000000a1          *   rts55x.lib : divul.obj (.text)
+                   0003b497  [ 0001da4b+] 00000087          *   ezdsp5535bsl.lib : ezdsp5535_gpio.obj (.text)
+                   0003b51e  [ 0001da8f ] 00000080          *   dbg_sdram.obj (.text)
+                   0003b59e  [ 0001dacf ] 00000077          *   rts55x.lib : fixdul.obj (.text)
+                   0003b615  [ 0001db0a+] 00000076          *              : frcmpyd.obj (.text)
+                   0003b68b  [ 0001db45+] 00000075          *              : sinit.obj (.text)
+                   0003b700  [ 0001db80 ] 00000073          *              : frcmpyd_div.obj (.text)
+                   0003b773  [ 0001dbb9+] 00000072          *              : remul.obj (.text)
+                   0003b7e5  [ 0001dbf2+] 0000006f          *              : atexit.obj (.text)
+                   0003b854  [ 0001dc2a ] 0000005c          *   bios.a55L : tsk_stup.o55L (.text)
+                   0003b8b0  [ 0001dc58 ] 00000058          *   palos_bios_lib.lib : pal_osSem.obj (.text)
+                   0003b908  [ 0001dc84 ] 00000057          *                      : pal_osprotect.obj (.text)
+                   0003b95f  [ 0001dcaf+] 00000054          *   ezdsp5535bsl.lib : ezdsp5535.obj (.text)
+                   0003b9b3  [ 0001dcd9+] 00000048          *   rts55x.lib : divli.obj (.text)
+                   0003b9fb  [ 0001dcfd+] 0000003f          *              : memcpy.obj (.text)
+                   0003ba3a  [ 0001dd1d ] 0000003e          *              : exit.obj (.text)
+                   0003ba78  [ 0001dd3c ] 00000028          *   palos_bios_lib.lib : pal_osTime.obj (.text)
+                   0003baa0  [ 0001dd50 ] 0000001b          *   rts55x.lib : fixdu.obj (.text)
+                   0003babb  [ 0001dd5d+] 00000014          *   palos_bios_lib.lib : pal_osWait.obj (.text)
+                   0003bacf  [ 0001dd67+] 00000013          *   rts55x.lib : lmpy.obj (.text)
+                   0003bae2  [ 0001dd71 ] 00000012          *              : _lock.obj (.text)
+                   0003baf4  [ 0001dd7a ] 00000007          *              : exit.obj (.text:CIO_breakpoint)
+                   0003bafb  [ 0001dd7d ] 00000001          *   --HOLE-- [fill = 20]
 
-.bios        0     0003bac0  [ 0001dd60 ] 000026c8          *   
-                   0003bac0  [ 0001dd60 ] 000003d4          *   bios.a55L : swi.o55L (.bios)
-                   0003be94  [ 0001df4a ] 000003a3          *   lnkrtdx.a55L : rtdx.o55L (.bios)
-                   0003c237  [ 0001e11b+] 0000035f          *   bios.a55L : hwi_disp_asm.o55L (.bios)
-                   0003c596  [ 0001e2cb ] 00000002          *   --HOLE-- [fill = 20]
-                   0003c598  [ 0001e2cc ] 0000018b          *             : sem_pend.o55L (.bios)
-                   0003c723  [ 0001e391+] 00000186          *             : prd.o55L (.bios)
-                   0003c8a9  [ 0001e454 ] 00000003          *   --HOLE-- [fill = 20]
-                   0003c8ac  [ 0001e456 ] 00000185          *             : knl_run.o55L (.bios)
-                   0003ca31  [ 0001e518 ] 00000003          *   --HOLE-- [fill = 20]
-                   0003ca34  [ 0001e51a ] 00000175          *             : mem_free.o55L (.bios:.near)
-                   0003cba9  [ 0001e5d4 ] 00000003          *   --HOLE-- [fill = 20]
-                   0003cbac  [ 0001e5d6 ] 00000144          *             : knl_tick.o55L (.bios)
-                   0003ccf0  [ 0001e678 ] 00000130          *             : rta.o55L (.bios)
-                   0003ce20  [ 0001e710 ] 0000012d          *             : mem_allo.o55L (.bios:.near)
-                   0003cf4d  [ 0001e7a6+] 00000119          *             : pip.o55L (.bios)
-                   0003d066  [ 0001e833 ] 0000010e          *             : knl_swit.o55L (.bios)
-                   0003d174  [ 0001e8ba ] 0000010d          *             : mbx.o55L (.bios)
-                   0003d281  [ 0001e940 ] 00000003          *   --HOLE-- [fill = 20]
-                   0003d284  [ 0001e942 ] 00000104          *             : sem_dopo.o55L (.bios)
-                   0003d388  [ 0001e9c4 ] 000000f8          *             : tsk_exit.o55L (.bios)
-                   0003d480  [ 0001ea40 ] 000000f6          *             : tsk_setu.o55L (.bios)
-                   0003d576  [ 0001eabb ] 00000002          *   --HOLE-- [fill = 20]
-                   0003d578  [ 0001eabc ] 000000bf          *             : tsk_stup.o55L (.bios)
-                   0003d637  [ 0001eb1b+] 000000a2          *             : c55_c.o55L (.bios)
-                   0003d6d9  [ 0001eb6c ] 00000003          *   --HOLE-- [fill = 20]
-                   0003d6dc  [ 0001eb6e ] 00000090          *   bios5505.a55L : clk5505_start.o55L (.bios)
-                   0003d76c  [ 0001ebb6 ] 0000008d          *   bios.a55L : knl_chec.o55L (.bios)
-                   0003d7f9  [ 0001ebfc ] 00000003          *   --HOLE-- [fill = 20]
-                   0003d7fc  [ 0001ebfe ] 0000008d          *   bios5505.a55L : clk5505_isr.o55L (.bios)
-                   0003d889  [ 0001ec44 ] 00000003          *   --HOLE-- [fill = 20]
-                   0003d88c  [ 0001ec46 ] 00000087          *                 : clk5505_htime.o55L (.bios)
-                   0003d913  [ 0001ec89+] 00000082          *   bios.a55L : sem_post_asm.o55L (.bios)
-                   0003d995  [ 0001ecca ] 00000003          *   --HOLE-- [fill = 20]
-                   0003d998  [ 0001eccc ] 00000068          *   bios5505.a55L : clk5505_meas.o55L (.bios)
-                   0003da00  [ 0001ed00 ] 00000062          *   bios.a55L : log_printf.o55L (.bios)
-                   0003da62  [ 0001ed31 ] 00000002          *   --HOLE-- [fill = 20]
-                   0003da64  [ 0001ed32 ] 00000062          *             : obj_crea.o55L (.bios)
-                   0003dac6  [ 0001ed63 ] 00000002          *   --HOLE-- [fill = 20]
-                   0003dac8  [ 0001ed64 ] 0000005f          *             : knl_exit.o55L (.bios)
-                   0003db27  [ 0001ed93 ] 00000001          *   --HOLE-- [fill = 20]
-                   0003db28  [ 0001ed94 ] 0000005b          *             : knl_ipos.o55L (.bios)
-                   0003db83  [ 0001edc1 ] 00000001          *   --HOLE-- [fill = 20]
-                   0003db84  [ 0001edc2 ] 0000005b          *             : sem_crea.o55L (.bios)
-                   0003dbdf  [ 0001edef ] 00000001          *   --HOLE-- [fill = 20]
-                   0003dbe0  [ 0001edf0 ] 00000058          *             : lck.o55L (.bios)
-                   0003dc38  [ 0001ee1c ] 00000051          *             : log.o55L (.bios)
-                   0003dc89  [ 0001ee44+] 0000004e          *             : sem_pend_counting.o55L (.bios)
-                   0003dcd7  [ 0001ee6b ] 00000001          *   --HOLE-- [fill = 20]
-                   0003dcd8  [ 0001ee6c ] 00000048          *             : sem_post.o55L (.bios)
-                   0003dd20  [ 0001ee90 ] 00000048          *             : sts.o55L (.bios)
-                   0003dd68  [ 0001eeb4 ] 00000048          *             : sys_exit.o55L (.bios)
-                   0003ddb0  [ 0001eed8 ] 00000047          *             : idl_busy.o55L (.bios)
-                   0003ddf7  [ 0001eefb+] 00000046          *             : idl_cal.o55L (.bios)
-                   0003de3d  [ 0001ef1e ] 00000003          *   --HOLE-- [fill = 20]
-                   0003de40  [ 0001ef20 ] 00000045          *             : obj_dele.o55L (.bios)
-                   0003de85  [ 0001ef42 ] 00000003          *   --HOLE-- [fill = 20]
-                   0003de88  [ 0001ef44 ] 00000044          *             : tsk_disa.o55L (.bios)
-                   0003decc  [ 0001ef66 ] 00000043          *             : rta_andn.o55L (.bios)
-                   0003df0f  [ 0001ef87+] 00000042          *             : que_get.o55L (.bios)
-                   0003df51  [ 0001efa8+] 00000036          *             : prd_c.o55L (.bios)
-                   0003df87  [ 0001efc3 ] 00000001          *   --HOLE-- [fill = 20]
-                   0003df88  [ 0001efc4 ] 00000036          *             : utl_putc.o55L (.bios)
-                   0003dfbe  [ 0001efdf ] 00000002          *   --HOLE-- [fill = 20]
-                   0003dfc0  [ 0001efe0 ] 00000034          *             : knl_post.o55L (.bios)
-                   0003dff4  [ 0001effa ] 00000034          *   bios5505.a55L : clk_itime.o55L (.bios)
-                   0003e028  [ 0001f014 ] 00000032          *   bios.a55L : mem_vall.o55L (.bios:.near)
-                   0003e05a  [ 0001f02d ] 00000025          *             : fxn.o55L (.bios)
-                   0003e07f  [ 0001f03f+] 00000024          *             : idl_stub.o55L (.bios)
-                   0003e0a3  [ 0001f051 ] 00000001          *   --HOLE-- [fill = 20]
-                   0003e0a4  [ 0001f052 ] 00000023          *             : utl_doab.o55L (.bios)
-                   0003e0c7  [ 0001f063 ] 00000001          *   --HOLE-- [fill = 20]
-                   0003e0c8  [ 0001f064 ] 00000020          *             : utl_doer.o55L (.bios)
-                   0003e0e8  [ 0001f074 ] 0000001a          *             : hwi_xable.o55L (.bios)
-                   0003e102  [ 0001f081 ] 00000017          *             : clk_run.o55L (.bios)
-                   0003e119  [ 0001f08c ] 00000003          *   --HOLE-- [fill = 20]
-                   0003e11c  [ 0001f08e ] 00000017          *             : sys_abor.o55L (.bios)
-                   0003e133  [ 0001f099 ] 00000001          *   --HOLE-- [fill = 20]
-                   0003e134  [ 0001f09a ] 00000016          *             : sys_erro.o55L (.bios:.near)
-                   0003e14a  [ 0001f0a5 ] 00000002          *   --HOLE-- [fill = 20]
-                   0003e14c  [ 0001f0a6 ] 00000010          *             : sem_dele.o55L (.bios)
-                   0003e15c  [ 0001f0ae ] 0000000c          *             : idl.o55L (.bios)
-                   0003e168  [ 0001f0b4 ] 00000008          *             : utl_halt.o55L (.bios)
-                   0003e170  [ 0001f0b8 ] 00000007          *             : sts_set.o55L (.bios)
-                   0003e177  [ 0001f0bb+] 00000006          *             : gbl_vers.o55L (.bios)
-                   0003e17d  [ 0001f0be ] 00000003          *   --HOLE-- [fill = 20]
-                   0003e180  [ 0001f0c0 ] 00000002          *             : fxn_c.o55L (.bios)
-                   0003e182  [ 0001f0c1 ] 00000002          *   --HOLE-- [fill = 20]
-                   0003e184  [ 0001f0c2 ] 00000002          *   bios5505.a55L : clk5505_wdog.o55L (.bios)
+.bios        0     0003bafc  [ 0001dd7e ] 000026c8          *   
+                   0003bafc  [ 0001dd7e ] 000003d4          *   bios.a55L : swi.o55L (.bios)
+                   0003bed0  [ 0001df68 ] 000003a3          *   lnkrtdx.a55L : rtdx.o55L (.bios)
+                   0003c273  [ 0001e139+] 0000035f          *   bios.a55L : hwi_disp_asm.o55L (.bios)
+                   0003c5d2  [ 0001e2e9 ] 00000002          *   --HOLE-- [fill = 20]
+                   0003c5d4  [ 0001e2ea ] 0000018b          *             : sem_pend.o55L (.bios)
+                   0003c75f  [ 0001e3af+] 00000186          *             : prd.o55L (.bios)
+                   0003c8e5  [ 0001e472 ] 00000003          *   --HOLE-- [fill = 20]
+                   0003c8e8  [ 0001e474 ] 00000185          *             : knl_run.o55L (.bios)
+                   0003ca6d  [ 0001e536 ] 00000003          *   --HOLE-- [fill = 20]
+                   0003ca70  [ 0001e538 ] 00000175          *             : mem_free.o55L (.bios:.near)
+                   0003cbe5  [ 0001e5f2 ] 00000003          *   --HOLE-- [fill = 20]
+                   0003cbe8  [ 0001e5f4 ] 00000144          *             : knl_tick.o55L (.bios)
+                   0003cd2c  [ 0001e696 ] 00000130          *             : rta.o55L (.bios)
+                   0003ce5c  [ 0001e72e ] 0000012d          *             : mem_allo.o55L (.bios:.near)
+                   0003cf89  [ 0001e7c4+] 00000119          *             : pip.o55L (.bios)
+                   0003d0a2  [ 0001e851 ] 0000010e          *             : knl_swit.o55L (.bios)
+                   0003d1b0  [ 0001e8d8 ] 0000010d          *             : mbx.o55L (.bios)
+                   0003d2bd  [ 0001e95e ] 00000003          *   --HOLE-- [fill = 20]
+                   0003d2c0  [ 0001e960 ] 00000104          *             : sem_dopo.o55L (.bios)
+                   0003d3c4  [ 0001e9e2 ] 000000f8          *             : tsk_exit.o55L (.bios)
+                   0003d4bc  [ 0001ea5e ] 000000f6          *             : tsk_setu.o55L (.bios)
+                   0003d5b2  [ 0001ead9 ] 00000002          *   --HOLE-- [fill = 20]
+                   0003d5b4  [ 0001eada ] 000000bf          *             : tsk_stup.o55L (.bios)
+                   0003d673  [ 0001eb39+] 000000a2          *             : c55_c.o55L (.bios)
+                   0003d715  [ 0001eb8a ] 00000003          *   --HOLE-- [fill = 20]
+                   0003d718  [ 0001eb8c ] 00000090          *   bios5505.a55L : clk5505_start.o55L (.bios)
+                   0003d7a8  [ 0001ebd4 ] 0000008d          *   bios.a55L : knl_chec.o55L (.bios)
+                   0003d835  [ 0001ec1a ] 00000003          *   --HOLE-- [fill = 20]
+                   0003d838  [ 0001ec1c ] 0000008d          *   bios5505.a55L : clk5505_isr.o55L (.bios)
+                   0003d8c5  [ 0001ec62 ] 00000003          *   --HOLE-- [fill = 20]
+                   0003d8c8  [ 0001ec64 ] 00000087          *                 : clk5505_htime.o55L (.bios)
+                   0003d94f  [ 0001eca7+] 00000082          *   bios.a55L : sem_post_asm.o55L (.bios)
+                   0003d9d1  [ 0001ece8 ] 00000003          *   --HOLE-- [fill = 20]
+                   0003d9d4  [ 0001ecea ] 00000068          *   bios5505.a55L : clk5505_meas.o55L (.bios)
+                   0003da3c  [ 0001ed1e ] 00000062          *   bios.a55L : log_printf.o55L (.bios)
+                   0003da9e  [ 0001ed4f ] 00000002          *   --HOLE-- [fill = 20]
+                   0003daa0  [ 0001ed50 ] 00000062          *             : obj_crea.o55L (.bios)
+                   0003db02  [ 0001ed81 ] 00000002          *   --HOLE-- [fill = 20]
+                   0003db04  [ 0001ed82 ] 0000005f          *             : knl_exit.o55L (.bios)
+                   0003db63  [ 0001edb1 ] 00000001          *   --HOLE-- [fill = 20]
+                   0003db64  [ 0001edb2 ] 0000005b          *             : knl_ipos.o55L (.bios)
+                   0003dbbf  [ 0001eddf ] 00000001          *   --HOLE-- [fill = 20]
+                   0003dbc0  [ 0001ede0 ] 0000005b          *             : sem_crea.o55L (.bios)
+                   0003dc1b  [ 0001ee0d ] 00000001          *   --HOLE-- [fill = 20]
+                   0003dc1c  [ 0001ee0e ] 00000058          *             : lck.o55L (.bios)
+                   0003dc74  [ 0001ee3a ] 00000051          *             : log.o55L (.bios)
+                   0003dcc5  [ 0001ee62+] 0000004e          *             : sem_pend_counting.o55L (.bios)
+                   0003dd13  [ 0001ee89 ] 00000001          *   --HOLE-- [fill = 20]
+                   0003dd14  [ 0001ee8a ] 00000048          *             : sem_post.o55L (.bios)
+                   0003dd5c  [ 0001eeae ] 00000048          *             : sts.o55L (.bios)
+                   0003dda4  [ 0001eed2 ] 00000048          *             : sys_exit.o55L (.bios)
+                   0003ddec  [ 0001eef6 ] 00000047          *             : idl_busy.o55L (.bios)
+                   0003de33  [ 0001ef19+] 00000046          *             : idl_cal.o55L (.bios)
+                   0003de79  [ 0001ef3c ] 00000003          *   --HOLE-- [fill = 20]
+                   0003de7c  [ 0001ef3e ] 00000045          *             : obj_dele.o55L (.bios)
+                   0003dec1  [ 0001ef60 ] 00000003          *   --HOLE-- [fill = 20]
+                   0003dec4  [ 0001ef62 ] 00000044          *             : tsk_disa.o55L (.bios)
+                   0003df08  [ 0001ef84 ] 00000043          *             : rta_andn.o55L (.bios)
+                   0003df4b  [ 0001efa5+] 00000042          *             : que_get.o55L (.bios)
+                   0003df8d  [ 0001efc6+] 00000036          *             : prd_c.o55L (.bios)
+                   0003dfc3  [ 0001efe1 ] 00000001          *   --HOLE-- [fill = 20]
+                   0003dfc4  [ 0001efe2 ] 00000036          *             : utl_putc.o55L (.bios)
+                   0003dffa  [ 0001effd ] 00000002          *   --HOLE-- [fill = 20]
+                   0003dffc  [ 0001effe ] 00000034          *             : knl_post.o55L (.bios)
+                   0003e030  [ 0001f018 ] 00000034          *   bios5505.a55L : clk_itime.o55L (.bios)
+                   0003e064  [ 0001f032 ] 00000032          *   bios.a55L : mem_vall.o55L (.bios:.near)
+                   0003e096  [ 0001f04b ] 00000025          *             : fxn.o55L (.bios)
+                   0003e0bb  [ 0001f05d+] 00000024          *             : idl_stub.o55L (.bios)
+                   0003e0df  [ 0001f06f ] 00000001          *   --HOLE-- [fill = 20]
+                   0003e0e0  [ 0001f070 ] 00000023          *             : utl_doab.o55L (.bios)
+                   0003e103  [ 0001f081 ] 00000001          *   --HOLE-- [fill = 20]
+                   0003e104  [ 0001f082 ] 00000020          *             : utl_doer.o55L (.bios)
+                   0003e124  [ 0001f092 ] 0000001a          *             : hwi_xable.o55L (.bios)
+                   0003e13e  [ 0001f09f ] 00000017          *             : clk_run.o55L (.bios)
+                   0003e155  [ 0001f0aa ] 00000003          *   --HOLE-- [fill = 20]
+                   0003e158  [ 0001f0ac ] 00000017          *             : sys_abor.o55L (.bios)
+                   0003e16f  [ 0001f0b7 ] 00000001          *   --HOLE-- [fill = 20]
+                   0003e170  [ 0001f0b8 ] 00000016          *             : sys_erro.o55L (.bios:.near)
                    0003e186  [ 0001f0c3 ] 00000002          *   --HOLE-- [fill = 20]
+                   0003e188  [ 0001f0c4 ] 00000010          *             : sem_dele.o55L (.bios)
+                   0003e198  [ 0001f0cc ] 0000000c          *             : idl.o55L (.bios)
+                   0003e1a4  [ 0001f0d2 ] 00000008          *             : utl_halt.o55L (.bios)
+                   0003e1ac  [ 0001f0d6 ] 00000007          *             : sts_set.o55L (.bios)
+                   0003e1b3  [ 0001f0d9+] 00000006          *             : gbl_vers.o55L (.bios)
+                   0003e1b9  [ 0001f0dc ] 00000003          *   --HOLE-- [fill = 20]
+                   0003e1bc  [ 0001f0de ] 00000002          *             : fxn_c.o55L (.bios)
+                   0003e1be  [ 0001f0df ] 00000002          *   --HOLE-- [fill = 20]
+                   0003e1c0  [ 0001f0e0 ] 00000002          *   bios5505.a55L : clk5505_wdog.o55L (.bios)
+                   0003e1c2  [ 0001f0e1 ] 00000002          *   --HOLE-- [fill = 20]
 
 .TSK_CodecConfig$stk 
-*            0   [ 0003e188 ]  0001f0c4          *   00000500   UNINITIALIZED
-                 [ 0003e188 ]  0001f0c4          *   00000500   VC5505_CSL_BIOS_cfg.obj (.TSK_CodecConfig$stk)
+*            0   [ 0003e1c4 ]  0001f0e2          *   00000500   UNINITIALIZED
+                 [ 0003e1c4 ]  0001f0e2          *   00000500   VC5505_CSL_BIOS_cfg.obj (.TSK_CodecConfig$stk)
 
 .TSK_MUSBMSCTask$stk 
-*            0   [ 0003eb88 ]  0001f5c4          *   00000500   UNINITIALIZED
-                 [ 0003eb88 ]  0001f5c4          *   00000500   VC5505_CSL_BIOS_cfg.obj (.TSK_MUSBMSCTask$stk)
+*            0   [ 0003ebc4 ]  0001f5e2          *   00000500   UNINITIALIZED
+                 [ 0003ebc4 ]  0001f5e2          *   00000500   VC5505_CSL_BIOS_cfg.obj (.TSK_MUSBMSCTask$stk)
 
 .TSK_MUSBMainTask$stk 
-*            0   [ 0003f588 ]  0001fac4          *   00000500   UNINITIALIZED
-                 [ 0003f588 ]  0001fac4          *   00000500   VC5505_CSL_BIOS_cfg.obj (.TSK_MUSBMainTask$stk)
+*            0   [ 0003f5c4 ]  0001fae2          *   00000500   UNINITIALIZED
+                 [ 0003f5c4 ]  0001fae2          *   00000500   VC5505_CSL_BIOS_cfg.obj (.TSK_MUSBMainTask$stk)
 
 .TSK_idle$stk 
 *            0   [ 00040000 ]  00020000          *   00000500   UNINITIALIZED
@@ -538,7 +537,7 @@ byte addr   word addr   name
 00042246                BIOS_start
 00000000                BUF$
 00000001                BUF_ENABLED
-0003bab9                C$$EXIT
+0003baf5                C$$EXIT
             00005098    C55_BIOSDATAOBJ
 00000001                CLK$
 000055da                CLK_A_TABBEG
@@ -551,10 +550,10 @@ byte addr   word addr   name
             000050b0    CLK_D_isrhook
             000050b2    CLK_D_tabbeg
             000050b4    CLK_D_timefxn
-0003e10d                CLK_F_dispRun
-0003d8cc                CLK_F_gethtime
-0003dff4                CLK_F_itime
-0003e10d                CLK_HOOKFXN
+0003e149                CLK_F_dispRun
+0003d908                CLK_F_gethtime
+0003e030                CLK_F_itime
+0003e149                CLK_HOOKFXN
 00000001                CLK_HTIMEDIV
 00000002                CLK_HTIMEMULT
 0000ea60                CLK_HTIMEPERLTIME
@@ -574,13 +573,13 @@ byte addr   word addr   name
 00000020                CLK_TCR
 00000000                CLK_TDDR
 00000000                CLK_TDDRHIGH
-0003d8cc                CLK_TIMEFXN
+0003d908                CLK_TIMEFXN
 00000001                CLK_TIMER0ARG
-0003d844                CLK_TIMER0FUNC
+0003d880                CLK_TIMER0FUNC
 00000000                CLK_TIMER1ARG
-00039b09                CLK_TIMER1FUNC
+00039b47                CLK_TIMER1FUNC
 00000000                CLK_TIMER2ARG
-0003e05a                CLK_TIMER2FUNC
+0003e096                CLK_TIMER2FUNC
 00000001                CLK_TIMERIFR
 00000000                CLK_TIMERIMR
 00000010                CLK_TIMERIMRMASK
@@ -596,13 +595,13 @@ ffffffff                DARAM
 00000000                DIO_NUMTSKBASE
 00000000                DIO_STATIC
 00000000                DPI$
-0003e05a                FXN_F_nop
-0003e05c                FXN_F_run
-0003e07d                FXN_F_selfLoop
-0003e079                FXN_F_zero
+0003e096                FXN_F_nop
+0003e098                FXN_F_run
+0003e0b9                FXN_F_selfLoop
+0003e0b5                FXN_F_zero
 00000001                GBL$
 00005205                GBL_A_VERSION
-0003e180                GBL_BIOS_BOOTFXN
+0003e1bc                GBL_BIOS_BOOTFXN
 00f80000                GBL_CACHEICRTAG1
 00f81000                GBL_CACHEICRTAG2
 00000002                GBL_CACHETYPE
@@ -628,7 +627,7 @@ ffffffff                DARAM
 00000000                GBL_SUPPORTCSL
 0000dbef                GBL_TRCMASKVALUE
 00000000                GBL_USERINIT
-0003e180                GBL_USERINITFXN
+0003e1bc                GBL_USERINITFXN
 00000001                GBL_boot
             000055e0    GBL_initdone
             00000860    GBL_stackbeg
@@ -636,10 +635,10 @@ ffffffff                DARAM
             00000060    GBL_sysstackbeg
             0000085f    GBL_sysstackend
 00000000                GIO$
-0003e180                GIO_CREATEFXN
-0003e180                GIO_DELETEFXN
-0003e180                GIO_PENDFXN
-0003e180                GIO_POSTFXN
+0003e1bc                GIO_CREATEFXN
+0003e1bc                GIO_DELETEFXN
+0003e1bc                GIO_PENDFXN
+0003e1bc                GIO_POSTFXN
 00000000                HOOK$
 00000000                HOOK_KNLID
 00000001                HST$
@@ -669,7 +668,7 @@ ffffffff                HST_DSMBUFSEG
             00005128    HWI_D_stktopaddr
             00005126    HWI_D_systkbotaddr
             0000512a    HWI_D_systktopaddr
-0003c237                HWI_F_dispatch
+0003c273                HWI_F_dispatch
 0000000a                HWI_INT10
 0000000b                HWI_INT11
 0000000c                HWI_INT12
@@ -702,22 +701,22 @@ ffffffff                HST_DSMBUFSEG
 0000001f                HWI_SINT31
 00000004                HWI_TINT
 00000000                HWI_ZEROTAB
-0003ba93                I$$LMPY
+0003bacf                I$$LMPY
 00000001                IDL$
 000055c4                IDL_A_CALBEG
 0000ab88                IDL_A_CALBEGb
 000055bc                IDL_A_TABBEG
 0000ab78                IDL_A_TABBEGb
 00000000                IDL_CALIBRERROR
-0003e07f                IDL_CALIBRFXN
+0003e0bb                IDL_CALIBRFXN
             00005164    IDL_D_busyObj
             000050ba    IDL_D_calbeg
             000050bc    IDL_D_calibrate
             000050be    IDL_D_tabbeg
             000055c2    IDL_END
             000055ca    IDL_END$
-0003ddb0                IDL_F_busy
-0003e15c                IDL_F_loop
+0003ddec                IDL_F_busy
+0003e198                IDL_F_loop
 00000001                IDL_USECLKIDLTIME
             000051e0    IDL_busyObj
             0002109f    IDL_busyObj$avgfmt
@@ -733,7 +732,7 @@ ffffffff                HST_DSMBUFSEG
             000055bc    IDL_cpuLoad
             000055c4    IDL_cpuLoad$
 00000001                ISRC$
-0003d0b4                KNL_glue
+0003d0f0                KNL_glue
             000052be    KNL_swi
 00000001                KNL_swi$dorta
 00000002                KNL_swi$ord
@@ -748,7 +747,7 @@ ffffffff                HST_DSMBUFSEG
             00020f69    KNL_swi$sts$sumfmt
 00000000                KNL_swi$sts$unittype
 00000000                KNL_swi$swi
-0003d0f3                KNL_tick_stub
+0003d12f                KNL_tick_stub
 00000001                LCK$
             0000515e    LNKCTRL
             0000515f    LNK_D_dataReadyMask
@@ -757,21 +756,21 @@ ffffffff                HST_DSMBUFSEG
             00005162    LNK_D_readFail
             00005160    LNK_D_readPend
             00005163    LNK_D_writeFail
-0003be96                LNK_F_checkChanEnabled
-0003beef                LNK_F_dataPump
-0003bebd                LNK_F_getChanPtr
-0003bea4                LNK_F_getNextChan
-0003be94                LNK_F_init
-0003c212                LNK_F_readCallBack
+0003bed2                LNK_F_checkChanEnabled
+0003bf2b                LNK_F_dataPump
+0003bef9                LNK_F_getChanPtr
+0003bee0                LNK_F_getNextChan
+0003bed0                LNK_F_init
+0003c24e                LNK_F_readCallBack
             000055be    LNK_dataPump
             000055c6    LNK_dataPump$
-0003c05a                LNK_newin
-0003c13e                LNK_newout
-0003beef                LNK_rcloop
-0003bf43                LNK_rdrtry
-0003bf4d                LNK_rrloop
-0003bfcd                LNK_wrloop
-0003bfc3                LNK_wrrtry
+0003c096                LNK_newin
+0003c17a                LNK_newout
+0003bf2b                LNK_rcloop
+0003bf7f                LNK_rdrtry
+0003bf89                LNK_rrloop
+0003c009                LNK_wrloop
+0003bfff                LNK_wrrtry
 00000001                LOG$
 000055a0                LOG_A_TABBEG
 0000ab40                LOG_A_TABBEGb
@@ -780,7 +779,7 @@ ffffffff                HST_DSMBUFSEG
 00000002                LOG_A_TABLEN
             000050c0    LOG_D_system
 00000001                LOG_ENABLED
-0003dc38                LOG_F_event
+0003dc74                LOG_F_event
             000055a0    LOG_system
             00003000    LOG_system$buf
 00000000                LOG_system$datatype
@@ -815,10 +814,10 @@ ffffffff                HST_DSMBUFSEG
 00000002                PIP_A_TABLEN
             000050c2    PIP_D_tabbeg
             000050c4    PIP_D_tablen
-0003cfa3                PIP_F_give
-0003cfa1                PIP_F_probe
-0003d015                PIP_F_start
-0003cf4d                PIP_F_take
+0003cfdf                PIP_F_give
+0003cfdd                PIP_F_probe
+0003d051                PIP_F_start
+0003cf89                PIP_F_take
 00000064                PIP_OBJSIZE
 00000000                PIP_gNextId
 00000002                PIP_gNumEmbed
@@ -840,11 +839,11 @@ ffffffff                HST_DSMBUFSEG
             000050d2    PRD_D_thook
             000050d4    PRD_D_tickh
             000050d5    PRD_D_tickl
-0003c723                PRD_F_swi
-0003c848                PRD_F_tick
+0003c75f                PRD_F_swi
+0003c884                PRD_F_tick
 00000002                PRD_SCALAR
             000052aa    PRD_SWIHANDLE
-0003d0f3                PRD_THOOKFXN
+0003d12f                PRD_THOOKFXN
             000055da    PRD_clock
             000052aa    PRD_swi
 00000001                PRD_swi$dorta
@@ -862,7 +861,7 @@ ffffffff                HST_DSMBUFSEG
 00000000                PRD_swi$swi
 00000001                PWRM$
 00000000                PWRM_PWRM_ADAPTCLK
-0003e180                PWRM_PWRM_BOOTHOOKFXN
+0003e1bc                PWRM_PWRM_BOOTHOOKFXN
 00000023                PWRM_PWRM_CAPSMASK
 0000003f                PWRM_PWRM_DS_IDLEMASK
 00000000                PWRM_PWRM_ENABLE
@@ -877,14 +876,14 @@ ffffffff                HST_DSMBUFSEG
             0000514c    RTA_D_logval
             00005156    RTA_D_stsval
             0000514a    RTA_D_toHost
-0003decc                RTA_F_andn
-0003cd79                RTA_F_dispatch
-0003ccf0                RTA_F_getlog
-0003cd1c                RTA_F_getsts
-0003dee2                RTA_F_or
-0003cd4b                RTA_F_readblk
-0003cd5e                RTA_F_resetmem
-0003cd5a                RTA_F_writeword
+0003df08                RTA_F_andn
+0003cdb5                RTA_F_dispatch
+0003cd2c                RTA_F_getlog
+0003cd58                RTA_F_getsts
+0003df1e                RTA_F_or
+0003cd87                RTA_F_readblk
+0003cd9a                RTA_F_resetmem
+0003cd96                RTA_F_writeword
             000055c0    RTA_dispatcher
             000055c8    RTA_dispatcher$
             00005570    RTA_fromHost
@@ -968,9 +967,9 @@ ffffffff                SARAM31
 0000a2cc                STS_A_TABBEGb
 0000520e                STS_A_TABEND
 0000a41c                STS_A_TABENDb
-0003dd42                STS_F_add
-0003dd20                STS_F_delta
-0003dd5a                STS_F_reset
+0003dd7e                STS_F_add
+0003dd5c                STS_F_delta
+0003dd96                STS_F_reset
 00000001                SWI$
 000052aa                SWI_A_TABBEG
 0000a554                SWI_A_TABBEGb
@@ -988,12 +987,12 @@ ffffffff                SARAM31
             000050e2    SWI_D_rdytab
             000050d6    SWI_D_runaddr
 00000000                SWI_EHOOKFXN
-0003bc06                SWI_EXECFXN
-0003bac0                SWI_F_enable
-0003bc06                SWI_F_exec
-0003bb7e                SWI_F_exec_sync
-0003baf3                SWI_F_post
-0003bcf2                SWI_F_run
+0003bc42                SWI_EXECFXN
+0003bafc                SWI_F_enable
+0003bc42                SWI_F_exec
+0003bbba                SWI_F_exec_sync
+0003bb2f                SWI_F_post
+0003bd2e                SWI_F_run
 00000000                SWI_IHOOKFXN
             000052d2    SWI_Process_USB_Input
 00000001                SWI_Process_USB_Input$dorta
@@ -1009,7 +1008,7 @@ ffffffff                SARAM31
             00020f83    SWI_Process_USB_Input$sts$sumfmt
 00000000                SWI_Process_USB_Input$sts$unittype
 00000000                SWI_Process_USB_Input$swi
-0003bcf2                SWI_RUNFXN
+0003bd2e                SWI_RUNFXN
             0000530e    SWI_Send_USB_Output
 00000001                SWI_Send_USB_Output$dorta
 00000006                SWI_Send_USB_Output$ord
@@ -1054,10 +1053,10 @@ ffffffff                SARAM31
 00000000                SWI_UserInterface$swi
 00000001                SYS$
             000055cc    SYS$config
-0003e0a4                SYS_ABORTFXN
-0003e0c8                SYS_ERRORFXN
-0003e168                SYS_EXITFXN
-0003df88                SYS_PUTCFXN
+0003e0e0                SYS_ABORTFXN
+0003e104                SYS_ERRORFXN
+0003e1a4                SYS_EXITFXN
+0003dfc4                SYS_PUTCFXN
 00004000                TRC_GBLTARG
             000055df    TRC_R_mask
             000055de    TRC_cinit
@@ -1065,8 +1064,8 @@ ffffffff                SARAM31
             00004f1e    TSK_CodecConfig
 00000006                TSK_CodecConfig$ord
 00000006                TSK_CodecConfig$pri
-            0001f0c4    TSK_CodecConfig$stack
-            0001f4a6    TSK_CodecConfig$stkptr
+            0001f0e2    TSK_CodecConfig$stack
+            0001f4c4    TSK_CodecConfig$stkptr
             000051d0    TSK_CodecConfig$sts
             00021075    TSK_CodecConfig$sts$avgfmt
 00000002                TSK_CodecConfig$sts$filter
@@ -1076,8 +1075,8 @@ ffffffff                SARAM31
             000051ce    TSK_CodecConfig$sts$stsobj
             0002106d    TSK_CodecConfig$sts$sumfmt
 00000000                TSK_CodecConfig$sts$unittype
-            0001f4c4    TSK_CodecConfig$sysstack
-            0001f5a6    TSK_CodecConfig$sysstkptr
+            0001f4e2    TSK_CodecConfig$sysstack
+            0001f5c4    TSK_CodecConfig$sysstkptr
 00000000                TSK_CodecConfig$tsk
             00004f36    TSK_CodecConfig$tskobj
             0000513c    TSK_D_idlstkaddr
@@ -1085,8 +1084,8 @@ ffffffff                SARAM31
             00004ec6    TSK_MUSBMSCTask
 00000004                TSK_MUSBMSCTask$ord
 00000008                TSK_MUSBMSCTask$pri
-            0001f5c4    TSK_MUSBMSCTask$stack
-            0001f9a6    TSK_MUSBMSCTask$stkptr
+            0001f5e2    TSK_MUSBMSCTask$stack
+            0001f9c4    TSK_MUSBMSCTask$stkptr
             000051c0    TSK_MUSBMSCTask$sts
             00021041    TSK_MUSBMSCTask$sts$avgfmt
 00000002                TSK_MUSBMSCTask$sts$filter
@@ -1096,15 +1095,15 @@ ffffffff                SARAM31
             000051be    TSK_MUSBMSCTask$sts$stsobj
             00021039    TSK_MUSBMSCTask$sts$sumfmt
 00000000                TSK_MUSBMSCTask$sts$unittype
-            0001f9c4    TSK_MUSBMSCTask$sysstack
-            0001faa6    TSK_MUSBMSCTask$sysstkptr
+            0001f9e2    TSK_MUSBMSCTask$sysstack
+            0001fac4    TSK_MUSBMSCTask$sysstkptr
 00000000                TSK_MUSBMSCTask$tsk
             00004ede    TSK_MUSBMSCTask$tskobj
             00004ef2    TSK_MUSBMainTask
 00000005                TSK_MUSBMainTask$ord
 00000009                TSK_MUSBMainTask$pri
-            0001fac4    TSK_MUSBMainTask$stack
-            0001fea6    TSK_MUSBMainTask$stkptr
+            0001fae2    TSK_MUSBMainTask$stack
+            0001fec4    TSK_MUSBMainTask$stkptr
             000051c8    TSK_MUSBMainTask$sts
             0002105b    TSK_MUSBMainTask$sts$avgfmt
 00000002                TSK_MUSBMainTask$sts$filter
@@ -1114,8 +1113,8 @@ ffffffff                SARAM31
             000051c6    TSK_MUSBMainTask$sts$stsobj
             00021053    TSK_MUSBMainTask$sts$sumfmt
 00000000                TSK_MUSBMainTask$sts$unittype
-            0001fec4    TSK_MUSBMainTask$sysstack
-            0001ffa6    TSK_MUSBMainTask$sysstkptr
+            0001fee2    TSK_MUSBMainTask$sysstack
+            0001ffc4    TSK_MUSBMainTask$sysstkptr
 00000000                TSK_MUSBMainTask$tsk
             00004f0a    TSK_MUSBMainTask$tskobj
 00000000                TSK_NUM_HOOKS
@@ -1161,9 +1160,9 @@ ffffffff                SARAM31
 00000400                TSK_STACKSIZE
 00000000                TSK_SWITCHFXN
 00000100                TSK_SYSTACKSIZE
-0003e180                TSK_VCREATEFXN
-0003e180                TSK_VDELETEFXN
-0003e180                TSK_VEXITFXN
+0003e1bc                TSK_VCREATEFXN
+0003e1bc                TSK_VDELETEFXN
+0003e1bc                TSK_VEXITFXN
             00004e6e    TSK_idle
 00000002                TSK_idle$ord
 00000000                TSK_idle$pri
@@ -1215,13 +1214,13 @@ ffffffff                VECT
 0003746f                _AppMediaInit
 000421b8                _BIOS_init
 00042246                _BIOS_start
-000383df                _C5515_reset
-0003d6af                _C55_clearIFR0
-0003d6c4                _C55_clearIFR1
-0003d637                _C55_disableIMR0
-0003d65a                _C55_disableIMR1
-0003d67d                _C55_enableIMR0
-0003d696                _C55_enableIMR1
+00038413                _C5515_reset
+0003d6eb                _C55_clearIFR0
+0003d700                _C55_clearIFR1
+0003d673                _C55_disableIMR0
+0003d696                _C55_disableIMR1
+0003d6b9                _C55_enableIMR0
+0003d6d2                _C55_enableIMR1
 0000ea60                _CLK_COUNTSPMS
             000175da    _CLK_DFLTMICROSECS
             000050ac    _CLK_D_countspms
@@ -1235,22 +1234,22 @@ ffffffff                VECT
 00000000                _CLK_TDDR
 00000000                _CLK_TIMERNUM
 00000001                _CLK_USETIMER
-0003e10d                _CLK_dispRun
-0003d7fc                _CLK_dispatch
-0003d8c0                _CLK_getfhtime
-0003d8cc                _CLK_getshtime
+0003e149                _CLK_dispRun
+0003d838                _CLK_dispatch
+0003d8fc                _CLK_getfhtime
+0003d908                _CLK_getshtime
             0000509e    _CLK_htimeDiv
             000050a0    _CLK_htimeMult
             0001757e    _CLK_htimePerLtime
-0003d844                _CLK_isr
+0003d880                _CLK_isr
             000050b0    _CLK_isrhook
-0003dff4                _CLK_itime
+0003e030                _CLK_itime
             000050a2    _CLK_ltimeDiv
             000050a4    _CLK_ltimeMult
-0003d998                _CLK_measure
-0003e102                _CLK_run
-0003d6dc                _CLK_start
-0003d764                _CLK_stop
+0003d9d4                _CLK_measure
+0003e13e                _CLK_run
+0003d718                _CLK_start
+0003d7a0                _CLK_stop
             000050b6    _CLK_time
             0001759e    _CLK_timer0arg
             00017598    _CLK_timer0func
@@ -1261,15 +1260,15 @@ ffffffff                VECT
 00001810                _CLK_timer5505
 00001c14                _CLK_timerIAFR
 00000000                _CLK_timerNum
-0003e184                _CLK_wdogdisable
-00038590                _CSL_acTest
+0003e1c0                _CLK_wdogdisable
+000385c4                _CSL_acTest
 00030792                _CSL_selfWakeupCallBack
 00030782                _CSL_suspendCallBack
-0003855a                _ClockGating
-0003a351                _CodecConfigTask
+0003858e                _ClockGating
+0003a38f                _CodecConfigTask
 000306eb                _CompleteTransfer
 ffffffff                _DARAM
-0003af06                _DDA_I2SHWInit
+0003af44                _DDA_I2SHWInit
             00017560    _DDA_I2SInfo
 00034f0e                _DDC_DMAAdjustAddrOffset
 00035419                _DDC_DMAChangeDestAddr
@@ -1281,76 +1280,76 @@ ffffffff                _DARAM
 00034a20                _DDC_DMARequestChan
 00034989                _DDC_DMAStartTransfer
 000348f2                _DDC_DMAStopTransfer
-00038327                _DDC_I2SClose
-00038315                _DDC_I2SDMADeinit
-000382ac                _DDC_I2SDMAInit
-000381e9                _DDC_I2SDMARead
+0003835b                _DDC_I2SClose
+00038349                _DDC_I2SDMADeinit
+000382e0                _DDC_I2SDMAInit
+0003821d                _DDC_I2SDMARead
 00038126                _DDC_I2SDMAWrite
 00037fea                _DDC_I2SHwSetup
 00037f62                _DDC_I2SOpen
             000173d4    _DDC_I2S_Instance
 00036c04                _DDC_I2S_transEnable
 00036ba5                _DDC_I2S_write
-0003b236                _DMA_AdjustAddrOffset
-0003b224                _DMA_ChangeDestAddr
+0003b274                _DMA_AdjustAddrOffset
+0003b262                _DMA_ChangeDestAddr
 00034836                _DMA_ChangeI2SDestAddr
 0003477a                _DMA_ChangeI2SSrcAddr
-0003b212                _DMA_ChangeSrcAddr
-0003b1fe                _DMA_ConfigChan
-0003b1f4                _DMA_DrvInit
-0003b1b8                _DMA_HwInit
+0003b250                _DMA_ChangeSrcAddr
+0003b23c                _DMA_ConfigChan
+0003b232                _DMA_DrvInit
+0003b1f6                _DMA_HwInit
 000346db                _DMA_Isr
-0003b1a6                _DMA_ReleaseChan
-0003b18d                _DMA_RequestChan
-0003b17b                _DMA_StartTransfer
-0003b169                _DMA_StopTransfer
-00038527                _DemoSwitch
+0003b1e4                _DMA_ReleaseChan
+0003b1cb                _DMA_RequestChan
+0003b1b9                _DMA_StartTransfer
+0003b1a7                _DMA_StopTransfer
+0003855b                _DemoSwitch
             000167d5    _DemoSwitchFlag
 0002f680                _DeviceNotification
-0003b4c2                _EZDSP5535_GPIO_getInput
-0003b459                _EZDSP5535_GPIO_init
-0003b484                _EZDSP5535_GPIO_setDirection
-0003b4a8                _EZDSP5535_GPIO_setOutput
-0003aa17                _EZDSP5535_LED_getall
-0003a9e1                _EZDSP5535_LED_init
-0003ab0c                _EZDSP5535_LED_off
-0003aad7                _EZDSP5535_LED_on
-0003aa69                _EZDSP5535_LED_setall
-0003ab3f                _EZDSP5535_LED_toggle
-0003ab9a                _EZDSP5535_XF_get
-0003ab8f                _EZDSP5535_XF_off
-0003ab84                _EZDSP5535_XF_on
-0003aba9                _EZDSP5535_XF_toggle
-0003b969                _EZDSP5535_init
-0003b923                _EZDSP5535_wait
-0003b957                _EZDSP5535_waitusec
-0003e180                _FXN_F_nop
+0003b500                _EZDSP5535_GPIO_getInput
+0003b497                _EZDSP5535_GPIO_init
+0003b4c2                _EZDSP5535_GPIO_setDirection
+0003b4e6                _EZDSP5535_GPIO_setOutput
+0003aa55                _EZDSP5535_LED_getall
+0003aa1f                _EZDSP5535_LED_init
+0003ab4a                _EZDSP5535_LED_off
+0003ab15                _EZDSP5535_LED_on
+0003aaa7                _EZDSP5535_LED_setall
+0003ab7d                _EZDSP5535_LED_toggle
+0003abd8                _EZDSP5535_XF_get
+0003abcd                _EZDSP5535_XF_off
+0003abc2                _EZDSP5535_XF_on
+0003abe7                _EZDSP5535_XF_toggle
+0003b9a5                _EZDSP5535_init
+0003b95f                _EZDSP5535_wait
+0003b993                _EZDSP5535_waitusec
+0003e1bc                _FXN_F_nop
             0000509a    _GBL_clkIn
             0000509c    _GBL_freq
-0003e177                _GBL_getVersion
+0003e1b3                _GBL_getVersion
             00005098    _GBL_procId
-000394d9                _GPIO_clearInt
-000394bd                _GPIO_close
-0003944b                _GPIO_config
-00039384                _GPIO_configBit
-00039324                _GPIO_disableInt
-000392c1                _GPIO_enableInt
-0003924f                _GPIO_getConfig
-00039226                _GPIO_open
-000391b7                _GPIO_read
-00039136                _GPIO_reset
-000390d1                _GPIO_statusBit
-00039050                _GPIO_write
-0003a798                _GPT_close
-0003a720                _GPT_config
-0003a6f6                _GPT_getCnt
-0003a66e                _GPT_open
-0003a60c                _GPT_reset
-0003a5ef                _GPT_start
-0003a5d2                _GPT_stop
+00039517                _GPIO_clearInt
+000394fb                _GPIO_close
+00039489                _GPIO_config
+000393c2                _GPIO_configBit
+00039362                _GPIO_disableInt
+000392ff                _GPIO_enableInt
+0003928d                _GPIO_getConfig
+00039264                _GPIO_open
+000391f5                _GPIO_read
+00039174                _GPIO_reset
+0003910f                _GPIO_statusBit
+0003908e                _GPIO_write
+0003a7d6                _GPT_close
+0003a75e                _GPT_config
+0003a734                _GPT_getCnt
+0003a6ac                _GPT_open
+0003a64a                _GPT_reset
+0003a62d                _GPT_start
+0003a610                _GPT_stop
             000175e2    _GpioObj
-0003b39c                _GpioWrite02
-0003b380                _GpioWrite04
+0003b3da                _GpioWrite02
+0003b3be                _GpioWrite04
 0000556e                _HST_A_TABBEG
 00005588                _HST_A_TABEND
             00020f05    _HST_HOST_CHANNEL_DRIVER
@@ -1359,8 +1358,8 @@ ffffffff                _DARAM
             0000512c    _HWI_D_inhwi
             00005120    _HWI_D_spsave
             00005122    _HWI_D_sspsave
-0003c4b6                _HWI_F_DispIsr0
-0003c237                _HWI_F_dispatch
+0003c4f2                _HWI_F_DispIsr0
+0003c273                _HWI_F_dispatch
 0000000a                _HWI_INT10
 0000000b                _HWI_INT11
 0000000c                _HWI_INT12
@@ -1397,19 +1396,19 @@ ffffffff                _DARAM
             00000060    _HWI_SYSSTKTOP
 00000004                _HWI_TINT
             00005120    _HWI_data
-0003e0e8                _HWI_disable
+0003e124                _HWI_disable
             000211fa    _HWI_dispatchTab
-0003e0f8                _HWI_enable
-0003e0fc                _HWI_restore
+0003e134                _HWI_enable
+0003e138                _HWI_restore
 0002fe3b                _HandleUSBInterrupt
-0003b120                _I2C_Init
-0003b0b7                _I2C_Read
-0003b096                _I2C_Write
-0003aef4                _I2S_DMA_Deinit
-0003aecd                _I2S_DMA_INIT
-0003aebb                _I2S_DMA_ISR_INPUT
-0003aea9                _I2S_DMA_ISR_OUTPUT
-0003ae84                _I2S_DeInit
+0003b15e                _I2C_Init
+0003b0f5                _I2C_Read
+0003b0d4                _I2C_Write
+0003af32                _I2S_DMA_Deinit
+0003af0b                _I2S_DMA_INIT
+0003aef9                _I2S_DMA_ISR_INPUT
+0003aee7                _I2S_DMA_ISR_OUTPUT
+0003aec2                _I2S_DeInit
 00037f29                _I2S_DmaRxLChCallBack
 00037ef0                _I2S_DmaRxLChCallBack2
 00037eb7                _I2S_DmaRxLChCallBack3
@@ -1422,122 +1421,122 @@ ffffffff                _DARAM
 00037d0e                _I2S_DmaTxRChCallBack
 00037cd5                _I2S_DmaTxRChCallBack2
 00037c9c                _I2S_DmaTxRChCallBack3
-0003adc5                _I2S_INIT
-0003adb3                _I2S_ReceiveData
-0003ada1                _I2S_TransmitData
-0003ddb0                _IDL_busy
+0003ae03                _I2S_INIT
+0003adf1                _I2S_ReceiveData
+0003addf                _I2S_TransmitData
+0003ddec                _IDL_busy
             000051e0    _IDL_busyObj
-0003ddf7                _IDL_calibrate
+0003de33                _IDL_calibrate
             000055bc    _IDL_cpuLoad
-0003dddc                _IDL_init
-0003e15c                _IDL_loop
-0003e07f                _IDL_stub
+0003de18                _IDL_init
+0003e198                _IDL_loop
+0003e0bb                _IDL_stub
             0001739e    _KNL_alarm
-0003d76c                _KNL_check
+0003d7a8                _KNL_check
             000173c6    _KNL_curqueue
             000173be    _KNL_curtask
             000173c2    _KNL_curtime
             000173a6    _KNL_dummy
-0003dac8                _KNL_enter
-0003db08                _KNL_exit
-0003d7c7                _KNL_idle
+0003db04                _KNL_enter
+0003db44                _KNL_exit
+0003d803                _KNL_idle
             000173d2    _KNL_idlefxn
             000173a2    _KNL_inactive
-0003db28                _KNL_ipost
-0003d7e4                _KNL_max
+0003db64                _KNL_ipost
+0003d820                _KNL_max
             000173c8    _KNL_maxqueue
-0003dfc0                _KNL_post
+0003dffc                _KNL_post
             000173c0    _KNL_prevtask
             000173a4    _KNL_priority
             0001734c    _KNL_queues
-0003c8ac                _KNL_run
-0003d113                _KNL_saveIsrFrame
+0003c8e8                _KNL_run
+0003d14f                _KNL_saveIsrFrame
             0001734b    _KNL_set
             000173a0    _KNL_setpri
             000052be    _KNL_swi
             000173c4    _KNL_swiptr
-0003d066                _KNL_switch
+0003d0a2                _KNL_switch
             000173cc    _KNL_tcreatefxn
             000173ce    _KNL_tdeletefxn
-0003cce0                _KNL_tick
+0003cd1c                _KNL_tick
             000173d0    _KNL_treadyfxn
             000173ca    _KNL_tswitchfxn
             0001734a    _KNL_wFlag
             0001739c    _KNL_wList
-0003dc00                _LCK_pend
-0003dbe0                _LCK_post
-00039938                _LLC_I2SDisable
-000398c9                _LLC_I2SDisableICMR
-000398c2                _LLC_I2SDisableLoopBack
-000398bb                _LLC_I2SEnable
-0003984c                _LLC_I2SEnableICMR
-00039845                _LLC_I2SEnableLoopBack
-00039839                _LLC_I2SResetIR
-0003981a                _LLC_I2SSetClkPol
-000397b2                _LLC_I2SSetClkdiv
-00039793                _LLC_I2SSetDataDelay
-00039774                _LLC_I2SSetDataFormat
-00039755                _LLC_I2SSetDataPacking
-00039736                _LLC_I2SSetFsPol
-000396c0                _LLC_I2SSetFsdiv
-000396a1                _LLC_I2SSetMono
-00039682                _LLC_I2SSetSignExt
-00039663                _LLC_I2SSetTransmitMode
-000395f5                _LLC_I2SSetWordLength
-0003953e                _LLC_ResetAll
-0003c212                _LNK_F_readCallBack
+0003dc3c                _LCK_pend
+0003dc1c                _LCK_post
+00039976                _LLC_I2SDisable
+00039907                _LLC_I2SDisableICMR
+00039900                _LLC_I2SDisableLoopBack
+000398f9                _LLC_I2SEnable
+0003988a                _LLC_I2SEnableICMR
+00039883                _LLC_I2SEnableLoopBack
+00039877                _LLC_I2SResetIR
+00039858                _LLC_I2SSetClkPol
+000397f0                _LLC_I2SSetClkdiv
+000397d1                _LLC_I2SSetDataDelay
+000397b2                _LLC_I2SSetDataFormat
+00039793                _LLC_I2SSetDataPacking
+00039774                _LLC_I2SSetFsPol
+000396fe                _LLC_I2SSetFsdiv
+000396df                _LLC_I2SSetMono
+000396c0                _LLC_I2SSetSignExt
+000396a1                _LLC_I2SSetTransmitMode
+00039633                _LLC_I2SSetWordLength
+0003957c                _LLC_ResetAll
+0003c24e                _LNK_F_readCallBack
             000055be    _LNK_dataPump
 000055a0                _LOG_A_TABBEG
 000055b4                _LOG_A_TABEND
 00000002                _LOG_A_TABLEN
             000050c0    _LOG_D_system
-0003dc38                _LOG_event
-0003da00                _LOG_printf
+0003dc74                _LOG_event
+0003da3c                _LOG_printf
             000055a0    _LOG_system
             0000527c    _MBX_codecConfig
             00005248    _MBX_msc
             00005214    _MBX_musb
-0003d174                _MBX_pend
-0003d1fc                _MBX_post
+0003d1b0                _MBX_pend
+0003d238                _MBX_post
             0000512d    _MEM_D_NUMSEGMENTS
             00005130    _MEM_D_freelist
             00005132    _MEM_D_lockaddr
             0000512e    _MEM_D_memtab
             00005134    _MEM_D_unlockaddr
-0003ce20                _MEM_alloc
-0003ca34                _MEM_free
+0003ce5c                _MEM_alloc
+0003ca70                _MEM_free
 00000000                _MEM_memtab
-0003e028                _MEM_valloc
+0003e064                _MEM_valloc
 0002f8ac                _MUSB_Handle_EP0_Intr
 0002f889                _MUSB_Handle_Resume_Intr
-0003da64                _OBJ_create
-0003de40                _OBJ_delete
+0003daa0                _OBJ_create
+0003de7c                _OBJ_delete
 000423f0                _OBJ_init
             0001751e    _OBJ_segtab
             00017502    _OBJ_table
-0003ba46                _PAL_osCheckTimeOut
-0003ba3c                _PAL_osGetCurrentTick
-0003b8ec                _PAL_osProtectEntry
-0003b8cc                _PAL_osProtectExit
-0003b89a                _PAL_osSemCreate
-0003b88e                _PAL_osSemDelete
-0003b882                _PAL_osSemGive
-0003b874                _PAL_osSemTake
-0003ba7f                _PAL_osWaitMsecs
+0003ba82                _PAL_osCheckTimeOut
+0003ba78                _PAL_osGetCurrentTick
+0003b928                _PAL_osProtectEntry
+0003b908                _PAL_osProtectExit
+0003b8d6                _PAL_osSemCreate
+0003b8ca                _PAL_osSemDelete
+0003b8be                _PAL_osSemGive
+0003b8b0                _PAL_osSemTake
+0003babb                _PAL_osWaitMsecs
 00005322                _PIP_A_TABBEG
 00005386                _PIP_A_TABEND
-0003ad6a                _PLL_bypass
-0003ac8a                _PLL_config
-0003ac3f                _PLL_enable
-0003ac20                _PLL_init
-0003abc8                _PLL_reset
+0003ada8                _PLL_bypass
+0003acc8                _PLL_config
+0003ac7d                _PLL_enable
+0003ac5e                _PLL_init
+0003ac06                _PLL_reset
             000050d5    _PRD_D_tick
             000055da    _PRD_clock
-0003df51                _PRD_getticks
-0003df5f                _PRD_start
-0003df81                _PRD_stop
+0003df8d                _PRD_getticks
+0003df9b                _PRD_start
+0003dfbd                _PRD_stop
             000052aa    _PRD_swi
-0003df59                _PRD_tick
+0003df95                _PRD_tick
 00036097                _PSP_i2cClose
 00035f59                _PSP_i2cCreate
 00035efd                _PSP_i2cDelete
@@ -1545,11 +1544,11 @@ ffffffff                _DARAM
 00035bde                _PSP_i2cOpen
 00035b15                _PSP_i2cTransfer
 00035a65                _PSP_i2cTransferMultiple
-00038cb1                _PbAudioAlgTsk
-00038512                _PowerDisplayTask
-0003df0f                _QUE_get
-0003df2e                _QUE_put
-0003ccf0                _RTA_F_getlog
+00038ce5                _PbAudioAlgTsk
+00038546                _PowerDisplayTask
+0003df4b                _QUE_get
+0003df6a                _QUE_put
+0003cd2c                _RTA_F_getlog
             000055c0    _RTA_dispatcher
             00005570    _RTA_fromHost
             0000557c    _RTA_toHost
@@ -1573,8 +1572,8 @@ ffffffff                _DARAM
 00005f60                _RTDX_Set_IER
 00000000                _RTDX_interrupt_mask
             0000508a    _RTDX_writing
-0003a0f3                _RateChange
-000389e4                _RecAudioAlgTsk
+0003a131                _RateChange
+00038a18                _RecAudioAlgTsk
 ffffffff                _SARAM
 ffffffff                _SARAM31
 0003796f                _SAR_A2DMeasParamSet
@@ -1620,19 +1619,19 @@ ffffffff                _SARAM31
             00004c2c    _SEM_PingPongTxRightComplete4
             00004acc    _SEM_RTCAlarmOff
             00004a48    _SEM_ResetDeviceDone
-0003db84                _SEM_create
-0003e14c                _SEM_delete
-0003dc89                _SEM_pend
-0003c598                _SEM_pendEnterKnl
-0003d913                _SEM_post
-0003d913                _SEM_postBinary
-0003dcd8                _SEM_postEnterKnl
+0003dbc0                _SEM_create
+0003e188                _SEM_delete
+0003dcc5                _SEM_pend
+0003c5d4                _SEM_pendEnterKnl
+0003d94f                _SEM_post
+0003d94f                _SEM_postBinary
+0003dd14                _SEM_postEnterKnl
 00005166                _STS_A_TABBEG
 0000520e                _STS_A_TABEND
-0003dd42                _STS_add
-0003dd20                _STS_delta
-0003dd5a                _STS_reset
-0003e170                _STS_set
+0003dd7e                _STS_add
+0003dd5c                _STS_delta
+0003dd96                _STS_reset
+0003e1ac                _STS_set
             000050de    _SWI_D_curfxn
             000050da    _SWI_D_curmask
             0000511e    _SWI_D_inswi
@@ -1643,19 +1642,19 @@ ffffffff                _SARAM31
             000052e6    _SWI_Store_USB_Input
             000052fa    _SWI_UserInterface
             000050d6    _SWI_data
-0003bac0                _SWI_enable
-0003baf3                _SWI_post
+0003bafc                _SWI_enable
+0003bb2f                _SWI_post
             00005136    _SYS
             00004c3c    _SYS_PUTCBEG
             00004e3b    _SYS_PUTCEND
-0003e11c                _SYS_abort
-0003e134                _SYS_error
-0003dd68                _SYS_exit
+0003e158                _SYS_abort
+0003e170                _SYS_error
+0003dda4                _SYS_exit
             00017526    _SYS_exitStack
             00017536    _SYS_exitStackPtr
             00017538    _SYS_exitStackTop
 000335d0                _Set_Mute_State
-000384f0                _SpectrumDisplayTask
+00038524                _SpectrumDisplayTask
 0002fdb3                _StartDevice
 00030621                _StartTransfer
 0002f7e7                _StopDevice
@@ -1668,15 +1667,15 @@ ffffffff                _SARAM31
             00004e42    _TSK_PbAudioAlg
             00004f4a    _TSK_RecAudioAlg
             000174ba    _TSK_config
-0003de88                _TSK_disable
-0003deb4                _TSK_enable
-0003d388                _TSK_exit
+0003dec4                _TSK_disable
+0003def0                _TSK_enable
+0003d3c4                _TSK_exit
             00004e6e    _TSK_idle
 0004228c                _TSK_init
             000174aa    _TSK_nTasks
             000174ab    _TSK_pid
-0003d480                _TSK_setup
-0003d5d4                _TSK_startup
+0003d4bc                _TSK_setup
+0003d610                _TSK_startup
             000174ca    _TSK_timerSem
 00037375                _USBMSCTask
 0003018d                _USBMainTask
@@ -1726,24 +1725,24 @@ ffffffff                _SARAM31
 000307cc                _USB_stallEndpt
 000307a2                _USB_suspendDevice
 0002f012                _USBisr
-0003e0a4                _UTL_doAbort
-0003e0c8                _UTL_doError
-0003df88                _UTL_doPutc
-0003e168                _UTL_halt
-00039c1e                _UserInterfaceSwi
+0003e0e0                _UTL_doAbort
+0003e104                _UTL_doError
+0003dfc4                _UTL_doPutc
+0003e1a4                _UTL_halt
+00039c5c                _UserInterfaceSwi
 ffffffff                _VECT
-0003b08b                __DDA_i2cOsGetTicks
-0003b081                __DDA_i2cSleep
+0003b0c9                __DDA_i2cOsGetTicks
+0003b0bf                __DDA_i2cSleep
 000354b7                __DDC_i2cIntrHandler
             00005146    __HOOK_NUMHOOKS
             00005144    __HOOK_knlId
             000174ee    __MEM_mutex
-0003d284                __SEM_dopost
+0003d2c0                __SEM_dopost
             00001860    __STACK_END
 00002000                __STACK_SIZE
 00001000                __SYSSTACK_SIZE
             000174da    __TSK_mutex
-0003b6a3                ___add_dtor
+0003b6e1                ___add_dtor
             00017288    ___atexit_func_id__
 ffffffff                ___binit__
             00008000    ___bss__
@@ -1752,30 +1751,30 @@ ffffffff                ___c_args__
             00008000    ___data__
             00008000    ___edata__
             000175f6    ___end__
-0003bac0                ___etext__
+0003bafc                ___etext__
             000055d4    ___pinit__
 0002ebec                ___text__
-0003a378                __addd
+0003a3b6                __addd
             000175ee    __cleanup_ptr
-00039d27                __divd
-0003b977                __divli
-0003b3b8                __divul
+00039d65                __divd
+0003b9b3                __divli
+0003b3f6                __divul
             000175f0    __dtors_ptr
-0003ba64                __fixdu
-0003b560                __fixdul
-0003b5d7                __frcmpyd
-0003b6c2                __frcmpyd_div
+0003baa0                __fixdu
+0003b59e                __fixdul
+0003b615                __frcmpyd
+0003b700                __frcmpyd_div
             000175ea    __lock
-0003af35                __mpyd
-0003ba93                __mpyli
-0003bab6                __nop
-0003baae                __register_lock
-0003baa6                __register_unlock
-0003b735                __remul
+0003af73                __mpyd
+0003bacf                __mpyli
+0003baf2                __nop
+0003baea                __register_lock
+0003bae2                __register_unlock
+0003b773                __remul
             00000860    __stack
             00000060    __sysstack
             000175ec    __unlock
-0003bab8                _abort
+0003baf4                _abort
             00020de8    _acHidReportDescriptor
             00015876    _active_sample_rate
 00037365                _appCtrlFxn
@@ -1790,15 +1789,15 @@ ffffffff                ___c_args__
             000166ba    _appRecordAudioCount
 00037178                _appStopPlayAudio
 00037168                _appStopRecordAudio
-0003b7a7                _atexit
+0003b7e5                _atexit
 00042310                _auto_init
             000167d8    _bufferFFT
             000166d4    _bufferIn
             000167d4    _bufferInIdx
             000169d8    _bufferScrach
 00042381                _c_int00
-0003b64d                _call_dtors
-00039be2                _chkAllowedPBNState
+0003b68b                _call_dtors
+00039c20                _chkAllowedPBNState
 000335af                _codec_Ioctl
             00009228    _codec_input_buffer
             0000ec28    _codec_input_buffer_input_index
@@ -1813,7 +1812,7 @@ ffffffff                ___c_args__
             0001583a    _codec_output_buffer_sample
             00015836    _codec_output_buffer_underflow
             0001747e    _completeTransCount
-0003a953                _computeDmaXferCnt
+0003a991                _computeDmaXferCnt
             00020a00    _configDescriptor
             0001744a    _ddcI2CDriver
             00017424    _ddcI2CObj
@@ -1841,7 +1840,7 @@ ffffffff                ___c_args__
             00017557    _dmaStartAddrReg1
             0001740a    _dma_error
             000175f4    _dtors
-0003b9fe                _exit
+0003ba3a                _exit
             00017490    _fifoEmptyCount
             00017471    _firstRecordFlag
             0001755c    _firstSof
@@ -1870,8 +1869,8 @@ ffffffff                ___c_args__
             00017104    _gUsbEpHandle
             0001754e    _gUsbPbSampRateHz
             00017408    _gZeroBuf
-0003996e                _genHidReport
-00039b1e                _getCurrentPBNState
+000399ac                _genHidReport
+00039b5c                _getCurrentPBNState
             00017404    _gi2sNextRxLeftBuf
             00017406    _gi2sNextRxRightBuf
             00017400    _gi2sNextTxLeftBuf
@@ -1880,8 +1879,8 @@ ffffffff                ___c_args__
             000173fe    _gi2sTxRightBuf
             000175e8    _gpio02State
             000175e9    _gpio04State
-0003b307                _gpioInit
-00039b09                _gpt1Isr
+0003b345                _gpioInit
+00039b47                _gpt1Isr
             0000800a    _hDmaRxLeft
             00008016    _hDmaRxLeft2
             00008022    _hDmaRxLeft3
@@ -1926,24 +1925,24 @@ ffffffff                ___c_args__
             000175ae    _inPacketNum
             000174a8    _inTransferErrNum
             000174a6    _inTransferNum
-0003a85f                _initPitchCalc
+0003a89d                _initPitchCalc
 0003713a                _initSampleRate
-0003b4e0                _initSdram
+0003b51e                _initSdram
             00017476    _isoInIntCount
             00017478    _isoOutIntCount
             00017484    _isoRxCount
             0001747a    _isoSofIntCount
             00017482    _isoTxCount
-0003a7de                _latchDmaXferState
+0003a81c                _latchDmaXferState
             0001664c    _lbaBufferHidReportApp
             0001604c    _lbaBufferPbApp
             0001634c    _lbaBufferRecApp
             00008026    _left_rx_buf_sel
             0000fe30    _left_tx_buf_sel
-0003843b                _main
+0003846f                _main
             000174a4    _mainTaskNum
             00004e9a    _mainTsk
-0003b9bf                _memcpy
+0003b9fb                _memcpy
             000166be    _mscTaskNum
             000166c2    _msgIsoInCount
             000166c0    _msgMscCtlCount
@@ -1983,7 +1982,7 @@ ffffffff                ___c_args__
             00017576    _pllCfg1
             00020ef0    _pllCfg_120MHz
             00017570    _pllObj
-0003b240                _pll_sample
+0003b27e                _pll_sample
             00005588    _poll
 000370e5                _process_usb_input
             00017590    _recAudioCopyCount
@@ -2009,7 +2008,7 @@ ffffffff                ___c_args__
             000175b8    _sdram_cntr
             000175ba    _sdram_flag
             00016c66    _secCount
-00038363                _secPrd
+00038397                _secPrd
             00005594    _second
 0002edf1                _send_USB_Output
             00017492    _sofIntCountPlay
@@ -2044,8 +2043,8 @@ ffffffff                ___c_args__
             0001746e    _usb_play_start
             0001746b    _usb_rec_mode
             0001746c    _usb_rec_start
-000399af                _userInterfaceInit
-0003993f                _userInterfaceStart
+000399ed                _userInterfaceInit
+0003997d                _userInterfaceStart
             00015879    _vId
             00020e1d    _volume_table
             00017474    _wake
@@ -2053,7 +2052,7 @@ ffffffff                binit
             00001860    cinit
             00008000    edata
             000175f6    end
-0003bac0                etext
+0003bafc                etext
             0000549c    gblinit
 0004df00                hwi0
 0004df08                hwi1
@@ -2087,8 +2086,8 @@ ffffffff                binit
 0004df38                hwi7
 0004df40                hwi8
 0004df48                hwi9
-0003def9                iRTA_F_or
-0003bdf8                logPost
+0003df35                iRTA_F_or
+0003be34                logPost
             00004e9a    mainTsk
 00000003                mainTsk$ord
 0000000f                mainTsk$pri
@@ -2189,7 +2188,7 @@ ffffffff                binit
             0000516e    second$sts$stsobj
             00020f33    second$sts$sumfmt
 00000002                second$sts$unittype
-0003be4a                stsPost
+0003be86                stsPost
             000055aa    trace
             00027000    trace$buf
 00000001                trace$datatype
@@ -3472,325 +3471,325 @@ byte addr   word addr   name
 00037f62                _DDC_I2SOpen
 00037fea                _DDC_I2SHwSetup
 00038126                _DDC_I2SDMAWrite
-000381e9                _DDC_I2SDMARead
-000382ac                _DDC_I2SDMAInit
-00038315                _DDC_I2SDMADeinit
-00038327                _DDC_I2SClose
-00038363                _secPrd
-000383df                _C5515_reset
-0003843b                _main
-000384f0                _SpectrumDisplayTask
-00038512                _PowerDisplayTask
-00038527                _DemoSwitch
-0003855a                _ClockGating
-00038590                _CSL_acTest
-000389e4                _RecAudioAlgTsk
-00038cb1                _PbAudioAlgTsk
-00039050                _GPIO_write
-000390d1                _GPIO_statusBit
-00039136                _GPIO_reset
-000391b7                _GPIO_read
-00039226                _GPIO_open
-0003924f                _GPIO_getConfig
-000392c1                _GPIO_enableInt
-00039324                _GPIO_disableInt
-00039384                _GPIO_configBit
-0003944b                _GPIO_config
-000394bd                _GPIO_close
-000394d9                _GPIO_clearInt
-0003953e                _LLC_ResetAll
-000395f5                _LLC_I2SSetWordLength
-00039663                _LLC_I2SSetTransmitMode
-00039682                _LLC_I2SSetSignExt
-000396a1                _LLC_I2SSetMono
-000396c0                _LLC_I2SSetFsdiv
-00039736                _LLC_I2SSetFsPol
-00039755                _LLC_I2SSetDataPacking
-00039774                _LLC_I2SSetDataFormat
-00039793                _LLC_I2SSetDataDelay
-000397b2                _LLC_I2SSetClkdiv
-0003981a                _LLC_I2SSetClkPol
-00039839                _LLC_I2SResetIR
-00039845                _LLC_I2SEnableLoopBack
-0003984c                _LLC_I2SEnableICMR
-000398bb                _LLC_I2SEnable
-000398c2                _LLC_I2SDisableLoopBack
-000398c9                _LLC_I2SDisableICMR
-00039938                _LLC_I2SDisable
-0003993f                _userInterfaceStart
-0003996e                _genHidReport
-000399af                _userInterfaceInit
-00039b09                CLK_TIMER1FUNC
-00039b09                _gpt1Isr
-00039b1e                _getCurrentPBNState
-00039be2                _chkAllowedPBNState
-00039c1e                _UserInterfaceSwi
-00039d27                __divd
-0003a0f3                _RateChange
-0003a351                _CodecConfigTask
-0003a378                __addd
-0003a5d2                _GPT_stop
-0003a5ef                _GPT_start
-0003a60c                _GPT_reset
-0003a66e                _GPT_open
-0003a6f6                _GPT_getCnt
-0003a720                _GPT_config
-0003a798                _GPT_close
-0003a7de                _latchDmaXferState
-0003a85f                _initPitchCalc
-0003a953                _computeDmaXferCnt
-0003a9e1                _EZDSP5535_LED_init
-0003aa17                _EZDSP5535_LED_getall
-0003aa69                _EZDSP5535_LED_setall
-0003aad7                _EZDSP5535_LED_on
-0003ab0c                _EZDSP5535_LED_off
-0003ab3f                _EZDSP5535_LED_toggle
-0003ab84                _EZDSP5535_XF_on
-0003ab8f                _EZDSP5535_XF_off
-0003ab9a                _EZDSP5535_XF_get
-0003aba9                _EZDSP5535_XF_toggle
-0003abc8                _PLL_reset
-0003ac20                _PLL_init
-0003ac3f                _PLL_enable
-0003ac8a                _PLL_config
-0003ad6a                _PLL_bypass
-0003ada1                _I2S_TransmitData
-0003adb3                _I2S_ReceiveData
-0003adc5                _I2S_INIT
-0003ae84                _I2S_DeInit
-0003aea9                _I2S_DMA_ISR_OUTPUT
-0003aebb                _I2S_DMA_ISR_INPUT
-0003aecd                _I2S_DMA_INIT
-0003aef4                _I2S_DMA_Deinit
-0003af06                _DDA_I2SHWInit
-0003af35                __mpyd
-0003b081                __DDA_i2cSleep
-0003b08b                __DDA_i2cOsGetTicks
-0003b096                _I2C_Write
-0003b0b7                _I2C_Read
-0003b120                _I2C_Init
-0003b169                _DMA_StopTransfer
-0003b17b                _DMA_StartTransfer
-0003b18d                _DMA_RequestChan
-0003b1a6                _DMA_ReleaseChan
-0003b1b8                _DMA_HwInit
-0003b1f4                _DMA_DrvInit
-0003b1fe                _DMA_ConfigChan
-0003b212                _DMA_ChangeSrcAddr
-0003b224                _DMA_ChangeDestAddr
-0003b236                _DMA_AdjustAddrOffset
-0003b240                _pll_sample
-0003b307                _gpioInit
-0003b380                _GpioWrite04
-0003b39c                _GpioWrite02
-0003b3b8                __divul
-0003b459                _EZDSP5535_GPIO_init
-0003b484                _EZDSP5535_GPIO_setDirection
-0003b4a8                _EZDSP5535_GPIO_setOutput
-0003b4c2                _EZDSP5535_GPIO_getInput
-0003b4e0                _initSdram
-0003b560                __fixdul
-0003b5d7                __frcmpyd
-0003b64d                _call_dtors
-0003b6a3                ___add_dtor
-0003b6c2                __frcmpyd_div
-0003b735                __remul
-0003b7a7                _atexit
-0003b874                _PAL_osSemTake
-0003b882                _PAL_osSemGive
-0003b88e                _PAL_osSemDelete
-0003b89a                _PAL_osSemCreate
-0003b8cc                _PAL_osProtectExit
-0003b8ec                _PAL_osProtectEntry
-0003b923                _EZDSP5535_wait
-0003b957                _EZDSP5535_waitusec
-0003b969                _EZDSP5535_init
-0003b977                __divli
-0003b9bf                _memcpy
-0003b9fe                _exit
-0003ba3c                _PAL_osGetCurrentTick
-0003ba46                _PAL_osCheckTimeOut
-0003ba64                __fixdu
-0003ba7f                _PAL_osWaitMsecs
-0003ba93                I$$LMPY
-0003ba93                __mpyli
-0003baa6                __register_unlock
-0003baae                __register_lock
-0003bab6                __nop
-0003bab8                _abort
-0003bab9                C$$EXIT
-0003bac0                SWI_F_enable
-0003bac0                _SWI_enable
-0003bac0                ___etext__
-0003bac0                etext
-0003baf3                SWI_F_post
-0003baf3                _SWI_post
-0003bb7e                SWI_F_exec_sync
-0003bc06                SWI_EXECFXN
-0003bc06                SWI_F_exec
-0003bcf2                SWI_F_run
-0003bcf2                SWI_RUNFXN
-0003bdf8                logPost
-0003be4a                stsPost
-0003be94                LNK_F_init
-0003be96                LNK_F_checkChanEnabled
-0003bea4                LNK_F_getNextChan
-0003bebd                LNK_F_getChanPtr
-0003beef                LNK_F_dataPump
-0003beef                LNK_rcloop
-0003bf43                LNK_rdrtry
-0003bf4d                LNK_rrloop
-0003bfc3                LNK_wrrtry
-0003bfcd                LNK_wrloop
-0003c05a                LNK_newin
-0003c13e                LNK_newout
-0003c212                LNK_F_readCallBack
-0003c212                _LNK_F_readCallBack
-0003c237                HWI_F_dispatch
-0003c237                _HWI_F_dispatch
-0003c4b6                _HWI_F_DispIsr0
-0003c598                _SEM_pendEnterKnl
-0003c723                PRD_F_swi
-0003c848                PRD_F_tick
-0003c8ac                _KNL_run
-0003ca34                _MEM_free
-0003cce0                _KNL_tick
-0003ccf0                RTA_F_getlog
-0003ccf0                _RTA_F_getlog
-0003cd1c                RTA_F_getsts
-0003cd4b                RTA_F_readblk
-0003cd5a                RTA_F_writeword
-0003cd5e                RTA_F_resetmem
-0003cd79                RTA_F_dispatch
-0003ce20                _MEM_alloc
-0003cf4d                PIP_F_take
-0003cfa1                PIP_F_probe
-0003cfa3                PIP_F_give
-0003d015                PIP_F_start
-0003d066                _KNL_switch
-0003d0b4                KNL_glue
-0003d0f3                KNL_tick_stub
-0003d0f3                PRD_THOOKFXN
-0003d113                _KNL_saveIsrFrame
-0003d174                _MBX_pend
-0003d1fc                _MBX_post
-0003d284                __SEM_dopost
-0003d388                _TSK_exit
-0003d480                _TSK_setup
-0003d5d4                _TSK_startup
-0003d637                _C55_disableIMR0
-0003d65a                _C55_disableIMR1
-0003d67d                _C55_enableIMR0
-0003d696                _C55_enableIMR1
-0003d6af                _C55_clearIFR0
-0003d6c4                _C55_clearIFR1
-0003d6dc                _CLK_start
-0003d764                _CLK_stop
-0003d76c                _KNL_check
-0003d7c7                _KNL_idle
-0003d7e4                _KNL_max
-0003d7fc                _CLK_dispatch
-0003d844                CLK_TIMER0FUNC
-0003d844                _CLK_isr
-0003d8c0                _CLK_getfhtime
-0003d8cc                CLK_F_gethtime
-0003d8cc                CLK_TIMEFXN
-0003d8cc                _CLK_getshtime
-0003d913                _SEM_post
-0003d913                _SEM_postBinary
-0003d998                _CLK_measure
-0003da00                _LOG_printf
-0003da64                _OBJ_create
-0003dac8                _KNL_enter
-0003db08                _KNL_exit
-0003db28                _KNL_ipost
-0003db84                _SEM_create
-0003dbe0                _LCK_post
-0003dc00                _LCK_pend
-0003dc38                LOG_F_event
-0003dc38                _LOG_event
-0003dc89                _SEM_pend
-0003dcd8                _SEM_postEnterKnl
-0003dd20                STS_F_delta
-0003dd20                _STS_delta
-0003dd42                STS_F_add
-0003dd42                _STS_add
-0003dd5a                STS_F_reset
-0003dd5a                _STS_reset
-0003dd68                _SYS_exit
-0003ddb0                IDL_F_busy
-0003ddb0                _IDL_busy
-0003dddc                _IDL_init
-0003ddf7                _IDL_calibrate
-0003de40                _OBJ_delete
-0003de88                _TSK_disable
-0003deb4                _TSK_enable
-0003decc                RTA_F_andn
-0003dee2                RTA_F_or
-0003def9                iRTA_F_or
-0003df0f                _QUE_get
-0003df2e                _QUE_put
-0003df51                _PRD_getticks
-0003df59                _PRD_tick
-0003df5f                _PRD_start
-0003df81                _PRD_stop
-0003df88                SYS_PUTCFXN
-0003df88                _UTL_doPutc
-0003dfc0                _KNL_post
-0003dff4                CLK_F_itime
-0003dff4                _CLK_itime
-0003e028                _MEM_valloc
-0003e05a                CLK_TIMER2FUNC
-0003e05a                FXN_F_nop
-0003e05c                FXN_F_run
-0003e079                FXN_F_zero
-0003e07d                FXN_F_selfLoop
-0003e07f                IDL_CALIBRFXN
-0003e07f                _IDL_stub
-0003e0a4                SYS_ABORTFXN
-0003e0a4                _UTL_doAbort
-0003e0c8                SYS_ERRORFXN
-0003e0c8                _UTL_doError
-0003e0e8                _HWI_disable
-0003e0f8                _HWI_enable
-0003e0fc                _HWI_restore
-0003e102                _CLK_run
-0003e10d                CLK_F_dispRun
-0003e10d                CLK_HOOKFXN
-0003e10d                _CLK_dispRun
-0003e11c                _SYS_abort
-0003e134                _SYS_error
-0003e14c                _SEM_delete
-0003e15c                IDL_F_loop
-0003e15c                _IDL_loop
-0003e168                SYS_EXITFXN
-0003e168                _UTL_halt
-0003e170                _STS_set
-0003e177                _GBL_getVersion
-0003e180                GBL_BIOS_BOOTFXN
-0003e180                GBL_USERINITFXN
-0003e180                GIO_CREATEFXN
-0003e180                GIO_DELETEFXN
-0003e180                GIO_PENDFXN
-0003e180                GIO_POSTFXN
-0003e180                PWRM_PWRM_BOOTHOOKFXN
-0003e180                TSK_VCREATEFXN
-0003e180                TSK_VDELETEFXN
-0003e180                TSK_VEXITFXN
-0003e180                _FXN_F_nop
-0003e184                _CLK_wdogdisable
-            0001f0c4    TSK_CodecConfig$stack
-            0001f4a6    TSK_CodecConfig$stkptr
-            0001f4c4    TSK_CodecConfig$sysstack
-            0001f5a6    TSK_CodecConfig$sysstkptr
-            0001f5c4    TSK_MUSBMSCTask$stack
-            0001f9a6    TSK_MUSBMSCTask$stkptr
-            0001f9c4    TSK_MUSBMSCTask$sysstack
-            0001faa6    TSK_MUSBMSCTask$sysstkptr
-            0001fac4    TSK_MUSBMainTask$stack
-            0001fea6    TSK_MUSBMainTask$stkptr
-            0001fec4    TSK_MUSBMainTask$sysstack
-            0001ffa6    TSK_MUSBMainTask$sysstkptr
+0003821d                _DDC_I2SDMARead
+000382e0                _DDC_I2SDMAInit
+00038349                _DDC_I2SDMADeinit
+0003835b                _DDC_I2SClose
+00038397                _secPrd
+00038413                _C5515_reset
+0003846f                _main
+00038524                _SpectrumDisplayTask
+00038546                _PowerDisplayTask
+0003855b                _DemoSwitch
+0003858e                _ClockGating
+000385c4                _CSL_acTest
+00038a18                _RecAudioAlgTsk
+00038ce5                _PbAudioAlgTsk
+0003908e                _GPIO_write
+0003910f                _GPIO_statusBit
+00039174                _GPIO_reset
+000391f5                _GPIO_read
+00039264                _GPIO_open
+0003928d                _GPIO_getConfig
+000392ff                _GPIO_enableInt
+00039362                _GPIO_disableInt
+000393c2                _GPIO_configBit
+00039489                _GPIO_config
+000394fb                _GPIO_close
+00039517                _GPIO_clearInt
+0003957c                _LLC_ResetAll
+00039633                _LLC_I2SSetWordLength
+000396a1                _LLC_I2SSetTransmitMode
+000396c0                _LLC_I2SSetSignExt
+000396df                _LLC_I2SSetMono
+000396fe                _LLC_I2SSetFsdiv
+00039774                _LLC_I2SSetFsPol
+00039793                _LLC_I2SSetDataPacking
+000397b2                _LLC_I2SSetDataFormat
+000397d1                _LLC_I2SSetDataDelay
+000397f0                _LLC_I2SSetClkdiv
+00039858                _LLC_I2SSetClkPol
+00039877                _LLC_I2SResetIR
+00039883                _LLC_I2SEnableLoopBack
+0003988a                _LLC_I2SEnableICMR
+000398f9                _LLC_I2SEnable
+00039900                _LLC_I2SDisableLoopBack
+00039907                _LLC_I2SDisableICMR
+00039976                _LLC_I2SDisable
+0003997d                _userInterfaceStart
+000399ac                _genHidReport
+000399ed                _userInterfaceInit
+00039b47                CLK_TIMER1FUNC
+00039b47                _gpt1Isr
+00039b5c                _getCurrentPBNState
+00039c20                _chkAllowedPBNState
+00039c5c                _UserInterfaceSwi
+00039d65                __divd
+0003a131                _RateChange
+0003a38f                _CodecConfigTask
+0003a3b6                __addd
+0003a610                _GPT_stop
+0003a62d                _GPT_start
+0003a64a                _GPT_reset
+0003a6ac                _GPT_open
+0003a734                _GPT_getCnt
+0003a75e                _GPT_config
+0003a7d6                _GPT_close
+0003a81c                _latchDmaXferState
+0003a89d                _initPitchCalc
+0003a991                _computeDmaXferCnt
+0003aa1f                _EZDSP5535_LED_init
+0003aa55                _EZDSP5535_LED_getall
+0003aaa7                _EZDSP5535_LED_setall
+0003ab15                _EZDSP5535_LED_on
+0003ab4a                _EZDSP5535_LED_off
+0003ab7d                _EZDSP5535_LED_toggle
+0003abc2                _EZDSP5535_XF_on
+0003abcd                _EZDSP5535_XF_off
+0003abd8                _EZDSP5535_XF_get
+0003abe7                _EZDSP5535_XF_toggle
+0003ac06                _PLL_reset
+0003ac5e                _PLL_init
+0003ac7d                _PLL_enable
+0003acc8                _PLL_config
+0003ada8                _PLL_bypass
+0003addf                _I2S_TransmitData
+0003adf1                _I2S_ReceiveData
+0003ae03                _I2S_INIT
+0003aec2                _I2S_DeInit
+0003aee7                _I2S_DMA_ISR_OUTPUT
+0003aef9                _I2S_DMA_ISR_INPUT
+0003af0b                _I2S_DMA_INIT
+0003af32                _I2S_DMA_Deinit
+0003af44                _DDA_I2SHWInit
+0003af73                __mpyd
+0003b0bf                __DDA_i2cSleep
+0003b0c9                __DDA_i2cOsGetTicks
+0003b0d4                _I2C_Write
+0003b0f5                _I2C_Read
+0003b15e                _I2C_Init
+0003b1a7                _DMA_StopTransfer
+0003b1b9                _DMA_StartTransfer
+0003b1cb                _DMA_RequestChan
+0003b1e4                _DMA_ReleaseChan
+0003b1f6                _DMA_HwInit
+0003b232                _DMA_DrvInit
+0003b23c                _DMA_ConfigChan
+0003b250                _DMA_ChangeSrcAddr
+0003b262                _DMA_ChangeDestAddr
+0003b274                _DMA_AdjustAddrOffset
+0003b27e                _pll_sample
+0003b345                _gpioInit
+0003b3be                _GpioWrite04
+0003b3da                _GpioWrite02
+0003b3f6                __divul
+0003b497                _EZDSP5535_GPIO_init
+0003b4c2                _EZDSP5535_GPIO_setDirection
+0003b4e6                _EZDSP5535_GPIO_setOutput
+0003b500                _EZDSP5535_GPIO_getInput
+0003b51e                _initSdram
+0003b59e                __fixdul
+0003b615                __frcmpyd
+0003b68b                _call_dtors
+0003b6e1                ___add_dtor
+0003b700                __frcmpyd_div
+0003b773                __remul
+0003b7e5                _atexit
+0003b8b0                _PAL_osSemTake
+0003b8be                _PAL_osSemGive
+0003b8ca                _PAL_osSemDelete
+0003b8d6                _PAL_osSemCreate
+0003b908                _PAL_osProtectExit
+0003b928                _PAL_osProtectEntry
+0003b95f                _EZDSP5535_wait
+0003b993                _EZDSP5535_waitusec
+0003b9a5                _EZDSP5535_init
+0003b9b3                __divli
+0003b9fb                _memcpy
+0003ba3a                _exit
+0003ba78                _PAL_osGetCurrentTick
+0003ba82                _PAL_osCheckTimeOut
+0003baa0                __fixdu
+0003babb                _PAL_osWaitMsecs
+0003bacf                I$$LMPY
+0003bacf                __mpyli
+0003bae2                __register_unlock
+0003baea                __register_lock
+0003baf2                __nop
+0003baf4                _abort
+0003baf5                C$$EXIT
+0003bafc                SWI_F_enable
+0003bafc                _SWI_enable
+0003bafc                ___etext__
+0003bafc                etext
+0003bb2f                SWI_F_post
+0003bb2f                _SWI_post
+0003bbba                SWI_F_exec_sync
+0003bc42                SWI_EXECFXN
+0003bc42                SWI_F_exec
+0003bd2e                SWI_F_run
+0003bd2e                SWI_RUNFXN
+0003be34                logPost
+0003be86                stsPost
+0003bed0                LNK_F_init
+0003bed2                LNK_F_checkChanEnabled
+0003bee0                LNK_F_getNextChan
+0003bef9                LNK_F_getChanPtr
+0003bf2b                LNK_F_dataPump
+0003bf2b                LNK_rcloop
+0003bf7f                LNK_rdrtry
+0003bf89                LNK_rrloop
+0003bfff                LNK_wrrtry
+0003c009                LNK_wrloop
+0003c096                LNK_newin
+0003c17a                LNK_newout
+0003c24e                LNK_F_readCallBack
+0003c24e                _LNK_F_readCallBack
+0003c273                HWI_F_dispatch
+0003c273                _HWI_F_dispatch
+0003c4f2                _HWI_F_DispIsr0
+0003c5d4                _SEM_pendEnterKnl
+0003c75f                PRD_F_swi
+0003c884                PRD_F_tick
+0003c8e8                _KNL_run
+0003ca70                _MEM_free
+0003cd1c                _KNL_tick
+0003cd2c                RTA_F_getlog
+0003cd2c                _RTA_F_getlog
+0003cd58                RTA_F_getsts
+0003cd87                RTA_F_readblk
+0003cd96                RTA_F_writeword
+0003cd9a                RTA_F_resetmem
+0003cdb5                RTA_F_dispatch
+0003ce5c                _MEM_alloc
+0003cf89                PIP_F_take
+0003cfdd                PIP_F_probe
+0003cfdf                PIP_F_give
+0003d051                PIP_F_start
+0003d0a2                _KNL_switch
+0003d0f0                KNL_glue
+0003d12f                KNL_tick_stub
+0003d12f                PRD_THOOKFXN
+0003d14f                _KNL_saveIsrFrame
+0003d1b0                _MBX_pend
+0003d238                _MBX_post
+0003d2c0                __SEM_dopost
+0003d3c4                _TSK_exit
+0003d4bc                _TSK_setup
+0003d610                _TSK_startup
+0003d673                _C55_disableIMR0
+0003d696                _C55_disableIMR1
+0003d6b9                _C55_enableIMR0
+0003d6d2                _C55_enableIMR1
+0003d6eb                _C55_clearIFR0
+0003d700                _C55_clearIFR1
+0003d718                _CLK_start
+0003d7a0                _CLK_stop
+0003d7a8                _KNL_check
+0003d803                _KNL_idle
+0003d820                _KNL_max
+0003d838                _CLK_dispatch
+0003d880                CLK_TIMER0FUNC
+0003d880                _CLK_isr
+0003d8fc                _CLK_getfhtime
+0003d908                CLK_F_gethtime
+0003d908                CLK_TIMEFXN
+0003d908                _CLK_getshtime
+0003d94f                _SEM_post
+0003d94f                _SEM_postBinary
+0003d9d4                _CLK_measure
+0003da3c                _LOG_printf
+0003daa0                _OBJ_create
+0003db04                _KNL_enter
+0003db44                _KNL_exit
+0003db64                _KNL_ipost
+0003dbc0                _SEM_create
+0003dc1c                _LCK_post
+0003dc3c                _LCK_pend
+0003dc74                LOG_F_event
+0003dc74                _LOG_event
+0003dcc5                _SEM_pend
+0003dd14                _SEM_postEnterKnl
+0003dd5c                STS_F_delta
+0003dd5c                _STS_delta
+0003dd7e                STS_F_add
+0003dd7e                _STS_add
+0003dd96                STS_F_reset
+0003dd96                _STS_reset
+0003dda4                _SYS_exit
+0003ddec                IDL_F_busy
+0003ddec                _IDL_busy
+0003de18                _IDL_init
+0003de33                _IDL_calibrate
+0003de7c                _OBJ_delete
+0003dec4                _TSK_disable
+0003def0                _TSK_enable
+0003df08                RTA_F_andn
+0003df1e                RTA_F_or
+0003df35                iRTA_F_or
+0003df4b                _QUE_get
+0003df6a                _QUE_put
+0003df8d                _PRD_getticks
+0003df95                _PRD_tick
+0003df9b                _PRD_start
+0003dfbd                _PRD_stop
+0003dfc4                SYS_PUTCFXN
+0003dfc4                _UTL_doPutc
+0003dffc                _KNL_post
+0003e030                CLK_F_itime
+0003e030                _CLK_itime
+0003e064                _MEM_valloc
+0003e096                CLK_TIMER2FUNC
+0003e096                FXN_F_nop
+0003e098                FXN_F_run
+0003e0b5                FXN_F_zero
+0003e0b9                FXN_F_selfLoop
+0003e0bb                IDL_CALIBRFXN
+0003e0bb                _IDL_stub
+0003e0e0                SYS_ABORTFXN
+0003e0e0                _UTL_doAbort
+0003e104                SYS_ERRORFXN
+0003e104                _UTL_doError
+0003e124                _HWI_disable
+0003e134                _HWI_enable
+0003e138                _HWI_restore
+0003e13e                _CLK_run
+0003e149                CLK_F_dispRun
+0003e149                CLK_HOOKFXN
+0003e149                _CLK_dispRun
+0003e158                _SYS_abort
+0003e170                _SYS_error
+0003e188                _SEM_delete
+0003e198                IDL_F_loop
+0003e198                _IDL_loop
+0003e1a4                SYS_EXITFXN
+0003e1a4                _UTL_halt
+0003e1ac                _STS_set
+0003e1b3                _GBL_getVersion
+0003e1bc                GBL_BIOS_BOOTFXN
+0003e1bc                GBL_USERINITFXN
+0003e1bc                GIO_CREATEFXN
+0003e1bc                GIO_DELETEFXN
+0003e1bc                GIO_PENDFXN
+0003e1bc                GIO_POSTFXN
+0003e1bc                PWRM_PWRM_BOOTHOOKFXN
+0003e1bc                TSK_VCREATEFXN
+0003e1bc                TSK_VDELETEFXN
+0003e1bc                TSK_VEXITFXN
+0003e1bc                _FXN_F_nop
+0003e1c0                _CLK_wdogdisable
+            0001f0e2    TSK_CodecConfig$stack
+            0001f4c4    TSK_CodecConfig$stkptr
+            0001f4e2    TSK_CodecConfig$sysstack
+            0001f5c4    TSK_CodecConfig$sysstkptr
+            0001f5e2    TSK_MUSBMSCTask$stack
+            0001f9c4    TSK_MUSBMSCTask$stkptr
+            0001f9e2    TSK_MUSBMSCTask$sysstack
+            0001fac4    TSK_MUSBMSCTask$sysstkptr
+            0001fae2    TSK_MUSBMainTask$stack
+            0001fec4    TSK_MUSBMainTask$stkptr
+            0001fee2    TSK_MUSBMainTask$sysstack
+            0001ffc4    TSK_MUSBMainTask$sysstkptr
             00020000    TSK_idle$stack
             000203e2    TSK_idle$stkptr
             00020400    TSK_idle$sysstack

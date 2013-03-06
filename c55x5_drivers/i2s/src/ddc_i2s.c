@@ -541,6 +541,7 @@ Int16 DDC_I2SDMAWrite(PSP_Handle        i2sHandle,
     PSP_Result       status0;
     PSP_Result       status1;
     Uint16           leftDmaChanNum;
+    Uint16			 rightDmaChanNum;
     Uint16           dmaChanCount;
     Uint16           dmaNum;
 
@@ -552,6 +553,7 @@ Int16 DDC_I2SDMAWrite(PSP_Handle        i2sHandle,
     {
         hI2S   =  (DDC_I2SHandle)i2sHandle;
         leftDmaChanNum   =  hDmaTxLeft->chanNum;
+        rightDmaChanNum  =  hDmaTxRight->chanNum;
         dmaChanCount  =  4;
         dmaNum  =  0;
 
@@ -570,19 +572,19 @@ Int16 DDC_I2SDMAWrite(PSP_Handle        i2sHandle,
                                        (dmaNum*dmaChanCount + leftDmaChanNum));
         }
 
-#if 0
+
         if(hDmaTxRight != NULL)
         {
             /* Find out the DMA channel number for right Tx DMA channel */
-            while(RightDmaChanNum >= dmaChanCount)
+            while(rightDmaChanNum >= dmaChanCount)
             {
-                RightDmaChanNum  -=  dmaChanCount;
+                rightDmaChanNum  -=  dmaChanCount;
             }
             /* Disable the DMA interrupts on Right transmit channel */
             CSL_DMAEVTINT_REGS->DMAINTEN  &=  ~(0x0001 <<
-                                      (dmaNum*dmaChanCount + RightDmaChanNum));
+                                      (dmaNum*dmaChanCount + rightDmaChanNum));
         }
-#endif
+
         /* Enable I2S transfer */
         LLC_I2SEnable(hI2S->regs);
 

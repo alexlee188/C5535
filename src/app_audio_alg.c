@@ -428,6 +428,8 @@ void PbAudioAlgTsk(void)
 {
     Int16 *pbOutBufLeft;
     Int16 *pbOutBufRight;
+    Uint32 *pPingPongTxLeft;
+    Uint32 *pPingPongTxRight;
 #ifdef USE_TWO_CODEC
     Int16 *pbOutBufLeft2;
     Int16 *pbOutBufRight2;
@@ -449,6 +451,10 @@ void PbAudioAlgTsk(void)
     volatile Int16 i, loopCount;
     Bool led_toggle = FALSE;
 
+    EZDSP5535_LED_off(2);
+    EZDSP5535_LED_off(3);
+    SEM_post(&SEM_PingPongTxLeftComplete);
+    SEM_post(&SEM_PingPongTxRightComplete);
     while (1)
     {
         SEM_pend(&SEM_PingPongTxLeftComplete, SYS_FOREVER);
@@ -457,8 +463,8 @@ void PbAudioAlgTsk(void)
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
 #endif //USE_TWO_CODEC
 #ifdef USE_THREE_CODEC
-        SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
-        SEM_pend(&SEM_PingPongTxLeftComplete3, SYS_FOREVER);
+        //SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
+        //SEM_pend(&SEM_PingPongTxLeftComplete3, SYS_FOREVER);
 #endif //USE_THREE_CODEC
 #ifdef USE_FOUR_CODEC
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
@@ -470,8 +476,8 @@ void PbAudioAlgTsk(void)
         SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
 #endif //USE_TWO_CODEC
 #ifdef USE_THREE_CODEC
-        SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
-        SEM_pend(&SEM_PingPongTxRightComplete3, SYS_FOREVER);
+        //SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
+        //SEM_pend(&SEM_PingPongTxRightComplete3, SYS_FOREVER);
 #endif //USE_THREE_CODEC
 #ifdef USE_FOUR_CODEC
         SEM_pend(&SEM_PingPongTxRightComplete2, SYS_FOREVER);
@@ -488,6 +494,7 @@ void PbAudioAlgTsk(void)
 		playAudioTaskCount++;
         /* Select output buffer */
         pbOutBufLeft = ping_pong_i2sTxLeftBuf + left_tx_buf_sel*i2sTxBuffSz;
+        pPingPongTxLeft = (Uint32*) pbOutBufLeft;
 #ifdef USE_TWO_CODEC
         pbOutBufLeft2 = ping_pong_i2sTxLeftBuf2 + left_tx_buf_sel*i2sTxBuffSz;
 #endif //USE_TWO_CODEC
@@ -502,6 +509,7 @@ void PbAudioAlgTsk(void)
 #endif //USE_FOUR_CODEC
         left_tx_buf_sel ^= 0x1;
         pbOutBufRight = ping_pong_i2sTxRightBuf + right_tx_buf_sel*i2sTxBuffSz;
+        pPingPongTxRight = (Uint32 *) pbOutBufRight;
 #ifdef USE_TWO_CODEC
         pbOutBufRight2 = ping_pong_i2sTxRightBuf2 + right_tx_buf_sel*i2sTxBuffSz;
 #endif //USE_TWO_CODEC
@@ -823,5 +831,6 @@ void PbAudioAlgTsk(void)
         /*                                      */
         /* Insert Playback audio algorithm here */
         /*                                      */
+		i2sPlayAudio(i2sHandleTx, pPingPongTxLeft, pPingPongTxRight);
     }
 }
