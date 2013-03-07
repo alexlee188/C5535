@@ -122,7 +122,7 @@ PSP_Handle I2S_INIT(PSP_I2SInstanceId      i2sInstance,
         return NULL;
     }
 
-#if 0 // this call resets all I2S => more than one call to I2S_INIT() will reset all I2S modules
+#if 1 // this call resets all I2S => more than one call to I2S_INIT() will reset all I2S modules
     /* Call HwInit function to make the I2S device active */
     DDA_I2SHWInit();
 #endif
