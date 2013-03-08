@@ -12,7 +12,10 @@ $(GEN_CMDS__FLAG) \
 "C:/Users/Alex/C5535/build/Release/user_interface.obj" \
 "C:/Users/Alex/C5535/build/Release/pll_control.obj" \
 "C:/Users/Alex/C5535/build/Release/i2s_sample.obj" \
+"C:/Users/Alex/C5535/build/Release/i2s_register.obj" \
+"C:/Users/Alex/C5535/build/Release/i2s_bypass1.obj" \
 "C:/Users/Alex/C5535/build/Release/gpio_control.obj" \
+"C:/Users/Alex/C5535/build/Release/dma_bypass1.obj" \
 "C:/Users/Alex/C5535/build/Release/dbg_sdram.obj" \
 "C:/Users/Alex/C5535/build/Release/csl_usb_iso_highspeed_example.obj" \
 "C:/Users/Alex/C5535/build/Release/codec_config.obj" \
@@ -132,11 +135,11 @@ endif
 all: C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out
 
 dependents:
-	-cd C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/Release && $(MAKE) all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/Release && $(MAKE) clean all
 
 # Tool invocations
 C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/../../../../c55x5_drivers/lib/Release/i2c_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/../../../../c55x5_drivers/lib/Release/i2s_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Release/cslVC5505_Lib.lib
@@ -150,9 +153,10 @@ C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_Is
 # Other Targets
 clean:
 	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\C5535\build\CSL_USB_IsoHighSpeedExample_Out\Release\CSL_USB_IsoHighSpeedExample_Out.out"
-	-$(RM) "VC5505_CSL_BIOS_cfg_c.pp" "app_asrc.pp" "app_audio_alg.pp" "app_usb.pp" "app_usbac.pp" "app_usbac_descs.pp" "codec_aic3254.pp" "codec_config.pp" "csl_usb_iso_highspeed_example.pp" "dbg_sdram.pp" "gpio_control.pp" "i2s_sample.pp" "pll_control.pp" "user_interface.pp" 
+	-$(RM) "VC5505_CSL_BIOS_cfg_c.pp" "app_asrc.pp" "app_audio_alg.pp" "app_usb.pp" "app_usbac.pp" "app_usbac_descs.pp" "codec_aic3254.pp" "codec_config.pp" "csl_usb_iso_highspeed_example.pp" "dbg_sdram.pp" "dma_bypass1.pp" "gpio_control.pp" "i2s_bypass1.pp" "i2s_sample.pp" "pll_control.pp" "user_interface.pp" 
 	-$(RM) "VC5505_CSL_BIOS_cfg.pp" 
-	-$(RM) "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg.obj" "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg_c.obj" "C:\Users\Alex\C5535\build\Release\app_asrc.obj" "C:\Users\Alex\C5535\build\Release\app_audio_alg.obj" "C:\Users\Alex\C5535\build\Release\app_usb.obj" "C:\Users\Alex\C5535\build\Release\app_usbac.obj" "C:\Users\Alex\C5535\build\Release\app_usbac_descs.obj" "C:\Users\Alex\C5535\build\Release\codec_aic3254.obj" "C:\Users\Alex\C5535\build\Release\codec_config.obj" "C:\Users\Alex\C5535\build\Release\csl_usb_iso_highspeed_example.obj" "C:\Users\Alex\C5535\build\Release\dbg_sdram.obj" "C:\Users\Alex\C5535\build\Release\gpio_control.obj" "C:\Users\Alex\C5535\build\Release\i2s_sample.obj" "C:\Users\Alex\C5535\build\Release\pll_control.obj" "C:\Users\Alex\C5535\build\Release\user_interface.obj" 
+	-$(RM) "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg.obj" "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg_c.obj" "C:\Users\Alex\C5535\build\Release\app_asrc.obj" "C:\Users\Alex\C5535\build\Release\app_audio_alg.obj" "C:\Users\Alex\C5535\build\Release\app_usb.obj" "C:\Users\Alex\C5535\build\Release\app_usbac.obj" "C:\Users\Alex\C5535\build\Release\app_usbac_descs.obj" "C:\Users\Alex\C5535\build\Release\codec_aic3254.obj" "C:\Users\Alex\C5535\build\Release\codec_config.obj" "C:\Users\Alex\C5535\build\Release\csl_usb_iso_highspeed_example.obj" "C:\Users\Alex\C5535\build\Release\dbg_sdram.obj" "C:\Users\Alex\C5535\build\Release\dma_bypass1.obj" "C:\Users\Alex\C5535\build\Release\gpio_control.obj" "C:\Users\Alex\C5535\build\Release\i2s_bypass1.obj" "C:\Users\Alex\C5535\build\Release\i2s_register.obj" "C:\Users\Alex\C5535\build\Release\i2s_sample.obj" "C:\Users\Alex\C5535\build\Release\pll_control.obj" "C:\Users\Alex\C5535\build\Release\user_interface.obj" 
+	-$(RM) "i2s_register.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

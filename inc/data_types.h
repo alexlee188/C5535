@@ -57,11 +57,11 @@ typedef double              Float64;
 #define Uint64              Uint40
 #define Float32             Float64 /* no 64-bit float on C55x */
 
-//typedef short               Int16;
-//typedef long                Int32;
+typedef short               Int16;
+typedef long                Int32;
 typedef long long           Int40;
-//typedef unsigned short      Uint16;
-//typedef unsigned long       Uint32;
+typedef unsigned short      Uint16;
+typedef unsigned long       Uint32;
 typedef unsigned long long  Uint40;
 typedef float               Float32;
 
