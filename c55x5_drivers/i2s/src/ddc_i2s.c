@@ -737,8 +737,6 @@ void I2S_DmaTxLChCallBack(
 
     i2sDmaTxLChCallBackCount++;
 
-    EZDSP5535_LED_on(1);
-
     if((dataCallback != NULL) && (dmaStatus == PSP_DMA_TRANSFER_COMPLETE))
     {
         SEM_post(&SEM_PingPongTxLeftComplete);
@@ -770,7 +768,7 @@ void I2S_DmaTxRChCallBack(
 	i2sDmaTxRChCallBackCount++;
 
     if ((dataCallback != NULL) && (dmaStatus == PSP_DMA_TRANSFER_COMPLETE))
-                    {
+    {
         SEM_post(&SEM_PingPongTxRightComplete);
     }
     else

@@ -453,6 +453,8 @@ void PbAudioAlgTsk(void)
     EZDSP5535_LED_off(2);
     EZDSP5535_LED_off(3);
 
+    SEM_post(&SEM_PingPongTxLeftComplete);
+    SEM_post(&SEM_PingPongTxRightComplete);
     while (1)
     {
         SEM_pend(&SEM_PingPongTxLeftComplete, SYS_FOREVER);
@@ -826,5 +828,6 @@ void PbAudioAlgTsk(void)
         /*                                      */
         /* Insert Playback audio algorithm here */
         /*                                      */
+		i2sPlayAudio(i2sHandleTx, pbOutBufLeft, pbOutBufRight);
     }
 }
