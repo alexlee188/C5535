@@ -447,11 +447,11 @@ void PbAudioAlgTsk(void)
     Int16 *pbOutBufRight4;
 #endif //USE_FOUR_CODEC
     volatile Int16 i, loopCount;
-    Bool led_toggle = FALSE;
 
     EZDSP5535_LED_off(0);
     EZDSP5535_LED_off(1);
     EZDSP5535_LED_off(2);
+    EZDSP5535_LED_off(3);
 
     while (1)
     {
@@ -485,9 +485,7 @@ void PbAudioAlgTsk(void)
 #endif //USE_FOUR_CODEC
 
         if ((playAudioTaskCount % 1000) == 0){
-        	if (led_toggle) EZDSP5535_LED_off(2);
-        	else EZDSP5535_LED_on(2);
-        	led_toggle = !led_toggle;
+        	EZDSP5535_LED_toggle(2);
         }
 
 		playAudioTaskCount++;

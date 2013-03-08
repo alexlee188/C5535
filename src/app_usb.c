@@ -501,8 +501,8 @@ void  MUSB_Handle_EP0_Intr(pUsbContext pContext)
 
                     case CSL_USB_SET_ADDRESS:
 
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK;
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
+                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK |
+                        	CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
                            pContext->ep0State = CSL_USB_EP0_STATUS_IN;
                         /* no state change */
                         break;

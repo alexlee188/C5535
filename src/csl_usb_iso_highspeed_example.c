@@ -66,6 +66,7 @@
 
 #ifdef C5535_EZDSP_DEMO
 #include "lcd_osd.h"
+#include "ezdsp5535_lcd.h"
 #include "dsplib.h"
 #include "soc.h"
 #include "cslr.h"
@@ -204,7 +205,6 @@ void main(void)
 
     EZDSP5535_init();
     EZDSP5535_LED_init( );
-    for (i = 0; i < 4; i++) EZDSP5535_LED_off(i);
 };
 
 /**
@@ -373,6 +373,8 @@ void CSL_acTest(void)
 #ifdef C5535_EZDSP_DEMO
         // initialize the OLED display        
         //oled_init();
+        EZDSP5535_OSD9616_init( );
+        EZDSP5535_OSD9616_printLetter(0x01,0x7C,0x04,0x01);
 #endif
         
         /* Initialising the Pointer to the Audio Class Handle to the Buffer Allocated */
