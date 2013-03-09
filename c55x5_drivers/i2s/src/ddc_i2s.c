@@ -736,11 +736,12 @@ void I2S_DmaTxLChCallBack(
     dmaCXferCnt++;
     i2sDmaTxLChCallBackCount++;
 
-    EZDSP5535_LED_on(3);
+    EZDSP5535_LED_on(2);
 
     if((dataCallback != NULL) && (dmaStatus == PSP_DMA_TRANSFER_COMPLETE))
     {
         SEM_post(&SEM_PingPongTxLeftComplete);
+        EZDSP5535_LED_on(3);
     } else
     {
         LOG_printf(&trace, "Left TX DMA Failed\n");

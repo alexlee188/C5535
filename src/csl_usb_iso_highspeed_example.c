@@ -110,6 +110,10 @@ void CSL_acTest(void);
 /* Resets C5515 */
 void C5515_reset(void);
 
+void SYS_GlobalIntEnable(void);
+void SYS_GlobalIntDisable(void);
+
+
 /**
  *  \brief  CSL Audio Class main function
  *
@@ -205,6 +209,7 @@ void main(void)
 
     EZDSP5535_init();
     EZDSP5535_LED_init( );
+    for (i = 0; i < 4; i++) EZDSP5535_LED_off(i);
 };
 
 /**
@@ -805,4 +810,16 @@ void secPrd()
 
 	sofIntCountPlaySec = sofIntCountPlay = sofIntCountPlaySave;
 	sofIntCountPlaySave = sofIntCountPlay;
+}
+
+
+
+void SYS_GlobalIntEnable(void)
+{
+    asm(" BIT (ST1, #ST1_INTM) = #0");
+}
+
+void SYS_GlobalIntDisable(void)
+{
+    asm(" BIT (ST1, #ST1_INTM) = #1");
 }
