@@ -448,19 +448,15 @@ void PbAudioAlgTsk(void)
 #endif //USE_FOUR_CODEC
     volatile Int16 i, loopCount;
 
-    EZDSP5535_LED_off(0);
-    EZDSP5535_LED_off(1);
-
     while (1)
     {
         SEM_pend(&SEM_PingPongTxLeftComplete, SYS_FOREVER);
-        EZDSP5535_LED_on(0);
 #ifdef USE_TWO_CODEC
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
 #endif //USE_TWO_CODEC
 #ifdef USE_THREE_CODEC
-        //SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
-        //SEM_pend(&SEM_PingPongTxLeftComplete3, SYS_FOREVER);
+        SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
+        SEM_pend(&SEM_PingPongTxLeftComplete3, SYS_FOREVER);
 #endif //USE_THREE_CODEC
 #ifdef USE_FOUR_CODEC
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
@@ -481,8 +477,8 @@ void PbAudioAlgTsk(void)
         SEM_pend(&SEM_PingPongTxRightComplete4, SYS_FOREVER);
 #endif //USE_FOUR_CODEC
 
-        if ((playAudioTaskCount % 1000) == 0){
-        	EZDSP5535_LED_toggle(1);
+        if ((playAudioTaskCount % 100) == 0){
+        	EZDSP5535_LED_toggle(0);
         }
 
 		playAudioTaskCount++;

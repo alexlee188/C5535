@@ -144,7 +144,6 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE.1684829288" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="&quot;C5535_EZDSP_DEMO&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C5535_EZDSP&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;USE_THREE_CODEC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;BIOS_BUILD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;I2S_POLLED_INTERRUPT&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>

@@ -135,17 +135,17 @@ endif
 all: C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out
 
 dependents:
-	-cd C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/Release && $(MAKE) clean all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/Release && $(MAKE) clean all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/Release && $(MAKE) clean all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/Release && $(MAKE) clean all
-	-cd C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/Release && $(MAKE) all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/Release && $(MAKE) all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/Release && $(MAKE) all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/Release && $(MAKE) all
+	-cd C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/Release && $(MAKE) all
 
 # Tool invocations
 C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/../../../../c55x5_drivers/lib/Release/i2c_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/../../../../c55x5_drivers/lib/Release/i2s_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Release/cslVC5505_Lib.lib
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define="C5535_EZDSP" --define="USE_THREE_CODEC" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/C5535/build/Release" -z -m"C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.map" --warn_sections -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" -i"C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/lib/c5500" -i"C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/lib" -i"C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out" -i"C:/Users/Alex/C5535/c55x5_drivers/lib/Release" -i"C:/Users/Alex/C5535/c55xx_csl/lib/Release" -i"C:/Users/Alex/C5535/build" -i"/packages/ti/rtdx/lib/c5000" -i"C:/Users/Alex/C5535/asrc/lib" --reread_libs --xml_link_info="C:/Users/Alex/C5535/build/Release/link_info.xml" --rom_model -o "C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out" $(ORDERED_OBJS)
+	"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 -g -O3 --define="BIOS_BUILD" --define="C5535_EZDSP" --define=" C5535_EZDSP_DEMO" --define="CSL_AC_TEST" --define="PLAY_RECORD" --define="SAMP_24BIT" --diag_warning=225 --no_warnings --large_memory_model --algebraic --obj_directory="C:/Users/Alex/C5535/build/Release" -z -m"C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.map" --warn_sections -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/Alex/ccsv5/tools/compiler/c5500_4.4.1/include" -i"C:/Users/Alex/bios_5_42_00_07/packages/ti/rtdx/lib/c5500" -i"C:/Users/Alex/bios_5_42_00_07/packages/ti/bios/lib" -i"C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out" -i"C:/Users/Alex/C5535/c55x5_drivers/lib/Release" -i"C:/Users/Alex/C5535/c55xx_csl/lib/Release" -i"C:/Users/Alex/C5535/build" -i"/packages/ti/rtdx/lib/c5000" -i"C:/Users/Alex/C5535/asrc/lib" --reread_libs --xml_link_info="C:/Users/Alex/C5535/build/Release/link_info.xml" --rom_model -o "C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

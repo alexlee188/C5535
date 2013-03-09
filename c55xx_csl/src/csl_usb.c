@@ -27,6 +27,8 @@
 #include "csl_usb.h"
 #include "csl_usbAux.h"
 #include "app_usb.h"
+#include "ezdsp5535.h"
+#include "ezdsp5535_led.h"
 
 CSL_UsbRegsOvly    usbRegisters;
 CSL_SysRegsOvly    sysCtrlRegs;
@@ -3324,12 +3326,15 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 				break;
 
 			case CSL_USB_SET_INTERFACE:
-				if (pContext->usbSetup.wIndex == IF_NUM_REC)
+				if (pContext->usbSetup.wIndex == IF_NUM_REC){
 					pContext->alt_setting_rec = pContext->usbSetup.wValue;
-				else if (pContext->usbSetup.wIndex == IF_NUM_PLAY)
+					EZDSP5535_LED_on(2);
+				}
+				else if (pContext->usbSetup.wIndex == IF_NUM_PLAY){
 					pContext->alt_setting_play = pContext->usbSetup.wValue;
-
-
+					EZDSP5535_LED_on(3);
+				}
+				else EZDSP5535_LED_on(1);
 				// Service the RXPKTRDY after reading the FIFO
 				USB_clearEpRxPktRdy(CSL_USB_EP0);
 
