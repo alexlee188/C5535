@@ -405,8 +405,10 @@ void  MUSB_Handle_EP0_Intr(pUsbContext pContext)
                         break;
                 }
             }
-            else if (((pContext->usbSetup.bmRequestType & (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE)) == 
-                (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE))) //AC Class-Specific Request
+            //else if (((pContext->usbSetup.bmRequestType & (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE)) ==
+            //               (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE))) //AC Class-Specific Request
+            else if ((pContext->usbSetup.bmRequestType & CSL_USB_REQTYPE_CLASS) ==
+            				CSL_USB_REQTYPE_CLASS) //AC Class-Specific Request
             {
                 switch(pContext->usbSetup.bRequest)
                 {
@@ -468,8 +470,8 @@ void  MUSB_Handle_EP0_Intr(pUsbContext pContext)
                         peps->wUSBEvents |= CSL_USB_EVENT_SETUP;
 
                         /* DataEnd + ServicedRxPktRdy */
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK;
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
+                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK |
+                        		CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
                           pContext->ep0State = CSL_USB_EP0_STATUS_IN;
                         /* no state change */
                         break;
@@ -480,8 +482,8 @@ void  MUSB_Handle_EP0_Intr(pUsbContext pContext)
                         peps->wUSBEvents |= CSL_USB_EVENT_SETUP;
 
                         /* DataEnd + ServicedRxPktRdy */
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK;
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
+                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK |
+                        		CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
                           pContext->ep0State = CSL_USB_EP0_STATUS_IN;
                         /* no state change */
                         break;
@@ -493,8 +495,8 @@ void  MUSB_Handle_EP0_Intr(pUsbContext pContext)
                         peps->wUSBEvents |= CSL_USB_EVENT_SETUP;
 
                         /* DataEnd + ServicedRxPktRdy */
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK;
-                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
+                        usbRegisters->PERI_CSR0_INDX |= CSL_USB_PERI_CSR0_INDX_SERV_RXPKTRDY_MASK |
+                        		CSL_USB_PERI_CSR0_INDX_DATAEND_MASK;
                           pContext->ep0State = CSL_USB_EP0_STATUS_IN;
                         /* no state change */
                         break;

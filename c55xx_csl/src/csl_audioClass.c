@@ -106,6 +106,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
     pAcClassHandle    pHandle;
     CSL_Status        status;
     Uint16            eventMask;
+    Uint16			  i;
 
     status  = CSL_SOK;
     pHandle = (pAcClassHandle)(pAppClassHandle->pAcObj);
@@ -183,6 +184,9 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         pHandle->acHandle.playBackActive = FALSE;
         pHandle->acHandle.recordActive = FALSE;
         pHandle->acHandle.mediaInitDone  = FALSE;
+
+        for (i = 0; i < 8; i++) pHandle->ctrlHandle.alt_setting_rec[i] = 0x0000;
+        for (i = 0; i < 8; i++) pHandle->ctrlHandle.alt_setting_play[i] = 0x0000;
 
         /* Initing CSL_AcObject */
         pHandle->acHandle.lbaBufferPb = pAppClassHandle->lbaBufferPbApp;
@@ -1280,7 +1284,7 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
     {
       	if (usbSetup->wIndex == IF_NUM_REC){
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
-				USB_postTransaction(hOutEp, 1, (void*)&pCtrlHandle->alt_setting_rec[0],
+				USB_postTransaction(hOutEp, tempLen, (void*)&pCtrlHandle->alt_setting_rec[0],
 									CSL_USB_IOFLAG_NONE);
 				alt_setting_rec = pCtrlHandle->alt_setting_rec[1];
 		        if (alt_setting_rec == 0)
@@ -1325,7 +1329,7 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
 
       	else if (usbSetup->wIndex == IF_NUM_PLAY){
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
-				USB_postTransaction(hOutEp, 1, (void*)&pCtrlHandle->alt_setting_play[0],
+				USB_postTransaction(hOutEp, tempLen, (void*)&pCtrlHandle->alt_setting_play[0],
 									CSL_USB_IOFLAG_NONE);
 				alt_setting_play = pCtrlHandle->alt_setting_play[1];
 		        if (alt_setting_play == 0)
@@ -1376,7 +1380,7 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
 		        pCtrlHandle->sampleRateBuf[1] = 0xFFFF;
 		        pCtrlHandle->sampleRateBuf[2] = 0xFFFF;
 				// get the assigned sample frequency from host (in 4 bytes)
-	        	USB_postTransaction(hOutEp, 4, (void*)&pCtrlHandle->sampleRateBuf[0],
+	        	USB_postTransaction(hOutEp, tempLen, (void*)&pCtrlHandle->sampleRateBuf[0],
 							        CSL_USB_IOFLAG_NONE);
 			} else
 			{
@@ -1606,11 +1610,11 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
     	if (usbSetup->wIndex == IF_NUM_REC){
     		if ((usbSetup->wValue >> 8) == AUDIO_AS_VAL_ALT_SETTINGS){
 				pCtrlHandle->ctrlBuffer[1] = 0x0301; // alt 0 and 1 valid
-				USB_postTransaction(hInEp, 2, (void*)&pCtrlHandle->ctrlBuffer[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
     		}
     		else if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
-				USB_postTransaction(hInEp, 1, (void*)&pCtrlHandle->alt_setting_rec[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->alt_setting_rec[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
     		}
 			else if ((usbSetup->wValue >> 8) == AUDIO_AS_AUDIO_DATA_FORMAT){
@@ -1625,11 +1629,11 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
     	else if (usbSetup->wIndex == IF_NUM_PLAY){
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_VAL_ALT_SETTINGS){
 				pCtrlHandle->ctrlBuffer[1] = 0x0301; // alt 0 and 1 valid
-				USB_postTransaction(hInEp, 2, (void*)&pCtrlHandle->ctrlBuffer[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
 									CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			}
 			else if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
-				USB_postTransaction(hInEp, 1, (void*)&pCtrlHandle->alt_setting_play[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->alt_setting_play[0],
 										CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			}
 			else if ((usbSetup->wValue >> 8) == AUDIO_AS_AUDIO_DATA_FORMAT){
@@ -1652,13 +1656,13 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
 				/* Send the current sampling frequency value (in 4 bytes) */
 				//USB_postTransaction(hInEp, 4, (void*)&pCtrlHandle->ctrlBuffer[0],
 				//			        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
-				USB_postTransaction(hInEp, 4, (void*)&pCtrlHandle->sampleRateBuf[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->sampleRateBuf[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			} else if ((usbSetup->wValue>>8)==2) // CS_CLOCK_VALID_CONTROL
 			{
 
 				pCtrlHandle->ctrlBuffer[1] = 0x0001;
-				USB_postTransaction(hInEp, 1, (void*)&pCtrlHandle->ctrlBuffer[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			} else
 			{
