@@ -684,10 +684,10 @@ typedef struct CSL_AcCtrlObject {
     Uint16                 getMaxBuffer[CSL_AC_GET_BUF_LEN];
     /** \brief  Buffer to service get resolution request                     */
     Uint16                 getResBuffer[CSL_AC_GET_BUF_LEN];
-    /** \brief  Buffer to service alt settings						 	  	 */
+    /** \brief  Dummy descriptor array                                       */
     Uint16				   alt_setting_rec[8];
     Uint16				   alt_setting_play[8];
-    /** \brief  Dummy descriptor array                                       */
+
     Uint16                 dummydesc[63];
     /** \brief  Device qualifier descriptor (Used in Full soeed mode)        */
     Uint16                 deviceQualifierDescr[CSL_AC_DEV_QUAL_DESCR_MAX_LEN];
@@ -1797,7 +1797,8 @@ CSL_AcRequestRet AC_reqHidSetIdle(
 /**
 @} */
 
-
+extern Uint16 alt_setting_rec;
+extern Uint16 alt_setting_play;
 
 #ifdef __cplusplus
 }

@@ -26,6 +26,7 @@
 
 #include "csl_usb.h"
 #include "csl_usbAux.h"
+#include "csl_audioClass.h"
 #include "app_usb.h"
 #include "ezdsp5535.h"
 #include "ezdsp5535_led.h"
@@ -3327,14 +3328,14 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 
 			case CSL_USB_SET_INTERFACE:
 				if (pContext->usbSetup.wIndex == IF_NUM_REC){
-					pContext->alt_setting_rec = pContext->usbSetup.wValue;
-					EZDSP5535_LED_on(2);
+					alt_setting_rec = pContext->usbSetup.wValue;
 				}
 				else if (pContext->usbSetup.wIndex == IF_NUM_PLAY){
-					pContext->alt_setting_play = pContext->usbSetup.wValue;
-					EZDSP5535_LED_on(3);
+					alt_setting_play = pContext->usbSetup.wValue;
 				}
-				else EZDSP5535_LED_on(1);
+				USB_postTransaction(pContext->hEpObjArray[1], 0, NULL,
+				                    CSL_USB_IOFLAG_NONE);
+
 				// Service the RXPKTRDY after reading the FIFO
 				USB_clearEpRxPktRdy(CSL_USB_EP0);
 
@@ -3470,9 +3471,9 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 		case CSL_USB_GET_INTERFACE:
 			/* Send the alt setting of the Interface */
 			if (pContext->usbSetup.wIndex == IF_NUM_REC)
-				UsbCtrlBuffer[0] = pContext->alt_setting_rec;
+				UsbCtrlBuffer[0] = alt_setting_rec;
 			else if (pContext->usbSetup.wIndex == IF_NUM_PLAY)
-				UsbCtrlBuffer[0] = pContext->alt_setting_play;
+				UsbCtrlBuffer[0] = alt_setting_play;
 			USB_postTransaction(pContext->hEpObjArray[1], 1, (void*)UsbCtrlBuffer,
 						        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			// send ZLP

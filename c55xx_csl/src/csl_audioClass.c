@@ -55,6 +55,9 @@ Int16 numRecSamps = 24;
 Int16 numPbSamps = 24;
 ///#endif
 
+Uint16 alt_setting_rec = 0;
+Uint16 alt_setting_play = 0;
+
 /** ============================================================================
  *   @n@b AC_Open
  *
@@ -173,11 +176,6 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         pHandle->ctrlHandle.recSampleRateBuf[1] = 0x7700; /* record sampling rate = 96 kHz */
         pHandle->ctrlHandle.recSampleRateBuf[2] = 0x0001;
 ///#endif
-        pHandle->ctrlHandle.alt_setting_rec[0] = 0x0000;
-        pHandle->ctrlHandle.alt_setting_rec[1] = 0x0000;
-        pHandle->ctrlHandle.alt_setting_play[0] = 0x0000;
-        pHandle->ctrlHandle.alt_setting_play[1] = 0x0000;
-
         pHandle->ctrlHandle.strDescr    = pAppClassHandle->strDescrApp;
         pHandle->ctrlHandle.acReqTable = &pAppClassHandle->acReqTableApp[0];
         pHandle->ctrlHandle.acReqTableHID = &pAppClassHandle->acReqTableAppHID[0];
@@ -1284,8 +1282,8 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
 				USB_postTransaction(hOutEp, 1, (void*)&pCtrlHandle->alt_setting_rec[0],
 									CSL_USB_IOFLAG_NONE);
-				pCtrlHandle->alt_setting_rec[1] &= 0x00ff;
-		        if (pCtrlHandle->alt_setting_rec[1] == 0)
+				alt_setting_rec = pCtrlHandle->alt_setting_rec[1];
+		        if (alt_setting_rec == 0)
 		        {
 		            if (pAcHandle->recordActive == TRUE)
 		            {
@@ -1329,8 +1327,8 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
 				USB_postTransaction(hOutEp, 1, (void*)&pCtrlHandle->alt_setting_play[0],
 									CSL_USB_IOFLAG_NONE);
-				pCtrlHandle->alt_setting_play[1] &= 0x00ff;
-		        if (pCtrlHandle->alt_setting_play[1] == 0)
+				alt_setting_play = pCtrlHandle->alt_setting_play[1];
+		        if (alt_setting_play == 0)
 		        {
 		            if (pAcHandle->playBackActive == TRUE)
 		            {
@@ -2152,8 +2150,8 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
     }
     else if (usbSetup->wIndex == IF_NUM_REC) /* host enable and disable record audio path */
     {
-    	pCtrlHandle->alt_setting_rec[1] = usbSetup->wValue;
-        if (usbSetup->wValue == 0)
+    	alt_setting_rec = pCtrlHandle->alt_setting_rec[1] = usbSetup->wValue;
+        if (alt_setting_rec == 0)
         {
             if (pAcHandle->recordActive == TRUE)
             {
@@ -2170,7 +2168,7 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
                 }
             }
         }
-        else if (usbSetup->wValue == 1)
+        else if (alt_setting_rec == 1)
         {
             if (pAcHandle->recordActive == FALSE)
             {
@@ -2194,8 +2192,8 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
     }
     else if (usbSetup->wIndex == IF_NUM_PLAY)      /* host enable and disable playback path */
     {
-    	pCtrlHandle->alt_setting_play[1] = usbSetup->wValue;
-        if (usbSetup->wValue == 0)
+    	alt_setting_play = pCtrlHandle->alt_setting_play[1] = usbSetup->wValue;
+        if (alt_setting_play == 0)
         {
             if (pAcHandle->playBackActive == TRUE)
             {
@@ -2212,7 +2210,7 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
                 }
             }
         }
-        else if (usbSetup->wValue == 1)
+        else if (alt_setting_play == 1)
         {
             if (pAcHandle->playBackActive == FALSE)
             {
