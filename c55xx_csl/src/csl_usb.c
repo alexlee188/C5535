@@ -3229,6 +3229,7 @@ Uint16 USB_findFifoSize(Uint16 maxPktSize, CSL_UsbXferType xferType)
 	return fifoSize;
 }
 
+
 // processing all the EP0 events for enumeration
 // call the CDC event handler for further processing
 CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
@@ -3327,15 +3328,9 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 				break;
 
 			case CSL_USB_SET_INTERFACE:
-				if (pContext->usbSetup.wIndex == IF_NUM_REC){
-					alt_setting_rec = pContext->usbSetup.wValue;
-				}
-				else if (pContext->usbSetup.wIndex == IF_NUM_PLAY){
-					alt_setting_play = pContext->usbSetup.wValue;
-				}
-				//USB_postTransaction(pContext->hEpObjArray[1], 0, NULL,
-				//                    CSL_USB_IOFLAG_NONE);
-
+				EZDSP5535_LED_on(1);
+				USB_postTransaction(pContext->hEpObjArray[1], 0, NULL,
+				                    CSL_USB_IOFLAG_NONE);
 				// Service the RXPKTRDY after reading the FIFO
 				USB_clearEpRxPktRdy(CSL_USB_EP0);
 
@@ -3470,10 +3465,7 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 
 		case CSL_USB_GET_INTERFACE:
 			/* Send the alt setting of the Interface */
-			if (pContext->usbSetup.wIndex == IF_NUM_REC)
-				UsbCtrlBuffer[0] = alt_setting_rec;
-			else if (pContext->usbSetup.wIndex == IF_NUM_PLAY)
-				UsbCtrlBuffer[0] = alt_setting_play;
+				UsbCtrlBuffer[0] = 0x0000;
 			USB_postTransaction(pContext->hEpObjArray[1], 1, (void*)UsbCtrlBuffer,
 						        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			// send ZLP

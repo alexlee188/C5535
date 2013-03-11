@@ -860,17 +860,17 @@ CSL_AcRequestRet AC_reqGetInterface(CSL_UsbDevNum         devNum,
 	{
 		/* Send zero */
 		pCtrlHandle->ctrlBuffer[1] = 0x0000;
-		USB_postTransaction(hInEp, 1, &pCtrlHandle->ctrlBuffer[0],
+		USB_postTransaction(hInEp, tempLen, &pCtrlHandle->ctrlBuffer[0],
 		  				    CSL_USB_IOFLAG_NONE);
 	}
 	else if (usbSetup->wIndex == IF_NUM_REC) // rec interface
 	{
-		USB_postTransaction(hInEp, 1, &pCtrlHandle->alt_setting_rec[0],
+		USB_postTransaction(hInEp, tempLen, &pCtrlHandle->alt_setting_rec[0],
 		  				    CSL_USB_IOFLAG_NONE);
 	}
 	else if (usbSetup->wIndex == IF_NUM_PLAY) // play interface
 	{
-		USB_postTransaction(hInEp, 1, &pCtrlHandle->alt_setting_play[0],
+		USB_postTransaction(hInEp, tempLen, &pCtrlHandle->alt_setting_play[0],
 		  				    CSL_USB_IOFLAG_NONE);
 	}
 	else
