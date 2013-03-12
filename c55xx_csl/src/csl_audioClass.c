@@ -1334,7 +1334,7 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
       	if (usbSetup->wIndex == IF_NUM_PLAY){
 #endif
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
-				USB_postTransaction(hOutEp, 1, (void*)&pCtrlHandle->alt_setting_play[0],
+				USB_postTransaction(hOutEp, tempLen, (void*)&pCtrlHandle->alt_setting_play[0],
 									CSL_USB_IOFLAG_NONE);
 				alt_setting_play = pCtrlHandle->alt_setting_play[1];
 		        if (alt_setting_play == 0)
@@ -1371,8 +1371,6 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
 		                }
 		            }
 		        }
-		        if (pAcHandle->playBackActive) EZDSP5535_LED_on(1);
-		        else EZDSP5535_LED_off(1);
 		    }
 			else return(CSL_AC_REQUEST_STALL);
       	}
@@ -1667,13 +1665,13 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
 				/* Send the current sampling frequency value (in 4 bytes) */
 				//USB_postTransaction(hInEp, 4, (void*)&pCtrlHandle->ctrlBuffer[0],
 				//			        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
-				USB_postTransaction(hInEp, 4, (void*)&pCtrlHandle->sampleRateBuf[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->sampleRateBuf[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			} else if ((usbSetup->wValue>>8)==2) // CS_CLOCK_VALID_CONTROL
 			{
 
 				pCtrlHandle->ctrlBuffer[1] = 0x0001;
-				USB_postTransaction(hInEp, 1, (void*)&pCtrlHandle->ctrlBuffer[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			} else
 			{
@@ -2212,7 +2210,7 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
     	alt_setting_play = pCtrlHandle->alt_setting_play[1] = usbSetup->wValue;
         if (alt_setting_play == 0)
         {
-            if (pAcHandle->playBackActive == TRUE)
+            //if (pAcHandle->playBackActive == TRUE)
             {
                 /* stop playback */
                 status = pAcHandle->stopPlayAudio(dummy, (void*)&dummy);
@@ -2229,7 +2227,7 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
         }
         else if (alt_setting_play == 1)
         {
-            if (pAcHandle->playBackActive == FALSE)
+            //if (pAcHandle->playBackActive == FALSE)
             {
                 /* start playback */
                 status = pAcHandle->initPlayAudio(dummy, (void*)&dummy);
@@ -2254,6 +2252,8 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
         /* Interface not supported, STALL the endpoint */
         retStat = CSL_AC_REQUEST_STALL;
     }
+    if (alt_setting_play) EZDSP5535_LED_on(1);
+    else EZDSP5535_LED_off(1);
 
     return(retStat);
 }
