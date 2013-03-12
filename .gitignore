@@ -23,3 +23,6 @@
 *.map
 *.xml
 
+./build/*
+./c55xx_csl/build/*
+
