@@ -1640,17 +1640,17 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
 
 			if ((usbSetup->wValue >> 8) == AUDIO_AS_VAL_ALT_SETTINGS){
 				pCtrlHandle->ctrlBuffer[1] = 0x0301; // alt 0 and 1 valid
-				USB_postTransaction(hInEp, 2, (void*)&pCtrlHandle->ctrlBuffer[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
 									CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			}
 			else if ((usbSetup->wValue >> 8) == AUDIO_AS_ACT_ALT_SETTINGS){
-				USB_postTransaction(hInEp, 1, (void*)&pCtrlHandle->alt_setting_play[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->alt_setting_play[0],
 										CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			}
 			else if ((usbSetup->wValue >> 8) == AUDIO_AS_AUDIO_DATA_FORMAT){
 				pCtrlHandle->ctrlBuffer[1] = 0x0001;
 				pCtrlHandle->ctrlBuffer[2] = 0x0000;
-				USB_postTransaction(hInEp, 4, (void*)&pCtrlHandle->ctrlBuffer[0],
+				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
 									CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			}
 			else return(CSL_AC_REQUEST_STALL);
