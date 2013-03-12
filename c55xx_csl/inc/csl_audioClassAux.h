@@ -863,11 +863,13 @@ CSL_AcRequestRet AC_reqGetInterface(CSL_UsbDevNum         devNum,
 		USB_postTransaction(hInEp, tempLen, &pCtrlHandle->ctrlBuffer[0],
 		  				    CSL_USB_IOFLAG_NONE);
 	}
+#ifndef PLAY_ONLY
 	else if (usbSetup->wIndex == IF_NUM_REC) // rec interface
 	{
 		USB_postTransaction(hInEp, tempLen, &pCtrlHandle->alt_setting_rec[0],
 		  				    CSL_USB_IOFLAG_NONE);
 	}
+#endif
 	else if (usbSetup->wIndex == IF_NUM_PLAY) // play interface
 	{
 		USB_postTransaction(hInEp, tempLen, &pCtrlHandle->alt_setting_play[0],

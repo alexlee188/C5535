@@ -16,8 +16,10 @@
 *.exe
 *.out
 *.app
+
 # others
 *.pp
 *.mk
 *.map
+*.xml
 

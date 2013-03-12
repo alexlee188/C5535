@@ -21,7 +21,11 @@
 /* USB interface numbers */
 #define IF_NUM_AC       ( 0 ) /* Interface Number Audio Control, must be zero */
 #define IF_NUM_REC      ( 1 ) /* Interface Number Audio Record */
+#ifdef PLAY_ONLY
+#define IF_NUM_PLAY		( 1 )
+#else
 #define IF_NUM_PLAY     ( 2 ) /* Interface Number Audio Playback */
+#endif
 #define IF_NUM_HID      ( 3 ) /* Interface Number HID */
 #ifdef FEEDBACKEP
 #define IF_NUM_FBCK     ( 4 ) /* Interface Number FBCK */

@@ -136,7 +136,7 @@
 									<listOptionValue builtIn="false" value="&quot;C5535_EZDSP_DEMO&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C5535_EZDSP&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;PLAY_RECORD&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;PLAY_ONLY&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;SAMP_24BIT&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEBUGGING_MODEL.1418461491" name="Debugging model" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEBUGGING_MODEL" value="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.DEBUGGING_MODEL.SYMDEBUG__DWARF" valueType="enumerated"/>

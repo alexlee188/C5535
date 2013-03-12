@@ -441,8 +441,8 @@ const Uint16 configDescriptor[CONFIG_DESCR_SZ] =
     FORMAT_TYPE,    /* bDescriptorSubtype=FORMAT_TYPE */
     0x01,           /* bFormatType = TYPE 1 Data Format */
 #ifdef SAMP_24BIT
-    0x03,           /* bSubframeSize in bytes=3 bytes */
-    //0x04,           /* bSubframeSize in bytes=4 bytes */
+    //0x03,           /* bSubframeSize in bytes=3 bytes */
+    0x04,           /* bSubframeSize in bytes=4 bytes */
     0x18,           /* bBitResolution=24 bit depth */
 #else
     0x02,           /* bSubframeSize in bytes=2 bytes */
@@ -527,8 +527,8 @@ const Uint16 configDescriptor[CONFIG_DESCR_SZ] =
     FORMAT_TYPE,    /* bDescriptorSubtype=FORMAT_TYPE */
     FORMAT_TYPE_I,  /* bFormatType = TYPE 1 Data Format */
 #ifdef SAMP_24BIT
-    0x03,           /* bSubframeSize in bytes=3 bytes */
-    //0x04,           /* bSubframeSize in bytes=4 bytes */
+    //0x03,           /* bSubframeSize in bytes=3 bytes */
+    0x04,           /* bSubframeSize in bytes=4 bytes */
     0x18,           /* bBitResolution=24 bit depth */
 #else
     0x02,           /* bSubframeSize in bytes=2 bytes */
