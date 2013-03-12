@@ -239,9 +239,11 @@ extern "C" {
 /** Host request to set configuration                                        */
 #define CSL_AC_REQUEST_SET_CONFIGURATION                      (0x0009)
 /** Host request to get interface                                            */
-#define CSL_AC_REQUEST_GET_INTERFACE                          (0x800A)
+#define CSL_AC_REQUEST_GET_INTERFACE                          (0xA00A)
+#define CSL_STD_REQUEST_GET_INTERFACE						  (0x800A)
 /** Host request to set interface                                            */
-#define CSL_AC_REQUEST_SET_INTERFACE                          (0x000B)
+#define CSL_AC_REQUEST_SET_INTERFACE						   (0x200B)
+#define CSL_STD_REQUEST_SET_INTERFACE                          (0x000B)
 /** Host request for the synchronization frame                               */
 #define CSL_AC_REQUEST_SYNC_FRAME                              (0x800C)
 /** Host request for Iso only reset                                          */
