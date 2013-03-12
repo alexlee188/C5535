@@ -572,7 +572,7 @@ Int16 DDC_I2SDMAWrite(PSP_Handle        i2sHandle,
                                        (dmaNum*dmaChanCount + leftDmaChanNum));
         }
 
-
+#if 0
         if(hDmaTxRight != NULL)
         {
             /* Find out the DMA channel number for right Tx DMA channel */
@@ -584,7 +584,7 @@ Int16 DDC_I2SDMAWrite(PSP_Handle        i2sHandle,
             CSL_DMAEVTINT_REGS->DMAINTEN  &=  ~(0x0001 <<
                                       (dmaNum*dmaChanCount + rightDmaChanNum));
         }
-
+#endif
         /* Enable I2S transfer */
         LLC_I2SEnable(hI2S->regs);
 
