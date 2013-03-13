@@ -405,10 +405,10 @@ void  MUSB_Handle_EP0_Intr(pUsbContext pContext)
                         break;
                 }
             }
-            else if (((pContext->usbSetup.bmRequestType & (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE)) ==
-                           (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE))) //AC Class-Specific Request
-            //else if ((pContext->usbSetup.bmRequestType & CSL_USB_REQTYPE_CLASS) ==
-            //				CSL_USB_REQTYPE_CLASS) //All other Class-Specific Request, ie Audio class
+            //else if (((pContext->usbSetup.bmRequestType & (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE)) ==
+            //               (CSL_USB_REQTYPE_CLASS | CSL_USB_REQTYPE_RCVR_INTERFACE))) //AC Class-Specific Request
+            else if ((pContext->usbSetup.bmRequestType & CSL_USB_REQTYPE_CLASS) ==
+            				CSL_USB_REQTYPE_CLASS) //All other Class-Specific Request, ie Audio class
             {
                 switch(pContext->usbSetup.bRequest)
                 {

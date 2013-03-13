@@ -3330,8 +3330,8 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 			case CSL_USB_SET_INTERFACE:
 				if (pContext->usbSetup.wIndex == IF_NUM_PLAY)
 					alt_setting_play = pContext->usbSetup.wValue;
-				//USB_postTransaction(pContext->hEpObjArray[1], 0, NULL,
-				//                    CSL_USB_IOFLAG_NONE);
+				USB_postTransaction(pContext->hEpObjArray[1], 0, NULL,
+				                    CSL_USB_IOFLAG_NONE);
 				// Service the RXPKTRDY after reading the FIFO
 				USB_clearEpRxPktRdy(CSL_USB_EP0);
 
