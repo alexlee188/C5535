@@ -946,6 +946,8 @@ typedef struct CSL_UsbContext {
 	WORD					dwQueuePend1;
 	/** \brief  TRUE, if data available in EP3 Buffer                        */
     Bool                    fEP3InBUFAvailable;
+	/** \brief  TRUE, if data available in EP4 Buffer                        */
+    Bool					fEP4InBUFAvailable;
 	/** \brief  Current Intr Low Bitmap                                      */
     WORD                    dwIntSourceL;
     /** \brief  Current Intr High Bitmap                                     */

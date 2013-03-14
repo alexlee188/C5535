@@ -416,6 +416,7 @@ bios.SEM.create("SEM_PingPongRxLeftComplete4");
 bios.SEM.create("SEM_PingPongRxRightComplete4");
 bios.SEM.create("SEM_PingPongTxLeftComplete4");
 bios.SEM.create("SEM_PingPongTxRightComplete4");
+bios.SEM.create("SEM_BufferInReady");
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();

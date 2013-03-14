@@ -708,6 +708,11 @@ CSL_Status StartTransfer(void    *vpContext,
             pContext->fWaitingOnFlagA = TRUE;
             pContext->fEP3InBUFAvailable = TRUE;
         }
+        else if (peps->dwEndpoint == EP_NUM_FBCK)
+        {
+            pContext->fWaitingOnFlagA = TRUE;
+            pContext->fEP4InBUFAvailable = TRUE;
+        }
     }
 
     if(no_main_task == FALSE)
