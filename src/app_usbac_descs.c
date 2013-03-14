@@ -491,7 +491,11 @@ const Uint16 configDescriptor[CONFIG_DESCR_SZ] =
     INTERFACE,      /* bDescriptorType=INTERFACE */
     IF_NUM_PLAY,    /* bInterfaceNumber=IF_NUM_PLAY */
     0x01,           /* bAlternateSetting=1 */
+#ifdef FEEDBACKEP
+    0x02,
+#else
     0x01,    		/* bNumEndpoints=1 */
+#endif
     AUDIOINTERFACECLASS,  /* bInterfaceClass=AUDIO INTERFACE CLASS */
     AUDIOSTREAMING, /* bInterfaceSubClass=AUDIO STREAMING */
     0x20,           /* bInterfaceProtocol */
