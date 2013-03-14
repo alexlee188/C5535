@@ -1355,11 +1355,11 @@ void store_USB_Input(void)
 
 
 /***********************************************************************
- * sent the USB data to the endpoint buffer  - called by SWI_Send_USB_Output
+ * sent the USB data to the endpoint buffer  - called by SWI_Send_USB_FB_Output
  ***********************************************************************/
 Uint32 fb_underRunCount = 0;
 Uint32 fb_fifoEmptyCount = 0;
-void send_USB_Output(void)
+void send_USB_FB_Output(void)
 {
     pUsbContext     pContext;
     pUsbEpStatus     peps;
@@ -1457,7 +1457,7 @@ void send_USB_Output(void)
 Uint32 swiSendCount = 0;
 Uint32 underRunCount = 0;
 Uint32 fifoEmptyCount = 0;
-void dummy_send_USB_Output(void)
+void send_USB_Output(void)
 {
     pUsbContext     pContext;
     pUsbEpStatus     peps;
@@ -1881,7 +1881,7 @@ void USBisr()
 			{
                 // start record
 		        // Send the data to the endpoint buffer
-		        //SWI_post(&SWI_Send_USB_Output);
+		        SWI_post(&SWI_Send_USB_Output);
 				firstRecordFlag = FALSE;
 			}
 		}
@@ -1923,7 +1923,7 @@ void USBisr()
         }
 
         // Send the data to the endpoint buffer
-        //SWI_post(&SWI_Send_USB_Output);
+        SWI_post(&SWI_Send_USB_Output);
     }
 
     /* ISO OUT, RX endpoint */
@@ -1943,7 +1943,7 @@ void USBisr()
     {
 		isoFbckIntCount++;
 		// put feedback EP processing code here
-		SWI_post(&SWI_Send_USB_Output);
+		SWI_post(&SWI_Send_USB_FB_Output);
     }
 #endif //FEEDBACKEP
 

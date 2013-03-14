@@ -416,14 +416,6 @@ bios.SEM.create("SEM_PingPongRxLeftComplete4");
 bios.SEM.create("SEM_PingPongRxRightComplete4");
 bios.SEM.create("SEM_PingPongTxLeftComplete4");
 bios.SEM.create("SEM_PingPongTxRightComplete4");
-bios.SWI.create("SWI_Send_USB_FB_Output");
-bios.SWI.instance("SWI_Send_USB_FB_Output").order = 7;
-bios.SWI.instance("SWI_Send_USB_FB_Output").priority = 5;
-bios.SWI.instance("SWI_Send_USB_FB_Output").fxn = prog.extern("send_USB_FB_Output");
-bios.SWI.instance("SWI_Send_USB_FB_Output").comment = "ISO output for rate feedback";
-bios.SEM.create("SEM_BufferInReady");
-bios.SWI.instance("SWI_Send_USB_FB_Output").destroy();
-bios.SEM.instance("SEM_BufferInReady").destroy();
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();

@@ -73,6 +73,8 @@
 #include "cslr_sysctrl.h"
 #include "ezdsp5535.h"
 #include "ezdsp5535_led.h"
+#include <sem.h>
+SEM_Obj SEM_BufferInReady;
 CSL_Status  CSL_i2cPowerTest(void);
 void calculate_FFT(int *input, int size);
 // buffer for data collection from USB Audio playback
@@ -750,7 +752,6 @@ void SpectrumDisplayTask(void)
 	// display the play audio message
 	//print_playaudio();
 
-/*
 	while (1)
 	{
 		// wait on bufferIn ready semaphore
@@ -763,7 +764,6 @@ void SpectrumDisplayTask(void)
 			bufferInIdx = 0;
 		}		
 	}
-*/
 }
 
 // PRD function. Runs every 10 second to switch the demo mode between
