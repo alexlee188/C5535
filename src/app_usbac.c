@@ -23,10 +23,6 @@
 #include "codec_config.h"
 #include "sample_rate.h"
 
-#ifdef C5535_EZDSP_DEMO
-#include "sem.h"
-extern SEM_Handle SEM_BufferInReady;
-#endif
 
 /* Define to send known data on record path to USB */
 //#define SEND_KNOWN_DATA_TO_USB // debug
@@ -164,7 +160,7 @@ CSL_AcMediaStatus appPlayAudio(
 			if (bufferInIdx==256)
 			{
 				// send semaphore
-				SEM_post(SEM_BufferInReady);
+				//SEM_post(&SEM_BufferInReady);
 			}
 		}
 	}
