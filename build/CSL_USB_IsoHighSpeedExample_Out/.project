@@ -86,24 +86,9 @@
 			<locationURI>EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out/src/dbg_sdram.c</locationURI>
 		</link>
 		<link>
-			<name>dma_bypass1.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/src/dma_bypass1.c</locationURI>
-		</link>
-		<link>
 			<name>gpio_control.c</name>
 			<type>1</type>
 			<locationURI>EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out/src/gpio_control.c</locationURI>
-		</link>
-		<link>
-			<name>i2s_bypass1.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/src/i2s_bypass1.c</locationURI>
-		</link>
-		<link>
-			<name>i2s_register.asm</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/src/i2s_register.asm</locationURI>
 		</link>
 		<link>
 			<name>i2s_sample.c</name>
