@@ -10,6 +10,27 @@
  *  software download.
 */
 
+/* Modifications of the software from Texas Instruments are under the following license:
+ *
+ * Copyright (C) 2013 Alex Lee
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+
+
 #include <std.h>
 #include "csl_usb.h"
 #include "csl_usbAux.h"
@@ -183,6 +204,11 @@ Bool HandleUSBInterrupt(
         USB_setRxMaxp(EP_NUM_PLAY, EP_PB_MAXP);
         /* Set ISO mode for playback endpoint */
         USB_setRxCsr(EP_NUM_PLAY, 0x4000);
+
+#ifdef FEEDBACKEP
+        USB_setTxMaxp(EP_NUM_FBCK, EP_FBCK_MAXP);
+        USB_setTxCsr(EP_NUM_FBCK, 0x4000);
+#endif
 
         /* Set Tx MaxP for HID interupt-IN endpoint */
         USB_setTxMaxp(EP_NUM_HID, EP_HID_MAXP);
@@ -708,11 +734,13 @@ CSL_Status StartTransfer(void    *vpContext,
             pContext->fWaitingOnFlagA = TRUE;
             pContext->fEP3InBUFAvailable = TRUE;
         }
+#ifdef FEEDBACKEP
         else if (peps->dwEndpoint == EP_NUM_FBCK)
         {
             pContext->fWaitingOnFlagA = TRUE;
             pContext->fEP4InBUFAvailable = TRUE;
         }
+#endif
     }
 
     if(no_main_task == FALSE)
@@ -765,12 +793,20 @@ CSL_Status CompleteTransfer(
                /* enqueue message */
                MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
                break;
-
+#ifndef PLAY_ONLY
          case  EP_NUM_REC:
               ///MWwMSCMsg = CSL_USB_MSG_ISO_IN;
               /* enqueue message */
               ///MWMBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
               break;
+#endif
+
+#ifdef FEEDBACKEP
+         case EP_NUM_FBCK:
+        	 wMSCMsg = CSL_USB_MSG_ISO_IN;
+        	 MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
+        	 break;
+#endif
 
          case  EP_NUM_PLAY:
               peps->wUSBEvents |= CSL_USB_EVENT_WRITE_MEDIA;
@@ -833,6 +869,15 @@ void DeviceNotification(
          /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 
+#ifdef FEEDBACKEP
+         peps = &pContext->pEpStatus[EP_NUM_FBCK];
+         peps->wUSBEvents |= wUSBEvents;
+
+         wMSCMsg = CSL_USB_MSG_ISO_IN;
+         /* enqueue message */
+         MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
+#endif
+
          peps = &pContext->pEpStatus[EP_NUM_PLAY];
          peps->wUSBEvents |= wUSBEvents;
 
@@ -859,6 +904,8 @@ void DeviceNotification(
     }
     else if (wUSBEvents & CSL_USB_EVENT_ISO_TX)
     {
+
+#ifndef PLAY_ONLY
          peps = &pContext->pEpStatus[EP_NUM_REC];
          peps->wUSBEvents |= CSL_USB_EVENT_READ_MEDIA;
          peps->wUSBEvents |= wUSBEvents;
@@ -867,6 +914,16 @@ void DeviceNotification(
          wMSCMsg = CSL_USB_MSG_ISO_IN;
          /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
+#endif
+#ifdef FEEDBACKEP
+         peps = &pContext->pEpStatus[EP_NUM_FBCK];
+         peps->wUSBEvents |= wUSBEvents;
+
+ 		 isoTxCount++;
+          wMSCMsg = CSL_USB_MSG_ISO_IN;
+          /* enqueue message */
+          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
+#endif
     }
     else if (wUSBEvents & CSL_USB_EVENT_HID_REPORT_TX)
     {
@@ -1848,6 +1905,7 @@ void USBisr()
     {
 		isoFbckIntCount++;
 		// put feedback EP processing code here
+		//SWI_post(&SWI_Store_USB_Input);
     }
 #endif //FEEDBACKEP
 
@@ -1889,7 +1947,7 @@ void USBisr()
     }
 
 	// only send the interrupt message when they are other interrupts (not USB ISO IN/OUT/SOF)
-    if ((pContext->dwIntSourceL & (~(USB_RX_INT_EP_PLAY|USB_TX_INT_EP_REC))) ||
+    if ((pContext->dwIntSourceL & (~(USB_RX_INT_EP_PLAY|USB_TX_INT_EP_REC|USB_TX_INT_EP_FBCK))) ||
 		(pContext->dwIntSourceH & (~CSL_USB_GBL_INT_SOF)))
 	{
 	    USB_MUSB_Isr();
