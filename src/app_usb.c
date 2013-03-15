@@ -73,6 +73,8 @@ Uint32 wake = 0;
 
 Uint16 firstRecordFlag = TRUE;
 
+Uint32 feedback_rate = 96 << 13;
+
 #if 0 // debug
 Uint16 gFaddr_PowerDbg;
 Uint16 gRxFifoSz_TxFifoSzDbg;
@@ -1413,6 +1415,7 @@ void store_USB_Input(void)
  	process_usb_input();	// call the process_usb_input directly
 }
 
+#ifndef PLAY_ONLY
 /***********************************************************************
  * sent the USB data to the endpoint buffer  - called by SWI_Send_USB_Output
  ***********************************************************************/
@@ -1722,6 +1725,113 @@ void send_USB_Output(void)
 	usbRegisters->INDEX_TESTMODE = saveIndex;
 }
 
+#endif
+
+#ifdef FEEDBACKEP
+/***********************************************************************
+ * sent the USB data to the endpoint buffer  - called by SWI_Send_USB_Output
+ ***********************************************************************/
+Uint32 swiSendCount = 0;
+Uint32 underRunCount = 0;
+Uint32 fifoEmptyCount = 0;
+void send_USB_Output(void)
+{
+    pUsbContext     pContext;
+    pUsbEpStatus     peps;
+    volatile ioport Uint16    *pFifoAddr;
+    Uint16              saveIndex;
+    volatile Uint16     looper;
+	Uint16			txCsr;
+	register Uint16			tempWord1;
+	register Uint16			tempWord2;
+	volatile Uint16		i, pktCount;
+
+    pContext = &gUsbContext;
+
+    /* Send the recorded data to the host */
+    peps = &pContext->pEpStatus[EP_NUM_FBCK];
+
+    // source (endpoint) buffer
+    pFifoAddr   = (volatile ioport Uint16*)peps->pFifoAddr;
+
+	/* save the index register value */
+	saveIndex = usbRegisters->INDEX_TESTMODE;
+
+	/* Select the end point for data transfer */
+	CSL_FINS(usbRegisters->INDEX_TESTMODE,
+			 USB_INDEX_TESTMODE_EPSEL,
+			 CSL_USB_INDEX_TESTMODE_EPSEL_RESETVAL);
+
+	CSL_FINS(usbRegisters->INDEX_TESTMODE,
+			 USB_INDEX_TESTMODE_EPSEL,
+			 EP_NUM_REC);
+
+	/* Flush the FIFO */
+	txCsr = usbRegisters->PERI_CSR0_INDX;
+
+	// if it is underrun or the first packet for transmitting then flush FIFO
+	if ((txCsr&0x0004)==0x0004)
+	{
+#if 1
+		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+				 USB_PERI_TXCSR_FLUSHFIFO, TRUE);
+		// if it is ISO mode flush the FIFO twice, because it is double buffered
+		if(peps->xferType == CSL_USB_ISO)
+		{
+			CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+					 USB_PERI_TXCSR_FLUSHFIFO, TRUE);
+		}
+#endif
+		underRunCount++;
+		// clear the underrun flag
+		usbRegisters->PERI_CSR0_INDX &= ~(0x0004);
+	}
+
+	// if the USB TX FIFO is not empty.
+	if ((txCsr&0x0002)==0x0002)
+	{
+		// clear the FIFO not empty bit
+		usbRegisters->PERI_CSR0_INDX &= ~(0x0002);
+		// we need send one packet
+		pktCount = 1;
+	} else
+	{
+		fifoEmptyCount++;
+		// we need send two packets for double buffering
+		pktCount = 2;
+	}
+
+	// packet loop (one or two packet depending on the FIFO emptiness)
+	//for (i=0; i<pktCount; i++)
+	{
+		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+				feedback_rate -= 1 << 4;
+				EZDSP5535_LED_toggle(2);
+		}
+		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
+				feedback_rate += 1 << 4;
+				EZDSP5535_LED_toggle(3);
+		}
+	   *pFifoAddr = feedback_rate & 0x0000ffff;
+	   *pFifoAddr = feedback_rate >> 16;
+
+		if(peps->xferType == CSL_USB_ISO)
+		{
+			usbRegisters->PERI_CSR0_INDX |=
+							CSL_USB_PERI_TXCSR_CLRDATATOG_MASK;
+		}
+
+		/* Commit Tx Packet */
+		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+				 USB_PERI_CSR0_INDX_RXPKTRDY, TRUE);
+	} // for (i=0; i<pktCount; i++)
+
+	/* restore the index register */
+	usbRegisters->INDEX_TESTMODE = saveIndex;
+}
+
+#endif
+
 /* Reads TXMAXP for selected endpoint */
 Uint16 USB_getTxMaxp(Uint16 epNum)
 {
@@ -1905,7 +2015,7 @@ void USBisr()
     {
 		isoFbckIntCount++;
 		// put feedback EP processing code here
-		//SWI_post(&SWI_Store_USB_Input);
+		SWI_post(&SWI_Send_USB_Output);
     }
 #endif //FEEDBACKEP
 
