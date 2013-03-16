@@ -265,7 +265,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         /* Initialize the Iso IN feedback Endpoint */
         USB_initEndptObj(pHandle->ctrlHandle.devNum,
                          &pHandle->acHandle.isoFbckEpObj,
-                         (CSL_UsbEpNum)(pAppClassHandle->fbEpNum + CSL_USB_IN_EP0), 
+                         (CSL_UsbEpNum)(pAppClassHandle->fbEpNum + CSL_USB_IN_EP0),
                          CSL_USB_ISO,
                          pAppClassHandle->fbckTxPktSize,
                          CSL_USB_EVENT_EOT,
