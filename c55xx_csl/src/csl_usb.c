@@ -24,6 +24,28 @@
  * ============================================================================
  */
 
+
+/* Modifications of the software from Texas Instruments are under the following license:
+ *
+ * Copyright (C) 2013 Alex Lee
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+
+
 #include "csl_usb.h"
 #include "csl_usbAux.h"
 #include "csl_audioClass.h"
@@ -173,6 +195,7 @@ CSL_Status USB_init(CSL_UsbConfig    *usbConfig)
 			pContext->fSendHandshake       = TRUE;
 			pContext->fEP0BUFAvailable     = TRUE;
 			pContext->fEP1InBUFAvailable   = TRUE;
+			pContext->fEP4InBUFAvailable   = TRUE;
 			pContext->cbOutEP0DataReceived = 0;
 			
 			pContext->alt_setting_rec = 0;
@@ -421,6 +444,13 @@ CSL_Status USB_resetDev(CSL_UsbDevNum    devNum)
     /* enable ep3 intr*/
     CSL_FINS(usbRegisters->INTRTXE,
              USB_INTRTXE_EP3TX, TRUE);
+
+#ifdef FEEDBACKEP
+	/* enable ep4 intr */
+	CSL_FINS(usbRegisters->INTRTXE,
+	         USB_INTRTXE_EP4TX, TRUE);
+#endif
+
 	 /* enable generic MUSB interrupts
 	Interrupts enabled : Disconnect, connect, Reset, Resume, Suspend */
 	usbRegisters->INTRUSB_INTRUSBE |= CSL_USB_INTRUSB_INTRUSBE_DEFVAL;

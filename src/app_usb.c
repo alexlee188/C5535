@@ -2005,9 +2005,9 @@ void USBisr()
 
 		isoOutIntCount++;
         USB_handleRxIntr(pContext, EP_NUM_PLAY);
-            // Get the data from the endpoint buffer
-            SWI_post(&SWI_Store_USB_Input);
-        }
+        // Get the data from the endpoint buffer
+        SWI_post(&SWI_Store_USB_Input);
+    }
 
 #ifdef FEEDBACKEP
     /* ISO IN, FBCK endpoint */

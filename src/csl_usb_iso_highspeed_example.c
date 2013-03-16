@@ -43,6 +43,26 @@
  * ============================================================================
  */
 
+/* Modifications of the software from Texas Instruments are under the following license:
+ *
+ * Copyright (C) 2013 Alex Lee
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+
 #include "csl_types.h"
 #include "csl_error.h"
 #include "csl_intc.h"
@@ -143,9 +163,9 @@ void main(void)
 #if defined(USE_I2S0_PB) || defined(USE_I2S0_REC)
     /* SP0 Mode 1 (I2S0 and GP[5:4]) */
     CSL_FINST(CSL_SYSCTRL_REGS->EBSR, SYS_EBSR_SP0MODE, MODE1);
-#else
     /* SP0 Mode 2 (GP[5:0]) -- GPIO02/GPIO04 for debug  */
     //CSL_FINST(CSL_SYSCTRL_REGS->EBSR, SYS_EBSR_SP0MODE, MODE2);
+#else
     CSL_FINST(CSL_SYSCTRL_REGS->EBSR, SYS_EBSR_SP0MODE, MODE1);
 #endif
 #if defined(USE_I2S1_PB) || defined(USE_I2S1_REC)
@@ -164,7 +184,7 @@ void main(void)
     /* SP1 Mode 1 (I2S1 and GP[11:10]) */
     CSL_FINST(CSL_SYSCTRL_REGS->EBSR, SYS_EBSR_SP1MODE, MODE1);
 #else
-    /* SP1 Mode 2 (GP[11:6]) */
+    /* SP1 Mode 1 (GP[11:10]) */
     CSL_FINST(CSL_SYSCTRL_REGS->EBSR, SYS_EBSR_SP1MODE, MODE1);
 #endif //USE_TWO_CODEC
 #endif //USE_THREE_CODEC
@@ -534,7 +554,7 @@ void CSL_acTest(void)
         AC_AppHandle.txPktSize = EP_REC_MAXP;
         AC_AppHandle.hidTxPktSize = EP_HID_MAXP; // max packet size for HID output report
 #ifdef FEEDBACKEP
-        AC_AppHandle.fbckTxPktSize = 4; // max packet size for HID output report
+        AC_AppHandle.fbckTxPktSize = EP_FBCK_MAXP; // 4
 #endif //FEEDBACKEP
 
         /* All Function Handlers need to be Initialised */
