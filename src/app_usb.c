@@ -922,15 +922,15 @@ void DeviceNotification(
          peps->wUSBEvents |= wUSBEvents;
 
  		 isoTxCount++;
-          wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
-          /* enqueue message */
-          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
+         wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
+         /* enqueue message */
+         MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
     }
     else if (wUSBEvents & CSL_USB_EVENT_HID_REPORT_TX)
     {
-        peps = &pContext->pEpStatus[EP_NUM_HID];
-        peps->wUSBEvents |= wUSBEvents;
+         peps = &pContext->pEpStatus[EP_NUM_HID];
+         peps->wUSBEvents |= wUSBEvents;
 
          wMSCMsg = CSL_USB_MSG_HID_INT_IN;
          /* enqueue message */
@@ -1746,9 +1746,11 @@ void send_USB_Output(void)
 	register Uint16			tempWord2;
 	volatile Uint16		i, pktCount;
 
+	EZDSP5535_LED_on(1);
+
     pContext = &gUsbContext;
 
-    /* Send the recorded data to the host */
+    /* Send the feedback data to the host */
     peps = &pContext->pEpStatus[EP_NUM_FBCK];
 
     // source (endpoint) buffer
