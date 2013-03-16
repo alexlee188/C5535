@@ -797,15 +797,15 @@ CSL_Status CompleteTransfer(
                break;
 #ifndef PLAY_ONLY
          case  EP_NUM_REC:
-              ///MWwMSCMsg = CSL_USB_MSG_ISO_IN;
+              wMSCMsg = CSL_USB_MSG_ISO_IN;
               /* enqueue message */
-              ///MWMBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
+              MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
               break;
 #endif
 
 #ifdef FEEDBACKEP
          case EP_NUM_FBCK:
-        	 wMSCMsg = CSL_USB_MSG_ISO_IN;
+        	 wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
         	 MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
         	 break;
 #endif
@@ -875,7 +875,7 @@ void DeviceNotification(
          peps = &pContext->pEpStatus[EP_NUM_FBCK];
          peps->wUSBEvents |= wUSBEvents;
 
-         wMSCMsg = CSL_USB_MSG_ISO_IN;
+         wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
          /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
@@ -922,7 +922,7 @@ void DeviceNotification(
          peps->wUSBEvents |= wUSBEvents;
 
  		 isoTxCount++;
-          wMSCMsg = CSL_USB_MSG_ISO_IN;
+          wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
           /* enqueue message */
           MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
@@ -1764,7 +1764,7 @@ void send_USB_Output(void)
 
 	CSL_FINS(usbRegisters->INDEX_TESTMODE,
 			 USB_INDEX_TESTMODE_EPSEL,
-			 EP_NUM_REC);
+			 EP_NUM_FBCK);
 
 	/* Flush the FIFO */
 	txCsr = usbRegisters->PERI_CSR0_INDX;

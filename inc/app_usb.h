@@ -43,8 +43,10 @@
 #ifdef PLAY_ONLY
 #define IF_NUM_PLAY		( 1 )
 #define IF_NUM_HID		( 2 )
+#ifdef FEEDBACKEP
 #define IF_NUM_FBCK		( 3 )
-#else
+#endif
+#else // PLAY_ONLY
 #define IF_NUM_REC      ( 1 ) /* Interface Number Audio Record */
 #define IF_NUM_PLAY     ( 2 ) /* Interface Number Audio Playback */
 #define IF_NUM_HID      ( 3 ) /* Interface Number HID */

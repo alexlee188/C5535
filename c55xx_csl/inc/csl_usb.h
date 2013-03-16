@@ -642,6 +642,7 @@ typedef enum {
 	CSL_USB_MSG_ISO_OUT,
     /** Sends Iso IN message                                                 */
 	CSL_USB_MSG_ISO_IN,
+	CSL_USB_MSG_ISO_FB_IN,
     /** Sends HID interrupt IN report                                        */
 	CSL_USB_MSG_HID_INT_IN,
     /** Sends task exit message to MSC task                                  */

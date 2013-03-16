@@ -190,9 +190,7 @@ CSL_AcMediaStatus appPlayAudio(
     if ((usb_play_start)&&(usb_play_mode==FALSE)&&(codec_output_buffer_sample>=(MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC/2)))
     {
         usb_play_mode = TRUE;
-        EZDSP5535_LED_on(3);
         usb_play_start = FALSE;
-        EZDSP5535_LED_off(2);
     }
 
     return(CSL_AC_MEDIACCESS_SUCCESS);
@@ -314,9 +312,7 @@ CSL_Status appInitPlayAudio(
 	
 	// start the USB uFrame counting
 	usb_play_start = TRUE;
-	EZDSP5535_LED_on(2);
 	usb_play_mode = FALSE;
-	EZDSP5535_LED_off(3);
 
     // reset codec output circular buffer
     //memset(codec_output_buffer, 0, 2*CODEC_OUTPUT_BUFFER_SIZE);
@@ -384,9 +380,7 @@ CSL_Status appStopPlayAudio(
 )
 {
     usb_play_mode = FALSE;
-    EZDSP5535_LED_off(3);
     usb_play_start = FALSE;
-    EZDSP5535_LED_off(2);
     return CSL_SOK;
 }
 
@@ -590,6 +584,7 @@ void USBMSCTask()
 Uint32 mscTaskNum = 0;
 Uint32 msgMscCtlCount = 0;
 Uint32 msgIsoInCount = 0;
+Uint32 msgIsoInFbCount = 0;
 static void MSCTask(void)
 {
     CSL_UsbMscMsg        wMSCMsg;
@@ -620,6 +615,13 @@ static void MSCTask(void)
             case CSL_USB_MSG_ISO_IN:
 				msgIsoInCount++;
                 peps = &pContext->pEpStatus[EP_NUM_REC];
+                if(peps->hEventHandler)
+                    (*peps->hEventHandler)();
+                break;
+
+            case CSL_USB_MSG_ISO_FB_IN:
+				msgIsoInFbCount++;
+                peps = &pContext->pEpStatus[EP_NUM_FBCK];
                 if(peps->hEventHandler)
                     (*peps->hEventHandler)();
                 break;

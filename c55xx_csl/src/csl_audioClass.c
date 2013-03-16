@@ -613,6 +613,7 @@ CSL_Status AC_Iso(void    *pAcObj)
     CSL_AcObject        *pAcHandle;
     pUsbEpHandle        hUsbOutEp;
     pUsbEpHandle        hUsbInEp;
+    pUsbEpHandle		hUsbFbckEp;
     CSL_Status          status;
     CSL_UsbEventMask    usbEvent;
 
@@ -623,11 +624,12 @@ CSL_Status AC_Iso(void    *pAcObj)
         pAcClassHdl = (pAcClassHandle)(pAcObj);
         pAcHandle   = &pAcClassHdl->acHandle;
         hUsbOutEp   = &pAcHandle->isoOutEpObj;
-
         hUsbInEp   = &pAcHandle->isoInEpObj;
+        hUsbFbckEp = &pAcHandle->isoFbckEpObj;
 
         usbEvent = (USB_getEvents(hUsbOutEp, &status) |
-                     USB_getEvents(hUsbInEp, &status));
+                     USB_getEvents(hUsbInEp, &status) |
+                     USB_getEvents(hUsbFbckEp, &status));
 
         if((usbEvent & CSL_USB_EVENT_READ_MEDIA) == CSL_USB_EVENT_READ_MEDIA)
         {
