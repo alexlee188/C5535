@@ -1746,8 +1746,6 @@ void send_USB_Output(void)
 	register Uint16			tempWord2;
 	volatile Uint16		i, pktCount;
 
-	EZDSP5535_LED_on(1);
-
     pContext = &gUsbContext;
 
     /* Send the feedback data to the host */
@@ -1808,11 +1806,11 @@ void send_USB_Output(void)
 	{
 		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
 				feedback_rate -= 1 << 4;
-				EZDSP5535_LED_toggle(2);
+				//EZDSP5535_LED_toggle(2);
 		}
 		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
 				feedback_rate += 1 << 4;
-				EZDSP5535_LED_toggle(3);
+				//EZDSP5535_LED_toggle(3);
 		}
 	   *pFifoAddr = feedback_rate & 0x0000ffff;
 	   *pFifoAddr = feedback_rate >> 16;
@@ -1901,6 +1899,7 @@ void USBisr()
     pUsbContext     pContext;
     Uint16 dmaSampCnt;
 
+	EZDSP5535_LED_on(1);
     usbIntCount++;
     /* Latch and clear interrupts */
     pContext = &gUsbContext;

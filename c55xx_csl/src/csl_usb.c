@@ -146,7 +146,7 @@ CSL_Status USB_init(CSL_UsbConfig    *usbConfig)
 			sysCtrlRegs->CLKSTOP = CSL_USB_CLOCKSTOP_REG_DEF_VAL;
 
 			/* Reset the USB controller.
-			 * Note. doing this will clear suspendm enable
+			 * Note. doing this will clear suspend enable
 			 */
 			usbRegisters->CTRLR = CSL_USB_CTRLR_RESET_MASK;
 
