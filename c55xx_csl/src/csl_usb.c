@@ -652,7 +652,7 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 							CSL_FINS(usbRegisters->FADDR_POWER,
 								     USB_FADDR_POWER_ISOUPDATE, (Uint16)TRUE);
 							
-							// set he ISO mode bit
+							// set the ISO mode bit
 							CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 								     USB_PERI_TXCSR_INDX_ISO, TRUE);
 

@@ -461,6 +461,7 @@ typedef struct CSL_AcInitStructApp {
                 enable data transfer to/from the media/USB API layer.        */
     Uint16                 *lbaBufferPbApp;
     Uint16                 *lbaBufferRecApp;
+    Uint16				   *lbaBufferFbckApp;
     /** \brief  Buffer ptr passed by the system to the module in order to
                 enable HID report data transfer to USB API layer.            */
     Uint16                 *lbaBufferHidReportApp;
@@ -600,6 +601,7 @@ typedef struct CSL_AcObject {
     /** \brief  Data buffer pointer used to transfer data to/from Media/usb  */
     Uint16               *lbaBufferPb;
     Uint16               *lbaBufferRec;
+    Uint16				 *lbaBufferFbck;
     /** \brief  Data buffer pointer used to HID report data to usb           */
     Uint16               *lbaBufferHidReport;
     /** \brief  CBW transfer length                                          */

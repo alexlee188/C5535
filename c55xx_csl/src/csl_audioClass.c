@@ -209,6 +209,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         /* Initing CSL_AcObject */
         pHandle->acHandle.lbaBufferPb = pAppClassHandle->lbaBufferPbApp;
         pHandle->acHandle.lbaBufferRec = pAppClassHandle->lbaBufferRecApp;
+        pHandle->acHandle.lbaBufferFbck = pAppClassHandle->lbaBufferFbckApp;
         pHandle->acHandle.lbaBufferHidReport = pAppClassHandle->lbaBufferHidReportApp;
 
         /* Initialising the default values for all the Audio Class Object */

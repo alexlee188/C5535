@@ -533,6 +533,7 @@ void CSL_acTest(void)
         AC_AppHandle.strDescrApp = (char **)string_descriptor;
         AC_AppHandle.lbaBufferPbApp = &lbaBufferPbApp[0];
         AC_AppHandle.lbaBufferRecApp = &lbaBufferRecApp[0];
+        AC_AppHandle.lbaBufferFbckApp = &lbaBufferFbckApp[0];
         AC_AppHandle.lbaBufferHidReportApp = &lbaBufferHidReportApp[0];
         AC_AppHandle.acReqTableApp = USB_ReqTable;
         AC_AppHandle.pId = pId;

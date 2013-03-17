@@ -61,6 +61,8 @@ extern Uint16 lbaBufferPbApp[APP_USBAC_LBA_BUF_PB_SIZE];
 /* Buffer used to store the record data to send to USB */
 extern Uint16 lbaBufferRecApp[APP_USBAC_LBA_BUF_REC_SIZE];
 
+extern Uint16 lbaBufferFbckApp[3];
+
 /* Buffer used to store the HID Report data to send to USB */
 extern Uint16 lbaBufferHidReportApp[HID_REPORT_SIZE_WORDS+1];
 

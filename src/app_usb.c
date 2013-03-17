@@ -1899,7 +1899,6 @@ void USBisr()
     pUsbContext     pContext;
     Uint16 dmaSampCnt;
 
-	EZDSP5535_LED_on(1);
     usbIntCount++;
     /* Latch and clear interrupts */
     pContext = &gUsbContext;
@@ -2249,6 +2248,19 @@ static void MainTask(void)
                     if (peps->pTransfer)
                     {
                         if (!USB_handleTx(pContext, EP_NUM_HID))
+                            fExitMainTaskOnUSBError = TRUE;
+                    }
+                }
+            }
+            if (pContext->fEP4InBUFAvailable == TRUE)
+            {
+                pContext->fEP3InBUFAvailable = FALSE;
+                peps = &pContext->pEpStatus[EP_NUM_FBCK];
+                if (pContext->fInitialized)
+                {
+                    if (peps->pTransfer)
+                    {
+                        if (!USB_handleTx(pContext, EP_NUM_FBCK))
                             fExitMainTaskOnUSBError = TRUE;
                     }
                 }
