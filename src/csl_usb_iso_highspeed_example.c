@@ -540,7 +540,9 @@ void CSL_acTest(void)
         AC_AppHandle.vId = vId;
 
         AC_AppHandle.rxEpNum = EP_NUM_PLAY; /* playback endpoint number */
+#ifndef PLAY_ONLY
         AC_AppHandle.txEpNum = EP_NUM_REC; /* record endpoint number */
+#endif
         AC_AppHandle.hidTxEpNum = EP_NUM_HID; /* HID interrupt-IN endpoint number */
 #ifdef FEEDBACKEP
         AC_AppHandle.fbEpNum = EP_NUM_FBCK; /* feedback endpoint number */

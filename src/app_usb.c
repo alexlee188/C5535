@@ -197,11 +197,12 @@ Bool HandleUSBInterrupt(
     {
         /* These USB controller registers are reset by USB bus reset condition */
 
+#ifndef PLAY_ONLY
         /* Set Tx MaxP for record endpoint */
         USB_setTxMaxp(EP_NUM_REC, EP_REC_MAXP);
         /* Set ISO mode for record endpoint */
         USB_setTxCsr(EP_NUM_REC, 0x4000);
-
+#endif
         /* Set Rx MaxP for playback endpoint */
         USB_setRxMaxp(EP_NUM_PLAY, EP_PB_MAXP);
         /* Set ISO mode for playback endpoint */
@@ -725,12 +726,14 @@ CSL_Status StartTransfer(void    *vpContext,
                 pContext->fEP0BUFAvailable = TRUE;
             }
         }
+#ifndef PLAY_ONLY
         else if (peps->dwEndpoint == EP_NUM_REC)
         {
             // set flag once SOF is received
             pContext->fWaitingOnFlagA = TRUE;
             pContext->fEP1InBUFAvailable = TRUE;
         }
+#endif
         else if (peps->dwEndpoint == EP_NUM_HID)
         {
             pContext->fWaitingOnFlagA = TRUE;
@@ -864,13 +867,14 @@ void DeviceNotification(
 
     if(wUSBEvents & CSL_USB_EVENT_RESET)
     {
+#ifndef PLAY_ONLY
          peps = &pContext->pEpStatus[EP_NUM_REC];
          peps->wUSBEvents |= wUSBEvents;
 
          wMSCMsg = CSL_USB_MSG_ISO_IN;
          /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
-
+#endif
 #ifdef FEEDBACKEP
          peps = &pContext->pEpStatus[EP_NUM_FBCK];
          peps->wUSBEvents |= wUSBEvents;
@@ -1982,7 +1986,7 @@ void USBisr()
 			dmaSampCntPerSec = 0;
 		}			
     }
-
+#ifndef PLAY_ONLY
     /* ISO IN, TX endpoint  */
     if(pContext->dwIntSourceL & USB_TX_INT_EP_REC)
     {
@@ -1997,7 +2001,7 @@ void USBisr()
         // Send the data to the endpoint buffer
         SWI_post(&SWI_Send_USB_Output);
     }
-
+#endif
     /* ISO OUT, RX endpoint */
     if (pContext->dwIntSourceL & USB_RX_INT_EP_PLAY)
     {
@@ -2057,7 +2061,11 @@ void USBisr()
     }
 
 	// only send the interrupt message when they are other interrupts (not USB ISO IN/OUT/SOF)
+#ifdef PLAY_ONLY
+    if ((pContext->dwIntSourceL & (~(USB_RX_INT_EP_PLAY|USB_TX_INT_EP_FBCK))) ||
+#else
     if ((pContext->dwIntSourceL & (~(USB_RX_INT_EP_PLAY|USB_TX_INT_EP_REC|USB_TX_INT_EP_FBCK))) ||
+#endif
 		(pContext->dwIntSourceH & (~CSL_USB_GBL_INT_SOF)))
 	{
 	    USB_MUSB_Isr();

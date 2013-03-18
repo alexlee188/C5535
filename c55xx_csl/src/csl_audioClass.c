@@ -272,7 +272,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
                          CSL_USB_EVENT_EOT,
                          pAppClassHandle->isoHandler);
 #endif //FEEDBACKEP
-
+#ifndef PLAY_ONLY
         /* Initialize the Iso IN Endpoint */
         USB_initEndptObj(pHandle->ctrlHandle.devNum,
                          &pHandle->acHandle.isoInEpObj,
@@ -282,7 +282,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
                          //(CSL_USB_EVENT_SOF |CSL_USB_EVENT_EOT),
                          CSL_USB_EVENT_EOT,
                          pAppClassHandle->isoHandler);
-
+#endif
         /* Initialize the HID Interrupt IN Endpoint */
         USB_initEndptObj(pHandle->ctrlHandle.devNum,
                          &pHandle->acHandle.hidIntInEpObj,

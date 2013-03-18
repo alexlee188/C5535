@@ -43,25 +43,23 @@
 #ifdef PLAY_ONLY
 #define IF_NUM_PLAY		( 1 )
 #define IF_NUM_HID		( 2 )
-#ifdef FEEDBACKEP
-#define IF_NUM_FBCK		( 3 )
-#endif
 #else // PLAY_ONLY
 #define IF_NUM_REC      ( 1 ) /* Interface Number Audio Record */
 #define IF_NUM_PLAY     ( 2 ) /* Interface Number Audio Playback */
 #define IF_NUM_HID      ( 3 ) /* Interface Number HID */
-#ifdef FEEDBACKEP
-#define IF_NUM_FBCK     ( 4 ) /* Interface Number FBCK */
-#endif //FEEDBACKEP
 #endif //PLAY_ONLY
 /* USB endpoint numbers & interrupts */
+#ifndef PLAY_ONLY
 #define EP_NUM_REC      ( CSL_USB_EP1 )
+#endif
 #define EP_NUM_PLAY     ( CSL_USB_EP2 )
-#define EP_NUM_HID      ( CSL_USB_EP3 )
+#define EP_NUM_HID      ( CSL_USB_EP4 )
 #ifdef FEEDBACKEP
-#define EP_NUM_FBCK     ( CSL_USB_EP4 )
+#define EP_NUM_FBCK     ( CSL_USB_EP3 )
 #endif //FEEDBACKEP
+#ifndef PLAY_ONLY
 #define USB_TX_INT_EP_REC   ( 1<<EP_NUM_REC )
+#endif
 #define USB_RX_INT_EP_PLAY  ( 1<<(8+EP_NUM_PLAY) )
 #define USB_TX_INT_EP_HID   ( 1<<EP_NUM_HID )
 #ifdef FEEDBACKEP

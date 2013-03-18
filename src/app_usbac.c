@@ -615,13 +615,14 @@ static void MSCTask(void)
                     (*peps->hEventHandler)();
                 break;
 
+#ifndef PLAY_ONLY
             case CSL_USB_MSG_ISO_IN:
 				msgIsoInCount++;
                 peps = &pContext->pEpStatus[EP_NUM_REC];
                 if(peps->hEventHandler)
                     (*peps->hEventHandler)();
                 break;
-
+#endif
             case CSL_USB_MSG_ISO_FB_IN:
 				msgIsoInFbCount++;
                 peps = &pContext->pEpStatus[EP_NUM_FBCK];
