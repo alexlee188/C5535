@@ -147,10 +147,11 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         pHandle->ctrlHandle.hEpObjArray[0] = &pHandle->ctrlHandle.ctrlOutEpObj;
         pHandle->ctrlHandle.hEpObjArray[1] = &pHandle->ctrlHandle.ctrlInEpObj;
         pHandle->ctrlHandle.hEpObjArray[2] = &pHandle->acHandle.isoOutEpObj;
-        pHandle->ctrlHandle.hEpObjArray[3] = &pHandle->acHandle.isoInEpObj;
+        pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoInEpObj;
         pHandle->ctrlHandle.hEpObjArray[4] = &pHandle->acHandle.hidIntInEpObj;
+        for (i = 6; i < CSL_USB_ENDPOINT_COUNT; i++) pHandle->ctrlHandle.hEpObjArray[i] = NULL;
 #ifdef FEEDBACKEP
-        pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoFbckEpObj;
+        pHandle->ctrlHandle.hEpObjArray[3] = &pHandle->acHandle.isoFbckEpObj;
 #endif //FEEDBACKEP
 
         pHandle->ctrlHandle.getMinBuffer[0] = 0x0000;

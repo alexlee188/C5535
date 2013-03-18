@@ -1884,10 +1884,12 @@ pUsbEpHandle USB_epNumToHandle(CSL_UsbDevNum    devNum,
 
 	for(looper = 0; looper < CSL_USB_ENDPOINT_COUNT; looper++)
 	{
-		if(epNum == gUsbEpHandle[looper]->epNum)
-		{
-			epHandle = gUsbEpHandle[looper];
-			break;
+		if (gUsbEpHandle[looper] != NULL){
+			if(epNum == gUsbEpHandle[looper]->epNum)
+			{
+				epHandle = gUsbEpHandle[looper];
+				break;
+			}
 		}
 	}
 
@@ -2793,7 +2795,7 @@ CSL_Status USB_setParams(CSL_UsbDevNum    devNum,
 
 			if(hEpObj[looper] == NULL)
 			{
-				break;
+				//break;
 			}
 		}
 	}
