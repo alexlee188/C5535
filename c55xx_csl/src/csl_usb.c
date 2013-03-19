@@ -621,13 +621,13 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 						CSL_FINS(usbRegisters->TXMAXP_INDX,
 						         USB_TXMAXP_INDX_MAXPAYLOAD, maxPktSize);
 
-						/* no autoset(D15=0); ISO for bulk(D14=0); no DMA(D12=0)
+						/* no autoset(D15=0); ISO or bulk(D14=0); no DMA(D12=0)
 						   normal data toggle(D11=0) */
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 								 USB_PERI_TXCSR_AUTOSET, FALSE);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-								 USB_PERI_TXCSR_ISO, FALSE);
+								 USB_PERI_TXCSR_INDX_ISO, FALSE);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 								 USB_PERI_TXCSR_DMAEN, FALSE);
@@ -693,7 +693,7 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 						CSL_FINS(usbRegisters->RXMAXP_INDX,
 						        USB_RXMAXP_INDX_MAXPAYLOAD, maxPktSize);
 
-						/* no autoclear(D15=0), ISO for bulk(D14=0), no DMA(D13=0)
+						/* no autoclear(D15=0), ISO or bulk(D14=0), no DMA(D13=0)
 						normal ping flow control(D12=0) */
 						CSL_FINS(usbRegisters->PERI_RXCSR_INDX,
 						         USB_PERI_RXCSR_INDX_AUTOCLEAR, FALSE);

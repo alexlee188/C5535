@@ -1986,42 +1986,6 @@ void USBisr()
 			dmaSampCntPerSec = 0;
 		}			
     }
-#ifndef PLAY_ONLY
-    /* ISO IN, TX endpoint  */
-    if(pContext->dwIntSourceL & USB_TX_INT_EP_REC)
-    {
-        recIntrRcvd++; /* indicate record packet sent to next SOF */
-		isoInIntCount++;
-
-		if (isoInIntCount==2)
-        {
-			sofIntCountRecSave = sofIntCountRec;
-        }
-
-        // Send the data to the endpoint buffer
-        SWI_post(&SWI_Send_USB_Output);
-    }
-#endif
-    /* ISO OUT, RX endpoint */
-    if (pContext->dwIntSourceL & USB_RX_INT_EP_PLAY)
-    {
-        playIntrRcvd++; /* indicate play packet received to next SOF */
-
-		isoOutIntCount++;
-        USB_handleRxIntr(pContext, EP_NUM_PLAY);
-        // Get the data from the endpoint buffer
-        SWI_post(&SWI_Store_USB_Input);
-    }
-
-#ifdef FEEDBACKEP
-    /* ISO IN, FBCK endpoint */
-    if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
-    {
-		isoFbckIntCount++;
-		// put feedback EP processing code here
-		SWI_post(&SWI_Send_USB_Output);
-    }
-#endif //FEEDBACKEP
 
     if(pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF)
     {
@@ -2059,6 +2023,45 @@ void USBisr()
             }
         }
     }
+#ifndef PLAY_ONLY
+    /* ISO IN, TX endpoint  */
+    if(pContext->dwIntSourceL & USB_TX_INT_EP_REC)
+    {
+        recIntrRcvd++; /* indicate record packet sent to next SOF */
+		isoInIntCount++;
+
+		if (isoInIntCount==2)
+        {
+			sofIntCountRecSave = sofIntCountRec;
+        }
+
+        // Send the data to the endpoint buffer
+        SWI_post(&SWI_Send_USB_Output);
+    }
+#endif
+    /* ISO OUT, RX endpoint */
+    if (pContext->dwIntSourceL & USB_RX_INT_EP_PLAY)
+    {
+        playIntrRcvd++; /* indicate play packet received to next SOF */
+
+        if ((isoOutIntCount % 1000) == 0) EZDSP5535_LED_toggle(2);
+		isoOutIntCount++;
+        USB_handleRxIntr(pContext, EP_NUM_PLAY);
+        // Get the data from the endpoint buffer
+        SWI_post(&SWI_Store_USB_Input);
+    }
+
+#ifdef FEEDBACKEP
+    /* ISO IN, FBCK endpoint */
+    if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
+    {
+		isoFbckIntCount++;
+		if ((isoFbckIntCount % 100) == 0) EZDSP5535_LED_toggle(3);
+		// put feedback EP processing code here
+		SWI_post(&SWI_Send_USB_Output);
+    }
+#endif //FEEDBACKEP
+
 
 	// only send the interrupt message when they are other interrupts (not USB ISO IN/OUT/SOF)
 #ifdef PLAY_ONLY
