@@ -72,6 +72,7 @@ Uint32 sus = 0;
 Uint32 wake = 0;
 
 Uint16 firstRecordFlag = TRUE;
+Uint16 firstFbckFlag = TRUE;
 
 Uint32 feedback_rate = 96 << 13;
 
@@ -1810,11 +1811,11 @@ void send_USB_Output(void)
 	{
 		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
 				feedback_rate -= 1 << 4;
-				//EZDSP5535_LED_toggle(2);
+				EZDSP5535_LED_toggle(2);
 		}
 		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
 				feedback_rate += 1 << 4;
-				//EZDSP5535_LED_toggle(3);
+				EZDSP5535_LED_toggle(3);
 		}
 	   *pFifoAddr = feedback_rate & 0x0000ffff;
 	   *pFifoAddr = feedback_rate >> 16;
@@ -1949,6 +1950,13 @@ void USBisr()
 		if (usb_play_mode)
 		{
 			sofIntCountPlay++;		
+			if (firstFbckFlag)		// kick start FBCK so that it will trigger an interrupt
+			{
+                // start Feedback
+		        // Send the data to the endpoint buffer
+		        SWI_post(&SWI_Send_USB_Output);
+				firstFbckFlag = FALSE;
+			}
 		}
 		if (usb_rec_mode)
 		{
@@ -2043,8 +2051,6 @@ void USBisr()
     if (pContext->dwIntSourceL & USB_RX_INT_EP_PLAY)
     {
         playIntrRcvd++; /* indicate play packet received to next SOF */
-
-        if ((isoOutIntCount % 1000) == 0) EZDSP5535_LED_toggle(2);
 		isoOutIntCount++;
         USB_handleRxIntr(pContext, EP_NUM_PLAY);
         // Get the data from the endpoint buffer
@@ -2056,7 +2062,7 @@ void USBisr()
     if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
     {
 		isoFbckIntCount++;
-		if ((isoFbckIntCount % 100) == 0) EZDSP5535_LED_toggle(3);
+		if ((isoFbckIntCount % 100) == 0) EZDSP5535_LED_toggle(1);
 		// put feedback EP processing code here
 		SWI_post(&SWI_Send_USB_Output);
     }

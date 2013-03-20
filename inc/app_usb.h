@@ -49,14 +49,15 @@
 #define IF_NUM_HID      ( 3 ) /* Interface Number HID */
 #endif //PLAY_ONLY
 /* USB endpoint numbers & interrupts */
-#ifndef PLAY_ONLY
-#define EP_NUM_REC      ( CSL_USB_EP1 )
-#endif
-#define EP_NUM_PLAY     ( CSL_USB_EP2 )
-#define EP_NUM_HID      ( CSL_USB_EP4 )
 #ifdef FEEDBACKEP
-#define EP_NUM_FBCK     ( CSL_USB_EP3 )
+#define EP_NUM_FBCK     ( CSL_USB_EP1 )
 #endif //FEEDBACKEP
+#define EP_NUM_PLAY     ( CSL_USB_EP2 )
+#ifndef PLAY_ONLY
+#define EP_NUM_REC      ( CSL_USB_EP3 )
+#endif
+#define EP_NUM_HID      ( CSL_USB_EP4 )
+
 #ifndef PLAY_ONLY
 #define USB_TX_INT_EP_REC   ( 1<<EP_NUM_REC )
 #endif
