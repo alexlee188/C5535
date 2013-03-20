@@ -732,19 +732,19 @@ CSL_Status StartTransfer(void    *vpContext,
         {
             // set flag once SOF is received
             pContext->fWaitingOnFlagA = TRUE;
-            pContext->fEP1InBUFAvailable = TRUE;
+            pContext->fEP3InBUFAvailable = TRUE;
         }
 #endif
         else if (peps->dwEndpoint == EP_NUM_HID)
         {
             pContext->fWaitingOnFlagA = TRUE;
-            pContext->fEP3InBUFAvailable = TRUE;
+            pContext->fEP4InBUFAvailable = TRUE;
         }
 #ifdef FEEDBACKEP
         else if (peps->dwEndpoint == EP_NUM_FBCK)
         {
             pContext->fWaitingOnFlagA = TRUE;
-            pContext->fEP4InBUFAvailable = TRUE;
+            pContext->fEP1InBUFAvailable = TRUE;
         }
 #endif
     }
@@ -924,7 +924,7 @@ void DeviceNotification(
 #endif
 #ifdef FEEDBACKEP
          peps = &pContext->pEpStatus[EP_NUM_FBCK];
-         peps->wUSBEvents |= wUSBEvents;
+         peps->wUSBEvents |= wUSBEvents | CSL_USB_EVENT_FBCK_TX;
 
  		 isoTxCount++;
          wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
@@ -1807,7 +1807,7 @@ void send_USB_Output(void)
 	}
 
 	// packet loop (one or two packet depending on the FIFO emptiness)
-	//for (i=0; i<pktCount; i++)
+	for (i=0; i<pktCount; i++)
 	{
 		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
 				feedback_rate -= 1 << 4;
@@ -2237,9 +2237,9 @@ static void MainTask(void)
         {
             /* Get the Endpoint currently assigned to Flag A */
 #if 0		// move to send_USB_Output
-            if (pContext->fEP1InBUFAvailable == TRUE)
+            if (pContext->fEP3InBUFAvailable == TRUE)
             {
-                pContext->fEP1InBUFAvailable = FALSE;
+                pContext->fEP3InBUFAvailable = FALSE;
                 peps = &pContext->pEpStatus[EP_NUM_REC];
                 if (pContext->fInitialized)
                 {
@@ -2254,11 +2254,11 @@ static void MainTask(void)
                     }
                 }
             }
-            else if (pContext->fEP3InBUFAvailable == TRUE)
+            else if (pContext->fEP4InBUFAvailable == TRUE)
 #endif
-            if (pContext->fEP3InBUFAvailable == TRUE)
+            if (pContext->fEP4InBUFAvailable == TRUE)
             {
-                pContext->fEP3InBUFAvailable = FALSE;
+                pContext->fEP4InBUFAvailable = FALSE;
                 peps = &pContext->pEpStatus[EP_NUM_HID];
                 if (pContext->fInitialized)
                 {
@@ -2269,9 +2269,9 @@ static void MainTask(void)
                     }
                 }
             }
-            if (pContext->fEP4InBUFAvailable == TRUE)
+            if (pContext->fEP1InBUFAvailable == TRUE)
             {
-                pContext->fEP3InBUFAvailable = FALSE;
+                pContext->fEP1InBUFAvailable = FALSE;
                 peps = &pContext->pEpStatus[EP_NUM_FBCK];
                 if (pContext->fInitialized)
                 {

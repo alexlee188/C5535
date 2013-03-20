@@ -266,6 +266,7 @@ extern "C" {
 #define CSL_USB_EVENT_WRITE_MEDIA                   (0x2000)
 /** USB event transmit HID report                                            */
 #define CSL_USB_EVENT_HID_REPORT_TX                 (0x4000)
+#define CSL_USB_EVENT_FBCK_TX						(0X8000)
 
 /** \brief Standard USB requests                                             */
 /** USB get status request                                                   */

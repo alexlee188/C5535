@@ -115,16 +115,18 @@
 									<listOptionValue builtIn="false" value="225"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.INCLUDE_PATH.2069515336" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.INCLUDE_PATH" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\C5535\c55x5_drivers\i2s\inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\C5535\c55x5_drivers\dma\inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\C5535\c55x5_drivers\inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\C5535\inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\C5535\c55xx_csl\inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\ezdsp5535_v1\include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\USB Audio Class\c55x5_drivers\inc&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\Users\Alex\USB Audio Class\inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${TCONF_OUTPUT_DIR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${BIOS_INCLUDE_DIR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${RTDX_INCLUDE_DIR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XDAIS_CG_ROOT}/packages/ti/xdais&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMMON_ROOT}/c55xx_csl/src&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${COMMON_ROOT}/c55xx_csl/inc&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.ALGEBRAIC.1212405186" name="Codegen outputs algebraic assembly (--algebraic, -mg)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.ALGEBRAIC" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OPT_LEVEL.library.release.1898853230" name="Optimization level (--opt_level, -O)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OPT_LEVEL.library.release" value="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.OPT_LEVEL.3" valueType="enumerated"/>

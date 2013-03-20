@@ -38,9 +38,11 @@
  * 28-May-2009 Modifed as per the review comments
  * ============================================================================
  */
-#include <app_usb.h>
+
+#include "app_usb.h"
 #include <csl_audioClass.h>
 #include <csl_audioClassAux.h>
+#include <i2s_sample.h>
 
 #include <log.h>
 #include <std.h>
@@ -53,6 +55,8 @@
 #include <string.h>
 #include <psp_i2s.h>
 #include "ezdsp5535_led.h"
+
+extern Uint32 feedback_rate;
 
 Bool gPbSampRateChange = FALSE; // playback sample rate change flag
 Bool gRecSampRateChange = FALSE; // record sample rate change flag -- NOTE no record sample rate control
@@ -646,6 +650,24 @@ CSL_Status AC_Iso(void    *pAcObj)
             /* playpack moved to SWI so set flags and return*/
             pAcHandle->playBackActive = TRUE;
             status = CSL_AC_MEDIACCESS_SUCCESS;
+        }
+        if ((usbEvent & CSL_USB_EVENT_FBCK_TX) == CSL_USB_EVENT_FBCK_TX)
+        {
+        	Uint16 lbaBufferFbckRate[2];
+
+    		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+    				feedback_rate -= 1 << 4;
+    				EZDSP5535_LED_toggle(2);
+    		}
+    		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
+    				feedback_rate += 1 << 4;
+    				EZDSP5535_LED_toggle(3);
+    		}
+        	lbaBufferFbckRate[0] = feedback_rate & 0x0000ffff;
+        	lbaBufferFbckRate[1] = feedback_rate >> 16;
+            /* Post transaction to USB */
+            USB_postTransaction(&pAcHandle->isoFbckEpObj, 4,
+                (void *)(&lbaBufferFbckRate[0]), CSL_USB_IOFLAG_NONE);
         }
     }
     else
@@ -2273,8 +2295,8 @@ CSL_AcRequestRet AC_reqSetInterface(CSL_UsbDevNum         devNum,
         /* Interface not supported, STALL the endpoint */
         retStat = CSL_AC_REQUEST_STALL;
     }
-    if (alt_setting_play) EZDSP5535_LED_on(1);
-    else EZDSP5535_LED_off(1);
+    //if (alt_setting_play) EZDSP5535_LED_on(1);
+    //else EZDSP5535_LED_off(1);
 
     return(retStat);
 }
