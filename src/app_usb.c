@@ -1820,14 +1820,14 @@ void send_USB_Output(void)
 	   *pFifoAddr = feedback_rate >> 16;
 
 		if(peps->xferType == CSL_USB_ISO)
-		{
-			usbRegisters->PERI_CSR0_INDX |=
-							CSL_USB_PERI_TXCSR_CLRDATATOG_MASK;
+		{	// This is a feedback endpoint so force data toggle
+			CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+							USB_PERI_TXCSR_FRCDATATOG, TRUE);
 		}
 
 		/* Commit Tx Packet */
 		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-				 USB_PERI_CSR0_INDX_RXPKTRDY, TRUE);
+				 USB_PERI_TXCSR_INDX_TXPKTRDY, TRUE);	// this will generate an interrupt when transmitted
 	} // for (i=0; i<pktCount; i++)
 
 	/* restore the index register */
@@ -1957,6 +1957,7 @@ void USBisr()
 				firstFbckFlag = FALSE;
 			}
 		}
+#ifndef PLAY_ONLY
 		if (usb_rec_mode)
 		{
 			sofIntCountRec++;
@@ -1968,7 +1969,8 @@ void USBisr()
 				firstRecordFlag = FALSE;
 			}
 		}
-			
+#endif
+
         // accumulate the USB ISO IN nominal sample counter (x2 for stereo) 
 		usbIsoInSampCntPerSec += ((gSetRecSampNum<<1)+gSetRecSampNumDelta);
 
@@ -2013,8 +2015,8 @@ void USBisr()
             }
         }
 
-        if (usb_rec_mode)
-            {
+#ifndef PLAY_ONLY
+        if (usb_rec_mode){
             if (recIntrRcvd >= 1) /* check record packet since last SOF */
 				{
 				///if (recIntrRcvd>1)
@@ -2029,6 +2031,8 @@ void USBisr()
                 //LOG_printf(&trace, "R 0x%04X", (asrcOutputFifoInBlk<<8)|asrcOutputFifoOutBlk); //debug
             }
         }
+#endif
+
     }
 #ifndef PLAY_ONLY
     /* ISO IN, TX endpoint  */
