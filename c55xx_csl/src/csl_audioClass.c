@@ -651,6 +651,8 @@ CSL_Status AC_Iso(void    *pAcObj)
             pAcHandle->playBackActive = TRUE;
             status = CSL_AC_MEDIACCESS_SUCCESS;
         }
+
+#if 0
         if ((usbEvent & CSL_USB_EVENT_FBCK_TX) == CSL_USB_EVENT_FBCK_TX)
         {
         	Uint16 lbaBufferFbckRate[2];
@@ -669,6 +671,8 @@ CSL_Status AC_Iso(void    *pAcObj)
             USB_postTransaction(&pAcHandle->isoFbckEpObj, 4,
                 (void *)(&lbaBufferFbckRate[0]), CSL_USB_IOFLAG_NONE);
         }
+#endif
+
     }
     else
     {

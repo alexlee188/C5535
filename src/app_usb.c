@@ -813,7 +813,6 @@ CSL_Status CompleteTransfer(
         	 MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
         	 break;
 #endif
-
          case  EP_NUM_PLAY:
               peps->wUSBEvents |= CSL_USB_EVENT_WRITE_MEDIA;
               wMSCMsg = CSL_USB_MSG_ISO_OUT;
