@@ -627,13 +627,19 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 								 USB_PERI_TXCSR_AUTOSET, FALSE);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-								 USB_PERI_TXCSR_INDX_ISO, FALSE);
+								 USB_PERI_TXCSR_ISO, FALSE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_MODE, TRUE);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 								 USB_PERI_TXCSR_DMAEN, FALSE);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 								 USB_PERI_TXCSR_FRCDATATOG, FALSE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_FIFONOTEMPTY, FALSE);
 
 						/* Enable Isochronous mode bit if request is for ISO IN */
 						if(xferType == CSL_USB_ISO)
@@ -654,7 +660,7 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 							
 							// set the ISO mode bit
 							CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-								     USB_PERI_TXCSR_INDX_ISO, TRUE);
+								     USB_PERI_TXCSR_ISO, TRUE);
 
 							/* Enable Double packet buffering */
 							CSL_FINS(usbRegisters->TXFIFOSZ_RXFIFOSZ,

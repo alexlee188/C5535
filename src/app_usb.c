@@ -1242,11 +1242,7 @@ void store_USB_Input(void)
     peps = &pContext->pEpStatus[EP_NUM_PLAY];
 
     pTransfer = peps->pTransfer;
-    // number of bytes to copy
-    ///cbBuffer = pTransfer->cbBuffer;
-    // destination buffer
-    ///pwBuffer = (WORD*)pTransfer->pvBuffer;
-    // source (endpoint) buffer
+
     pFifoAddr   = (volatile ioport Uint16*)peps->pFifoAddr;
     #if ((defined(CSL_MSC_TEST)) || (defined(CSL_AC_TEST)))
     /* TI MSC put the DATA length as the first WORD, bypass it */

@@ -192,6 +192,7 @@ typedef struct  {
     volatile Uint16 RSVD24[2];				//0x840E/0F
     volatile Uint16 TXMAXP_INDX;			//0x8410
     volatile Uint16 PERI_CSR0_INDX;			//0x8411
+//    volatile Uint16 PERI_TXCSR_INDX;		//same location as PERI_CSR0_INDX
     volatile Uint16 RSVD25[2];				//0x8412/13
     volatile Uint16 RXMAXP_INDX;			//0x8414
     volatile Uint16 PERI_RXCSR_INDX;		//0x8415
