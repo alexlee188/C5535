@@ -2268,6 +2268,7 @@ static void MainTask(void)
                     }
                 }
             }
+#if 0
             if (pContext->fEP1InBUFAvailable == TRUE)
             {
                 pContext->fEP1InBUFAvailable = FALSE;
@@ -2281,6 +2282,7 @@ static void MainTask(void)
                     }
                 }
             }
+#endif
         }
 
 #if 0 // moved to store_USB_Input()
