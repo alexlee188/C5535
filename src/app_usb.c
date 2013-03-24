@@ -1770,28 +1770,25 @@ void send_USB_Output(void)
 	txCsr = usbRegisters->PERI_CSR0_INDX;
 
 	// if it is underrun or the first packet for transmitting then flush FIFO
-	if ((txCsr&0x0004)==0x0004)
+	if ((txCsr &  CSL_USB_PERI_TXCSR_UNDERRUN_MASK) ==  CSL_USB_PERI_TXCSR_UNDERRUN_MASK)
 	{
 #if 1
 		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 				 USB_PERI_TXCSR_FLUSHFIFO, TRUE);
 		// if it is ISO mode flush the FIFO twice, because it is double buffered
-		if(peps->xferType == CSL_USB_ISO)
-		{
 			CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 					 USB_PERI_TXCSR_FLUSHFIFO, TRUE);
-		}
 #endif
 		underRunCount++;
 		// clear the underrun flag
-		usbRegisters->PERI_CSR0_INDX &= ~(0x0004);
+		usbRegisters->PERI_CSR0_INDX &= ~(CSL_USB_PERI_TXCSR_UNDERRUN_MASK);
 	}
 
 	// if the USB TX FIFO is not empty.
-	if ((txCsr&0x0002)==0x0002)
+	if ((txCsr & CSL_USB_PERI_TXCSR_FIFONOTEMPTY_MASK) == CSL_USB_PERI_TXCSR_FIFONOTEMPTY_MASK)
 	{
 		// clear the FIFO not empty bit
-		usbRegisters->PERI_CSR0_INDX &= ~(0x0002);
+		usbRegisters->PERI_CSR0_INDX &= ~(CSL_USB_PERI_TXCSR_FIFONOTEMPTY_MASK);
 		// we need send one packet
 		pktCount = 1;
 	} else
@@ -1815,15 +1812,13 @@ void send_USB_Output(void)
 	   *pFifoAddr = feedback_rate & 0x0000ffff;
 	   *pFifoAddr = feedback_rate >> 16;
 
-		if(peps->xferType == CSL_USB_ISO)
-		{	// This is a feedback endpoint so force data toggle
+	   // This is a feedback endpoint so force data toggle
 			CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 							USB_PERI_TXCSR_FRCDATATOG, TRUE);
-		}
 
-		/* Commit Tx Packet */
-		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-				 USB_PERI_TXCSR_INDX_TXPKTRDY, TRUE);	// this will generate an interrupt when transmitted
+		// No need to commit Tx Packet as it is in AUTOSET mode
+		//CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+		//		 USB_PERI_TXCSR_INDX_TXPKTRDY, TRUE);
 	} // for (i=0; i<pktCount; i++)
 
 	/* restore the index register */
@@ -1902,8 +1897,10 @@ void USBisr()
     usbIntCount++;
     /* Latch and clear interrupts */
     pContext = &gUsbContext;
-    pContext->dwIntSourceL = usbRegisters->INTMASKEDR1;
-    pContext->dwIntSourceH = usbRegisters->INTMASKEDR2;
+    //pContext->dwIntSourceL = usbRegisters->INTMASKEDR1;
+    //pContext->dwIntSourceH = usbRegisters->INTMASKEDR2;
+    pContext->dwIntSourceL = usbRegisters->INTSRCR1;		// try using the unmasked interrupts
+    pContext->dwIntSourceH = usbRegisters->INTSRCR2;
     usbRegisters->INTCLRR1 = pContext->dwIntSourceL;
     usbRegisters->INTCLRR2 = pContext->dwIntSourceH;
 

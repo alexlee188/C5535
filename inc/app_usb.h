@@ -155,7 +155,6 @@
 ///#endif //SAMPLE_RATE_TX_96kHz
 
 #define EP_FBCK_MAXP	(0x0004)
-copy
 #define EP_HID_MAXP     ( 0x0003 ) /* maximum packet size for HID endpoint */
 
 #define APP_USB_SELF_POWERED    /* define if self-powered USB device */

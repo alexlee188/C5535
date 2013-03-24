@@ -444,12 +444,10 @@ CSL_Status USB_resetDev(CSL_UsbDevNum    devNum)
     /* enable ep3 intr*/
     CSL_FINS(usbRegisters->INTRTXE,
              USB_INTRTXE_EP3TX, TRUE);
-
-#ifdef FEEDBACKEP
 	/* enable ep4 intr */
 	CSL_FINS(usbRegisters->INTRTXE,
 	         USB_INTRTXE_EP4TX, TRUE);
-#endif
+
 
 	 /* enable generic MUSB interrupts
 	Interrupts enabled : Disconnect, connect, Reset, Resume, Suspend */
@@ -589,7 +587,67 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 				switch(epNum)
 				{
 					/* Configure Bulk IN End point */
-					case CSL_USB_IN_EP1:
+					case CSL_USB_IN_EP1:		// special handling of feedback EP
+						fifoSize = CSL_USB_TX_FIFO_SIZE_8; // 0 means 8 bytes
+						CSL_FINS(usbRegisters->TXFIFOSZ_RXFIFOSZ,
+								 USB_TXFIFOSZ_RXFIFOSZ_TXSZ,
+								 CSL_USB_TXFIFOSZ_RXFIFOSZ_RESETVAL);
+
+						CSL_FINS(usbRegisters->TXFIFOSZ_RXFIFOSZ,
+								 USB_TXFIFOSZ_RXFIFOSZ_TXSZ, fifoSize);
+
+                        // make sure we have enough FIFO space left (total 512*8 = 4096)
+						if ((pContext->dwFIFOStartAddr+(1<<fifoSize))<=CSL_USB_FIFO_SIZE)
+						{
+	                        // set the TX FIFO start address
+						CSL_FINS(usbRegisters->TXFIFOADDR,
+								USB_TXFIFOADDR_ADDR, pContext->dwFIFOStartAddr);
+							// reserve FIFO space for transmit
+						pContext->dwFIFOStartAddr += 1<<fifoSize;
+						} else
+						{
+							// we are out of the FIFO space for this EP
+							return CSL_ESYS_INVPARAMS;
+						}
+
+						/* Set maximum packet size */
+						CSL_FINS(usbRegisters->TXMAXP_INDX,
+						         USB_TXMAXP_INDX_MAXPAYLOAD, maxPktSize);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_AUTOSET, TRUE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_ISO, TRUE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_MODE, TRUE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_DMAEN, FALSE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_CLRDATATOG, TRUE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_UNDERRUN, FALSE);
+
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_FIFONOTEMPTY, FALSE);
+
+						// set the ISO update bit
+						CSL_FINS(usbRegisters->FADDR_POWER,
+								 USB_FADDR_POWER_ISOUPDATE, TRUE);
+
+						// set the ISO mode bit
+						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+								 USB_PERI_TXCSR_ISO, TRUE);
+
+						/* Enable Double packet buffering */
+						CSL_FINS(usbRegisters->TXFIFOSZ_RXFIFOSZ,
+								 USB_TXFIFOSZ_RXFIFOSZ_TXDPB, TRUE);
+						break;
+
 					case CSL_USB_IN_EP2:
 					case CSL_USB_IN_EP3:
 					case CSL_USB_IN_EP4:
@@ -667,7 +725,6 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 									 USB_TXFIFOSZ_RXFIFOSZ_TXDPB, TRUE);
 						}
 						break;
-
 					/* Configure Bulk OUT End point */
 					case CSL_USB_OUT_EP1:
 					case CSL_USB_OUT_EP2:
