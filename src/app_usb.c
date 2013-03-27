@@ -1897,10 +1897,10 @@ void USBisr()
     usbIntCount++;
     /* Latch and clear interrupts */
     pContext = &gUsbContext;
-    //pContext->dwIntSourceL = usbRegisters->INTMASKEDR1;
-    //pContext->dwIntSourceH = usbRegisters->INTMASKEDR2;
-    pContext->dwIntSourceL = usbRegisters->INTSRCR1;		// try using the unmasked interrupts
-    pContext->dwIntSourceH = usbRegisters->INTSRCR2;
+    pContext->dwIntSourceL = usbRegisters->INTMASKEDR1;
+    pContext->dwIntSourceH = usbRegisters->INTMASKEDR2;
+    //pContext->dwIntSourceL = usbRegisters->INTSRCR1;		// try using the unmasked interrupts
+    //pContext->dwIntSourceH = usbRegisters->INTSRCR2;
     usbRegisters->INTCLRR1 = pContext->dwIntSourceL;
     usbRegisters->INTCLRR2 = pContext->dwIntSourceH;
 

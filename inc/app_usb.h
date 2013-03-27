@@ -129,7 +129,7 @@
 #define EP_PB_MAXP      ( 0x0180 ) /* maximum packet size for playback endpoint */ // note can't currently be changed
 #else
 //#define EP_PB_MAXP      ( 0x0060 ) /* maximum packet size for playback endpoint */ // note can't currently be changed
-#define EP_PB_MAXP      ( 0x00C0 ) /* maximum packet size for playback endpoint */ // note can't currently be changed
+#define EP_PB_MAXP      ( 0x00C8 )	// one sample more for rate feedback adjustments
 #endif //USE_TWO_CODEC
 #endif //USE_THREE_CODEC
 #endif //USE_FOUR_CODEC
