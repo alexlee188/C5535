@@ -24,5 +24,7 @@
 *.xml
 
 ./build/*
+./build/Release/*.xml
+./build/Release/*.map
 ./c55xx_csl/build/*
 
