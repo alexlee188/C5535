@@ -85,7 +85,7 @@ const Uint16 configDescriptor[CONFIG_DESCR_SZ] =
     0x00,           /* iConfiguration */
 #ifdef APP_USB_SELF_POWERED
     0xC0,           /* bmAttributes */ /* self-powered, no remote wakeup */
-	0x00,
+    APP_USB_MAX_CURRENT,
 #else
     0x80,           /* bmAttributes */ /* bus-powered, no remote wakeup */
     APP_USB_MAX_CURRENT,  /* max Power, units of 2 mA */

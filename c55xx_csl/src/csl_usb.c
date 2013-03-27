@@ -60,6 +60,7 @@ CSL_UsbTransfer    gCtrlTransfer;
 CSL_UsbTransfer    gBulkInTransfer;
 CSL_UsbTransfer    gBulkOutTransfer;
 CSL_UsbTransfer    gIsoInTransfer;
+CSL_UsbTransfer	   gIsoFbckTransfer;
 CSL_UsbTransfer    gIsoOutTransfer;
 CSL_UsbTransfer    gIntInTransfer;
 CSL_UsbEpStatus    gEpStatus[CSL_USB_ENDPOINT_COUNT];
@@ -161,6 +162,7 @@ CSL_Status USB_init(CSL_UsbConfig    *usbConfig)
 
 			gCtrlTransfer.fComplete    = TRUE;
 			gIsoInTransfer.fComplete   = TRUE;
+			gIsoFbckTransfer.fComplete = TRUE;
 			gIsoOutTransfer.fComplete  = TRUE;
 			gBulkInTransfer.fComplete  = TRUE;
 			gBulkOutTransfer.fComplete = TRUE;
@@ -1169,6 +1171,9 @@ CSL_Status USB_postTransaction(pUsbEpHandle      hEp,
 				break;
 
 			case CSL_USB_IN_EP1:
+				pTransfer = &gIsoFbckTransfer;
+				pTransfer->dwFlags = CSL_USB_IN_TRANSFER;
+				break;
 			case CSL_USB_IN_EP2:
 			case CSL_USB_IN_EP3:
 			case CSL_USB_IN_EP4:
