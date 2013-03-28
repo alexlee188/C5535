@@ -1568,6 +1568,10 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
                 (void*)&pCtrlHandle->recSampleRateBuf[0],
                 CSL_USB_IOFLAG_NONE);
         }
+        else if (epNum == pAcHandle->isoFbckEpObj.epNum) /* is data for feedbacm endpoint? */
+        {
+
+        }
         else
         {
             requestRet = CSL_AC_REQUEST_STALL;
@@ -1862,6 +1866,13 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
             /* Send  sample rate */
             USB_postTransaction(hInEp, 4,
                 (void*)&pCtrlHandle->recSampleRateBuf[0], 
+                CSL_USB_IOFLAG_NONE);
+        }
+        else if (epNum == pAcHandle->isoFbckEpObj.epNum) /* is data for Feedback endpoint? */
+        {
+            /* Send sample rate */
+            USB_postTransaction(hInEp, 4,
+                (void*)&pCtrlHandle->sampleRateBuf[0],
                 CSL_USB_IOFLAG_NONE);
         }
         else
