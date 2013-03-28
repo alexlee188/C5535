@@ -1874,134 +1874,11 @@ void USBisr()
     usbRegisters->INTCLRR1 = pContext->dwIntSourceL;
     usbRegisters->INTCLRR2 = pContext->dwIntSourceH;
 
-    /* Handle SOF processing */
-    if (pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF)
-    {
-		sof_int_count++;
-		uFrameCount++;
-
-		// if we are using 44.1khz, we may need to revise the sample count
-		gSetRecSampNumDelta  = 0;
-		if (gSetRecSampNum==5)
-		{
-			// add 2 for each 2 uFrames
-			if ((sof_int_count&0x00000001)==0)
-			{
-				gSetRecSampNumDelta += 2;
-				// add 2 more for each 80 uFrames
-				if (uFrameCount==80)
-				{
-					gSetRecSampNumDelta += 2;
-					uFrameCount = 0;
-				}
-			}
-		}
-		// if we are using 88.2khz, we may need to revise the sample count
-		if (gSetRecSampNum==11)
-		{
-			// add 2 more for each 40 uFrames
-			if (uFrameCount==40)
-			{
-				gSetRecSampNumDelta += 2;
-				uFrameCount=0;
-			}
-		}
-		// get the number of sample per uFrame. x2 for stereo.
-		numPbSamps = numRecSamps = (gSetRecSampNum<<1)+gSetRecSampNumDelta;
-
-		if (usb_play_mode)
-		{
-			sofIntCountPlay++;		
-			if (firstFbckFlag)		// kick start FBCK so that it will trigger an interrupt
-			{
-                // start Feedback
-		        // Send the data to the endpoint buffer
-		        SWI_post(&SWI_Send_USB_Output);
-				firstFbckFlag = FALSE;
-			}
-		}
-#ifndef PLAY_ONLY
-		if (usb_rec_mode)
-		{
-			sofIntCountRec++;
-			if (firstRecordFlag)
-			{
-                // start record
-		        // Send the data to the endpoint buffer
-		        SWI_post(&SWI_Send_USB_Output);
-				firstRecordFlag = FALSE;
-			}
-		}
-#endif
-
-        // accumulate the USB ISO IN nominal sample counter (x2 for stereo) 
-		usbIsoInSampCntPerSec += ((gSetRecSampNum<<1)+gSetRecSampNumDelta);
-
-		// for each 2ms (16 microframes), get the DMA transfer count
-		if ((sof_int_count&0x000F)==0)
-		{
-	        latchDmaXferState();
-		
-        	/* Compute DMA transfer count since last SOF */
-        	dmaSampCnt = computeDmaXferCnt();			
-	        // accumulate the DMA sample counter 
-			dmaSampCntPerSec += (dmaSampCnt<<1);			
-		}		
-
-		// for each 1.024 second (8192 microframes)
-		if ((sof_int_count&0x1FFF)==0)
-		{
-			// update the numRecSamps, if necessary.
-			numRecSamps -= (Int16)(usbIsoInSampCntPerSec-dmaSampCntPerSec); 
-			// reset the accumulators
-			usbIsoInSampCntPerSec = 0;
-			dmaSampCntPerSec = 0;
-		}			
-    }
-
-    if(pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF)
-    {
-        if (usb_play_mode)
-        {
-            if (playIntrRcvd >= 1) /* check Rx received since last SOF */
-            {
-				///if (playIntrRcvd > 1)
-				///	sofMoreRxCount++;
-                playIntrRcvd = 0;
-            }
-            else
-            {
-				sofNoRxCount++;
-                ///if (sofNoRxCount>9)
-                ///	usb_play_mode = FALSE; /* no Rx received since last SOF -- deactivate playback */
-                //LOG_printf(&trace, "R 0x%04X", (asrcOutputFifoInBlk<<8)|asrcOutputFifoOutBlk); //debug
-            }
-        }
 
 #ifndef PLAY_ONLY
-        if (usb_rec_mode){
-            if (recIntrRcvd >= 1) /* check record packet since last SOF */
-				{
-				///if (recIntrRcvd>1)
-				///	sofMoreTxCount++;
-                recIntrRcvd = 0;
-				}
-            else
-            {
-				sofNoTxCount++;
-                ///if (sofNoTxCount>9)
-                ///	usb_rec_mode = FALSE; /* no Tx sent since last SOF -- deactivate record */
-                //LOG_printf(&trace, "R 0x%04X", (asrcOutputFifoInBlk<<8)|asrcOutputFifoOutBlk); //debug
-            }
-        }
-#endif
-
-    }
-#ifndef PLAY_ONLY
-    /* ISO IN, TX endpoint  */
     if(pContext->dwIntSourceL & USB_TX_INT_EP_REC)
     {
-        recIntrRcvd++; /* indicate record packet sent to next SOF */
+        recIntrRcvd++;
 		isoInIntCount++;
 
 		if (isoInIntCount==2)
@@ -2013,6 +1890,7 @@ void USBisr()
         SWI_post(&SWI_Send_USB_Output);
     }
 #endif
+
     /* ISO OUT, RX endpoint */
     if (pContext->dwIntSourceL & USB_RX_INT_EP_PLAY)
     {
@@ -2197,83 +2075,6 @@ static void MainTask(void)
         }
 
 /* Non-Control endpoints */
-
-        /* process the DATA IN */
-        if (pContext->fWaitingOnFlagA == TRUE)
-        {
-            /* Get the Endpoint currently assigned to Flag A */
-#if 0		// move to send_USB_Output
-            if (pContext->fEP3InBUFAvailable == TRUE)
-            {
-                pContext->fEP3InBUFAvailable = FALSE;
-                peps = &pContext->pEpStatus[EP_NUM_REC];
-                if (pContext->fInitialized)
-                {
-                    if (peps->pTransfer)
-                    {
-                        inTransferNum++;
-                        if (USB_handleTx(pContext, EP_NUM_REC))
-						{
-                            fExitMainTaskOnUSBError = TRUE;
-							inTransferErrNum++;
-						}
-                    }
-                }
-            }
-            else if (pContext->fEP4InBUFAvailable == TRUE)
-#endif
-            if (pContext->fEP4InBUFAvailable == TRUE)
-            {
-                pContext->fEP4InBUFAvailable = FALSE;
-                peps = &pContext->pEpStatus[EP_NUM_HID];
-                if (pContext->fInitialized)
-                {
-                    if (peps->pTransfer)
-                    {
-                        if (!USB_handleTx(pContext, EP_NUM_HID))
-                            fExitMainTaskOnUSBError = TRUE;
-                    }
-                }
-            }
-#if 0
-            if (pContext->fEP1InBUFAvailable == TRUE)
-            {
-                pContext->fEP1InBUFAvailable = FALSE;
-                peps = &pContext->pEpStatus[EP_NUM_FBCK];
-                if (pContext->fInitialized)
-                {
-                    if (peps->pTransfer)
-                    {
-                        if (!USB_handleTx(pContext, EP_NUM_FBCK))
-                            fExitMainTaskOnUSBError = TRUE;
-                    }
-                }
-            }
-#endif
-        }
-
-#if 0 // moved to store_USB_Input()
-        /* process the DATA OUT */
-        if(pContext->fWaitingOnFlagB)
-        {
-            /* Get the Endpoint currently assigned to Flag B */
-            peps = &pContext->pEpStatus[CSL_USB_EP2];
-
-            if(USB_isValidDataInFifoOut(peps))
-            {
-                if(pContext->fInitialized)
-                {
-                    if(peps->pTransfer)
-                    {
-                        if(!USB_handleRx(pContext, CSL_USB_EP2))
-                        {
-                            fExitMainTaskOnUSBError = TRUE;
-                        }
-                    }
-                }
-            }
-        }/* fWaitingOnFlagB check */
-#endif
 
         /* process EP0 IN DATA */
         if(pContext->fWaitingOnEP0BUFAvail)

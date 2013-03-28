@@ -3596,7 +3596,6 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 				case CSL_USB_REQUEST_TYPE_ENDPOINT_STATUS:
 					// get endpoint from setup packet
 					endpt = (pContext->usbSetup.wIndex) & 0xFF;
-					if (endpt == 0x81) EZDSP5535_LED_on(1);
 					// get the endpoint handle
 					hEPx   =  USB_epNumToHandle(CSL_USB0, endpt);
 					// return the stall status
