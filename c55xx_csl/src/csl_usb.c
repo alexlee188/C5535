@@ -60,7 +60,6 @@ CSL_UsbTransfer    gCtrlTransfer;
 CSL_UsbTransfer    gBulkInTransfer;
 CSL_UsbTransfer    gBulkOutTransfer;
 CSL_UsbTransfer    gIsoInTransfer;
-CSL_UsbTransfer	   gIsoFbckTransfer;
 CSL_UsbTransfer    gIsoOutTransfer;
 CSL_UsbTransfer    gIntInTransfer;
 CSL_UsbEpStatus    gEpStatus[CSL_USB_ENDPOINT_COUNT];
@@ -162,7 +161,6 @@ CSL_Status USB_init(CSL_UsbConfig    *usbConfig)
 
 			gCtrlTransfer.fComplete    = TRUE;
 			gIsoInTransfer.fComplete   = TRUE;
-			gIsoFbckTransfer.fComplete = TRUE;
 			gIsoOutTransfer.fComplete  = TRUE;
 			gBulkInTransfer.fComplete  = TRUE;
 			gBulkOutTransfer.fComplete = TRUE;
@@ -588,7 +586,7 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 
 				switch(epNum)
 				{
-					/* Configure Bulk IN End point */
+					/* Configure ISO IN feedback End point */
 					case CSL_USB_IN_EP1:		// special handling of feedback EP
 						fifoSize = CSL_USB_TX_FIFO_SIZE_8; // 0 means 8 bytes
 						CSL_FINS(usbRegisters->TXFIFOSZ_RXFIFOSZ,
@@ -1171,9 +1169,6 @@ CSL_Status USB_postTransaction(pUsbEpHandle      hEp,
 				break;
 
 			case CSL_USB_IN_EP1:
-				pTransfer = &gIsoFbckTransfer;
-				pTransfer->dwFlags = CSL_USB_IN_TRANSFER;
-				break;
 			case CSL_USB_IN_EP2:
 			case CSL_USB_IN_EP3:
 			case CSL_USB_IN_EP4:
@@ -3601,6 +3596,7 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 				case CSL_USB_REQUEST_TYPE_ENDPOINT_STATUS:
 					// get endpoint from setup packet
 					endpt = (pContext->usbSetup.wIndex) & 0xFF;
+					if (endpt == 0x81) EZDSP5535_LED_on(1);
 					// get the endpoint handle
 					hEPx   =  USB_epNumToHandle(CSL_USB0, endpt);
 					// return the stall status

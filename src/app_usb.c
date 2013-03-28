@@ -740,13 +740,7 @@ CSL_Status StartTransfer(void    *vpContext,
             pContext->fWaitingOnFlagA = TRUE;
             pContext->fEP4InBUFAvailable = TRUE;
         }
-#ifdef FEEDBACKEP
-        else if (peps->dwEndpoint == EP_NUM_FBCK)
-        {
-            pContext->fWaitingOnFlagA = TRUE;
-            pContext->fEP1InBUFAvailable = TRUE;
-        }
-#endif
+
     }
 
     if(no_main_task == FALSE)
@@ -807,12 +801,6 @@ CSL_Status CompleteTransfer(
               break;
 #endif
 
-#ifdef FEEDBACKEP
-         case EP_NUM_FBCK:
-        	 wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
-        	 MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
-        	 break;
-#endif
          case  EP_NUM_PLAY:
               peps->wUSBEvents |= CSL_USB_EVENT_WRITE_MEDIA;
               wMSCMsg = CSL_USB_MSG_ISO_OUT;
@@ -875,14 +863,6 @@ void DeviceNotification(
          /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
-#ifdef FEEDBACKEP
-         peps = &pContext->pEpStatus[EP_NUM_FBCK];
-         peps->wUSBEvents |= wUSBEvents;
-
-         wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
-         /* enqueue message */
-         MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
-#endif
 
          peps = &pContext->pEpStatus[EP_NUM_PLAY];
          peps->wUSBEvents |= wUSBEvents;
@@ -918,15 +898,6 @@ void DeviceNotification(
 
 		 isoTxCount++;
          wMSCMsg = CSL_USB_MSG_ISO_IN;
-         /* enqueue message */
-         MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
-#endif
-#ifdef FEEDBACKEP
-         peps = &pContext->pEpStatus[EP_NUM_FBCK];
-         peps->wUSBEvents |= wUSBEvents | CSL_USB_EVENT_FBCK_TX;
-
- 		 isoTxCount++;
-         wMSCMsg = CSL_USB_MSG_ISO_FB_IN;
          /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
@@ -1749,10 +1720,9 @@ void send_USB_Output(void)
     pContext = &gUsbContext;
 
     /* Send the feedback data to the host */
-    peps = &pContext->pEpStatus[EP_NUM_FBCK];
 
     // source (endpoint) buffer
-    pFifoAddr   = (volatile ioport Uint16*)peps->pFifoAddr;
+    pFifoAddr   = (volatile ioport Uint16*) &(usbRegisters->FIFO1R1);
 
 	/* save the index register value */
 	saveIndex = usbRegisters->INDEX_TESTMODE;

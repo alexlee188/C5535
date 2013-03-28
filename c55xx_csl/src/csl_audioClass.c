@@ -151,12 +151,12 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         pHandle->ctrlHandle.hEpObjArray[0] = &pHandle->ctrlHandle.ctrlOutEpObj;
         pHandle->ctrlHandle.hEpObjArray[1] = &pHandle->ctrlHandle.ctrlInEpObj;
         pHandle->ctrlHandle.hEpObjArray[2] = &pHandle->acHandle.isoOutEpObj;
-        pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoInEpObj;
-        pHandle->ctrlHandle.hEpObjArray[4] = &pHandle->acHandle.hidIntInEpObj;
-        for (i = 6; i < CSL_USB_ENDPOINT_COUNT; i++) pHandle->ctrlHandle.hEpObjArray[i] = NULL;
 #ifdef FEEDBACKEP
         pHandle->ctrlHandle.hEpObjArray[3] = &pHandle->acHandle.isoFbckEpObj;
 #endif //FEEDBACKEP
+        pHandle->ctrlHandle.hEpObjArray[4] = &pHandle->acHandle.hidIntInEpObj;
+        pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoInEpObj;
+        for (i = 6; i < CSL_USB_ENDPOINT_COUNT; i++) pHandle->ctrlHandle.hEpObjArray[i] = NULL;
 
         pHandle->ctrlHandle.getMinBuffer[0] = 0x0000;
         pHandle->ctrlHandle.getMinBuffer[1] = 0xFA00; /* vol min = -6 dB */
@@ -271,9 +271,9 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         /* Initialize the Iso IN feedback Endpoint */
         USB_initEndptObj(pHandle->ctrlHandle.devNum,
                          &pHandle->acHandle.isoFbckEpObj,
-                         (CSL_UsbEpNum)(pAppClassHandle->fbEpNum + CSL_USB_IN_EP0),
+                         CSL_USB_IN_EP1,
                          CSL_USB_ISO,
-                         pAppClassHandle->fbckTxPktSize,
+                         EP_FBCK_MAXP,
                          CSL_USB_EVENT_EOT,
                          pAppClassHandle->isoHandler);
 #endif //FEEDBACKEP
@@ -631,7 +631,6 @@ CSL_Status AC_Iso(void    *pAcObj)
         pAcHandle   = &pAcClassHdl->acHandle;
         hUsbOutEp   = &pAcHandle->isoOutEpObj;
         hUsbInEp   = &pAcHandle->isoInEpObj;
-        hUsbFbckEp = &pAcHandle->isoFbckEpObj;
 
         usbEvent = (USB_getEvents(hUsbOutEp, &status) |
                      USB_getEvents(hUsbInEp, &status) |
@@ -651,27 +650,6 @@ CSL_Status AC_Iso(void    *pAcObj)
             pAcHandle->playBackActive = TRUE;
             status = CSL_AC_MEDIACCESS_SUCCESS;
         }
-
-#if 0
-        if ((usbEvent & CSL_USB_EVENT_FBCK_TX) == CSL_USB_EVENT_FBCK_TX)
-        {
-        	Uint16 lbaBufferFbckRate[2];
-
-    		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-    				feedback_rate -= 1 << 4;
-    				EZDSP5535_LED_toggle(2);
-    		}
-    		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-    				feedback_rate += 1 << 4;
-    				EZDSP5535_LED_toggle(3);
-    		}
-        	lbaBufferFbckRate[0] = feedback_rate & 0x0000ffff;
-        	lbaBufferFbckRate[1] = feedback_rate >> 16;
-            /* Post transaction to USB */
-            USB_postTransaction(&pAcHandle->isoFbckEpObj, 4,
-                (void *)(&lbaBufferFbckRate[0]), CSL_USB_IOFLAG_NONE);
-        }
-#endif
 
     }
     else

@@ -533,7 +533,6 @@ void CSL_acTest(void)
         AC_AppHandle.strDescrApp = (char **)string_descriptor;
         AC_AppHandle.lbaBufferPbApp = &lbaBufferPbApp[0];
         AC_AppHandle.lbaBufferRecApp = &lbaBufferRecApp[0];
-        AC_AppHandle.lbaBufferFbckApp = &lbaBufferFbckApp[0];
         AC_AppHandle.lbaBufferHidReportApp = &lbaBufferHidReportApp[0];
         AC_AppHandle.acReqTableApp = USB_ReqTable;
         AC_AppHandle.pId = pId;
@@ -544,9 +543,6 @@ void CSL_acTest(void)
         AC_AppHandle.txEpNum = EP_NUM_REC; /* record endpoint number */
 #endif
         AC_AppHandle.hidTxEpNum = EP_NUM_HID; /* HID interrupt-IN endpoint number */
-#ifdef FEEDBACKEP
-        AC_AppHandle.fbEpNum = EP_NUM_FBCK; /* feedback endpoint number */
-#endif //FEEDBACKEP
 
 ///#ifdef SAMPLE_RATE_TX_96kHz
 ///		LOG_printf(&trace, "PLAYBACK: 96KHZ ");
@@ -556,9 +552,6 @@ void CSL_acTest(void)
 
         AC_AppHandle.txPktSize = EP_REC_MAXP;
         AC_AppHandle.hidTxPktSize = EP_HID_MAXP; // max packet size for HID output report
-#ifdef FEEDBACKEP
-        AC_AppHandle.fbckTxPktSize = EP_FBCK_MAXP; // 4
-#endif //FEEDBACKEP
 
         /* All Function Handlers need to be Initialised */
         AC_AppHandle.playAudioApp = appPlayAudio;

@@ -73,9 +73,6 @@ Uint16 lbaBufferPbApp[APP_USBAC_LBA_BUF_PB_SIZE];
 #pragma DATA_ALIGN(lbaBufferRecApp, 4);
 Uint16 lbaBufferRecApp[APP_USBAC_LBA_BUF_REC_SIZE];
 
-#pragma DATA_ALIGN(lbaBufferFbckApp, 4);
-Uint16 lbaBufferFbckApp[3]; // 4 bytes plus one spare
-
 /* Buffer used to store the HID Report data to send to USB */
 #pragma DATA_ALIGN(lbaBufferHidReportApp, 4);
 Uint16 lbaBufferHidReportApp[HID_REPORT_SIZE_WORDS+1];
@@ -623,12 +620,6 @@ static void MSCTask(void)
                     (*peps->hEventHandler)();
                 break;
 #endif
-            case CSL_USB_MSG_ISO_FB_IN:
-				msgIsoInFbCount++;
-                peps = &pContext->pEpStatus[EP_NUM_FBCK];
-                if(peps->hEventHandler)
-                    (*peps->hEventHandler)();
-                break;
 
             case CSL_USB_MSG_ISO_OUT:
                 peps = &pContext->pEpStatus[EP_NUM_PLAY];
