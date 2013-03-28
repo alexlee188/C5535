@@ -441,13 +441,15 @@ CSL_Status USB_resetDev(CSL_UsbDevNum    devNum)
 	/* enable ep2 intr*/
 	CSL_FINS(usbRegisters->INTRRXE,
 	         USB_INTRRXE_EP2RX, TRUE);
+
+#if 0
     /* enable ep3 intr*/
     CSL_FINS(usbRegisters->INTRTXE,
              USB_INTRTXE_EP3TX, TRUE);
 	/* enable ep4 intr */
 	CSL_FINS(usbRegisters->INTRTXE,
 	         USB_INTRTXE_EP4TX, TRUE);
-
+#endif
 
 	 /* enable generic MUSB interrupts
 	Interrupts enabled : Disconnect, connect, Reset, Resume, Suspend */

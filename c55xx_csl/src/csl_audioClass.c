@@ -154,9 +154,9 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
 #ifdef FEEDBACKEP
         pHandle->ctrlHandle.hEpObjArray[3] = &pHandle->acHandle.isoFbckEpObj;
 #endif //FEEDBACKEP
-        pHandle->ctrlHandle.hEpObjArray[4] = &pHandle->acHandle.hidIntInEpObj;
-        pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoInEpObj;
-        for (i = 6; i < CSL_USB_ENDPOINT_COUNT; i++) pHandle->ctrlHandle.hEpObjArray[i] = NULL;
+        //pHandle->ctrlHandle.hEpObjArray[4] = &pHandle->acHandle.hidIntInEpObj;
+        //pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoInEpObj;
+        for (i = 4; i < CSL_USB_ENDPOINT_COUNT; i++) pHandle->ctrlHandle.hEpObjArray[i] = NULL;
 
         pHandle->ctrlHandle.getMinBuffer[0] = 0x0000;
         pHandle->ctrlHandle.getMinBuffer[1] = 0xFA00; /* vol min = -6 dB */
@@ -288,7 +288,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
                          CSL_USB_EVENT_EOT,
                          pAppClassHandle->isoHandler);
 #endif
-        /* Initialize the HID Interrupt IN Endpoint */
+/*
         USB_initEndptObj(pHandle->ctrlHandle.devNum,
                          &pHandle->acHandle.hidIntInEpObj,
                          (CSL_UsbEpNum)(pAppClassHandle->hidTxEpNum + CSL_USB_IN_EP0), 
@@ -301,7 +301,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         pHandle->ctrlHandle.acHidReportId = pAppClassHandle->acHidReportId; // HID report ID
         pHandle->ctrlHandle.acHidReportLen = pAppClassHandle->acHidReportLen; // HID report length (bytes)
         pHandle->ctrlHandle.acHidIdleRate = 0; // HID idle rate -- only indefinite duration supported
-
+*/
         /* USB API setParams called for setup */
         USB_setParams(CSL_USB0, pHandle->ctrlHandle.hEpObjArray, 0x0);
 

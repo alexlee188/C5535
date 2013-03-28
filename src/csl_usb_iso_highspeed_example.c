@@ -636,7 +636,7 @@ void CSL_acTest(void)
         DMA_StartTransfer(hDmaTxRight4);
 #endif //USE_FOUR_CODEC
 
-        #ifdef ENABLE_RECORD
+#ifndef PLAY_ONLY
 ///#if defined(SAMPLE_RATE_RX_96kHz)
 ///        LOG_printf(&trace, "RECORD: 96KHZ ");
 ///#else
@@ -685,7 +685,7 @@ void CSL_acTest(void)
         /* Start 3rd right Rx DMA */
         DMA_StartTransfer(hDmaRxRight4);
 #endif //USE_FOUR_CODEC
-        #endif // ENABLE_RECORD
+#endif //ifndef PLAY_ONLY
 
 #ifdef STORE_PARAMETERS_TO_SDRAM
         initSdram(TRUE, 0x0000);
@@ -714,8 +714,6 @@ void CSL_acTest(void)
         *(volatile unsigned int *)0x0001 = (1<<9) | (1<<8) | 0x0E;
         asm("   idle");     
 
-        /* Clock gate usused peripherals */
-		//ClockGating();
     }
 }
 
