@@ -584,7 +584,7 @@ void USBMSCTask()
 Uint32 mscTaskNum = 0;
 Uint32 msgMscCtlCount = 0;
 Uint32 msgIsoInCount = 0;
-Uint32 msgIsoInFbCount = 0;
+Uint32 msgIsoFbckCount = 0;
 static void MSCTask(void)
 {
     CSL_UsbMscMsg        wMSCMsg;
@@ -612,14 +612,12 @@ static void MSCTask(void)
                     (*peps->hEventHandler)();
                 break;
 
-#ifndef PLAY_ONLY
-            case CSL_USB_MSG_ISO_IN:
-				msgIsoInCount++;
-                peps = &pContext->pEpStatus[EP_NUM_REC];
+            case CSL_USB_MSG_ISO_IN:		// feedback EP handler for any ISO IN request
+				msgIsoFbckCount++;
+                peps = &pContext->pEpStatus[EP_NUM_FBCK];
                 if(peps->hEventHandler)
                     (*peps->hEventHandler)();
                 break;
-#endif
 
             case CSL_USB_MSG_ISO_OUT:
                 peps = &pContext->pEpStatus[EP_NUM_PLAY];

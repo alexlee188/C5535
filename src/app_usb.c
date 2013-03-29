@@ -802,20 +802,18 @@ CSL_Status CompleteTransfer(
               MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
               break;
 #endif
-
+/*
          case  EP_NUM_PLAY:
               peps->wUSBEvents |= CSL_USB_EVENT_WRITE_MEDIA;
               wMSCMsg = CSL_USB_MSG_ISO_OUT;
-              /* enqueue message */
               MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
               break;
 
          case  EP_NUM_HID:
               wMSCMsg = CSL_USB_MSG_HID_INT_IN;
-              /* enqueue message */
               MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
               break;
-
+*/
          default:
               break;
     }
