@@ -848,13 +848,14 @@ void DeviceNotification(
 
 	deviceNotifyCount++;
 
+
     if (isoTxCount<8000)
 	{
 	    wMSCMsg = CSL_USB_MSG_MSC_CTL;
-	    /* enqueue message */
 	    MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 	}
 
+/*
     if(wUSBEvents & CSL_USB_EVENT_RESET)
     {
 #ifndef PLAY_ONLY
@@ -862,7 +863,6 @@ void DeviceNotification(
          peps->wUSBEvents |= wUSBEvents;
 
          wMSCMsg = CSL_USB_MSG_ISO_IN;
-         /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
 
@@ -870,14 +870,12 @@ void DeviceNotification(
          peps->wUSBEvents |= wUSBEvents;
 
          wMSCMsg = CSL_USB_MSG_ISO_OUT;
-         /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 
          peps = &pContext->pEpStatus[EP_NUM_HID];
          peps->wUSBEvents |= wUSBEvents;
 
          wMSCMsg = CSL_USB_MSG_HID_INT_IN;
-         /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
     }
     else if (wUSBEvents & CSL_USB_EVENT_ISO_RX)
@@ -887,7 +885,6 @@ void DeviceNotification(
 
 		 isoRxCount++;
          wMSCMsg = CSL_USB_MSG_ISO_OUT;
-         /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
     }
     else if (wUSBEvents & CSL_USB_EVENT_ISO_TX)
@@ -900,7 +897,6 @@ void DeviceNotification(
 
 		 isoTxCount++;
          wMSCMsg = CSL_USB_MSG_ISO_IN;
-         /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
 #endif
     }
@@ -910,20 +906,10 @@ void DeviceNotification(
          peps->wUSBEvents |= wUSBEvents;
 
          wMSCMsg = CSL_USB_MSG_HID_INT_IN;
-         /* enqueue message */
          MBX_post(&MBX_msc, &wMSCMsg, SYS_FOREVER);
     }
+    */
 }
-
-/**
- *  \brief  Function to start USB data transfer
- *
- *  \param  pContext     - Pointer to the global MUSB contoller context structure
- *  \param  dwEndpoint   - Endpoint Number
- *
- *  \return TRUE  - Operation successful
- *          FALSE - Invalid input parameters
- */
 
 /*
 void USB_configEndpointDataSize(

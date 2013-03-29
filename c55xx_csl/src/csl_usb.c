@@ -3341,8 +3341,8 @@ CSL_Status USB_coreEventProcessEp0(pUsbContext pContext)
 	status = CSL_SOK;
 
 	saveIndex = usbRegisters->INDEX_TESTMODE;
-		CSL_FINS(usbRegisters->INDEX_TESTMODE,
-				 USB_INDEX_TESTMODE_EPSEL, CSL_USB_EP0);
+	CSL_FINS(usbRegisters->INDEX_TESTMODE,
+			 USB_INDEX_TESTMODE_EPSEL, CSL_USB_EP0);
 
 	USB_getSetupPacket(CSL_USB0, &pContext->usbSetup, TRUE);
 
