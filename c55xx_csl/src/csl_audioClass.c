@@ -152,10 +152,9 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
         pHandle->ctrlHandle.hEpObjArray[1] = &pHandle->ctrlHandle.ctrlInEpObj;
         pHandle->ctrlHandle.hEpObjArray[2] = &pHandle->acHandle.isoOutEpObj;
 #ifdef FEEDBACKEP
-        pHandle->ctrlHandle.hEpObjArray[3] = &pHandle->acHandle.isoFbckEpObj;
+        pHandle->ctrlHandle.hEpObjArray[3] = &pHandle->acHandle.isoInEpObj;
 #endif //FEEDBACKEP
         //pHandle->ctrlHandle.hEpObjArray[4] = &pHandle->acHandle.hidIntInEpObj;
-        //pHandle->ctrlHandle.hEpObjArray[5] = &pHandle->acHandle.isoInEpObj;
         for (i = 4; i < CSL_USB_ENDPOINT_COUNT; i++) pHandle->ctrlHandle.hEpObjArray[i] = NULL;
 
         pHandle->ctrlHandle.getMinBuffer[0] = 0x0000;
@@ -270,7 +269,7 @@ CSL_Status AC_Open(pAcAppClassHandle    pAppClassHandle)
 #ifdef FEEDBACKEP
         /* Initialize the Iso IN feedback Endpoint */
         USB_initEndptObj(pHandle->ctrlHandle.devNum,
-                         &pHandle->acHandle.isoFbckEpObj,
+                         &pHandle->acHandle.isoInEpObj,
                          CSL_USB_IN_EP1,
                          CSL_USB_ISO,
                          EP_FBCK_MAXP,
@@ -619,7 +618,6 @@ CSL_Status AC_Iso(void    *pAcObj)
     CSL_AcObject        *pAcHandle;
     pUsbEpHandle        hUsbOutEp;
     pUsbEpHandle        hUsbInEp;
-    pUsbEpHandle		hUsbFbckEp;
     CSL_Status          status;
     CSL_UsbEventMask    usbEvent;
 
@@ -633,8 +631,7 @@ CSL_Status AC_Iso(void    *pAcObj)
         hUsbInEp   = &pAcHandle->isoInEpObj;
 
         usbEvent = (USB_getEvents(hUsbOutEp, &status) |
-                     USB_getEvents(hUsbInEp, &status) |
-                     USB_getEvents(hUsbFbckEp, &status));
+                     USB_getEvents(hUsbInEp, &status));
 
         if((usbEvent & CSL_USB_EVENT_READ_MEDIA) == CSL_USB_EVENT_READ_MEDIA)
         {
@@ -1535,20 +1532,17 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
                 (void*)&pCtrlHandle->sampleRateBuf[0],
                 CSL_USB_IOFLAG_NONE);
         }
-        else if (epNum == pAcHandle->isoInEpObj.epNum) /* is data for record endpoint? */
+        else if (epNum == pAcHandle->isoInEpObj.epNum) /* is data for Feedback endpoint? */
         {
+        	/*
             gRecSampRateChange = TRUE;
 
-            /* get sample rate */
             pCtrlHandle->recSampleRateBuf[0] = 0xffff;
             pCtrlHandle->recSampleRateBuf[1] = 0xffff;
             USB_postTransaction(hOutEp, 4,
                 (void*)&pCtrlHandle->recSampleRateBuf[0],
                 CSL_USB_IOFLAG_NONE);
-        }
-        else if (epNum == pAcHandle->isoFbckEpObj.epNum) /* is data for feedbacm endpoint? */
-        {
-
+            */
         }
         else
         {
@@ -1839,14 +1833,7 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
                 (void*)&pCtrlHandle->sampleRateBuf[0], 
                 CSL_USB_IOFLAG_NONE);
         }
-        else if (epNum == pAcHandle->isoInEpObj.epNum) /* is data for record endpoint? */
-        {
-            /* Send  sample rate */
-            USB_postTransaction(hInEp, 4,
-                (void*)&pCtrlHandle->recSampleRateBuf[0], 
-                CSL_USB_IOFLAG_NONE);
-        }
-        else if (epNum == pAcHandle->isoFbckEpObj.epNum) /* is data for Feedback endpoint? */
+        else if (epNum == pAcHandle->isoInEpObj.epNum) /* is data for Feedback endpoint? */
         {
             /* Send sample rate */
             USB_postTransaction(hInEp, 4,

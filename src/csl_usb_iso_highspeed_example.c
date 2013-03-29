@@ -550,7 +550,7 @@ void CSL_acTest(void)
         AC_AppHandle.rxPktSize = EP_PB_MAXP; // max packet size for 96K stereo
 ///#endif // SAMPLE_RATE_TX_96kHz
 
-        AC_AppHandle.txPktSize = EP_REC_MAXP;
+        AC_AppHandle.txPktSize = EP_FBCK_MAXP;
         AC_AppHandle.hidTxPktSize = EP_HID_MAXP; // max packet size for HID output report
 
         /* All Function Handlers need to be Initialised */

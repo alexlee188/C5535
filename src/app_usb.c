@@ -116,6 +116,7 @@ Bool StartDevice(pUsbContext pContext)
     if(!USB_checkSpeed(pContext, &pContext->busSpeed))
         return FALSE;
 
+    /*
     for (dwEndpoint = 0; dwEndpoint < CSL_USB_ENDPOINT_COUNT; ++dwEndpoint)
     {
         if(peps && peps->fSelected)
@@ -123,6 +124,7 @@ Bool StartDevice(pUsbContext pContext)
             USB_configEndpointDataSize(pContext, dwEndpoint);
         }
     }
+    */
 
     if(pContext->cableState != CSL_USB_DEVICE_ATTACH)
     {
@@ -922,6 +924,8 @@ void DeviceNotification(
  *  \return TRUE  - Operation successful
  *          FALSE - Invalid input parameters
  */
+
+/*
 void USB_configEndpointDataSize(
     pUsbContext pContext,
     DWORD       dwEndpoint
@@ -1013,6 +1017,8 @@ void USB_configEndpointDataSize(
         break;
     }
 }
+
+*/
 
 /* Reads RXMAXP for selected endpoint */
 Uint16 USB_getRxMaxp(Uint16 epNum)
@@ -1707,17 +1713,10 @@ Uint32 underRunCount = 0;
 Uint32 fifoEmptyCount = 0;
 void send_USB_Output(void)
 {
-    pUsbContext     pContext;
-    pUsbEpStatus     peps;
     volatile ioport Uint16    *pFifoAddr;
     Uint16              saveIndex;
-    volatile Uint16     looper;
-	Uint16			txCsr;
-	register Uint16			tempWord1;
-	register Uint16			tempWord2;
+	Uint16				txCsr;
 	volatile Uint16		i, pktCount;
-
-    pContext = &gUsbContext;
 
     /* Send the feedback data to the host */
 
