@@ -40,6 +40,7 @@
  */
 
 #include "app_usb.h"
+#include "app_usbac_descs.h"
 #include <csl_audioClass.h>
 #include <csl_audioClassAux.h>
 #include <i2s_sample.h>
@@ -1677,7 +1678,7 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
 			else return(CSL_AC_REQUEST_STALL);
     	}
 
-    	else if ((usbSetup->wIndex>>8)==0x41) // input clock source ID
+    	else if ((usbSetup->wIndex>>8)==T_IT_CLK_SRC) // input clock source ID
 		{
 			if ((usbSetup->wValue>>8)==1) // CS_SAM_FREQ_CONTROL
 			{
@@ -1701,7 +1702,7 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
 				return(CSL_AC_REQUEST_STALL);
 			}
 
-		} else if ((usbSetup->wIndex >> CSL_AC_8BIT_SHIFT) == 0x2) /* FU ID=2 => playback */
+		} else if ((usbSetup->wIndex >> CSL_AC_8BIT_SHIFT) == T_FU_PLAY)
         {
             switch (usbSetup->wValue)
             {
@@ -1763,7 +1764,7 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
                     break;
             }
         }
-        else if ((usbSetup->wIndex >> CSL_AC_8BIT_SHIFT) == 0x5) /* FU ID=5 => record */
+        else if ((usbSetup->wIndex >> CSL_AC_8BIT_SHIFT) == T_FU_REC)
         {
             switch (usbSetup->wValue)
             {
@@ -1814,9 +1815,23 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
                     break;
             }
         }
-        else
-        {
-            requestRet = CSL_AC_REQUEST_STALL;
+        else if ((usbSetup->wIndex >> CSL_AC_8BIT_SHIFT) == T_IT_STRM_PLAY ){
+        	if ((usbSetup->wValue >> 8) == AUDIO_TE_CONTROL_CS_CLUSTER){
+        		if (alt_setting_play == 1){
+    				pCtrlHandle->ctrlBuffer[1] = 0x0302;	// 03 - input terminal conf  02 - num of channels
+    				pCtrlHandle->ctrlBuffer[2] = 0x0000;
+    				pCtrlHandle->ctrlBuffer[3] = 0x1A00;	// 1A - Input terminal string desc
+    				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
+    									CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
+        		}
+        		else {
+					pCtrlHandle->ctrlBuffer[1] = 0x0000;	// zero's at startup
+					pCtrlHandle->ctrlBuffer[2] = 0x0000;
+					pCtrlHandle->ctrlBuffer[3] = 0x0000;	// 1A - Input terminal string desc
+					USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->ctrlBuffer[0],
+										CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
+        		}
+        	}
         }
     }
     else if ((usbSetup->bmRequestType & 0x0F) == 0x2)  /* request sent to endpoint */
@@ -1826,16 +1841,14 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
         {
             epNum += CSL_USB_IN_EP0;
         }
-        if (epNum == pAcHandle->isoOutEpObj.epNum) /* is data for playback endpoint? */
+        if (epNum == pAcHandle->isoOutEpObj.epNum) // is data for playback endpoint?
         {
-            /* Send sample rate */
             USB_postTransaction(hInEp, 4,
                 (void*)&pCtrlHandle->sampleRateBuf[0], 
                 CSL_USB_IOFLAG_NONE);
         }
-        else if (epNum == pAcHandle->isoInEpObj.epNum) /* is data for Feedback endpoint? */
+        else if (epNum == CSL_USB_IN_EP1) // is data for Feedback endpoint?
         {
-            /* Send sample rate */
             USB_postTransaction(hInEp, 4,
                 (void*)&pCtrlHandle->sampleRateBuf[0],
                 CSL_USB_IOFLAG_NONE);

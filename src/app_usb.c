@@ -76,19 +76,6 @@ Uint16 firstFbckFlag = TRUE;
 
 Uint32 feedback_rate = 96 << 13;
 
-#if 0 // debug
-Uint16 gFaddr_PowerDbg;
-Uint16 gRxFifoSz_TxFifoSzDbg;
-Uint16 gTxFifoAddrDbg;
-Uint16 gTxMaxpDbg;
-Uint16 gTxCsrDbg;
-Uint16 gRxFifoAddrDbg;
-Uint16 gRxMaxpDbg;
-Uint16 gRxCsrDbg;
-Uint16 gCsr0Dbg;
-Uint16 gSaveIndex;
-#endif
-
 static void USB_MUSB_Isr(void);
 static void MainTask(void);
 
@@ -115,16 +102,6 @@ Bool StartDevice(pUsbContext pContext)
 
     if(!USB_checkSpeed(pContext, &pContext->busSpeed))
         return FALSE;
-
-    /*
-    for (dwEndpoint = 0; dwEndpoint < CSL_USB_ENDPOINT_COUNT; ++dwEndpoint)
-    {
-        if(peps && peps->fSelected)
-        {
-            USB_configEndpointDataSize(pContext, dwEndpoint);
-        }
-    }
-    */
 
     if(pContext->cableState != CSL_USB_DEVICE_ATTACH)
     {

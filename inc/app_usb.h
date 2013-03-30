@@ -180,6 +180,8 @@
 #define  AUDIO_AS_ACT_ALT_SETTINGS                         0x01
 #define  AUDIO_AS_VAL_ALT_SETTINGS                         0x02
 #define  AUDIO_AS_AUDIO_DATA_FORMAT                        0x03
+
+#define  AUDIO_TE_CONTROL_CS_CLUSTER					   0x04
       //! @}
 
 
