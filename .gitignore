@@ -26,5 +26,6 @@
 ./build/*
 ./build/Release/*.xml
 ./build/Release/*.map
+./build/CSL_USB_IsoHighSpeedExample_Out/Release/*.*
 ./c55xx_csl/build/*
 
