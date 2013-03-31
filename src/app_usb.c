@@ -74,7 +74,8 @@ Uint32 wake = 0;
 Uint16 firstRecordFlag = TRUE;
 Uint16 firstFbckFlag = TRUE;
 
-Uint32 feedback_rate = 96 << 13;
+Uint16 feedback_rate_high16 = 96 >> 3;
+Uint16 feedback_rate_low16 = 0;
 
 static void USB_MUSB_Isr(void);
 static void MainTask(void);
@@ -1679,6 +1680,7 @@ void send_USB_Output(void)
 	Uint16				txCsr;
 	volatile Uint16		i, pktCount;
 	Uint16				temp1, temp2;
+	Uint8				byte1, byte2;
 
     /* Send the feedback data to the host */
 
@@ -1734,17 +1736,27 @@ void send_USB_Output(void)
 	{
 		if (codec_output_buffer_sample > 0){
 			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-					feedback_rate -= 1 << 4;
+					feedback_rate_low16 -= 1;
+					if (feedback_rate_low16 == 0){
+						feedback_rate_high16 -=1;
+					}
 					EZDSP5535_LED_toggle(2);
 			}
 			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-					feedback_rate += 1 << 4;
+					feedback_rate_low16 += 1;
+					if (feedback_rate_low16 == 0){
+						feedback_rate_high16 +=1;
+					}
 					EZDSP5535_LED_toggle(3);
 			}
 		}
 
-	   temp1 = feedback_rate & 0x0000ffff;
-	   temp2 = feedback_rate >> 16;
+	   byte1 = feedback_rate_low16;
+	   byte2 = feedback_rate_low16 /256;
+	   temp1 = byte1 * 256 + byte2;
+	   byte1 = feedback_rate_high16;
+	   byte2 = feedback_rate_high16 /256;
+	   temp2 = byte1 * 256 + byte2;
 	   *pFifoAddr = temp1;
 	   *pFifoAddr = temp2;
 
