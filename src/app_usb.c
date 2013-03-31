@@ -1859,6 +1859,10 @@ void USBisr()
         USB_handleRxIntr(pContext, EP_NUM_PLAY);
         // Get the data from the endpoint buffer
         SWI_post(&SWI_Store_USB_Input);
+        if (firstFbckFlag){
+        	firstFbckFlag = FALSE;
+        	SWI_post(&SWI_Send_USB_Output);		// kick start feedback
+        }
     }
 
 #ifdef FEEDBACKEP
