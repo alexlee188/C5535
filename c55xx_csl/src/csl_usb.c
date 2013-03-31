@@ -617,7 +617,7 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 						         USB_TXMAXP_INDX_MAXPAYLOAD, maxPktSize);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-								 USB_PERI_TXCSR_AUTOSET, TRUE);
+								 USB_PERI_TXCSR_AUTOSET, FALSE);
 
 						CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 								 USB_PERI_TXCSR_ISO, TRUE);
@@ -648,6 +648,7 @@ CSL_Status USB_initEndptObj(CSL_UsbDevNum        devNum,
 						/* Enable Double packet buffering */
 						CSL_FINS(usbRegisters->TXFIFOSZ_RXFIFOSZ,
 								 USB_TXFIFOSZ_RXFIFOSZ_TXDPB, TRUE);
+
 						break;
 
 					case CSL_USB_IN_EP2:

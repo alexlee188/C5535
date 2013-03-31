@@ -1678,6 +1678,7 @@ void send_USB_Output(void)
     Uint16              saveIndex;
 	Uint16				txCsr;
 	volatile Uint16		i, pktCount;
+	Uint16				temp1, temp2;
 
     /* Send the feedback data to the host */
 
@@ -1731,24 +1732,29 @@ void send_USB_Output(void)
 	// packet loop (one or two packet depending on the FIFO emptiness)
 	for (i=0; i<pktCount; i++)
 	{
-		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-				feedback_rate -= 1 << 4;
-				EZDSP5535_LED_toggle(2);
+		if (codec_output_buffer_sample > 0){
+			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+					feedback_rate -= 1 << 4;
+					EZDSP5535_LED_toggle(2);
+			}
+			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
+					feedback_rate += 1 << 4;
+					EZDSP5535_LED_toggle(3);
+			}
 		}
-		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-				feedback_rate += 1 << 4;
-				EZDSP5535_LED_toggle(3);
-		}
-	   *pFifoAddr = feedback_rate & 0x0000ffff;
-	   *pFifoAddr = feedback_rate >> 16;
+
+	   temp1 = feedback_rate & 0x0000ffff;
+	   temp2 = feedback_rate >> 16;
+	   *pFifoAddr = temp1;
+	   *pFifoAddr = temp2;
 
 	   // This is a feedback endpoint so force data toggle
-			CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+	   		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 							USB_PERI_TXCSR_FRCDATATOG, TRUE);
 
-		// No need to commit Tx Packet as it is in AUTOSET mode
-		//CSL_FINS(usbRegisters->PERI_CSR0_INDX,
-		//		 USB_PERI_TXCSR_INDX_TXPKTRDY, TRUE);
+		// Commit Tx packet
+		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+				 USB_PERI_TXCSR_INDX_TXPKTRDY, TRUE);
 	} // for (i=0; i<pktCount; i++)
 
 	/* restore the index register */
@@ -1870,7 +1876,7 @@ void USBisr()
     if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
     {
 		isoFbckIntCount++;
-		if ((isoFbckIntCount % 100) == 0) EZDSP5535_LED_toggle(1);
+		if ((isoFbckIntCount % 200) == 0) EZDSP5535_LED_toggle(1);
 		// put feedback EP processing code here
 		SWI_post(&SWI_Send_USB_Output);
     }
