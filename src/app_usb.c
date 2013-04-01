@@ -1679,6 +1679,8 @@ void send_USB_Output(void)
     Uint16              saveIndex;
 	Uint16				txCsr;
 	volatile Uint16		i, pktCount;
+	Uint16				up_count = 0;
+	Uint16				down_count = 0;
 
     /* Send the feedback data to the host */
 
@@ -1718,18 +1720,26 @@ void send_USB_Output(void)
 	// calculate rate feedback adjustments
 	if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
 		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+			down_count++;
+			if (down_count >= 4){
 				feedback_rate_low16 -= 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 -=1;
 				}
 				EZDSP5535_LED_toggle(2);
+				down_count = 0;
+			}
 		}
 		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
+			up_count++;
+			if (up_count >= 4){
 				feedback_rate_low16 += 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 +=1;
 				}
 				EZDSP5535_LED_toggle(3);
+				up_count = 0;
+			}
 		}
 	}
 
