@@ -1715,6 +1715,24 @@ void send_USB_Output(void)
 		usbRegisters->PERI_CSR0_INDX &= ~(CSL_USB_PERI_TXCSR_UNDERRUN_MASK);
 	}
 
+	// calculate rate feedback adjustments
+	if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
+		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+				feedback_rate_low16 -= 1;
+				if (feedback_rate_low16 == 0){
+					feedback_rate_high16 -=1;
+				}
+				EZDSP5535_LED_toggle(2);
+		}
+		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
+				feedback_rate_low16 += 1;
+				if (feedback_rate_low16 == 0){
+					feedback_rate_high16 +=1;
+				}
+				EZDSP5535_LED_toggle(3);
+		}
+	}
+
 	// if the USB TX FIFO is not empty.
 	if ((txCsr & CSL_USB_PERI_TXCSR_FIFONOTEMPTY_MASK) == CSL_USB_PERI_TXCSR_FIFONOTEMPTY_MASK)
 	{
@@ -1732,45 +1750,16 @@ void send_USB_Output(void)
 	// packet loop (one or two packet depending on the FIFO emptiness)
 	for (i=0; i<pktCount; i++)
 	{
-		if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
-			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*7/8)){
-					feedback_rate_low16 -= 1 << 5;
-					if (feedback_rate_low16 == 0){
-						feedback_rate_high16 -=1;
-					}
-					EZDSP5535_LED_toggle(2);
-			}
-			else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-					feedback_rate_low16 -= 1 << 2;
-					if (feedback_rate_low16 == 0){
-						feedback_rate_high16 -=1;
-					}
-					EZDSP5535_LED_toggle(2);
-			}
-			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/8)){
-					feedback_rate_low16 += 1 << 5;
-					if (feedback_rate_low16 == 0){
-						feedback_rate_high16 +=1;
-					}
-					EZDSP5535_LED_toggle(3);
-			}
-			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-					feedback_rate_low16 += 1 << 2;
-					if (feedback_rate_low16 == 0){
-						feedback_rate_high16 +=1;
-					}
-					EZDSP5535_LED_toggle(3);
-			}
-		}
+
 	   *pFifoAddr = feedback_rate_low16;
 	   *pFifoAddr = feedback_rate_high16;
 
 	   // This is a feedback endpoint so force data toggle
-	   		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+	   CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 							USB_PERI_TXCSR_FRCDATATOG, TRUE);
 
-		// Commit Tx packet
-		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
+	   // Commit Tx packet
+	   CSL_FINS(usbRegisters->PERI_CSR0_INDX,
 				 USB_PERI_TXCSR_INDX_TXPKTRDY, TRUE);
 	} // for (i=0; i<pktCount; i++)
 
@@ -1893,7 +1882,7 @@ void USBisr()
     if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
     {
 		isoFbckIntCount++;
-		if ((isoFbckIntCount % 50) == 0) EZDSP5535_LED_toggle(1);
+		if ((isoFbckIntCount % 200) == 0) EZDSP5535_LED_toggle(1);
 		// put feedback EP processing code here
 		SWI_post(&SWI_Send_USB_Output);
     }
