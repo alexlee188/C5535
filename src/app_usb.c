@@ -1673,14 +1673,14 @@ void send_USB_Output(void)
 Uint32 swiSendCount = 0;
 Uint32 underRunCount = 0;
 Uint32 fifoEmptyCount = 0;
+Uint16	up_count = 0;
+Uint16	down_count = 0;
 void send_USB_Output(void)
 {
     volatile ioport Uint16    *pFifoAddr;
     Uint16              saveIndex;
 	Uint16				txCsr;
 	volatile Uint16		i, pktCount;
-	Uint16				up_count = 0;
-	Uint16				down_count = 0;
 
     /* Send the feedback data to the host */
 
