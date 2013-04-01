@@ -1734,14 +1734,14 @@ void send_USB_Output(void)
 	{
 		if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
 			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-					feedback_rate_low16 -= 1 << 4;
+					feedback_rate_low16 -= 1 << 3;
 					if (feedback_rate_low16 == 0){
 						feedback_rate_high16 -=1;
 					}
 					EZDSP5535_LED_toggle(2);
 			}
 			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-					feedback_rate_low16 += 1 << 4;
+					feedback_rate_low16 += 1 << 3;
 					if (feedback_rate_low16 == 0){
 						feedback_rate_high16 +=1;
 					}
@@ -1879,7 +1879,7 @@ void USBisr()
     if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
     {
 		isoFbckIntCount++;
-		if ((isoFbckIntCount % 200) == 0) EZDSP5535_LED_toggle(1);
+		if ((isoFbckIntCount % 50) == 0) EZDSP5535_LED_toggle(1);
 		// put feedback EP processing code here
 		SWI_post(&SWI_Send_USB_Output);
     }
