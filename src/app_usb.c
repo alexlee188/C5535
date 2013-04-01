@@ -1733,15 +1733,29 @@ void send_USB_Output(void)
 	for (i=0; i<pktCount; i++)
 	{
 		if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
-			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-					feedback_rate_low16 -= 1 << 3;
+			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*7/8)){
+					feedback_rate_low16 -= 1 << 5;
 					if (feedback_rate_low16 == 0){
 						feedback_rate_high16 -=1;
 					}
 					EZDSP5535_LED_toggle(2);
 			}
+			else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+					feedback_rate_low16 -= 1 << 2;
+					if (feedback_rate_low16 == 0){
+						feedback_rate_high16 -=1;
+					}
+					EZDSP5535_LED_toggle(2);
+			}
+			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/8)){
+					feedback_rate_low16 += 1 << 5;
+					if (feedback_rate_low16 == 0){
+						feedback_rate_high16 +=1;
+					}
+					EZDSP5535_LED_toggle(3);
+			}
 			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-					feedback_rate_low16 += 1 << 3;
+					feedback_rate_low16 += 1 << 2;
 					if (feedback_rate_low16 == 0){
 						feedback_rate_high16 +=1;
 					}
