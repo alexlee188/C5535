@@ -59,7 +59,7 @@
 #define CODEC_OUTPUT_BUFFER_FRAME_SZ     (2*MAX_TXBUFF_SZ_I2SSAMPS) /* 2x for stereo */
 
 /* codec output buffer size in msec. */
-#define CODEC_OUTPUT_SZ_MSEC              (40l)
+#define CODEC_OUTPUT_SZ_MSEC              (10l)
 
 #ifdef USE_FOUR_CODEC
 #ifdef SAMP_24BIT
