@@ -1679,8 +1679,6 @@ void send_USB_Output(void)
     Uint16              saveIndex;
 	Uint16				txCsr;
 	volatile Uint16		i, pktCount;
-	Uint16				temp1, temp2;
-	Uint8				byte1, byte2;
 
     /* Send the feedback data to the host */
 
@@ -1734,31 +1732,24 @@ void send_USB_Output(void)
 	// packet loop (one or two packet depending on the FIFO emptiness)
 	for (i=0; i<pktCount; i++)
 	{
-		if (codec_output_buffer_sample > 0){
+		if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
 			if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
-					feedback_rate_low16 -= 1;
+					feedback_rate_low16 -= 1 << 4;
 					if (feedback_rate_low16 == 0){
 						feedback_rate_high16 -=1;
 					}
 					EZDSP5535_LED_toggle(2);
 			}
 			else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
-					feedback_rate_low16 += 1;
+					feedback_rate_low16 += 1 << 4;
 					if (feedback_rate_low16 == 0){
 						feedback_rate_high16 +=1;
 					}
 					EZDSP5535_LED_toggle(3);
 			}
 		}
-
-	   byte1 = feedback_rate_low16;
-	   byte2 = feedback_rate_low16 /256;
-	   temp1 = byte1 * 256 + byte2;
-	   byte1 = feedback_rate_high16;
-	   byte2 = feedback_rate_high16 /256;
-	   temp2 = byte1 * 256 + byte2;
-	   *pFifoAddr = temp1;
-	   *pFifoAddr = temp2;
+	   *pFifoAddr = feedback_rate_low16;
+	   *pFifoAddr = feedback_rate_high16;
 
 	   // This is a feedback endpoint so force data toggle
 	   		CSL_FINS(usbRegisters->PERI_CSR0_INDX,
