@@ -1722,10 +1722,10 @@ void send_USB_Output(void)
 		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
 			down_count++;
 			if (down_count >= 4){
-				feedback_rate_low16 -= 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 -=1;
 				}
+				feedback_rate_low16 -= 1;
 				EZDSP5535_LED_toggle(2);
 				down_count = 0;
 			}

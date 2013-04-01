@@ -470,8 +470,6 @@ void PbAudioAlgTsk(void)
 
     while (1)
     {
-    	usb_play_mode = TRUE;	// There is a problem with UAC2 triggering the usb_play_mode/start
-    							// under Linux driver so temporarily enable usb_play_mode all the time
         SEM_pend(&SEM_PingPongTxLeftComplete, SYS_FOREVER);
 #ifdef USE_TWO_CODEC
         SEM_pend(&SEM_PingPongTxLeftComplete2, SYS_FOREVER);
