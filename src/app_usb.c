@@ -2105,8 +2105,8 @@ static void MainTask(void)
 					feedback_rate_low16 = 65536L / 5;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
-					feedback_rate_high16 = 44/8;
-					feedback_rate_low16 = (65536L*6/10);
+					feedback_rate_high16 = 0x0005;
+					feedback_rate_low16 =  0x8333;
 				}
 				else if	(gSetPbSampRateTemp==SAMP_RATE_48KHZ){
 					feedback_rate_high16 = 48 >> 3;

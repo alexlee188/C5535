@@ -57,7 +57,6 @@
 #include <psp_i2s.h>
 #include "ezdsp5535_led.h"
 
-extern Uint32 feedback_rate;
 
 Bool gPbSampRateChange = FALSE; // playback sample rate change flag
 //Bool gRecSampRateChange = FALSE; // record sample rate change flag -- NOTE no record sample rate control

@@ -974,7 +974,8 @@ CSL_AcRequestRet AC_reqGetRange(CSL_UsbDevNum         devNum,
 	{
 		if ((usbSetup->wValue>>8)==1) // CS_SAM_FREQ_CONTROL
 		{
-#if ALL_FREQ
+#define ALL_FREQ
+#ifdef ALL_FREQ
 			/* Send the current sampling frequency range (in 2+N*12 bytes) */
 			// specify N(wNumSubRanges) - number of sample frequencies supported
 			pCtrlHandle->ctrlBuffer[1] = 0x0004;
