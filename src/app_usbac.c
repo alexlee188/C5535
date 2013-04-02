@@ -53,7 +53,6 @@ extern CSL_UsbContext  gUsbContext;
 
 CSL_AcInitStructApp AC_AppHandle;
 
-Uint16 active_sample_rate;
 Uint16 rx_pkt_size_16K_playback;
 
 Uint16 pId = DEV_PID;
@@ -642,29 +641,3 @@ static void MSCTask(void)
 
 }
 
-/* Intializes active sample rate and I2S Tx buffer size */
-Int16 initSampleRate(
-    Uint16 usbSampleRate, 
-    Uint16 *pActiveSampleRate, 
-    Uint16 *pI2sTxBuffSz
-)
-{
-    Int16 status = APP_USBAC_SOK;
-
-    switch (usbSampleRate)
-    {
-    case RATE_48_KHZ:
-        *pActiveSampleRate = ACTIVE_SAMPLE_RATE_48KHZ;
-        *pI2sTxBuffSz = 2*TXBUFF_SZ_I2SSAMPS_48KHZ; /* 2x for stereo */
-        break;
-    case RATE_96_KHZ:
-        *pActiveSampleRate = ACTIVE_SAMPLE_RATE_96KHZ;
-        *pI2sTxBuffSz = 2*TXBUFF_SZ_I2SSAMPS_96KHZ; /* 2x for stereo */
-        break;
-    default:
-        status = APP_USBAC_INV_USBSR;
-        break;
-    }
-
-    return status;
-}

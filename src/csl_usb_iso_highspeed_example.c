@@ -597,11 +597,6 @@ void CSL_acTest(void)
         /* Enable CPU USB interrupts */
         CSL_FINST(CSL_CPU_REGS->IER1, CPU_IER1_USB, ENABLE);
 
-        /* Initialize active playback sample rate */
-///#if defined(SAMPLE_RATE_TX_96kHz)
-        initSampleRate(RATE_96_KHZ, &active_sample_rate, 
-            &i2sTxBuffSz);
-///#endif
         /* Reset codec output buffer */
         reset_codec_output_buffer();
 

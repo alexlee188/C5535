@@ -33,20 +33,11 @@
 #define APP_USBAC_LBA_BUF_PB_SIZE   ( 2*2*192 )
 #define APP_USBAC_LBA_BUF_REC_SIZE  ( 2*2*192 )
 
-enum
-{
-    ACTIVE_SAMPLE_RATE_16KHZ = 0,
-    ACTIVE_SAMPLE_RATE_48KHZ,
-    ACTIVE_SAMPLE_RATE_96KHZ,
-    ACTIVE_SAMPLE_RATE_192KHZ
-};
-
 #define RX_PKT_SIZE_16K_PLAYBACK_MONO   (32) /* rx buffer size in bytes for 16 kHz mono playback  */
 #define RX_PKT_SIZE_16K_PLAYBACK_STEREO (64) /* rx buffer size in bytes for 16 kHz stereo playback  */
 
 extern CSL_AcInitStructApp AC_AppHandle;
 
-extern Uint16 active_sample_rate;
 extern Uint16 rx_pkt_size_16K_playback;
 
 extern Uint16 pId;
