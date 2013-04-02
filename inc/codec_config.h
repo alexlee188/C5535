@@ -31,11 +31,11 @@ typedef struct CodecCfgMsgObj {
     void    *wData;
 } CodecCfgMsgObj;
 
-extern Bool gRecSampRateChange;
-extern Uint16 gSetRecSampRateFlag;
-extern long gSetRecSampRate;
-extern long gSetRecSampRateTemp;
-extern long gSetRecSampRatePrev;
+extern Bool gPbSampRateChange;
+extern Uint16 gSetPbSampRateFlag;
+extern long gSetPbSampRate;
+extern long gSetPbSampRateTemp;
+extern long gSetPbSampRatePrev;
 // the number of sample per uFrame
 extern Uint16 gSetRecSampNum;
 // the revise amount to the number of sample per uFrame

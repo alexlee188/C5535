@@ -33,9 +33,9 @@ extern "C" {
 #include "csl_usb.h"
 #include "csl_usbAux.h"
 
-extern Bool gRecSampRateChange;
-extern Uint16 gSetRecSampRateFlag;
-extern long gSetRecSampRate;
+extern Bool gPbSampRateChange;
+extern Uint16 gSetPbSampRateFlag;
+extern long gSetPbSampRate;
 
 /** @addtogroup CSL_AC_FUNCTION
  @{ */
@@ -1131,7 +1131,7 @@ CSL_AcRequestRet AC_reqSetCur(CSL_UsbDevNum         devNum,
 	{
 		if ((usbSetup->wValue>>8)==1) // CS_SAM_FREQ_CONTROL
 		{
-            gRecSampRateChange = TRUE;
+            gPbSampRateChange = TRUE;
 
 			/* host wants to set the current sampling frequency (in 4 bytes) */
 	        pCtrlHandle->sampleRateBuf[1] = 0xFFFF;

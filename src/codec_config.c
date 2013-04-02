@@ -20,10 +20,10 @@
 #include "app_asrc.h"
 #include "Sample_rate.h"
 
-Uint16 gSetRecSampRateFlag = FALSE;
-long gSetRecSampRateTemp = SAMP_RATE_96KHZ;
-long gSetRecSampRate = SAMP_RATE_96KHZ;
-long gSetRecSampRatePrev = SAMP_RATE_96KHZ;
+Uint16 gSetPbSampRateFlag = FALSE;
+long gSetPbSampRateTemp = SAMP_RATE_96KHZ;
+long gSetPbSampRate = SAMP_RATE_96KHZ;
+long gSetPbSampRatePrev = SAMP_RATE_96KHZ;
 // the number of sample per uFrame
 Uint16 gSetRecSampNum = SAMP_RATE_96KHZ/8000;
 // the revise amount to the number of sample per uFrame
@@ -40,15 +40,15 @@ void RateChange(void)
 	volatile Uint32 looper;
 
 	// if the sample rate has been changed, then call the codec configuration
-	if (gSetRecSampRateFlag)
+	if (gSetPbSampRateFlag)
 	{
 		// if the record sample rate is indeed changed
-		if (gSetRecSampRateTemp!=gSetRecSampRate)
+		if (gSetPbSampRateTemp!=gSetPbSampRate)
 		{
-			if ((gSetRecSampRateTemp==SAMP_RATE_96KHZ)||		// 96kHz
-					(gSetRecSampRateTemp==SAMP_RATE_88_2KHZ)||	// 88.2kHz
-					(gSetRecSampRateTemp==SAMP_RATE_44_1KHZ)||	// 44.1kHz
-					(gSetRecSampRateTemp==SAMP_RATE_48KHZ))		// 48kHz
+			if ((gSetPbSampRateTemp==SAMP_RATE_96KHZ)||		// 96kHz
+					(gSetPbSampRateTemp==SAMP_RATE_88_2KHZ)||	// 88.2kHz
+					(gSetPbSampRateTemp==SAMP_RATE_44_1KHZ)||	// 44.1kHz
+					(gSetPbSampRateTemp==SAMP_RATE_48KHZ))		// 48kHz
 			{
 				// stop the I2S data receive
 				///DDC_I2S_transEnable((DDC_I2SHandle)i2sHandleRx, FALSE); 
@@ -190,22 +190,22 @@ void RateChange(void)
 #endif // USE_FOUR_CODEC
 
 				/* Initialize audio module */
-			    status = AIC3254_init(gSetRecSampRateTemp, gSetRecSampRateTemp);
+			    status = AIC3254_init(gSetPbSampRateTemp, gSetPbSampRateTemp);
 				if (status!=PSP_SOK)
 				{
 #ifdef DEBUG_LOG_PRINT
-					LOG_printf(&trace, "Change Codec Sample Rate ERROR: 0x%x", gSetRecSampRate);
+					LOG_printf(&trace, "Change Codec Sample Rate ERROR: 0x%x", gSetPbSampRate);
 #endif
 				}
 				
 				// save the previous sample rate
-				gSetRecSampRatePrev = gSetRecSampRate;
+				gSetPbSampRatePrev = gSetPbSampRate;
 				// update the sample rate
-				gSetRecSampRate = gSetRecSampRateTemp;
+				gSetPbSampRate = gSetPbSampRateTemp;
 
 				// compute number of samples per uFrame
 				// update the gSetRecSampNum
-				gSetRecSampNum = gSetRecSampRate/8000;
+				gSetRecSampNum = gSetPbSampRate/8000;
 
 			    // reset codec input circular buffer
 			    ///memset(codec_input_buffer, 0, CODEC_INPUT_BUFFER_SIZE*2);
@@ -475,9 +475,9 @@ void RateChange(void)
 #endif // USE_FOUR_CODEC
 			} else
 			{
-				///gSetRecSampRate = gSetRecSampRatePrev;
+				///gSetPbSampRate = gSetPbSampRatePrev;
 #ifdef DEBUG_LOG_PRINT
-				LOG_printf(&trace, "Unsupported Codec Sample Rate: 0x%x", gSetRecSampRate);
+				LOG_printf(&trace, "Unsupported Codec Sample Rate: 0x%x", gSetPbSampRate);
 #endif
 			}
 
@@ -490,7 +490,7 @@ void RateChange(void)
 			dmaSampCntPerSec = 0;
 		}
 		
-		gSetRecSampRateFlag = FALSE;
+		gSetPbSampRateFlag = FALSE;
 	}
 }
 

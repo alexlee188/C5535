@@ -43,6 +43,7 @@
 #include "VC5505_CSL_BIOS_cfg.h"
 #include "psp_i2s.h"
 #include "app_asrc.h"
+#include "sample_rate.h"
 
 extern CSL_UsbContext  gUsbContext;
 extern CSL_UsbRegsOvly usbRegisters;
@@ -2079,19 +2080,39 @@ static void MainTask(void)
                 fExitMainTaskOnUSBError = TRUE;
         }
 
-        // check for record sample rate change
+        // check for playback sample rate change
 		// did we get the new sample rate 
-        if ((gRecSampRateChange)&&
-			(pCtrlHandle->recSampleRateBuf[1] != 0xffff))
+        if ((gPbSampRateChange)&&
+			(pCtrlHandle->sampleRateBuf[1] != 0xffff))
         {
-            gRecSampRateChange = FALSE;
+            gPbSampRateChange = FALSE;
 
-			gSetRecSampRateFlag = TRUE;
-			gSetRecSampRateTemp = ((long)pCtrlHandle->recSampleRateBuf[2]<<16)|(pCtrlHandle->recSampleRateBuf[1]);
+			gSetPbSampRateFlag = TRUE;
+			gSetPbSampRateTemp = ((long)pCtrlHandle->sampleRateBuf[2]<<16)|(pCtrlHandle->sampleRateBuf[1]);
 	        /* Update the sample rate state */
 	        codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_RATE;
-	        codecCfgMsg.wData = (void *)&gSetRecSampRateTemp;
+	        codecCfgMsg.wData = (void *)&gSetPbSampRateTemp;
 	        MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
+
+			// if the record sample rate is indeed changed
+			if (gSetPbSampRateTemp!=gSetPbSampRate){
+				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
+					feedback_rate_high16 = 96 >> 3;
+					feedback_rate_low16 = 0;
+				}
+				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
+					feedback_rate_high16 = 88 >> 3;
+					feedback_rate_low16 = 65536L / 5;
+				}
+				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
+					feedback_rate_high16 = 44/8;
+					feedback_rate_low16 = (65536L*6/10);
+				}
+				else if	(gSetPbSampRateTemp==SAMP_RATE_48KHZ){
+					feedback_rate_high16 = 48 >> 3;
+					feedback_rate_low16 = 0;
+				}
+			}
         }
         
         if(mute_flag_change == TRUE)

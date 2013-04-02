@@ -60,7 +60,7 @@
 extern Uint32 feedback_rate;
 
 Bool gPbSampRateChange = FALSE; // playback sample rate change flag
-Bool gRecSampRateChange = FALSE; // record sample rate change flag -- NOTE no record sample rate control
+//Bool gRecSampRateChange = FALSE; // record sample rate change flag -- NOTE no record sample rate control
 
 Bool mute_flag_change = FALSE; // playback mute state change flag
 Bool rec_mute_flag_change = FALSE; // record mute state change flag
@@ -1402,7 +1402,7 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
 		{
 			if ((usbSetup->wValue>>8)==1) // CS_SAM_FREQ_CONTROL
 			{
-	            gRecSampRateChange = TRUE;
+	            gPbSampRateChange = TRUE;
 
 				/* host wants to set the current sampling frequency (in 4 bytes) */
 		        pCtrlHandle->sampleRateBuf[1] = 0xFFFF;
@@ -1535,15 +1535,6 @@ CSL_AcRequestRet AC_reqSetCurrent(CSL_UsbDevNum           devNum,
         }
         else if (epNum == pAcHandle->isoInEpObj.epNum) /* is data for Feedback endpoint? */
         {
-        	/*
-            gRecSampRateChange = TRUE;
-
-            pCtrlHandle->recSampleRateBuf[0] = 0xffff;
-            pCtrlHandle->recSampleRateBuf[1] = 0xffff;
-            USB_postTransaction(hOutEp, 4,
-                (void*)&pCtrlHandle->recSampleRateBuf[0],
-                CSL_USB_IOFLAG_NONE);
-            */
         }
         else
         {
@@ -1682,13 +1673,7 @@ CSL_AcRequestRet AC_reqGetCurrent(CSL_UsbDevNum         devNum,
 		{
 			if ((usbSetup->wValue>>8)==1) // CS_SAM_FREQ_CONTROL
 			{
-				/* Send the current sampling frequency (in 4 bytes) */
-				// dCUR	
-				//pCtrlHandle->ctrlBuffer[1] = (Uint16)(gSetRecSampRate&0xFFFF);
-				//pCtrlHandle->ctrlBuffer[2] = (Uint16)(gSetRecSampRate>>16);
-				/* Send the current sampling frequency value (in 4 bytes) */
-				//USB_postTransaction(hInEp, 4, (void*)&pCtrlHandle->ctrlBuffer[0],
-				//			        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
+
 				USB_postTransaction(hInEp, tempLen, (void*)&pCtrlHandle->sampleRateBuf[0],
 							        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 			} else if ((usbSetup->wValue>>8)==2) // CS_CLOCK_VALID_CONTROL
