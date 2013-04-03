@@ -13,4 +13,6 @@
 #ifndef _APP_AUDIO_ALG_H_
 #define _APP_AUDIO_ALG_H_
 
+extern Bool mute_play;
+
 #endif /* _APP_AUDIO_ALG_H_ */

@@ -53,6 +53,7 @@ static Bool usbDevDisconnect = FALSE;
 
 /* Indicates whether EP2 Rx interrupt received since last SOF interrupt */
 static Uint16 playIntrRcvd = 0;
+static Uint16 old_playIntrRcvd = 0;
 /* Indicates whether EP2 Rx interrupt received since last SOF interrupt */
 static Uint16 recIntrRcvd = 0;
 
@@ -61,6 +62,7 @@ Bool usb_rec_start = FALSE;
 
 Bool usb_play_mode = FALSE;
 Bool usb_play_start = FALSE;
+Bool mute_play = FALSE;
 
 Bool  no_main_task = FALSE;
 
@@ -1877,7 +1879,7 @@ void USBisr()
     /* ISO OUT, RX endpoint */
     if (pContext->dwIntSourceL & USB_RX_INT_EP_PLAY)
     {
-        playIntrRcvd++; /* indicate play packet received to next SOF */
+        playIntrRcvd++; /* indicate play packet received */
 		isoOutIntCount++;
         USB_handleRxIntr(pContext, EP_NUM_PLAY);
         // Get the data from the endpoint buffer
@@ -1893,12 +1895,24 @@ void USBisr()
     if (pContext->dwIntSourceL & USB_TX_INT_EP_FBCK)
     {
 		isoFbckIntCount++;
-		if ((isoFbckIntCount % 200) == 0) EZDSP5535_LED_toggle(1);
+		if ((isoFbckIntCount % 100) == 0) EZDSP5535_LED_toggle(1);
 		// put feedback EP processing code here
 		SWI_post(&SWI_Send_USB_Output);
     }
 #endif //FEEDBACKEP
 
+    //
+    if (pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF){
+    	sof_int_count++;
+    	if ((sof_int_count % 100) == 0){
+    		if (playIntrRcvd == old_playIntrRcvd){		// no new play interrupt since last check
+    			mute_play = TRUE;
+    		} else {
+    			mute_play = FALSE;
+    			old_playIntrRcvd = playIntrRcvd;
+    		}
+    	}
+    }
 
 	// only send the interrupt message when they are other interrupts (not USB ISO IN/OUT/SOF)
 #ifdef PLAY_ONLY
@@ -2101,8 +2115,8 @@ static void MainTask(void)
 					feedback_rate_low16 = 0;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
-					feedback_rate_high16 = 88 >> 3;
-					feedback_rate_low16 = 65536L / 5;
+					feedback_rate_high16 = 0x000b;
+					feedback_rate_low16 = 0x0666;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
 					feedback_rate_high16 = 0x0005;
