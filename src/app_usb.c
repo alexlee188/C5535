@@ -52,7 +52,7 @@ extern CSL_UsbRegsOvly usbRegisters;
 static Bool usbDevDisconnect = FALSE;
 
 /* Indicates whether EP2 Rx interrupt received since last SOF interrupt */
-static Uint16 playIntrRcvd = 0;
+volatile Uint16 playIntrRcvd = 0;
 static Uint16 old_playIntrRcvd = 0;
 /* Indicates whether EP2 Rx interrupt received since last SOF interrupt */
 static Uint16 recIntrRcvd = 0;
@@ -79,6 +79,8 @@ Uint16 firstFbckFlag = TRUE;
 
 Uint16 feedback_rate_high16 = 96 >> 3;
 Uint16 feedback_rate_low16 = 0;
+
+#define FEEDBACK_THRESHOLD_COUNT (8)
 
 static void USB_MUSB_Isr(void);
 static void MainTask(void);
@@ -1724,7 +1726,7 @@ void send_USB_Output(void)
 	if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
 		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
 			down_count++;
-			if (down_count >= 4){
+			if (down_count >= FEEDBACK_THRESHOLD_COUNT){
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 -=1;
 				}
@@ -1735,7 +1737,7 @@ void send_USB_Output(void)
 		}
 		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
 			up_count++;
-			if (up_count >= 4){
+			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
 				feedback_rate_low16 += 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 +=1;

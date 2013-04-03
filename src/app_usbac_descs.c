@@ -581,7 +581,7 @@ const Uint16 configDescriptor[CONFIG_DESCR_SZ] =
     EP_ADDR_FBCK,            		/* 2  bEndpointAddress (D7: 0:out, 1:in) */
     17,              				/* 3  bmAttributes (bitmap)  */
     LEB(0x0004),            		/* 4  wMaxPacketSize */
-    7,              				/* 6  bInterval */
+    8,              				/* 6  bInterval */
 #endif // FEEDBACKEP
     /* Audio Playback Interface */
 #endif // (defined(PLAY_ONLY)||defined(PLAY_RECORD))
