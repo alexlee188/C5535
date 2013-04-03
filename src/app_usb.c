@@ -80,7 +80,7 @@ Uint16 firstFbckFlag = TRUE;
 Uint16 feedback_rate_high16 = 96 >> 3;
 Uint16 feedback_rate_low16 = 0;
 
-#define FEEDBACK_THRESHOLD_COUNT (8)
+#define FEEDBACK_THRESHOLD_COUNT (16)
 
 static void USB_MUSB_Isr(void);
 static void MainTask(void);
@@ -1723,8 +1723,30 @@ void send_USB_Output(void)
 	}
 
 	// calculate rate feedback adjustments
-	if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){
-		if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+	if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS/2) ){
+		if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*(CODEC_OUTPUT_SZ_MSEC - 1))){
+			down_count++;
+			if (down_count >= 2){
+				if (feedback_rate_low16 == 0){
+					feedback_rate_high16 -=1;
+				}
+				feedback_rate_low16 -= 1;
+				EZDSP5535_LED_toggle(2);
+				down_count = 0;
+			}
+		}
+		else if (codec_output_buffer_sample < MAX_TXBUFF_SZ_DACSAMPS){
+			up_count++;
+			if (up_count >= 2){
+				feedback_rate_low16 += 1;
+				if (feedback_rate_low16 == 0){
+					feedback_rate_high16 +=1;
+				}
+				EZDSP5535_LED_toggle(3);
+				up_count = 0;
+			}
+		}
+		else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
 			down_count++;
 			if (down_count >= FEEDBACK_THRESHOLD_COUNT){
 				if (feedback_rate_low16 == 0){
