@@ -446,6 +446,7 @@ Uint32 playAudioCopyCount = 0;
 Uint32 playMemsetCount = 0;
 void PbAudioAlgTsk(void)
 {
+	Int16 tempL, tempR;
     Int16 *pbOutBufLeft;
     Int16 *pbOutBufRight;
 #ifdef USE_TWO_CODEC
@@ -543,18 +544,22 @@ void PbAudioAlgTsk(void)
 				{
 #ifdef SAMP_24BIT
 					// copy left channel sample
-					*pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
+					tempL = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
+					*pbOutBufLeft = mute_play ? 0 : tempL;
 					pbOutBufLeft++;
-					*pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
+					tempL = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
+					*pbOutBufLeft = mute_play ? 0 : tempL;
 					pbOutBufLeft++;
 					// copy right channel sample
-					*pbOutBufRight = codec_output_buffer[codec_output_buffer_output_index];
+					tempR = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
+					*pbOutBufRight = mute_play ? 0 : tempR;
 					pbOutBufRight++;
-					*pbOutBufRight = codec_output_buffer[codec_output_buffer_output_index];
+					tempR = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
+					*pbOutBufRight = mute_play ? 0 : tempR;
 					pbOutBufRight++;
 #ifdef USE_TWO_CODEC
 					// copy left channel sample

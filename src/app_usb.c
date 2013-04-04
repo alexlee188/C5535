@@ -1752,7 +1752,7 @@ void send_USB_Output(void)
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 -=1;
 				}
-				feedback_rate_low16 -= 1;
+				feedback_rate_low16 -= 2;
 				EZDSP5535_LED_toggle(2);
 				down_count = 0;
 			}
@@ -1802,6 +1802,18 @@ void send_USB_Output(void)
 
 	/* restore the index register */
 	usbRegisters->INDEX_TESTMODE = saveIndex;
+
+	// Linux FIX
+	if ((gSetPbSampRateTemp==SAMP_RATE_88_2KHZ)  &&
+			(feedback_rate_high16 > 0x000b) && (feedback_rate_low16 > 0x2000)){
+		feedback_rate_high16 = 0x000b;
+		feedback_rate_low16 = 0x0666;
+	}
+	else if ((gSetPbSampRateTemp==SAMP_RATE_96KHZ)  &&
+			(feedback_rate_high16 >= 0x000c) && (feedback_rate_low16 > 0x1000)){
+		feedback_rate_high16 = 0x000c;
+		feedback_rate_low16 = 0x0000;
+	}
 }
 
 #endif
@@ -2135,12 +2147,12 @@ static void MainTask(void)
 			// if the record sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
-					feedback_rate_high16 = 96 >> 3;
-					feedback_rate_low16 = 0;
+					feedback_rate_high16 = 0x000c;
+					feedback_rate_low16 = 0x8000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
-					feedback_rate_high16 = 0x000b;
-					feedback_rate_low16 = 0x0666;
+					feedback_rate_high16 = 0x000c;
+					feedback_rate_low16 = 0x8000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
 					feedback_rate_high16 = 0x0005;
