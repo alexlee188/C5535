@@ -684,6 +684,8 @@ typedef enum {
     CSL_USB_MSG_ABORT_TRANSFER,
     /** Send hand shake message                                              */
     CSL_USB_MSG_SEND_HAND_SHAKE,
+    CSL_USB_MSG_MUTE_PLAYBACK,
+    CSL_USB_MSG_UNMUTE_PLAYBACK,
     /** Main task exit message                                               */
     CSL_USB_MSG_MAIN_TASK_EXIT
 } CSL_UsbMainMsg;

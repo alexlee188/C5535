@@ -38,6 +38,7 @@ void RateChange(void)
 {
 	Uint16 status;
 	volatile Uint32 looper;
+    CSL_UsbMsgObj        USBMsg;
 
 	// if the sample rate has been changed, then call the codec configuration
 	if (gSetPbSampRateFlag)
@@ -50,6 +51,10 @@ void RateChange(void)
 					(gSetPbSampRateTemp==SAMP_RATE_44_1KHZ)||	// 44.1kHz
 					(gSetPbSampRateTemp==SAMP_RATE_48KHZ))		// 48kHz
 			{
+
+            	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
+            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+
 				// stop the I2S data receive
 				///DDC_I2S_transEnable((DDC_I2SHandle)i2sHandleRx, FALSE); 
 				// stop the I2S data transfer
@@ -491,6 +496,9 @@ void RateChange(void)
 		}
 		
 		gSetPbSampRateFlag = FALSE;
+
+    	USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
+    	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 	}
 }
 

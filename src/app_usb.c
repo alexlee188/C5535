@@ -1804,6 +1804,7 @@ void send_USB_Output(void)
 	/* restore the index register */
 	usbRegisters->INDEX_TESTMODE = saveIndex;
 
+#if 0
 	// Linux FIX
 	feedback_quirk_count++;
 	if (feedback_quirk_count > 16){
@@ -1819,6 +1820,7 @@ void send_USB_Output(void)
 		}
 		feedback_quirk_count = 0;
 	}
+#endif
 }
 
 #endif
@@ -1889,7 +1891,7 @@ void USBisr()
 {
     pUsbContext     pContext;
     Uint16 dmaSampCnt;
-
+    CSL_UsbMsgObj        USBMsg;
     usbIntCount++;
     /* Latch and clear interrupts */
     pContext = &gUsbContext;
@@ -1945,11 +1947,13 @@ void USBisr()
     //
     if (pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF){
     	sof_int_count++;
-    	if ((sof_int_count % 100) == 0){
+    	if ((sof_int_count % 200) == 0){
     		if (playIntrRcvd == old_playIntrRcvd){		// no new play interrupt since last check
-    			Set_Mute_State(TRUE);
+            	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
+            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
     		} else {
-    			Set_Mute_State(FALSE);
+            	USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
+            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
     			old_playIntrRcvd = playIntrRcvd;
     		}
     	}
@@ -2110,7 +2114,11 @@ static void MainTask(void)
                     fExitMainTaskOnUSBError = FALSE;
                     /* Just trigger this task. */
                     break;
-
+                case CSL_USB_MSG_MUTE_PLAYBACK:
+                	Set_Mute_State(TRUE);
+                	break;
+                case CSL_USB_MSG_UNMUTE_PLAYBACK:
+                	Set_Mute_State(FALSE);
                 default:
                     break;
             }
@@ -2153,11 +2161,11 @@ static void MainTask(void)
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
 					feedback_rate_high16 = 0x000c;
-					feedback_rate_low16 = 0x8000;
+					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
-					feedback_rate_high16 = 0x000c;
-					feedback_rate_low16 = 0x8000;
+					feedback_rate_high16 = 0x000b;
+					feedback_rate_low16 = 0x0666;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
 					feedback_rate_high16 = 0x0005;
