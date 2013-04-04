@@ -62,7 +62,6 @@ Bool usb_rec_start = FALSE;
 
 Bool usb_play_mode = FALSE;
 Bool usb_play_start = FALSE;
-Bool mute_play = FALSE;
 
 Bool  no_main_task = FALSE;
 
@@ -79,6 +78,8 @@ Uint16 firstFbckFlag = TRUE;
 
 Uint16 feedback_rate_high16 = 96 >> 3;
 Uint16 feedback_rate_low16 = 0;
+
+Uint16 feedback_quirk_count = 0;
 
 #define FEEDBACK_THRESHOLD_COUNT (16)
 
@@ -1804,15 +1805,19 @@ void send_USB_Output(void)
 	usbRegisters->INDEX_TESTMODE = saveIndex;
 
 	// Linux FIX
-	if ((gSetPbSampRateTemp==SAMP_RATE_88_2KHZ)  &&
-			(feedback_rate_high16 > 0x000b) && (feedback_rate_low16 > 0x2000)){
-		feedback_rate_high16 = 0x000b;
-		feedback_rate_low16 = 0x0666;
-	}
-	else if ((gSetPbSampRateTemp==SAMP_RATE_96KHZ)  &&
-			(feedback_rate_high16 >= 0x000c) && (feedback_rate_low16 > 0x1000)){
-		feedback_rate_high16 = 0x000c;
-		feedback_rate_low16 = 0x0000;
+	feedback_quirk_count++;
+	if (feedback_quirk_count > 16){
+		if ((gSetPbSampRateTemp==SAMP_RATE_88_2KHZ)  &&
+				(feedback_rate_high16 > 0x000b) && (feedback_rate_low16 > 0x2000)){
+			feedback_rate_high16 = 0x000b;
+			feedback_rate_low16 = 0x0666;
+		}
+		else if ((gSetPbSampRateTemp==SAMP_RATE_96KHZ)  &&
+				(feedback_rate_high16 >= 0x000c) && (feedback_rate_low16 > 0x1000)){
+			feedback_rate_high16 = 0x000c;
+			feedback_rate_low16 = 0x0000;
+		}
+		feedback_quirk_count = 0;
 	}
 }
 
@@ -1942,9 +1947,9 @@ void USBisr()
     	sof_int_count++;
     	if ((sof_int_count % 100) == 0){
     		if (playIntrRcvd == old_playIntrRcvd){		// no new play interrupt since last check
-    			mute_play = TRUE;
+    			Set_Mute_State(TRUE);
     		} else {
-    			mute_play = FALSE;
+    			Set_Mute_State(FALSE);
     			old_playIntrRcvd = playIntrRcvd;
     		}
     	}
@@ -2159,7 +2164,7 @@ static void MainTask(void)
 					feedback_rate_low16 =  0x8333;
 				}
 				else if	(gSetPbSampRateTemp==SAMP_RATE_48KHZ){
-					feedback_rate_high16 = 48 >> 3;
+					feedback_rate_high16 = 0x0006;
 					feedback_rate_low16 = 0;
 				}
 			}
