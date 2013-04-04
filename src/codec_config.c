@@ -52,7 +52,7 @@ void RateChange(void)
 					(gSetPbSampRateTemp==SAMP_RATE_48KHZ))		// 48kHz
 			{
 
-            	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
+            	USBMsg.wMsg = CSL_USB_MSG_FORCE_MUTE_PLAYBACK;
             	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 
 				// stop the I2S data receive
@@ -497,7 +497,7 @@ void RateChange(void)
 		
 		gSetPbSampRateFlag = FALSE;
 
-    	USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
+    	USBMsg.wMsg = CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK;
     	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 	}
 }

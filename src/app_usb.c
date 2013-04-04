@@ -2037,6 +2037,7 @@ static void MainTask(void)
     pAcClassHandle       pAcClassHdl;
     CSL_AcCtrlObject     *pCtrlHandle;
     CodecCfgMsgObj      codecCfgMsg;
+    Bool			force_mute_playback = FALSE;
 
     pAcClassHdl = AC_AppHandle.pAcObj;
     pCtrlHandle = &pAcClassHdl->ctrlHandle;
@@ -2118,7 +2119,16 @@ static void MainTask(void)
                 	Set_Mute_State(TRUE);
                 	break;
                 case CSL_USB_MSG_UNMUTE_PLAYBACK:
+                	if (!force_mute_playback) Set_Mute_State(FALSE);
+                	break;
+                case CSL_USB_MSG_FORCE_MUTE_PLAYBACK:
+                	force_mute_playback = TRUE;
+                	Set_Mute_State(TRUE);
+                	break;
+                case CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK:
+                	force_mute_playback = FALSE;
                 	Set_Mute_State(FALSE);
+                	break;
                 default:
                     break;
             }
@@ -2160,12 +2170,15 @@ static void MainTask(void)
 			// if the record sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
-					feedback_rate_high16 = 0x000c;
+					//feedback_rate_high16 = 0x000c;
+					feedback_rate_high16 = 0x0018;	// 15.17 format
 					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
-					feedback_rate_high16 = 0x000b;
-					feedback_rate_low16 = 0x0666;
+					//feedback_rate_high16 = 0x000b;
+					//feedback_rate_low16 = 0x0666;
+					feedback_rate_high16 = 0x0016;	// 15.17 format
+					feedback_rate_low16 = 0x0ccc;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
 					feedback_rate_high16 = 0x0005;
