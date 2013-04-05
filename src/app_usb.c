@@ -1681,6 +1681,7 @@ Uint32 underRunCount = 0;
 Uint32 fifoEmptyCount = 0;
 Uint16	up_count = 0;
 Uint16	down_count = 0;
+Uint32 old_codec_output_buffer_sample = 0;
 void send_USB_Output(void)
 {
     volatile ioport Uint16    *pFifoAddr;
@@ -1724,8 +1725,9 @@ void send_USB_Output(void)
 	}
 
 	// calculate rate feedback adjustments
-	if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS/2) ){
-		if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*(CODEC_OUTPUT_SZ_MSEC - 1))){
+	if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){  // only if streaming has reached one ms
+		if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*(CODEC_OUTPUT_SZ_MSEC - 1)) &&
+				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
 			down_count++;
 			if (down_count >= 2){
 				if (feedback_rate_low16 == 0){
@@ -1736,7 +1738,8 @@ void send_USB_Output(void)
 				down_count = 0;
 			}
 		}
-		else if (codec_output_buffer_sample < MAX_TXBUFF_SZ_DACSAMPS){
+		else if ((codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*3/2)) &&
+				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= 2){
 				feedback_rate_low16 += 1;
@@ -1747,7 +1750,8 @@ void send_USB_Output(void)
 				up_count = 0;
 			}
 		}
-		else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4)){
+		else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4) &&
+				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
 			down_count++;
 			if (down_count >= FEEDBACK_THRESHOLD_COUNT){
 				if (feedback_rate_low16 == 0){
@@ -1758,7 +1762,8 @@ void send_USB_Output(void)
 				down_count = 0;
 			}
 		}
-		else if (codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)){
+		else if ((codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)) &&
+				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
 				feedback_rate_low16 += 1;
@@ -1769,6 +1774,7 @@ void send_USB_Output(void)
 				up_count = 0;
 			}
 		}
+		old_codec_output_buffer_sample = codec_output_buffer_sample;
 	}
 
 	// if the USB TX FIFO is not empty.
@@ -1944,7 +1950,7 @@ void USBisr()
     }
 #endif //FEEDBACKEP
 
-    //
+    //  Use SOF interrupt time to detect sudden stopping of playback stream
     if (pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF){
     	sof_int_count++;
     	if ((sof_int_count % 200) == 0){
@@ -1969,7 +1975,7 @@ void USBisr()
 	{
 	    USB_MUSB_Isr();
 	} else
-	{
+	{	// Maybe this is needed even for USB_MSUB_Isr() case?
 	    /* all interrupts are handled, signal 'End Of Interrupt' */
 	    usbRegisters->EOIR = CSL_USB_EOIR_RESETVAL;
 	}

@@ -202,6 +202,7 @@ void RateChange(void)
 					LOG_printf(&trace, "Change Codec Sample Rate ERROR: 0x%x", gSetPbSampRate);
 #endif
 				}
+				Set_Mute_State(TRUE);
 				
 				// save the previous sample rate
 				gSetPbSampRatePrev = gSetPbSampRate;
@@ -497,6 +498,7 @@ void RateChange(void)
 		
 		gSetPbSampRateFlag = FALSE;
 
+		// sample rate changed, now unmute
     	USBMsg.wMsg = CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK;
     	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 	}
