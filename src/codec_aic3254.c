@@ -681,7 +681,7 @@ PSP_Result AIC3254_init(long sampRatePb, long sampRateRec)
         } 
 // Right channel 
 // Filter 1       
-    	result = AIC3254_Write(0, 9, hi2c); // write 8 to page register to select page 8
+    	result = AIC3254_Write(0, 9, hi2c);
     	if (result != PSP_SOK) 
     	{
         	return result;
@@ -1495,6 +1495,11 @@ PSP_Result AIC3254_set_sample_rate(long sampRatePb){
     PSP_Result result = PSP_SOK;
 
     if (hi2c){
+        result = AIC3254_Write(0, 0, hi2c); // write 0 to page register to select page 0
+        if (result != PSP_SOK)
+        {
+            return result;
+        }
 
 		/*
 		  PLL_CLK = (PLL_CLKIN * R * J.D)/P

@@ -80,8 +80,6 @@ Uint16 firstFbckFlag = TRUE;
 Uint16 feedback_rate_high16 = 0x000c;
 Uint16 feedback_rate_low16 = 0x0000;
 
-Uint16 feedback_quirk_count = 0;
-
 #define FEEDBACK_THRESHOLD_COUNT (16)
 
 static void USB_MUSB_Isr(void);
@@ -1683,6 +1681,7 @@ Uint32 fifoEmptyCount = 0;
 Uint16	up_count = 0;
 Uint16	down_count = 0;
 Uint32 old_codec_output_buffer_sample = 0;
+Uint16 feedback_quirk_count = 0;
 void send_USB_Output(void)
 {
     volatile ioport Uint16    *pFifoAddr;
@@ -1807,23 +1806,6 @@ void send_USB_Output(void)
 	/* restore the index register */
 	usbRegisters->INDEX_TESTMODE = saveIndex;
 
-#if 0
-	// Linux FIX
-	feedback_quirk_count++;
-	if (feedback_quirk_count > 16){
-		if ((gSetPbSampRateTemp==SAMP_RATE_88_2KHZ)  &&
-				(feedback_rate_high16 > 0x000b) && (feedback_rate_low16 > 0x2000)){
-			feedback_rate_high16 = 0x000b;
-			feedback_rate_low16 = 0x0666;
-		}
-		else if ((gSetPbSampRateTemp==SAMP_RATE_96KHZ)  &&
-				(feedback_rate_high16 >= 0x000c) && (feedback_rate_low16 > 0x1000)){
-			feedback_rate_high16 = 0x000c;
-			feedback_rate_low16 = 0x0000;
-		}
-		feedback_quirk_count = 0;
-	}
-#endif
 }
 
 #endif
@@ -2173,8 +2155,7 @@ static void MainTask(void)
 			// if the record sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
-					//feedback_rate_high16 = 0x000c;
-					feedback_rate_high16 = 0x0048;	// 14.18 format
+					feedback_rate_high16 = 0x000c;
 					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
