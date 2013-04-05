@@ -202,7 +202,6 @@ void RateChange(void)
 					LOG_printf(&trace, "Change Codec Sample Rate ERROR: 0x%x", gSetPbSampRate);
 #endif
 				}
-				Set_Mute_State(TRUE);
 				
 				// save the previous sample rate
 				gSetPbSampRatePrev = gSetPbSampRate;

@@ -1726,17 +1726,13 @@ void send_USB_Output(void)
 
 	// calculate rate feedback adjustments
 	if (codec_output_buffer_sample > MAX_TXBUFF_SZ_DACSAMPS ){  // only if streaming has reached one ms
-		if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*(CODEC_OUTPUT_SZ_MSEC - 1)) &&
+		if ((codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*3/4)) &&
 				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
-			down_count++;
-			if (down_count >= 2){
 				if (feedback_rate_low16 == 0){
-					feedback_rate_high16 -=1;
+					feedback_rate_high16 -=2;
 				}
 				feedback_rate_low16 -= 1;
 				EZDSP5535_LED_toggle(2);
-				down_count = 0;
-			}
 		}
 		else if ((codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*3/2)) &&
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
@@ -1750,7 +1746,7 @@ void send_USB_Output(void)
 				up_count = 0;
 			}
 		}
-		else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*3/4) &&
+		else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)*2/3) &&
 				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
 			down_count++;
 			if (down_count >= FEEDBACK_THRESHOLD_COUNT){
@@ -1762,7 +1758,7 @@ void send_USB_Output(void)
 				down_count = 0;
 			}
 		}
-		else if ((codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/4)) &&
+		else if ((codec_output_buffer_sample < ((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/3)) &&
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
