@@ -76,7 +76,8 @@ Uint32 wake = 0;
 Uint16 firstRecordFlag = TRUE;
 Uint16 firstFbckFlag = TRUE;
 
-Uint16 feedback_rate_high16 = 0x0018;	// 15.17 format 96khz
+// default 96khz
+Uint16 feedback_rate_high16 = 0x000c;
 Uint16 feedback_rate_low16 = 0x0000;
 
 Uint16 feedback_quirk_count = 0;
@@ -2173,7 +2174,7 @@ static void MainTask(void)
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
 					//feedback_rate_high16 = 0x000c;
-					feedback_rate_high16 = 0x0018;	// 15.17 format
+					feedback_rate_high16 = 0x0048;	// 14.18 format
 					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){

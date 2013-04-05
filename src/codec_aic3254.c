@@ -1491,6 +1491,314 @@ PSP_Result AIC3254_init(long sampRatePb, long sampRateRec)
 
 }
 
+PSP_Result AIC3254_set_sample_rate(long sampRatePb){
+    PSP_Result result = PSP_SOK;
+
+    if (hi2c){
+
+		/*
+		  PLL_CLK = (PLL_CLKIN * R * J.D)/P
+		  DAC_FS = PLL_CLK/(NDAC * MDAC * DOSR)
+		  ADC_FS = PLL_CLK/(NADC * MADC * AOSR)
+		  DAC_CLK = PLL_CLK/NDAC
+		  BCLK = DAC_CLK/BCLK N
+
+		  DAC_FS, BCLK:
+			  96 kHz: P=1, R=1, J=8, D=1920 (0x780)
+					  NDAC=4, MDAC=4, DOSR=64
+					  PLL_CLK = (12e6 * 1 * 8.192)/1 = 98304000
+					  BCLK = PLL_CLK/(NDAC*BCLK N) = 98304000/(4*4) = 6144000
+					  DAC_FS = PLL_CLK/(NDAC*MDAC*DOSR) = 98304000/(4*4*64) = 96000
+			  48 kHz: P=1, R=1, J=8, D=1920 (0x780)
+					  NDAC=4, MDAC=4, DOSR=128
+					  PLL_CLK = (12e6 * 1 * 8.192)/1 = 98304000
+					  BCLK = PLL_CLK/(NDAC*MDAC) = 98304000/(4*4) = 6144000
+					  DAC_FS = PLL_CLK/(NDAC*MDAC*DOSR) = 98304000/(4*4*128) = 48000
+			  88.2 kHz: P=1, R=1, J=7, D=5264 (0x1490)
+					  NDAC=4, MDAC=4, DOSR=64
+					  PLL_CLK = (12e6 * 1 * 7.5264)/1 = 90316800
+					  BCLK = PLL_CLK/(NDAC*MDAC) = 90316800/(4*4) = 5644800
+					  DAC_FS = PLL_CLK/(NDAC*MDAC*DOSR) = 90316800/(4*4*64) = 88200
+			  44.1 kHz: P=1, R=1, J=7, D=5264 (0x1490)
+					  NDAC=4, MDAC=4, DOSR=128
+					  PLL_CLK = (12e6 * 1 * 7.5264)/1 = 90316800
+					  BCLK = PLL_CLK/(NDAC*MDAC) = 90316800/(4*4) = 5644800
+					  DAC_FS = PLL_CLK/(NDAC*MDAC*DOSR) = 90316800/(4*4*128) = 44100
+		  ADC_FS:
+			  96 kHz: P=1, R=1, J=8, D=1920 (0x780)
+					  NADC=4, MADC=4, AOSR=64
+					  BCLK = PLL_CLK/(NADC*MADC) = 98304000/(4*4) = 6144000
+					  ADC_FS = PLL_CLK/(NADC*MADC*AOSR) = 98304000/(4*4*64) = 96000
+			  48 kHz: P=1, R=1, J=8, D=1920 (0x780)
+					  NADC=4, MADC=4, AOSR=128
+					  BCLK = PLL_CLK/(NADC*MADC) = 98304000/(4*4) = 6144000
+					  ADC_FS = PLL_CLK/(NADC*MADC*AOSR) = 98304000/(4*4*128) = 48000
+			  88.2 kHz: P=1, R=1, J=7, D=5264 (0x1490)
+					  NADC=4, MADC=4, AOSR=64
+					  PLL_CLK = (12e6 * 1 * 7.5264)/1 = 90316800
+					  BCLK = PLL_CLK/(NADC*MADC) = 90316800/(4*4) = 5644800
+					  DAC_FS = PLL_CLK/(NADC*MADC*AOSR) = 90316800/(4*4*64) = 88200
+			  44.1 kHz: P=1, R=1, J=7, D=5264 (0x1490)
+					  NADC=4, MADC=4, AOSR=128
+					  PLL_CLK = (12e6 * 1 * 7.5264)/1 = 90316800
+					  BCLK = PLL_CLK/(NADC*MADC) = 90316800/(4*4) = 5644800
+					  DAC_FS = PLL_CLK/(NADC*MADC*AOSR) = 90316800/(4*4*128) = 44100
+		*/
+
+		//
+		// CODEC_CLKIN = 12MHz *(R * J.D)/P
+		//
+		// BCLK = (12MHz *(R * J.D)/P)/(NDAC * BCLK N)
+		//
+		if (sampRatePb==SAMP_RATE_96KHZ)
+		{
+			// Power up the PLL and set P = 1 & R = 1
+			result = AIC3254_Write(5, 0x91, hi2c); // 96khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set J value to 8
+			result = AIC3254_Write(6, 0x08, hi2c); // 96khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set D value(MSB) = 0x7
+			result = AIC3254_Write(7, 0x7, hi2c); // 96khz
+			  if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set D value(LSB) = 0x80
+			result = AIC3254_Write(8, 0x80, hi2c); // 96khz ; 0x780 => .1920 => D = 8.192 => DAC_FS = 96000
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+
+			// Set NDAC to 4 - this along with BCLK N configures BCLK
+			result = AIC3254_Write(11,0x84, hi2c); // 96khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set MDAC to 4
+			result = AIC3254_Write(12,0x84, hi2c); // 96khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set DAC OSR MSB value to 0 */
+			result = AIC3254_Write(13, 0x0, hi2c );
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set DAC OSR LSB value to 64
+			// This generates the DAC_FS = 96KHz
+			result = AIC3254_Write(14, 64, hi2c ); // 96khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set BCLK N value to 4
+			// This along with NDAC generates the  BCLK = 6.144 MHz
+			result = AIC3254_Write(30,0x84, hi2c); // 96khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+		} // if (sampRatePb==SAMP_RATE_96KHZ)
+		else if (sampRatePb==SAMP_RATE_48KHZ)
+		{
+			// Power up the PLL and set P = 1 & R = 1
+			result = AIC3254_Write(5, 0x91, hi2c); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+				// Set J value to 8
+				result = AIC3254_Write(6, 0x08, hi2c); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set D value(MSB) = 0x7
+			result = AIC3254_Write(7, 0x7, hi2c); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set D value(LSB) = 0x80
+			result = AIC3254_Write(8, 0x80, hi2c); // 48khz ; 0x780 => .1920 => D = 8.192 => DAC_FS = 48000
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+
+			// Set NDAC to 4 - this along with BCLK N configures BCLK
+			result = AIC3254_Write(11,0x84, hi2c); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set MDAC to 4
+			result = AIC3254_Write(12,0x84, hi2c); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set DAC OSR MSB value to 0 */
+			result = AIC3254_Write(13, 0x0, hi2c );
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set DAC OSR LSB value to 128
+			// This generates the DAC_FS = 48KHz
+			result = AIC3254_Write(14, 128, hi2c ); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			// Set BCLK N value to 8
+			// This along with NDAC generates the  BCLK = 6.144 MHz
+			result = AIC3254_Write(30,0x84, hi2c); // 48khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+		} // if (sampRatePb==SAMP_RATE_48KHZ)
+		else if (sampRatePb==SAMP_RATE_88_2KHZ)
+		{
+			/* Power up the PLL and set P = 1 & R = 1 */
+			result = AIC3254_Write(5, 0x91, hi2c); // 88.2khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set J value to 7 */
+			result = AIC3254_Write(6, 0x07, hi2c); // 88.2khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set D value(MSB) = 0x14 */
+			result = AIC3254_Write(7, 0x14, hi2c); // 88.2khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set D value(LSB) = 0x90 */
+			result = AIC3254_Write(8, 0x90, hi2c); // 88.2khz ; 0x1490 => .5264 => D = 7.5264 => DAC_FS = 88200
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+
+			/* Set NDAC to 4 */
+			result = AIC3254_Write(11,0x84, hi2c);
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set MDAC to 4 */
+			result = AIC3254_Write(12,0x84, hi2c);
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set DAC OSR MSB value to 0 */
+			result = AIC3254_Write(13, 0x0, hi2c );
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set DAC OSR LSB value to 64 */
+			/* This generates the DAC_FS = 88.2KHz */
+			result = AIC3254_Write(14, 64, hi2c );
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set BCLK N value to4 */
+			/* This generates the  BCLK = 5.6448MHz */
+			result = AIC3254_Write(30,0x84, hi2c); // 88.2khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+		} // if (sampRatePb==SAMP_RATE_88_2KHZ)
+		else if (sampRatePb==SAMP_RATE_44_1KHZ)
+		{
+			/* Power up the PLL and set P = 1 & R = 1 */
+			result = AIC3254_Write(5, 0x91, hi2c); // 44.1khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set J value to 7 */
+			result = AIC3254_Write(6, 0x07, hi2c); //44.1khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set D value(MSB) = 0x14 */
+			result = AIC3254_Write(7, 0x14, hi2c);
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set D value(LSB) = 0x90 */
+			result = AIC3254_Write(8, 0x90, hi2c); // 44.1khz ; 0x1490 => .5264 => D = 7.5264 => DAC_FS = 44100
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+
+			/* Set NDAC to 4 */
+			result = AIC3254_Write(11,0x84, hi2c);
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set MDAC to 4 */
+			result = AIC3254_Write(12,0x84, hi2c);
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set DAC OSR MSB value to 0 */
+			result = AIC3254_Write(13, 0x0, hi2c );
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set DAC OSR LSB value to 128 */
+			/* This generates the DAC_FS = 44.1KHz */
+			result = AIC3254_Write(14, 128, hi2c );
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+			/* Set BCLK N value to 8 */
+			/* This generates the  BCLK = 5.6448MHz */
+			result = AIC3254_Write(30,0x84, hi2c); // 44.1khz
+			if (result != PSP_SOK)
+			{
+				return result;
+			}
+		} // if (sampRatePb==SAMP_RATE_44_1KHZ)
+		else
+		{
+			LOG_printf(&trace, "PLAYBACK FORMAT IS NOT SUPPORTED\n");
+	        return PSP_E_DRIVER_INIT;
+		}
+    }
+    return result;
+}
+
 /**
  *  \brief Codec write function
  *

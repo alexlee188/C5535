@@ -194,15 +194,18 @@ void RateChange(void)
 				}
 #endif // USE_FOUR_CODEC
 
-				/* Initialize audio module */
-			    status = AIC3254_init(gSetPbSampRateTemp, gSetPbSampRateTemp);
-				if (status!=PSP_SOK)
+
+				// status = AIC3254_init(gSetPbSampRateTemp, gSetPbSampRateTemp);
+				//if (status!=PSP_SOK)
 				{
 #ifdef DEBUG_LOG_PRINT
 					LOG_printf(&trace, "Change Codec Sample Rate ERROR: 0x%x", gSetPbSampRate);
 #endif
 				}
 				
+
+				status = AIC3254_set_sample_rate(gSetPbSampRateTemp);
+
 				// save the previous sample rate
 				gSetPbSampRatePrev = gSetPbSampRate;
 				// update the sample rate

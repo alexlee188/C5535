@@ -35,6 +35,7 @@
 #include "psp_common.h"
 
 PSP_Result AIC3254_init(long sampRatePb, long sampRaterec);
+PSP_Result AIC3254_set_sample_rate(long sampRatePb);
 Bool Set_Mute_State(Bool flag);
 Bool Adjust_Volume(Int16 volume, Uint16 channel);
 PSP_Result AIC3254_Write(Uint16 regAddr, Uint16 regData, PSP_Handle hi2c);
