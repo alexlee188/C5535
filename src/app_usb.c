@@ -76,8 +76,8 @@ Uint32 wake = 0;
 Uint16 firstRecordFlag = TRUE;
 Uint16 firstFbckFlag = TRUE;
 
-Uint16 feedback_rate_high16 = 96 >> 3;
-Uint16 feedback_rate_low16 = 0;
+Uint16 feedback_rate_high16 = 0x0018;	// 15.17 format 96khz
+Uint16 feedback_rate_low16 = 0x0000;
 
 Uint16 feedback_quirk_count = 0;
 
