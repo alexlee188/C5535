@@ -1738,10 +1738,10 @@ void send_USB_Output(void)
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= 2){
-				feedback_rate_low16 += 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 +=1;
 				}
+				feedback_rate_low16 += 1;
 				EZDSP5535_LED_toggle(3);
 				up_count = 0;
 			}
@@ -1762,10 +1762,10 @@ void send_USB_Output(void)
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
-				feedback_rate_low16 += 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 +=1;
 				}
+				feedback_rate_low16 += 1;
 				EZDSP5535_LED_toggle(3);
 				up_count = 0;
 			}
@@ -2155,7 +2155,7 @@ static void MainTask(void)
 			// if the record sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
-					feedback_rate_high16 = 0x000c;
+					feedback_rate_high16 = 0x0018; // 15.17 format
 					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
