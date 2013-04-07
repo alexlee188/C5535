@@ -2152,17 +2152,28 @@ static void MainTask(void)
 	        codecCfgMsg.wData = (void *)&gSetPbSampRateTemp;
 	        MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
 
-			// if the record sample rate is indeed changed
+#define LINUX_QUIRK
+			// if the playback sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
+#ifdef LINUX_QUIRK
 					feedback_rate_high16 = 0x0018; // 15.17 format
+#else
+					feedback_rate_high16 = 0x000c; // 16.16
+#endif
 					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
 					//feedback_rate_high16 = 0x000b;
 					//feedback_rate_low16 = 0x0666;
+#ifdef LINUX_QUIRK
 					feedback_rate_high16 = 0x0016;	// 15.17 format
 					feedback_rate_low16 = 0x0ccc;
+#else
+					feedback_rate_high16 = 0x000b;	// 16.16
+					feedback_rate_low16 = 0x0666;
+#endif
+
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
 					feedback_rate_high16 = 0x0005;
