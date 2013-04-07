@@ -1738,10 +1738,11 @@ void send_USB_Output(void)
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= 2){
+				feedback_rate_low16 += 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 +=1;
 				}
-				feedback_rate_low16 += 1;
+
 				EZDSP5535_LED_toggle(3);
 				up_count = 0;
 			}
@@ -1762,10 +1763,10 @@ void send_USB_Output(void)
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
+				feedback_rate_low16 += 1;
 				if (feedback_rate_low16 == 0){
 					feedback_rate_high16 +=1;
-				}
-				feedback_rate_low16 += 1;
+				};
 				EZDSP5535_LED_toggle(3);
 				up_count = 0;
 			}
