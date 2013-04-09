@@ -2184,7 +2184,6 @@ static void MainTask(void)
         {
             pAcClassHandle      pAcClassHdl;
             CSL_AcCtrlObject    *pCtrlHandle;
-            CodecCfgMsgObj      codecCfgMsg;
 
             pAcClassHdl = AC_AppHandle.pAcObj;
             pCtrlHandle = &pAcClassHdl->ctrlHandle;
@@ -2205,7 +2204,6 @@ static void MainTask(void)
         {
             pAcClassHandle      pAcClassHdl;
             CSL_AcCtrlObject    *pCtrlHandle;
-            CodecCfgMsgObj      codecCfgMsg;
 
             pAcClassHdl = AC_AppHandle.pAcObj;
             pCtrlHandle = &pAcClassHdl->ctrlHandle;
@@ -2226,7 +2224,6 @@ static void MainTask(void)
         {
             pAcClassHandle      pAcClassHdl;
             CSL_AcCtrlObject    *pCtrlHandle;
-            CodecCfgMsgObj      codecCfgMsg;
 
             pAcClassHdl = AC_AppHandle.pAcObj;
             pCtrlHandle = &pAcClassHdl->ctrlHandle;

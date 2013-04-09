@@ -34,11 +34,13 @@ extern Uint32 sof_int_count;
 extern Int32 dmaSampCntPerSec;
 extern Int32 usbIsoInSampCntPerSec;
 
+CSL_UsbMsgObj  USBMsg;
+
 void RateChange(void)
 {
 	Uint16 status;
 	volatile Uint32 looper;
-    CSL_UsbMsgObj        USBMsg;
+
 
 	// if the sample rate has been changed, then call the codec configuration
 	if (gSetPbSampRateFlag)
@@ -522,12 +524,12 @@ void CodecConfigTask(void)
             {
                 case CODEC_CFG_MSG_ADJ_VOL_L:
                     pData =  (Int16 *)codecCfgMsg.wData;
-                    //Adjust_Volume(*pData, 0);
+                    Adjust_Volume(*pData, 0);
                     break;
 
                 case CODEC_CFG_MSG_ADJ_VOL_R:
                     pData =  (Int16 *)codecCfgMsg.wData;
-                    //Adjust_Volume(*pData, 1);
+                    Adjust_Volume(*pData, 1);
                     break;
 
                 case CODEC_CFG_MSG_ADJ_MUTE:
@@ -535,6 +537,9 @@ void CodecConfigTask(void)
                     if ((*pData & 0xff) == 0)
                     {
                         // un-mute
+
+                    	USBMsg.wMsg = CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK;
+                    	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
                         //STS_set(&mySts1, CLK_gethtime());
                         //if(Set_Mute_State(FALSE) == FALSE)
                         //{
@@ -547,6 +552,10 @@ void CodecConfigTask(void)
                     else if ((*pData & 0xff) == 1)
                     {
                         // mute
+
+                    	USBMsg.wMsg = CSL_USB_MSG_FORCE_MUTE_PLAYBACK;
+                    	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+
                         //STS_set(&mySts1, CLK_gethtime());
                         //if(Set_Mute_State(TRUE) == FALSE)
                         //{
