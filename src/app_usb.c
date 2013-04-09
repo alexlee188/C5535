@@ -1871,6 +1871,8 @@ void USBisr()
     pUsbContext     pContext;
     Uint16 dmaSampCnt;
     CSL_UsbMsgObj        USBMsg;
+    CodecCfgMsgObj      codecCfgMsg;
+
     usbIntCount++;
     /* Latch and clear interrupts */
     pContext = &gUsbContext;
@@ -1928,11 +1930,11 @@ void USBisr()
     	sof_int_count++;
     	if ((sof_int_count % 200) == 0){
     		if (playIntrRcvd == old_playIntrRcvd){		// no new play interrupt since last check
-            	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
-            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+            	codecCfgMsg.wMsg = CODEC_CFG_MSG_MUTE;
+            	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
     		} else {
-            	USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
-            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+            	USBMsg.wMsg = CODEC_CFG_MSG_UNMUTE;
+            	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
     			old_playIntrRcvd = playIntrRcvd;
     		}
     	}
@@ -2016,7 +2018,6 @@ static void MainTask(void)
     pAcClassHandle       pAcClassHdl;
     CSL_AcCtrlObject     *pCtrlHandle;
     CodecCfgMsgObj      codecCfgMsg;
-    Bool			force_mute_playback = FALSE;
 
     pAcClassHdl = AC_AppHandle.pAcObj;
     pCtrlHandle = &pAcClassHdl->ctrlHandle;
@@ -2094,20 +2095,6 @@ static void MainTask(void)
                     fExitMainTaskOnUSBError = FALSE;
                     /* Just trigger this task. */
                     break;
-                case CSL_USB_MSG_MUTE_PLAYBACK:
-                	Set_Mute_State(TRUE);
-                	break;
-                case CSL_USB_MSG_UNMUTE_PLAYBACK:
-                	if (!force_mute_playback) Set_Mute_State(FALSE);
-                	break;
-                case CSL_USB_MSG_FORCE_MUTE_PLAYBACK:
-                	force_mute_playback = TRUE;
-                	Set_Mute_State(TRUE);
-                	break;
-                case CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK:
-                	force_mute_playback = FALSE;
-                	Set_Mute_State(FALSE);
-                	break;
                 default:
                     break;
             }
