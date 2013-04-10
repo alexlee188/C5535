@@ -1098,9 +1098,9 @@ CSL_AcRequestRet AC_reqGetRange(CSL_UsbDevNum         devNum,
 		{
 			/* send the current volume range in 8 bytes */
 			pCtrlHandle->ctrlBuffer[1] = 0x0001;
-			pCtrlHandle->ctrlBuffer[2] = 0x8080;
-			pCtrlHandle->ctrlBuffer[3] = 0x0000;
-			pCtrlHandle->ctrlBuffer[4] = 0x0080;
+			pCtrlHandle->ctrlBuffer[2] = -7*256;
+			pCtrlHandle->ctrlBuffer[3] = 29*256;
+			pCtrlHandle->ctrlBuffer[4] = 1;
 			USB_postTransaction(hInEp, 8, (void*)&pCtrlHandle->ctrlBuffer[0],
 						        CSL_USB_IOFLAG_NONE | CSL_USB_IOFLAG_NOSHORT);
 		} else

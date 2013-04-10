@@ -547,39 +547,6 @@ void CodecConfigTask(void)
                 	force_mute_playback = FALSE;
                 	break;
 
-                case CODEC_CFG_MSG_ADJ_MUTE:
-                    pData =  (Int16 *)codecCfgMsg.wData;
-                    if ((*pData & 0xff) == 0)
-                    {
-                        // un-mute
-                    	force_mute_playback = FALSE;
-                    	Set_Mute_State(FALSE);
-                        //STS_set(&mySts1, CLK_gethtime());
-                        //if(Set_Mute_State(FALSE) == FALSE)
-                        //{
-                        //    LOG_printf(&trace, "FAILED MUTE CLEAR\n");
-                        //}
-                        //STS_delta(&mySts1, CLK_gethtime());
-                        //TSK_deltatime(TSK_self()); // statistic collection
-                        break;
-                    }
-                    else
-                    {
-                        // mute
-                    	force_mute_playback = TRUE;
-                    	Set_Mute_State(TRUE);
-
-                        //STS_set(&mySts1, CLK_gethtime());
-                        //if(Set_Mute_State(TRUE) == FALSE)
-                        //{
-                        //    LOG_printf(&trace, "FAILED MUTE SET\n");
-                        //}
-                        //STS_delta(&mySts1, CLK_gethtime());
-                        //TSK_deltatime(TSK_self()); // statistic collection
-                    }
-
-                    break;
-
                 case CODEC_CFG_MSG_ADJ_RATE:
 					// change to new sample rate
                     RateChange();

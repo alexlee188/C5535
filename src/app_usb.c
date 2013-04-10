@@ -1933,7 +1933,7 @@ void USBisr()
             	codecCfgMsg.wMsg = CODEC_CFG_MSG_MUTE;
             	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
     		} else {
-            	USBMsg.wMsg = CODEC_CFG_MSG_UNMUTE;
+            	codecCfgMsg.wMsg = CODEC_CFG_MSG_UNMUTE;
             	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
     			old_playIntrRcvd = playIntrRcvd;
     		}
@@ -2179,11 +2179,15 @@ static void MainTask(void)
             if (pCtrlHandle->muteCtrlBuf[1] != 0xffff )
             {
                 mute_flag_change = FALSE;
-
-                // update the mute state
-                codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_MUTE;
-                codecCfgMsg.wData = (void *)&pCtrlHandle->muteCtrlBuf[1];
+                if (pCtrlHandle->muteCtrlBuf[1] == 0){
+                // unmute
+                codecCfgMsg.wMsg = CODEC_CFG_MSG_FORCE_UNMUTE;
                 MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
+                }
+                else {
+                codecCfgMsg.wMsg = CODEC_CFG_MSG_FORCE_MUTE;
+                MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
+                }
             }
         }
 

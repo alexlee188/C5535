@@ -94,7 +94,7 @@ Bool Set_Mute_State(Bool flag)
 #define VOLUME_STEP_SIZE                   256
 #define VOLUME_TABLE_MAX_GAIN_INDEX        29      // headphone gain setting = 29 -> 29 dB gain
 #define VOLUME_TABLE_MAX_ATTNEUATION_INDEX 35      // headphone gain setting = 0x3A -> -6dB gain
-#define USB_MAX_ATTENUATION_VALUE          -32768
+#define USB_MAX_ATTENUATION_VALUE          (-7*VOLUME_STEP_SIZE)
 #define VOLUME_TABLE_MUTE_HEADPHONE_INDEX  36      // headphone gain setting = 0x7B set gain to -5dB with headphone driver muted
 
 // table has both gain and attenuation settings for headphone output of the codec.
