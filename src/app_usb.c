@@ -77,7 +77,12 @@ Uint16 firstRecordFlag = TRUE;
 Uint16 firstFbckFlag = TRUE;
 
 // default 96khz
+#define LINUX_QUIRK
+#ifdef LINUX_QUIRK
+Uint16 feedback_rate_high16 = 0x0018;
+#else
 Uint16 feedback_rate_high16 = 0x000c;
+#endif
 Uint16 feedback_rate_low16 = 0x0000;
 
 #define FEEDBACK_THRESHOLD_COUNT (16)
@@ -2133,7 +2138,6 @@ static void MainTask(void)
 	        codecCfgMsg.wData = (void *)&gSetPbSampRateTemp;
 	        MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
 
-#define LINUX_QUIRK
 			// if the playback sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
