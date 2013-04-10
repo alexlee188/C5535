@@ -18,12 +18,9 @@ typedef enum {
     CODEC_CFG_MSG_ADJ_VOL_L = 0,
 	/** Adjust right volume message                                          */
     CODEC_CFG_MSG_ADJ_VOL_R,
-    // Mute settings messages
-    CODEC_CFG_MSG_MUTE,
-    CODEC_CFG_MSG_UNMUTE,
-    CODEC_CFG_MSG_FORCE_MUTE,
-    CODEC_CFG_MSG_FORCE_UNMUTE,
-	/** Adjust sample rate                                                   */
+	/** Adjust mute message                                                  */
+    //CODEC_CFG_MSG_ADJ_MUTE,
+	/** Adjust sample rate                                                  */
     CODEC_CFG_MSG_ADJ_RATE
 } CodecConfigMsg;
 

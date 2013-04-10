@@ -33,8 +33,9 @@ extern Uint16 uFrameCount;
 extern Uint32 sof_int_count;
 extern Int32 dmaSampCntPerSec;
 extern Int32 usbIsoInSampCntPerSec;
+
 CSL_UsbMsgObj  USBMsg;
-CodecCfgMsgObj codecCfgMsg;
+
 void RateChange(void)
 {
 	Uint16 status;
@@ -53,8 +54,8 @@ void RateChange(void)
 					(gSetPbSampRateTemp==SAMP_RATE_48KHZ))		// 48kHz
 			{
 
-            	codecCfgMsg.wMsg = CODEC_CFG_MSG_FORCE_MUTE;
-            	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
+            	USBMsg.wMsg = CSL_USB_MSG_FORCE_MUTE_PLAYBACK;
+            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 
 				// stop the I2S data receive
 				///DDC_I2S_transEnable((DDC_I2SHandle)i2sHandleRx, FALSE); 
@@ -502,8 +503,8 @@ void RateChange(void)
 		gSetPbSampRateFlag = FALSE;
 
 		// sample rate changed, now unmute
-    	codecCfgMsg.wMsg = CODEC_CFG_MSG_FORCE_UNMUTE;
-    	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
+    	USBMsg.wMsg = CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK;
+    	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 	}
 }
 
@@ -512,8 +513,6 @@ void CodecConfigTask(void)
 {
     CodecCfgMsgObj codecCfgMsg;
     Int16 *pData;
-	CSL_UsbMsgObj  USBMsg;
-	Bool force_mute_playback = FALSE;
 
     while (1)
     {
@@ -532,20 +531,6 @@ void CodecConfigTask(void)
                     pData =  (Int16 *)codecCfgMsg.wData;
                     Adjust_Volume(*pData, 1);
                     break;
-                case CODEC_CFG_MSG_MUTE:
-                	Set_Mute_State(TRUE);
-                	break;
-                case CODEC_CFG_MSG_UNMUTE:
-                	if (!force_mute_playback) Set_Mute_State(FALSE);
-                	break;
-                case CODEC_CFG_MSG_FORCE_MUTE:
-                	Set_Mute_State(TRUE);
-                	force_mute_playback = TRUE;
-                	break;
-                case CODEC_CFG_MSG_FORCE_UNMUTE:
-                	Set_Mute_State(FALSE);
-                	force_mute_playback = FALSE;
-                	break;
 
                 case CODEC_CFG_MSG_ADJ_RATE:
 					// change to new sample rate
