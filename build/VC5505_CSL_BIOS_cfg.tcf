@@ -418,6 +418,10 @@ bios.SEM.create("SEM_PingPongTxLeftComplete4");
 bios.SEM.create("SEM_PingPongTxRightComplete4");
 bios.SEM.create("SEM_BufferInReady");
 bios.MBX.instance("MBX_codecConfig").messageSize = 3;
+bios.MBX.instance("MBX_codecConfig").messageSize = 2;
+bios.TSK.instance("TSK_MUSBMainTask").stackSize = 2048;
+bios.TSK.instance("mainTsk").priority = 6;
+bios.TSK.instance("TSK_CodecConfig").priority = 5;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();
