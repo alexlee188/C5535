@@ -417,6 +417,7 @@ bios.SEM.create("SEM_PingPongRxRightComplete4");
 bios.SEM.create("SEM_PingPongTxLeftComplete4");
 bios.SEM.create("SEM_PingPongTxRightComplete4");
 bios.SEM.create("SEM_BufferInReady");
+bios.MBX.instance("MBX_codecConfig").messageSize = 3;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();

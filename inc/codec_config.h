@@ -28,7 +28,7 @@ typedef struct CodecCfgMsgObj {
 	/** \brief  Message posted                                               */
     Int16    wMsg;
     /** \brief  Message data                                                 */
-    void    *wData;
+    Int16	wData;
 } CodecCfgMsgObj;
 
 extern Bool gPbSampRateChange;

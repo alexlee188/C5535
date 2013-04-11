@@ -512,7 +512,6 @@ void RateChange(void)
 void CodecConfigTask(void)
 {
     CodecCfgMsgObj codecCfgMsg;
-    Int16 *pData;
 
     while (1)
     {
@@ -523,19 +522,15 @@ void CodecConfigTask(void)
             switch (codecCfgMsg.wMsg)
             {
                 case CODEC_CFG_MSG_ADJ_VOL_L:
-                    pData =  (Int16 *)codecCfgMsg.wData;
-                    Adjust_Volume(*pData, 0);
+                    Adjust_Volume(codecCfgMsg.wData, 0);
                     break;
 
                 case CODEC_CFG_MSG_ADJ_VOL_R:
-                    pData =  (Int16 *)codecCfgMsg.wData;
-                    Adjust_Volume(*pData, 1);
+                    Adjust_Volume(codecCfgMsg.wData, 1);
                     break;
 
                 case CODEC_CFG_MSG_ADJ_RATE:
-					// change to new sample rate
                     RateChange();
-					
                     break;
 
                 default:
