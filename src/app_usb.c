@@ -1936,10 +1936,10 @@ void USBisr()
     	if ((sof_int_count % 200) == 0){
     		if (playIntrRcvd == old_playIntrRcvd){		// no new play interrupt since last check
 				USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
-				MBX_post(&MBX_musb, &USBMsg, 0);
+				MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
     		} else {
 				USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
-				MBX_post(&MBX_musb, &USBMsg, 0);
+				MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 				old_playIntrRcvd = playIntrRcvd;
     		}
     	}
@@ -2151,8 +2151,8 @@ static void MainTask(void)
 			gSetPbSampRateTemp = ((long)pCtrlHandle->sampleRateBuf[2]<<16)|(pCtrlHandle->sampleRateBuf[1]);
 	        /* Update the sample rate state */
 	        codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_RATE;
-	        codecCfgMsg.data.long_data = gSetPbSampRateTemp;
-	        MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
+	        codecCfgMsg.wData = (void *)&gSetPbSampRateTemp;
+	        MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
 
 			// if the playback sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
@@ -2226,8 +2226,8 @@ static void MainTask(void)
 
                 // adjust volume setting
                 codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_VOL_L;
-                codecCfgMsg.data.word_data = pCtrlHandle->leftVolBuf[1];
-                MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
+                codecCfgMsg.wData = (void *)&pCtrlHandle->leftVolBuf[1];
+                MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
             }
         }
 
@@ -2245,8 +2245,8 @@ static void MainTask(void)
                 playback_volume_flag_change_Right = FALSE;
                 // adjust volume setting
                 codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_VOL_R;
-                codecCfgMsg.data.word_data = pCtrlHandle->rightVolBuf[1];
-                MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
+                codecCfgMsg.wData = (void *)&pCtrlHandle->rightVolBuf[1];
+                MBX_post(&MBX_codecConfig, &codecCfgMsg, 0);
             }
         }
 

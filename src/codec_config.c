@@ -512,6 +512,7 @@ void RateChange(void)
 void CodecConfigTask(void)
 {
     CodecCfgMsgObj codecCfgMsg;
+    Int16 *pData;
 
     while (1)
     {
@@ -522,11 +523,13 @@ void CodecConfigTask(void)
             switch (codecCfgMsg.wMsg)
             {
                 case CODEC_CFG_MSG_ADJ_VOL_L:
-                    Adjust_Volume(codecCfgMsg.data.word_data, 0);
+                    pData =  (Int16 *)codecCfgMsg.wData;
+                    Adjust_Volume(*pData, 0);
                     break;
 
                 case CODEC_CFG_MSG_ADJ_VOL_R:
-                    Adjust_Volume(codecCfgMsg.data.word_data, 1);
+                    pData =  (Int16 *)codecCfgMsg.wData;
+                    Adjust_Volume(*pData, 1);
                     break;
 
                 case CODEC_CFG_MSG_ADJ_RATE:
