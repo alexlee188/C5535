@@ -1883,8 +1883,6 @@ void USBisr()
     pContext = &gUsbContext;
     pContext->dwIntSourceL = usbRegisters->INTMASKEDR1;
     pContext->dwIntSourceH = usbRegisters->INTMASKEDR2;
-    //pContext->dwIntSourceL = usbRegisters->INTSRCR1;		// try using the unmasked interrupts
-    //pContext->dwIntSourceH = usbRegisters->INTSRCR2;
     usbRegisters->INTCLRR1 = pContext->dwIntSourceL;
     usbRegisters->INTCLRR2 = pContext->dwIntSourceH;
 
@@ -1929,21 +1927,6 @@ void USBisr()
 		SWI_post(&SWI_Send_USB_Output);
     }
 #endif //FEEDBACKEP
-
-    //  Use SOF interrupt time to detect sudden stopping of playback stream
-    if (pContext->dwIntSourceH & CSL_USB_GBL_INT_SOF){
-    	sof_int_count++;
-    	if ((sof_int_count % 200) == 0){
-    		if (playIntrRcvd == old_playIntrRcvd){		// no new play interrupt since last check
-				USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
-				MBX_post(&MBX_musb, &USBMsg, 0);
-    		} else {
-				USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
-				MBX_post(&MBX_musb, &USBMsg, 0);
-				old_playIntrRcvd = playIntrRcvd;
-    		}
-    	}
-    }
 
 	// only send the interrupt message when they are other interrupts (not USB ISO IN/OUT/SOF)
 #ifdef PLAY_ONLY
