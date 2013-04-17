@@ -79,11 +79,10 @@ Uint16 firstFbckFlag = TRUE;
 // default 96khz
 #define LINUX_QUIRK
 #ifdef LINUX_QUIRK
-Uint16 feedback_rate_high16 = 0x0018;
+long feedback_rate = 0x00180000;
 #else
-Uint16 feedback_rate_high16 = 0x000c;
+long feedback_rate = 0x000c0000;
 #endif
-Uint16 feedback_rate_low16 = 0x0000;
 
 #define FEEDBACK_THRESHOLD_COUNT (16)
 
@@ -1732,27 +1731,18 @@ void send_USB_Output(void)
 	// calculate rate feedback adjustments
 	if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS/2) ){
 		if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*3/4)){
-				if (feedback_rate_low16 == 0){
-					feedback_rate_high16--;
-				}
-				feedback_rate_low16--;
+				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
 		}
 		else if (codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*2)){
-				feedback_rate_low16++;
-				if (feedback_rate_low16 == 0){
-					feedback_rate_high16++;
-				}
+				feedback_rate++;
 				EZDSP5535_LED_toggle(3);
 		}
 		else if (codec_output_buffer_sample>((MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC)/2) &&
 				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
 			down_count++;
 			if (down_count >= FEEDBACK_THRESHOLD_COUNT){
-				if (feedback_rate_low16 == 0){
-					feedback_rate_high16--;
-				}
-				feedback_rate_low16--;
+				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
 				down_count = 0;
 			}
@@ -1761,10 +1751,7 @@ void send_USB_Output(void)
 				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
 			up_count++;
 			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
-				feedback_rate_low16++;
-				if (feedback_rate_low16 == 0){
-					feedback_rate_high16++;
-				};
+				feedback_rate++;
 				EZDSP5535_LED_toggle(3);
 				up_count = 0;
 			}
@@ -1790,8 +1777,8 @@ void send_USB_Output(void)
 	for (i=0; i<pktCount; i++)
 	{
 
-	   *pFifoAddr = feedback_rate_low16;
-	   *pFifoAddr = feedback_rate_high16;
+	   *pFifoAddr = feedback_rate % 32768L;
+	   *pFifoAddr = feedback_rate / 32768L;
 
 	   // This is a feedback endpoint so force data toggle
 	   CSL_FINS(usbRegisters->PERI_CSR0_INDX,
@@ -2137,33 +2124,28 @@ static void MainTask(void)
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
 #ifdef LINUX_QUIRK
-					feedback_rate_high16 = 0x0018; // 15.17 format
+					feedback_rate = 0x00180000; // 15.17 format
 #else
-					feedback_rate_high16 = 0x000c; // 16.16
+					feedback_rate = 0x000c0000; // 16.16
 #endif
-					feedback_rate_low16 = 0x0000;
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
 					//feedback_rate_high16 = 0x000b;
 					//feedback_rate_low16 = 0x0666;
 #ifdef LINUX_QUIRK
-					feedback_rate_high16 = 0x0016;	// 15.17 format
-					feedback_rate_low16 = 0x0ccc;
+					feedback_rate = 0x00160ccc;	// 15.17 format
 #else
-					feedback_rate_high16 = 0x000b;	// 16.16
-					feedback_rate_low16 = 0x0666;
+					feedback_rate = 0x000b0666;	// 16.16
 #endif
 
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
-					feedback_rate_high16 = 0x0005;
-					feedback_rate_low16 =  0x8333;
+					feedback_rate = 0x00058333;
 				}
 				else if	(gSetPbSampRateTemp==SAMP_RATE_48KHZ){
-					feedback_rate_high16 = 0x0006;
-					feedback_rate_low16 = 0;
+					feedback_rate = 0x00060000;
 				}
-		        /* Update the sample rate state */
+		        // Update the sample rate state of the AIC codec
 		        codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_RATE;
 		        MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
 			}
