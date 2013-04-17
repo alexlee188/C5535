@@ -2132,9 +2132,6 @@ static void MainTask(void)
 
 			gSetPbSampRateFlag = TRUE;
 			gSetPbSampRateTemp = ((long)pCtrlHandle->sampleRateBuf[2]<<16)|(pCtrlHandle->sampleRateBuf[1]);
-	        /* Update the sample rate state */
-	        codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_RATE;
-	        MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
 
 			// if the playback sample rate is indeed changed
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
@@ -2166,7 +2163,11 @@ static void MainTask(void)
 					feedback_rate_high16 = 0x0006;
 					feedback_rate_low16 = 0;
 				}
+		        /* Update the sample rate state */
+		        codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_RATE;
+		        MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
 			}
+
         }
         
         if(mute_flag_change == TRUE)

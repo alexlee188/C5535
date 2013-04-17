@@ -728,8 +728,6 @@ void PbAudioAlgTsk(void)
 				codec_output_buffer_sample -= MAX_TXBUFF_SZ_DACSAMPS;
 			} else
 			{
-            	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
-            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 				codec_output_buffer_underflow++;
 				// codec_output_buffer underflow, send zero instead
 	            ///memset(pbOutBufLeft, 0x7F, 2*MAX_TXBUFF_SZ_DACSAMPS);
@@ -784,9 +782,11 @@ void PbAudioAlgTsk(void)
 				}
 #endif //USE_FOUR_CODEC
 			}
-        }
+        } // end if usb_play_mode
         else
         {
+        	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
+        	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 			playMemsetCount++;
             /* Output zeros */
             ///memset(pbOutBufLeft, 0, 2*MAX_TXBUFF_SZ_DACSAMPS);
