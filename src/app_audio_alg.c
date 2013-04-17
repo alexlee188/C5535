@@ -468,6 +468,7 @@ void PbAudioAlgTsk(void)
 #endif //USE_FOUR_CODEC
     volatile Int16 i, loopCount;
     CSL_UsbMsgObj        USBMsg;
+    Bool mute_play_status = TRUE;
 
     while (1)
     {
@@ -538,8 +539,11 @@ void PbAudioAlgTsk(void)
         	// do we have enough samples for the DMA buffer? 
 			if (codec_output_buffer_sample>=MAX_TXBUFF_SZ_DACSAMPS)
 			{
-            	USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
-            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+				if (mute_play_status){
+					USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
+					MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+					mute_play_status = FALSE;
+				}
 				playAudioCopyCount++;
 	            /* copy one-millisecond audio data from circular buffer codec_output_buffer to DMA ping pong buffer */
 				for (i=0; i<MAX_TXBUFF_SZ_DACSAMPS; i++)
@@ -785,8 +789,11 @@ void PbAudioAlgTsk(void)
         } // end if usb_play_mode
         else
         {
-        	USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
-        	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+        	if (!mute_play_status){
+				USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
+				MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+				mute_play_status = TRUE;
+        	}
 			playMemsetCount++;
             /* Output zeros */
             ///memset(pbOutBufLeft, 0, 2*MAX_TXBUFF_SZ_DACSAMPS);
