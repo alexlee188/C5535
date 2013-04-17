@@ -1729,12 +1729,12 @@ void send_USB_Output(void)
 	}
 
 	// calculate rate feedback adjustments
-	if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS/2) ){
+	if ((codec_output_buffer_sample > 0) && usb_play_mode){
 		if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*3/4)){
 				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
 		}
-		else if (codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*2)){
+		else if (codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*1/4)){
 				feedback_rate++;
 				EZDSP5535_LED_toggle(3);
 		}
@@ -1777,8 +1777,8 @@ void send_USB_Output(void)
 	for (i=0; i<pktCount; i++)
 	{
 
-	   *pFifoAddr = feedback_rate % 32768L;
-	   *pFifoAddr = feedback_rate / 32768L;
+	   *pFifoAddr = feedback_rate % 65536L;
+	   *pFifoAddr = feedback_rate / 65536L;
 
 	   // This is a feedback endpoint so force data toggle
 	   CSL_FINS(usbRegisters->PERI_CSR0_INDX,
