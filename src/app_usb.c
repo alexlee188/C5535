@@ -80,8 +80,10 @@ Uint16 firstFbckFlag = TRUE;
 #define LINUX_QUIRK
 #ifdef LINUX_QUIRK
 long feedback_rate = 0x00180000;
+long nominal_feedback_rate = 0x00180000;
 #else
 long feedback_rate = 0x000c0000;
+long nominal_feedback_rate = 0x000c0000;
 #endif
 
 #define FEEDBACK_THRESHOLD_COUNT (16)
@@ -1731,22 +1733,16 @@ void send_USB_Output(void)
 	// calculate rate feedback adjustments
 	if ((codec_output_buffer_sample > 0) && usb_play_mode){
 		if (codec_output_buffer_sample > (CODEC_OUTPUT_BUFFER_SIZE*3/4/4) &&
-				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
-			down_count++;
-			if (down_count >= FEEDBACK_THRESHOLD_COUNT/4){
+				(codec_output_buffer_sample > old_codec_output_buffer_sample) &&
+				(feedback_rate > nominal_feedback_rate)){
 				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
-				down_count = 0;
-			}
 		}
 		else if (codec_output_buffer_sample < (CODEC_OUTPUT_BUFFER_SIZE*1/4/4) &&
-				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
-			up_count++;
-			if (up_count >= FEEDBACK_THRESHOLD_COUNT/4){
+				(codec_output_buffer_sample < old_codec_output_buffer_sample) &&
+				(feedback_rate < nominal_feedback_rate)){
 				feedback_rate++;
 				EZDSP5535_LED_toggle(3);
-				up_count = 0;
-			}
 		}
 		else if (codec_output_buffer_sample>(CODEC_OUTPUT_BUFFER_SIZE/2/4) &&
 				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
@@ -2134,26 +2130,26 @@ static void MainTask(void)
 			if (gSetPbSampRateTemp!=gSetPbSampRate){
 				if (gSetPbSampRateTemp==SAMP_RATE_96KHZ){
 #ifdef LINUX_QUIRK
-					feedback_rate = 0x00180000; // 15.17 format
+					nominal_feedback_rate = feedback_rate = 0x00180000; // 15.17 format
 #else
-					feedback_rate = 0x000c0000; // 16.16
+					nominal_feedback_rate = feedback_rate = 0x000c0000; // 16.16
 #endif
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_88_2KHZ){
 					//feedback_rate_high16 = 0x000b;
 					//feedback_rate_low16 = 0x0666;
 #ifdef LINUX_QUIRK
-					feedback_rate = 0x00160ccc;	// 15.17 format
+					nominal_feedback_rate = feedback_rate = 0x00160ccc;	// 15.17 format
 #else
-					feedback_rate = 0x000b0666;	// 16.16
+					nominal_feedback_rate = feedback_rate = 0x000b0666;	// 16.16
 #endif
 
 				}
 				else if (gSetPbSampRateTemp==SAMP_RATE_44_1KHZ){
-					feedback_rate = 0x00058333;
+					nominal_feedback_rate = feedback_rate = 0x00058333;
 				}
 				else if	(gSetPbSampRateTemp==SAMP_RATE_48KHZ){
-					feedback_rate = 0x00060000;
+					nominal_feedback_rate = feedback_rate = 0x00060000;
 				}
 		        // Update the sample rate state of the AIC codec
 		        codecCfgMsg.wMsg = CODEC_CFG_MSG_ADJ_RATE;
