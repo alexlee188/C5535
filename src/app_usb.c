@@ -77,7 +77,6 @@ Uint16 firstRecordFlag = TRUE;
 Uint16 firstFbckFlag = TRUE;
 
 // default 96khz
-#define LINUX_QUIRK
 #ifdef LINUX_QUIRK
 long feedback_rate = 0x00180000;
 long nominal_feedback_rate = 0x00180000;
