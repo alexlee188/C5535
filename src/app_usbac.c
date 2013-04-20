@@ -146,7 +146,7 @@ CSL_AcMediaStatus appPlayAudio(
 #ifdef C5535_EZDSP_DEMO
 	int i, numSample;
 	int *samplePtr;
-	extern int bufferIn[1024];
+	extern int bufferIn[256];
 	extern int bufferInIdx;
 	// get the number of samples
 	numSample = dataLength/2;

@@ -187,7 +187,7 @@
 									<listOptionValue builtIn="false" value="&quot; C5535_EZDSP_DEMO&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;CSL_AC_TEST&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;PLAY_ONLY&quot;"/>
-									<listOptionValue builtIn="false" value="LINUX_QUIRK"/>
+									<listOptionValue builtIn="false" value="&quot;LINUX_QUIRK&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;SAMP_24BIT&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.LARGE_MEMORY_MODEL.324233686" name="Use large memory model (--large_memory_model, -ml)" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
