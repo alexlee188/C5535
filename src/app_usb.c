@@ -1685,7 +1685,6 @@ Uint32 underRunCount = 0;
 Uint32 fifoEmptyCount = 0;
 Uint16	up_count = 0;
 Uint16	down_count = 0;
-Uint32 old_codec_output_buffer_sample = 0;
 Uint16 feedback_quirk_count = 0;
 void send_USB_Output(void)
 {
@@ -1731,18 +1730,17 @@ void send_USB_Output(void)
 
 	// calculate rate feedback adjustments
 	if ((codec_output_buffer_sample > 0) && usb_play_mode){
-		if (codec_output_buffer_sample > (CODEC_OUTPUT_BUFFER_SIZE*3/4/4) &&
+		if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*3/4) &&
 				(feedback_rate > nominal_feedback_rate)){
 				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
 		}
-		else if (codec_output_buffer_sample < (CODEC_OUTPUT_BUFFER_SIZE*1/4/4) &&
+		else if (codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*1/4) &&
 				(feedback_rate < nominal_feedback_rate)){
 				feedback_rate++;
 				EZDSP5535_LED_toggle(3);
 		}
-		else if (codec_output_buffer_sample>(CODEC_OUTPUT_BUFFER_SIZE/2/4) &&
-				(codec_output_buffer_sample > old_codec_output_buffer_sample)){
+		else if (codec_output_buffer_sample>(MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC/2)){
 			down_count++;
 			if (down_count >= FEEDBACK_THRESHOLD_COUNT){
 				feedback_rate--;
@@ -1750,8 +1748,7 @@ void send_USB_Output(void)
 				down_count = 0;
 			}
 		}
-		else if ((codec_output_buffer_sample < (CODEC_OUTPUT_BUFFER_SIZE/2/4)) &&
-				(codec_output_buffer_sample < old_codec_output_buffer_sample)){
+		else if (codec_output_buffer_sample < (MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC/2)){
 			up_count++;
 			if (up_count >= FEEDBACK_THRESHOLD_COUNT){
 				feedback_rate++;
@@ -1759,7 +1756,6 @@ void send_USB_Output(void)
 				up_count = 0;
 			}
 		}
-		old_codec_output_buffer_sample = codec_output_buffer_sample;
 	}
 
 	// if the USB TX FIFO is not empty.
