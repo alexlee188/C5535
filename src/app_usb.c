@@ -1730,7 +1730,7 @@ void send_USB_Output(void)
 
 	// calculate rate feedback adjustments
 	if ((codec_output_buffer_sample > 0) && usb_play_mode){
-		if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*3/4) &&
+		if (codec_output_buffer_sample > (MAX_TXBUFF_SZ_DACSAMPS*CODEC_OUTPUT_SZ_MSEC*2/3) &&
 				(feedback_rate > nominal_feedback_rate)){
 				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
