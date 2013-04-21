@@ -1732,13 +1732,11 @@ void send_USB_Output(void)
 	// calculate rate feedback adjustments
 	if ((codec_output_buffer_sample > 0) && usb_play_mode){
 		if (codec_output_buffer_sample > (CODEC_OUTPUT_BUFFER_SIZE*3/4/4) &&
-				(codec_output_buffer_sample > old_codec_output_buffer_sample) &&
 				(feedback_rate > nominal_feedback_rate)){
 				feedback_rate--;
 				EZDSP5535_LED_toggle(2);
 		}
 		else if (codec_output_buffer_sample < (CODEC_OUTPUT_BUFFER_SIZE*1/4/4) &&
-				(codec_output_buffer_sample < old_codec_output_buffer_sample) &&
 				(feedback_rate < nominal_feedback_rate)){
 				feedback_rate++;
 				EZDSP5535_LED_toggle(3);
