@@ -143,46 +143,10 @@ CSL_AcMediaStatus appPlayAudio(
 
 	appPlayAudioCount++;
 
-#ifdef C5535_EZDSP_DEMO
-	int i, numSample;
-	int *samplePtr;
-	extern int bufferIn[256];
-	extern int bufferInIdx;
-	// get the number of samples
-	numSample = dataLength/2;
-	samplePtr = (int*)leftDataBuf;
-#endif
-
     // NOTE: leftDataBuf and rightDataBuf point to the same buffer
 
     playBackActive = (Uint16*)ptr;
     *playBackActive = TRUE;
-
-    // the first byte is the number of bytes in the buffer followed by the first left audio sample
-    leftDataBuf++;
-
-#ifdef C5535_EZDSP_DEMO
-	samplePtr++;
-	for (i=0; i<numSample; i++)
-	{
-		if (bufferInIdx<256)
-		{
-			/* Take average of left and right channels. */
-			//temp = (signed long)samplePtr[i*2] + (signed long)samplePtr[i*2+1];
-			//temp >>= 1;    /* Divide by 2 to prevent overload at output */
-			//bufferIn[bufferInIdx] = (int)temp;
-			// copy the audio sample from the USB buffer into bufferIn (left channel only)
-			bufferIn[bufferInIdx] = (int)samplePtr[i*2]*2;
-			bufferInIdx++;
-			// if the bufferIn is filled, then send a semaphore to the SpectrumDisplayTask
-			if (bufferInIdx==256)
-			{
-				// send semaphore
-				SEM_post(&SEM_BufferInReady);
-			}
-		}
-	}
-#endif
 
 	// make sure we have enough microframes for playback (at least (CODEC_OUTPUT_SZ_MSEC/2)*8 microframes) 
     // enable the playback

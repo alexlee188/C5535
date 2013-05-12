@@ -94,7 +94,6 @@
 #include "ezdsp5535.h"
 #include "ezdsp5535_led.h"
 #include "sem.h"
-SEM_Obj SEM_BufferInReady;
 
 CSL_Status  CSL_i2cPowerTest(void);
 void calculate_FFT(int *input, int size);
@@ -110,7 +109,7 @@ DATA bufferScrach[512];
 // display buffer for spectrum display
 int display_buffer[128];
 // Demo switch flag: 0 - power display, 1 - spectrum analyzer
-Uint16 DemoSwitchFlag = 1;
+Uint16 DemoSwitchFlag = 0;
 #endif
 
 #include "VC5505_CSL_BIOS_cfg.h"
@@ -767,11 +766,11 @@ void SpectrumDisplayTask(void)
 	while (1)
 	{
 		// wait on bufferIn ready semaphore
-		SEM_pend(&SEM_BufferInReady, SYS_FOREVER);
+		SEM_pend(&SEM_PingPongRxLeftComplete4, SYS_FOREVER);
 		// compute and display the bargraph
 		if (DemoSwitchFlag)
 		{
-			//calculate_FFT(bufferIn, 256);
+			calculate_FFT(bufferIn, 256);
 			// clear the bufferInIdx to 0
 			bufferInIdx = 0;
 		}		
@@ -783,16 +782,12 @@ void SpectrumDisplayTask(void)
 void DemoSwitch(void)
 {
 	DemoSwitchFlag++;
-	if (DemoSwitchFlag==1)
-	{
-		// if we were in power display mode, swtch to spectrum analyzer mode
-		// clear the bufferInIdx
-		bufferInIdx = 0; 
-	}
-	else if (DemoSwitchFlag==3)
+
+	if (DemoSwitchFlag >= 3)
 	{
 		// if we were in spectrum analyzer mode, switch to power display mode
-		DemoSwitchFlag = 1;
+		// DemoSwitchFlag = 0;
+		DemoSwitchFlag = 1;  // don't switch to power display mode
 		// stop data collection for spectrum analyzer
 		bufferInIdx = 0;
 	}

@@ -469,6 +469,9 @@ void PbAudioAlgTsk(void)
     volatile Int16 i, loopCount;
     CSL_UsbMsgObj        USBMsg;
     Bool mute_play_status = TRUE;
+    Int16 temp1, temp2;
+	extern int bufferIn[256];
+	extern int bufferInIdx;
 
     while (1)
     {
@@ -550,12 +553,22 @@ void PbAudioAlgTsk(void)
 				{
 #ifdef SAMP_24BIT
 					// copy left channel sample
-					*pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
+					temp1 = *pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
 					pbOutBufLeft++;
-					*pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
+					temp2 = *pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
 					pbOutBufLeft++;
+					if (bufferInIdx<256){
+						bufferIn[bufferInIdx] = temp2;
+						bufferInIdx++;
+						// if the bufferIn is filled, then send a semaphore to the SpectrumDisplayTask
+						if (bufferInIdx==256)
+						{
+							// send semaphore
+							SEM_post(&SEM_PingPongRxLeftComplete4);
+						}
+					}
 					// copy right channel sample
 					*pbOutBufRight = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
@@ -740,6 +753,16 @@ void PbAudioAlgTsk(void)
 				{
 					pbOutBufLeft[i] = 0;
 					pbOutBufRight[i] = 0;
+					if (bufferInIdx<256){
+						bufferIn[bufferInIdx] = 0;
+						bufferInIdx++;
+						// if the bufferIn is filled, then send a semaphore to the SpectrumDisplayTask
+						if (bufferInIdx==256)
+						{
+							// send semaphore
+							SEM_post(&SEM_PingPongRxLeftComplete4);
+						}
+					}
 				}
 #ifdef USE_TWO_CODEC
 				// codec_output_buffer underflow, send zero instead
@@ -802,6 +825,16 @@ void PbAudioAlgTsk(void)
 			{
 				pbOutBufLeft[i] = 0;
 				pbOutBufRight[i] = 0;
+				if (bufferInIdx<256){
+						bufferIn[bufferInIdx] = 0;
+						bufferInIdx++;
+						// if the bufferIn is filled, then send a semaphore to the SpectrumDisplayTask
+						if (bufferInIdx==256)
+						{
+							// send semaphore
+							SEM_post(&SEM_PingPongRxLeftComplete4);
+						}
+					}
 			}
 #ifdef USE_TWO_CODEC
 			// codec_output_buffer underflow, send zero instead
