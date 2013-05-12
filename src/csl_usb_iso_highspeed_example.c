@@ -762,7 +762,7 @@ void PowerDisplayTask(void)
 void SpectrumDisplayTask(void)
 {
 	// display the play audio message
-	//print_playaudio();
+	print_playaudio();
 
 	while (1)
 	{

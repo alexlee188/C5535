@@ -1,3 +1,8 @@
+MEMORY
+{
+CROM (RX) : origin = 0xfe0000, length = 0x000600 /* 1536B */
+}
+
 SECTIONS
 {
     .text   :  > SARAM
@@ -16,4 +21,6 @@ SECTIONS
     .ping_pong_i2sTxLeftBuf   : block(0x20000)    {} > SARAM
     .ping_pong_i2sTxRightBuf   : block(0x40000)    {} > SARAM
 */
+
+	.charrom : > CROM
 }
