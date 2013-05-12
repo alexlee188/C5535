@@ -426,6 +426,13 @@ bios.TSK.create("TSK_PowerDisplay");
 bios.TSK.instance("TSK_PowerDisplay").order = 11;
 bios.TSK.instance("TSK_PowerDisplay").priority = 3;
 bios.TSK.instance("TSK_PowerDisplay").fxn = prog.extern("PowerDisplayTask");
+bios.TSK.instance("TSK_SpectrumDisplay").order = 8;
+bios.TSK.instance("TSK_PowerDisplay").order = 9;
+bios.TSK.instance("TSK_DemoSwitch").destroy();
+bios.PRD.create("PRD_DemoSwitch");
+bios.PRD.instance("PRD_DemoSwitch").order = 3;
+bios.PRD.instance("PRD_DemoSwitch").fxn = prog.extern("DemoSwitch");
+bios.PRD.instance("PRD_DemoSwitch").period = 10000;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();

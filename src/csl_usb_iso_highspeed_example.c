@@ -753,7 +753,7 @@ void PowerDisplayTask(void)
 		// read and display the power usage
 		if (DemoSwitchFlag==0)
 		{
-			//CSL_i2cPowerTest();
+			CSL_i2cPowerTest();
 		}
 	}
 }
