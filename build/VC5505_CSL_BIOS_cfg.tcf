@@ -408,6 +408,24 @@ bios.MBX.instance("MBX_codecConfig").messageSize = 2;
 bios.TSK.instance("TSK_MUSBMainTask").stackSize = 2048;
 bios.TSK.instance("TSK_CodecConfig").priority = 5;
 bios.TSK.instance("mainTsk").priority = 10;
+bios.TSK.instance("TSK_idle").order = 1;
+bios.TSK.instance("mainTsk").order = 2;
+bios.TSK.instance("TSK_MUSBMSCTask").order = 3;
+bios.TSK.instance("TSK_MUSBMainTask").order = 4;
+bios.TSK.instance("TSK_CodecConfig").order = 5;
+bios.TSK.instance("TSK_RecAudioAlg").order = 6;
+bios.TSK.instance("TSK_PbAudioAlg").order = 7;
+bios.TSK.create("TSK_DemoSwitch");
+bios.TSK.instance("TSK_DemoSwitch").order = 9;
+bios.TSK.instance("TSK_DemoSwitch").fxn = prog.extern("DemoSwitch");
+bios.TSK.create("TSK_SpectrumDisplay");
+bios.TSK.instance("TSK_SpectrumDisplay").order = 10;
+bios.TSK.instance("TSK_SpectrumDisplay").fxn = prog.extern("SpectrumDisplayTask");
+bios.TSK.instance("TSK_SpectrumDisplay").priority = 4;
+bios.TSK.create("TSK_PowerDisplay");
+bios.TSK.instance("TSK_PowerDisplay").order = 11;
+bios.TSK.instance("TSK_PowerDisplay").priority = 3;
+bios.TSK.instance("TSK_PowerDisplay").fxn = prog.extern("PowerDisplayTask");
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();
