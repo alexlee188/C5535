@@ -398,9 +398,9 @@ void CSL_acTest(void)
 
 #ifdef C5535_EZDSP_DEMO
         // initialize the OLED display        
-        oled_init();
+        //oled_init();
+        EZDSP5535_OSD9616_init( );
 
-#if 0
     	Int16 i;
     	Uint16 cmd[10];    // For multibyte commands
         EZDSP5535_OSD9616_init( );
@@ -505,9 +505,7 @@ void CSL_acTest(void)
         cmd[2] = 0x08;  // Set No. of rows in top fixed area
         cmd[3] = 0x08;  // Set No. of rows in scroll area
         EZDSP5535_OSD9616_multiSend( cmd, 4 );
-#endif
         
-        print_ti();
 #endif
 
         /* Initialising the Pointer to the Audio Class Handle to the Buffer Allocated */
@@ -755,7 +753,7 @@ void PowerDisplayTask(void)
 		// read and display the power usage
 		if (DemoSwitchFlag==0)
 		{
-			CSL_i2cPowerTest();
+			//CSL_i2cPowerTest();
 		}
 	}
 }
@@ -764,7 +762,7 @@ void PowerDisplayTask(void)
 void SpectrumDisplayTask(void)
 {
 	// display the play audio message
-	print_playaudio();
+	//print_playaudio();
 
 	while (1)
 	{
@@ -773,7 +771,7 @@ void SpectrumDisplayTask(void)
 		// compute and display the bargraph
 		if (DemoSwitchFlag)
 		{
-			calculate_FFT(bufferIn, 256);
+			//calculate_FFT(bufferIn, 256);
 			// clear the bufferInIdx to 0
 			bufferInIdx = 0;
 		}		
