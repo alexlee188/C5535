@@ -665,7 +665,7 @@ void SpectrumDisplayTask(void)
 		// compute and display the bargraph
 		if (DemoSwitchFlag)
 		{
-			calculate_FFT(bufferIn, 256);
+			//calculate_FFT(bufferIn, 256);
 			// clear the bufferInIdx to 0
 			bufferInIdx = 0;
 		}		
