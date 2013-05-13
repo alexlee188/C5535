@@ -109,7 +109,7 @@ DATA bufferScrach[512];
 // display buffer for spectrum display
 int display_buffer[128];
 // Demo switch flag: 0 - power display, 1 - spectrum analyzer
-Uint16 DemoSwitchFlag = 0;
+Uint16 DemoSwitchFlag = 1;		// Don't switch to power display
 #endif
 
 #include "VC5505_CSL_BIOS_cfg.h"
@@ -665,7 +665,7 @@ void SpectrumDisplayTask(void)
 		// compute and display the bargraph
 		if (DemoSwitchFlag)
 		{
-			//calculate_FFT(bufferIn, 256);
+			calculate_FFT(bufferIn, 256);
 			// clear the bufferInIdx to 0
 			bufferInIdx = 0;
 		}		

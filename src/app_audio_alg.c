@@ -469,8 +469,7 @@ void PbAudioAlgTsk(void)
     volatile Int16 i, loopCount;
     CSL_UsbMsgObj        USBMsg;
     Bool mute_play_status = TRUE;
-    Int16 temp1, temp2;
-    long result;
+    Int16 temp1;
 	extern int bufferIn[256];
 	extern int bufferInIdx;
 
@@ -557,14 +556,11 @@ void PbAudioAlgTsk(void)
 					temp1 = *pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
 					pbOutBufLeft++;
-					temp2 = *pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
+					*pbOutBufLeft = codec_output_buffer[codec_output_buffer_output_index];
 					codec_output_buffer_output_index++;
 					pbOutBufLeft++;
 					if (bufferInIdx<256){
-						result = temp2;
-						result <<= 16;
-						result |= temp1;
-						bufferIn[bufferInIdx] = result >> 12;  // reduce applitude a bit
+						bufferIn[bufferInIdx] = temp1; // Is it the MSB 16 bits?
 						bufferInIdx++;
 						// if the bufferIn is filled, then send a semaphore to the SpectrumDisplayTask
 						if (bufferInIdx==256)

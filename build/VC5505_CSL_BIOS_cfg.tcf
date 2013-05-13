@@ -433,6 +433,7 @@ bios.PRD.create("PRD_DemoSwitch");
 bios.PRD.instance("PRD_DemoSwitch").order = 3;
 bios.PRD.instance("PRD_DemoSwitch").fxn = prog.extern("DemoSwitch");
 bios.PRD.instance("PRD_DemoSwitch").period = 10000;
+bios.TSK.instance("TSK_SpectrumDisplay").priority = 1;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();
