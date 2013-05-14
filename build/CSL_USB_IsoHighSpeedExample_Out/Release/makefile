@@ -13,6 +13,7 @@ $(GEN_CMDS__FLAG) \
 "C:/Users/Alex/C5535/build/Release/pll_control.obj" \
 "C:/Users/Alex/C5535/build/Release/lcd_osd.obj" \
 "C:/Users/Alex/C5535/build/Release/i2s_sample.obj" \
+"C:/Users/Alex/C5535/build/Release/hwafft_wrapper.obj" \
 "C:/Users/Alex/C5535/build/Release/gpio_control.obj" \
 "C:/Users/Alex/C5535/build/Release/dbg_sdram.obj" \
 "C:/Users/Alex/C5535/build/Release/csl_usb_iso_highspeed_example.obj" \
@@ -154,7 +155,8 @@ clean:
 	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QUOTED)$(GEN_SRCS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(GEN_CMDS__QUOTED) "C:\Users\Alex\C5535\build\CSL_USB_IsoHighSpeedExample_Out\Release\CSL_USB_IsoHighSpeedExample_Out.out"
 	-$(RM) "VC5505_CSL_BIOS_cfg_c.pp" "app_asrc.pp" "app_audio_alg.pp" "app_usb.pp" "app_usbac.pp" "app_usbac_descs.pp" "codec_aic3254.pp" "codec_config.pp" "csl_i2c_power_monitor.pp" "csl_usb_iso_highspeed_example.pp" "dbg_sdram.pp" "gpio_control.pp" "i2s_sample.pp" "lcd_osd.pp" "pll_control.pp" "user_interface.pp" 
 	-$(RM) "VC5505_CSL_BIOS_cfg.pp" 
-	-$(RM) "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg.obj" "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg_c.obj" "C:\Users\Alex\C5535\build\Release\app_asrc.obj" "C:\Users\Alex\C5535\build\Release\app_audio_alg.obj" "C:\Users\Alex\C5535\build\Release\app_usb.obj" "C:\Users\Alex\C5535\build\Release\app_usbac.obj" "C:\Users\Alex\C5535\build\Release\app_usbac_descs.obj" "C:\Users\Alex\C5535\build\Release\codec_aic3254.obj" "C:\Users\Alex\C5535\build\Release\codec_config.obj" "C:\Users\Alex\C5535\build\Release\csl_i2c_power_monitor.obj" "C:\Users\Alex\C5535\build\Release\csl_usb_iso_highspeed_example.obj" "C:\Users\Alex\C5535\build\Release\dbg_sdram.obj" "C:\Users\Alex\C5535\build\Release\gpio_control.obj" "C:\Users\Alex\C5535\build\Release\i2s_sample.obj" "C:\Users\Alex\C5535\build\Release\lcd_osd.obj" "C:\Users\Alex\C5535\build\Release\pll_control.obj" "C:\Users\Alex\C5535\build\Release\user_interface.obj" 
+	-$(RM) "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg.obj" "C:\Users\Alex\C5535\build\Release\VC5505_CSL_BIOS_cfg_c.obj" "C:\Users\Alex\C5535\build\Release\app_asrc.obj" "C:\Users\Alex\C5535\build\Release\app_audio_alg.obj" "C:\Users\Alex\C5535\build\Release\app_usb.obj" "C:\Users\Alex\C5535\build\Release\app_usbac.obj" "C:\Users\Alex\C5535\build\Release\app_usbac_descs.obj" "C:\Users\Alex\C5535\build\Release\codec_aic3254.obj" "C:\Users\Alex\C5535\build\Release\codec_config.obj" "C:\Users\Alex\C5535\build\Release\csl_i2c_power_monitor.obj" "C:\Users\Alex\C5535\build\Release\csl_usb_iso_highspeed_example.obj" "C:\Users\Alex\C5535\build\Release\dbg_sdram.obj" "C:\Users\Alex\C5535\build\Release\gpio_control.obj" "C:\Users\Alex\C5535\build\Release\hwafft_wrapper.obj" "C:\Users\Alex\C5535\build\Release\i2s_sample.obj" "C:\Users\Alex\C5535\build\Release\lcd_osd.obj" "C:\Users\Alex\C5535\build\Release\pll_control.obj" "C:\Users\Alex\C5535\build\Release\user_interface.obj" 
+	-$(RM) "hwafft_wrapper.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

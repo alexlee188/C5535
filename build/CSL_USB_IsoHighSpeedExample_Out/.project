@@ -91,6 +91,11 @@
 			<locationURI>EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out/src/gpio_control.c</locationURI>
 		</link>
 		<link>
+			<name>hwafft_wrapper.asm</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/hwafft_wrapper.asm</locationURI>
+		</link>
+		<link>
 			<name>i2s_sample.c</name>
 			<type>1</type>
 			<locationURI>EXT_ROOT__CSL_USB_IsoHighSpeedExample_Out/src/i2s_sample.c</locationURI>
