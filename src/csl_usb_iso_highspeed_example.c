@@ -657,7 +657,7 @@ void SpectrumDisplayTask(void)
 {
 	// display the play audio message
 	print_playaudio();
-	TSK_sleep(5000);
+	TSK_sleep(10000);
 
 	while (1)
 	{

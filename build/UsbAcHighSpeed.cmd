@@ -13,7 +13,7 @@ SECTIONS
     .const  :  > SARAM
     .data   :  > SARAM
     .cio    :  > DARAM
-
+	.onchip_code	:	> SARAM
     .bss    :  > SARAM
 /*
     .ping_pong_i2sRxLeftBuf   : block(0x8000)    {} > SARAM
