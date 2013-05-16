@@ -102,9 +102,10 @@ int bufferIn[256];
 // index for bufferIn
 int bufferInIdx = 0;
 // buffer for perform FFT
-#pragma DATA_ALIGN(bufferFFT, 4)
+#pragma DATA_ALIGN(bufferFFT, 4096)
 DATA bufferFFT[512];
 // scarch buffer for FFT
+#pragma DATA_ALIGN(bufferFFT, 4096)
 DATA bufferScrach[512];
 // display buffer for spectrum display
 int display_buffer[128];
