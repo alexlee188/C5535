@@ -135,11 +135,11 @@ endif
 all: C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out
 
 dependents:
-	-cd C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/Release && $(MAKE) all
-	-cd C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/Release && $(MAKE) all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/Release && $(MAKE) clean all
+	-cd C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/Release && $(MAKE) clean all
 
 # Tool invocations
 C:/Users/Alex/C5535/build/CSL_USB_IsoHighSpeedExample_Out/../../build/CSL_USB_IsoHighSpeedExample_Out/Release/CSL_USB_IsoHighSpeedExample_Out.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/Alex/C5535/c55x5_drivers/dma/build/dma_bios_drv_lib/../../../../c55x5_drivers/lib/Release/dma_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/i2c/build/i2c_bios_drv_lib/../../../../c55x5_drivers/lib/Release/i2c_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/i2s/build/i2s_bios_drv_lib/../../../../c55x5_drivers/lib/Release/i2s_bios_drv_lib.lib C:/Users/Alex/C5535/c55x5_drivers/pal_os/build/palos_bios_lib/../../../../c55x5_drivers/lib/release/palos_bios_lib.lib C:/Users/Alex/C5535/c55xx_csl/build/cslVC5505/../../../c55xx_csl/lib/Release/cslVC5505_Lib.lib

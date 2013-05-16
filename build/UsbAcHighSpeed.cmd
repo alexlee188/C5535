@@ -15,6 +15,8 @@ SECTIONS
     .cio    :  > DARAM
 	.onchip_code	:	> SARAM
     .bss    :  > SARAM
+    bufferFFT : > DARAM
+    bufferScrach : > DARAM
 /*
     .ping_pong_i2sRxLeftBuf   : block(0x8000)    {} > SARAM
     .ping_pong_i2sRxRightBuf   : block(0x10000)    {} > SARAM
