@@ -54,8 +54,8 @@ void RateChange(void)
 					(gSetPbSampRateTemp==SAMP_RATE_48KHZ))		// 48kHz
 			{
 
-            	USBMsg.wMsg = CSL_USB_MSG_FORCE_MUTE_PLAYBACK;
-            	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+            	//USBMsg.wMsg = CSL_USB_MSG_FORCE_MUTE_PLAYBACK;
+            	//MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 
 				// stop the I2S data receive
 				///DDC_I2S_transEnable((DDC_I2SHandle)i2sHandleRx, FALSE); 
@@ -503,8 +503,8 @@ void RateChange(void)
 		gSetPbSampRateFlag = FALSE;
 
 		// sample rate changed, now unmute
-    	USBMsg.wMsg = CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK;
-    	MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+    	//USBMsg.wMsg = CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK;
+    	//MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
 	}
 }
 
@@ -533,6 +533,12 @@ void CodecConfigTask(void)
                     RateChange();
                     break;
 
+                case CODEC_CFG_MSG_UNMUTE:
+                	Set_Mute_State(FALSE);
+                	break;
+                case CODEC_CFG_MSG_MUTE:
+                	Set_Mute_State(TRUE);
+                	break;
                 default:
                     break;
             }

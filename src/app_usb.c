@@ -1993,7 +1993,6 @@ static void MainTask(void)
     pAcClassHandle       pAcClassHdl;
     CSL_AcCtrlObject     *pCtrlHandle;
     CodecCfgMsgObj      codecCfgMsg;
-    Bool force_mute_playback = FALSE;
 
     pAcClassHdl = AC_AppHandle.pAcObj;
     pCtrlHandle = &pAcClassHdl->ctrlHandle;
@@ -2071,20 +2070,7 @@ static void MainTask(void)
                     fExitMainTaskOnUSBError = FALSE;
                     /* Just trigger this task. */
                     break;
-                case CSL_USB_MSG_MUTE_PLAYBACK:
-                	Set_Mute_State(TRUE);
-                	break;
-                case CSL_USB_MSG_UNMUTE_PLAYBACK:
-                	if (!force_mute_playback) Set_Mute_State(FALSE);
-                	break;
-                case CSL_USB_MSG_FORCE_MUTE_PLAYBACK:
-                	force_mute_playback = TRUE;
-                	Set_Mute_State(TRUE);
-                	break;
-                case CSL_USB_MSG_FORCE_UNMUTE_PLAYBACK:
-                	force_mute_playback = FALSE;
-                	Set_Mute_State(FALSE);
-                	break;
+
                 default:
                     break;
             }
@@ -2164,13 +2150,14 @@ static void MainTask(void)
             {
                 mute_flag_change = FALSE;
                 if (pCtrlHandle->muteCtrlBuf[1] == 0){
-                // unmute
-                	force_mute_playback = FALSE;
-                	Set_Mute_State(FALSE);
+                	//Set_Mute_State(FALSE);
+                	codecCfgMsg.wMsg = CODEC_CFG_MSG_UNMUTE;
+                	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
                 }
                 else {
-                	force_mute_playback = TRUE;
-                	Set_Mute_State(TRUE);
+                	//Set_Mute_State(TRUE);
+                	codecCfgMsg.wMsg = CODEC_CFG_MSG_MUTE;
+                	MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
                 }
             }
         }

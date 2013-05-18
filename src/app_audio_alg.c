@@ -467,7 +467,7 @@ void PbAudioAlgTsk(void)
     Int16 *pbOutBufRight4;
 #endif //USE_FOUR_CODEC
     volatile Int16 i, loopCount;
-    CSL_UsbMsgObj        USBMsg;
+    CodecCfgMsgObj codecCfgMsg;
     Bool mute_play_status = TRUE;
     Int16 temp1;
 	extern int bufferIn[256];
@@ -543,8 +543,8 @@ void PbAudioAlgTsk(void)
 			if (codec_output_buffer_sample>=MAX_TXBUFF_SZ_DACSAMPS)
 			{
 				if (mute_play_status){
-					USBMsg.wMsg = CSL_USB_MSG_UNMUTE_PLAYBACK;
-					MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+					codecCfgMsg.wMsg = CODEC_CFG_MSG_UNMUTE;
+					MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
 					mute_play_status = FALSE;
 				}
 				playAudioCopyCount++;
@@ -813,8 +813,8 @@ void PbAudioAlgTsk(void)
         else
         {
         	if (!mute_play_status){
-				USBMsg.wMsg = CSL_USB_MSG_MUTE_PLAYBACK;
-				MBX_post(&MBX_musb, &USBMsg, SYS_FOREVER);
+        		codecCfgMsg.wMsg = CODEC_CFG_MSG_MUTE;
+				MBX_post(&MBX_codecConfig, &codecCfgMsg, SYS_FOREVER);
 				mute_play_status = TRUE;
         	}
 			playMemsetCount++;
