@@ -434,6 +434,13 @@ bios.PRD.instance("PRD_DemoSwitch").order = 3;
 bios.PRD.instance("PRD_DemoSwitch").fxn = prog.extern("DemoSwitch");
 bios.PRD.instance("PRD_DemoSwitch").period = 10000;
 bios.TSK.instance("TSK_SpectrumDisplay").priority = 1;
+bios.TSK.instance("mainTsk").stackMemSeg = prog.get("DARAM");
+bios.TSK.instance("TSK_MUSBMainTask").stackMemSeg = prog.get("DARAM");
+bios.TSK.instance("TSK_PowerDisplay").priority = 1;
+bios.TSK.instance("TSK_PowerDisplay").stackMemSeg = prog.get("SARAM");
+bios.TSK.instance("TSK_RecAudioAlg").priority = 1;
+bios.TSK.instance("TSK_RecAudioAlg").stackMemSeg = prog.get("SARAM");
+bios.TSK.instance("TSK_SpectrumDisplay").stackMemSeg = prog.get("SARAM");
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 prog.gen();
